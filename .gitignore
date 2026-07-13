@@ -1,0 +1,14 @@
+# --- Large media that exceeds GitHub's 100 MB per-file hard limit ---
+# This is the ONLY file GitHub refuses to receive. The site never needs it:
+# a 1.6 MB web preview (simulated_box_remus_web.mp4) plays inline and a
+# 33 MB high-quality version (simulated_box_remus_download.mp4) is offered
+# for download on the Movies page. If you ever want the raw original online,
+# upload it to Google Drive / YouTube and link it from teaching/movies/index.html.
+teaching/movies/collection/simulated_box_remus.mpg
+
+# --- stale embedded duplicate of the site (has its own .git; not deployed) ---
+/Smukh/
+
+# --- editor / OS cruft ---
+.DS_Store
+Thumbs.db

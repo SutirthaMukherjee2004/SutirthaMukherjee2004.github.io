@@ -1,0 +1,1100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280, user-scalable=yes">
+<title>Sutirtha Mukherjee</title>
+    <meta name="description" content="Numerical cosmology and galaxy formation academic resources from Sutirtha Mukherjee.">
+    <meta name="keywords" content="Sutirtha Mukherjee, astrophysics, cosmology, dark matter, galactic dynamics, Milky Way, axions, conformal field theory, theoretical physics">
+    <meta name="author" content="Sutirtha Mukherjee">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="application-name" content="Sutirtha Mukherjee">
+    <meta name="apple-mobile-web-app-title" content="Sutirtha Mukherjee">
+    <meta name="theme-color" content="#0d1117">
+    <link rel="canonical" href="https://sutirthamukherjee2004.github.io/teaching/num_cos.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sutirthamukherjee2004.github.io/teaching/num_cos.html">
+    <meta property="og:title" content="Sutirtha Mukherjee">
+    <meta property="og:site_name" content="Sutirtha Mukherjee">
+    <meta property="og:description" content="Numerical cosmology and galaxy formation academic resources from Sutirtha Mukherjee.">
+    <meta property="og:image" content="https://sutirthamukherjee2004.github.io/images/Profile.jpeg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sutirtha Mukherjee">
+    <meta name="twitter:description" content="Numerical cosmology and galaxy formation academic resources from Sutirtha Mukherjee.">
+    <meta name="twitter:image" content="https://sutirthamukherjee2004.github.io/images/Profile.jpeg">
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Sutirtha Mukherjee",
+  "headline": "Sutirtha Mukherjee",
+  "url": "https://sutirthamukherjee2004.github.io/teaching/num_cos.html",
+  "description": "Numerical cosmology and galaxy formation academic resources from Sutirtha Mukherjee.",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Sutirtha Mukherjee",
+    "url": "https://sutirthamukherjee2004.github.io/"
+  },
+  "about": {
+    "@type": "Person",
+    "name": "Sutirtha Mukherjee",
+    "url": "https://sutirthamukherjee2004.github.io/",
+    "image": "https://sutirthamukherjee2004.github.io/images/Profile.jpeg"
+  },
+  "primaryImageOfPage": {
+    "@type": "ImageObject",
+    "url": "https://sutirthamukherjee2004.github.io/images/Profile.jpeg"
+  }
+}
+    </script>
+    <link rel="icon" type="image/jpeg" href="../images/Profile.jpeg">
+    <link rel="apple-touch-icon" href="../images/Profile.jpeg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+<style>
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'EB Garamond', serif;
+    background-color: #0d1117;
+    color: #e6edf3;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* Layout Structure */
+#layout {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#top {
+    background-color: #0d1117;
+    padding: 20px;
+    text-align: center;
+}
+
+#galaxies {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Navigation */
+hr {
+    border: none;
+    height: 1px;
+    background-color: #30363d;
+    margin: 0 auto;
+    max-width: 90%;
+}
+
+.upper { margin-bottom: 2px; }
+.lower { margin-top: 2px; }
+
+#nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-size: 1.5em;
+    margin: 1rem 0;
+}
+
+#nav a {
+    color: #58a6ff;
+    text-decoration: none;
+    padding: 0 0.7rem;
+    transition: all 0.3s ease;
+}
+
+#nav a:hover {
+    color: #1f6feb;
+    text-shadow: 0 0 8px rgba(88, 166, 255, 0.5);
+}
+
+#nav a:not(:last-child)::after {
+    content: "·";
+    margin-left: 0.7rem;
+    color: #484f58;
+}
+
+/* Main Content Area */
+#main {
+    flex: 1;
+    width: 100%;
+    overflow: hidden;
+}
+
+#page {
+    width: 100%;
+    height: 100%;
+}
+
+#sublayout {
+    width: 100%;
+    min-height: calc(100vh - 200px);
+    display: flex;
+}
+
+/* Menu Sidebar */
+#menu {
+    width: 200px;
+    min-width: 180px;
+    background: #161b22;
+    padding: 20px 15px;
+    height: 100%;
+    overflow-y: auto;
+    flex-shrink: 0;
+}
+
+#menu a {
+    display: block;
+    margin: 20px 0;
+    padding: 10px;
+    background: transparent;
+    color: #58a6ff;
+    text-decoration: none;
+    text-align: center;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+#menu a:hover {
+    background: rgba(28, 33, 40, 0.3);
+    transform: translateX(5px);
+    text-shadow: 0 0 8px rgba(88, 166, 255, 0.5);
+}
+
+#menu a.redcol {
+    color: #ff6b6b;
+    font-weight: 600;
+}
+
+/* Subpage Content */
+#subpage {
+    flex: 1;
+    position: relative;
+    background: #0d1117;
+    overflow: auto;
+    padding: 20px 40px;
+    max-width: 100%;
+}
+
+/* Content Styles */
+.resources-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #30363d;
+}
+
+.resources-header h1 {
+    font-size: 2.2em;
+    font-weight: 300;
+    letter-spacing: -0.5px;
+    margin-bottom: 15px;
+    color: #58a6ff;
+}
+
+.section-nav {
+    margin: 15px 0;
+    line-height: 1.8;
+    font-size: 1.1em;
+}
+
+.section-nav a {
+    color: #58a6ff;
+    text-decoration: none;
+    margin: 0 8px;
+}
+
+.section-nav a:hover {
+    color: #1f6feb;
+    text-decoration: underline;
+}
+
+.update-info {
+    margin: 15px 0;
+    color: #8b949e;
+    font-size: 0.95em;
+}
+
+.resources-section {
+    margin: 40px 0;
+}
+
+.section-title {
+    color: #58a6ff;
+    font-size: 1.6em;
+    margin-bottom: 20px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.section-title .back-to-top {
+    font-size: 0.8em;
+    color: #8b949e;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.section-title .back-to-top:hover {
+    color: #58a6ff;
+}
+
+.resource-list {
+    margin-left: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.resource-list > li {
+    margin: 15px 0;
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.6;
+    font-size: 1.05em;
+}
+
+.resource-list > li:before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: #58a6ff;
+}
+
+.resource-list ul {
+    margin: 10px 0 10px 20px;
+    list-style: none;
+}
+
+.resource-list ul li {
+    margin: 8px 0;
+    padding-left: 20px;
+    position: relative;
+}
+
+.resource-list ul li:before {
+    content: "–";
+    position: absolute;
+    left: 0;
+    color: #484f58;
+}
+
+.resource-list a {
+    color: #58a6ff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.resource-list a:hover {
+    color: #1f6feb;
+    text-decoration: underline;
+}
+
+.resource-list strong {
+    color: #f0f6fc;
+    font-weight: 600;
+}
+
+.resource-list code {
+    background: #161b22;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 0.9em;
+    color: #79c0ff;
+}
+
+/* Bottom Section */
+#bottom {
+    background-color: #0d1117;
+    padding: 20px;
+    text-align: center;
+    color: #8b949e;
+    font-size: 0.9em;
+    margin-top: 3em;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    #menu {
+        width: 160px;
+        min-width: 140px;
+    }
+}
+
+@media (max-width: 768px) {
+    #sublayout {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    #menu {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 10px;
+        gap: 10px;
+    }
+    
+    #menu a {
+        flex: 1 1 calc(50% - 5px);
+        margin: 0;
+        font-size: 16px;
+    }
+    
+    #subpage {
+        min-height: 600px;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    #menu a {
+        flex: 1 1 100%;
+        font-size: 14px;
+    }
+    
+    #subpage {
+        min-height: 500px;
+        padding: 15px;
+    }
+    
+    .resources-header h1 {
+        font-size: 1.8em;
+    }
+    
+    .section-title {
+        font-size: 1.3em;
+    }
+}
+</style>
+<link rel="stylesheet" href="../nav.css?v=20260713-2145">
+</head>
+
+<body>
+<div id="layout">
+<div id="top">
+<img src="../images/galaxies_comic.png" alt="Galaxies comic" id="galaxies">
+<h1>Sutirtha Mukherjee</h1>
+<hr class="upper">
+<hr class="lower">
+<nav class="topnav">
+  <a href="../index.html">Home</a>
+  <div class="dropdown">
+    <a href="../research.html" class="dropbtn">Research<span class="caret">&#9662;</span></a>
+    <div class="dropdown-content">
+      <a href="../research.html">Overview</a>
+      <a href="../research/research_consp.html">Baryons & Dark Matter</a>
+      <a href="../research/research_outer.html">Outer Stellar Halos</a>
+      <a href="../research/research_kinematics.html">Galaxy Kinematics</a>
+      <a href="../research/research_proto.html">High Redshift</a>
+      <a href="../research/research_jets.html">Relativistic Jets</a>
+      <a href="../research/research_rotcurve.html">Galactic Rotation Curve</a>
+      <a href="../research/research_survey.html">Large-Scale Cosmological Survey</a>
+      <a href="../research/research_axion.html">Magnetised Disc Axion Search</a>
+      <a href="../research/research_jointlike.html">Joint Likelihood & Local DM Density</a>
+      <a href="../research/research_surfdens.html">Surface Density of the Milky Way</a>
+      <a href="../research/research_download.html">Downloads</a>
+    </div>
+  </div>
+  <a href="../publications.html">Publications</a>
+  <div class="dropdown">
+    <a href="../comics.html" class="dropbtn">Galaxy Comics<span class="caret">&#9662;</span></a>
+    <div class="dropdown-content">
+      <a href="../comics.html">Overview</a>
+      <a href="../comics/comic_rampressure.html">Ram Pressure Stripping</a>
+      <a href="../comics/comic_majormerger.html">Major Merger</a>
+      <a href="../comics/comic_harassment.html">Galaxy Harassment</a>
+      <a href="../comics/comic_compact.html">Compact Group</a>
+      <a href="../comics/comic_fossil.html">Fossil Group</a>
+      <a href="../comics/comic_multi_minor.html">Multi Minor Merger</a>
+    </div>
+  </div>
+  <div class="dropdown">
+    <a href="../teaching.html" class="dropbtn">Academics<span class="caret">&#9662;</span></a>
+    <div class="dropdown-content">
+      <a href="../teaching.html">Overview</a>
+      <a href="../teaching/grav_dyn.html">Gravitational Dynamics</a>
+      <a href="../teaching/fluid_dyn.html">Fluid Dynamics</a>
+      <a href="../teaching/num_cos.html">Numerical Cosmology</a>
+      <a href="../teaching/lecture_canary.html">Notes of Theoretical Physics</a>
+      <a href="../teaching/movies/index.html">Movies</a>
+    </div>
+  </div>
+  <a href="../vita.html">About Me</a>
+</nav>
+<hr class="upper">
+<hr class="lower">
+</div>
+
+<div id="main">
+<div id="page">
+<div id="sublayout">
+<div id="menu">
+<a href="movies/index.html">Movie Gallery</a>
+<a href="lecture_canary.html">Notes of Theoretical Physics</a>
+<a class="redcol" href="num_cos.html">Numerical Cosmology and Galaxy Formation</a>
+<a href="fluid_dyn.html">Astrophysical Fluid Dynamics</a>
+<a href="grav_dyn.html">Gravitational Dynamics</a>
+</div>
+
+<div id="subpage">
+    <div class="resources-header">
+        <h1>Cosmology Resource Materials</h1>
+        <div class="section-nav">
+            <strong>Sections:</strong> 
+            <a href="#videos">Talk Videos+</a> | 
+            <a href="#lecturenotes">Lecture Notes/Materials</a> | 
+            <a href="#resourcesites">Resources</a> | 
+            <a href="#codes">Codes/Tools</a> | 
+            <a href="#books">Online Books</a> | 
+            <a href="#papers">Papers+</a> | 
+            <a href="#websites">Personal Sites</a> | 
+            <a href="#other">Other</a>
+        </div>
+        <p class="update-info">
+            <strong>New:</strong> <a href="https://jrdmb.netlify.app/crm-search-all.html">Search for links to all Cosmology Data cataloged on this site</a> - talks/lectures, papers-talks cross-ref, slides, resource materials<br>
+            This page <strong>last updated 05-Jun-2025</strong>
+        </p>
+    </div>
+
+    <!-- Talk Videos Section -->
+    <div class="resources-section" id="videos">
+        <h2 class="section-title">
+            Talk videos/slides from conferences, seminars, workshops, colloquia, summer schools, uni courses, etc
+            <a href="#" class="back-to-top" title="Return to top of page">^</a>
+        </h2>
+        <ul class="resource-list">
+            <li><a href="https://jrdmb.netlify.app/crt.html"><strong>Database of links to 8,700+ cosmology research/academic talks from 215 sources</strong></a> | <a href="https://github.com/jrdmb/cosmotalks-datasette">GitHub repo</a> | <a href="https://jrdmb.netlify.app?qsa3sxsyhmzq1gqq">blog post</a></li>
+            
+            <li><a href="https://jrdmb.netlify.app/crt-papers.html"><strong>Searchable cross-reference of Cosmology Papers with Researcher Talks</strong></a></li>
+            
+            <li><a href="https://jrdmb.netlify.app/crt-series.html"><strong>List of all talk host sites in the talks database</strong></a> | <a href="https://jrdmb.netlify.app/crt-topics.html">Topics groupings</a></li>
+            
+            <li><a href="https://jrdmb.netlify.app/crsl.html"><strong>Database of 4,200+ slides from cosmology research/academic talks</strong></a>, typically where recordings are unavailable</li>
+            
+            <li><a href="https://jrdmb.netlify.app/crm-search-all.html"><strong>Search for links to all Cosmology Data cataloged on this site</strong></a> - talks/lectures, papers-talks cross-ref, slides, resource materials</li>
+            
+            <li><a href="https://jrdmb.netlify.app/?x62ca5qxiy8nprhr"><strong>A List of Some Cosmology Review Papers</strong></a></li>
+            
+            <li>Some sites that list upcoming or past cosmology conferences, seminars, etc:
+                <ul>
+                    <li>INSPIRE listings: <a href="https://inspirehep.net/conferences?sort=datedesc&size=100&page=1&start_date=all&subject=gravitation%20and%20cosmology">cosmology conferences</a> | <a href="https://inspirehep.net/seminars?sort=datedesc&size=100&page=1&start_date=all&q=cosmology">cosmology seminars</a></li>
+                    <li><a href="https://indico.cern.ch/search/?q=keyword%3Acosmology&sort=mostrecent">Indico.CERN search page</a></li>
+                    <li><a href="https://cosmocoffee.info/viewforum.php?f=9">CosmoCoffee conferences and meetings</a></li>
+                    <li><a href="https://conference-service.com/conferences/gravitation-and-cosmology.html">COMS conferences and meetings</a></li>
+                    <li><a href="https://www.eso.org/sci/php/libraries/zenodolist.html">ESO Conferences at Zenodo</a></li>
+                    <li><a href="https://www.eucapt.org/virtual-meetings">Astroparticle theory virtual events sponsored by EuCAPT</a></li>
+                </ul>
+            </li>
+            
+            <li><a href="https://dhendriks.gitlab.io/astrotalks/">A collection of ~25,000 astrophysics talks compiled by David Hendriks (last updated 2023-04-11)</a></li>
+        </ul>
+    </div>
+
+    <!-- Lecture Notes Section -->
+    <div class="resources-section" id="lecturenotes">
+        <h2 class="section-title">
+            Lecture Notes and Course Materials
+            <a href="#" class="back-to-top" title="Return to top of page">^</a>
+        </h2>
+        <ul class="resource-list">
+            <li>Note: also see separate <a href="#books">Online Books</a> section</li>
+            
+            <li>Alan Guth - <a href="http://web.mit.edu/8.286/www/">2022 MIT Early Universe undergrad course</a>, with slides, problem sets, and quizzes. | <a href="https://www.youtube.com/playlist?list=PLUl4u3cNGP61Bf9I0WDDriuDqEnywoxra">23 lecture videos from the 2013 course</a> | <a href="https://web.mit.edu/8.286/www/lecn18/index.shtml">Lecture notes from the 2018 course</a> are publicly available. This course is <a href="https://ocw.mit.edu/courses/physics/8-286-the-early-universe-fall-2013/">available through MIT Open Courseware</a>, though it's the 2013 course. For a graduate level version of the MIT OCW cosmology course, taught by <a href="http://web.mit.edu/edbert/">Edmund Bertschinger</a>, see <a href="https://ocw.mit.edu/courses/8-942-cosmology-fall-2001/pages/syllabus/">this</a> (unfortunately, it's from 2001).</li>
+            
+            <li>Amsterdam Cosmology Group master's level course - <a href="http://cosmology.amsterdam/education/cosmology/">Lecture notes and materials</a></li>
+            
+            <li>Andrew Jaffe - <a href="https://www.sr.bham.ac.uk/~smcgee/ObsCosmo/Jaffe_cosmology.pdf">Cosmology Lecture Notes</a></li>
+            
+            <li>Anne Green - <a href="https://arxiv.org/abs/2109.05854">Dark Matter lecture notes</a> from 'Les Houches Summer School 2021: Dark Matter' | <a href="https://www.youtube.com/results?search_query=%22Anne+Green%22+%22LesHouches+2021%22+%22Dark+Matter%22">Anne's recorded DM lectures</a> from this school | <a href="http://anne-green.net/physics/UKCosmologyPhDs.html">UK research groups with people working on Cosmology</a></li>
+            
+            <li>Anson Hook - <a href="https://arxiv.org/abs/1812.02669">TASI Lectures on the Strong CP Problem and Axions [1812.02669]</a> | <a href="https://www.youtube.com/results?sp=mAEB&search_query=TASI+Anson+Hook+axions">lecture recordings</a></li>
+            
+            <li>Anthony Challinor - <a href="https://cosmologist.info/teaching/EU/ADC_Structure_formation2.pdf">Large-scale structure formation lecture notes</a></li>
+            
+            <li>Anthony Challinor and Hiranya Peiris - <a href="https://arxiv.org/abs/0903.5158">Lecture notes on the physics of cosmic microwave background anisotropies [0903.5158]</a></li>
+            
+            <li>Antonio Riotto - <a href="https://agenda.infn.it/event/42906/contributions/241419/">Inflation and the Theory of Cosmological Perturbations (105 pages)</a> | <a href="https://www.youtube.com/watch?v=aOEBOvZD5-8&list=PL1CFLtxeIrQrQ0mUsdCw_vG_OJOYc0Prc">2025 Inflation lecture series at GGI</a> | <a href="https://www.youtube.com/playlist?list=PLDxsZU4NC6Z48qC-2ApHG1eg_I96Jw3B9">lecture series (2018): Inflation and Cosmological Perturbations</a></li>
+            
+            <li>Antony Lewis - <a href="https://cosmologist.info/teaching/EU/">Graduate level Cosmology course lecture notes, problem sets, exams</a> | <a href="https://cosmologist.info/teaching/Cosmology/Cosmology.pdf">Undergrad Cosmology course notes</a></li>
+            
+            <li>Bayesian Data Analysis - <a href="https://avehtari.github.io/BDA_course_Aalto/gsu2021.html">Course materials</a> | <a href="https://github.com/avehtari/BDA_course_Aalto">github</a> | <a href="https://x.com/avehtari/status/1364550167295311874">tweet</a></li>
+            
+            <li>Ben Safdi - <a href="https://arxiv.org/abs/2303.02169">[2303.02169] TASI 2022 Lectures on the Particle Physics and Astrophysics of Dark Matter</a> | <a href="https://www.youtube.com/results?search_query=benjamin+safdi+tasi">recorded lectures</a></li>
+            
+            <li>Classical and quantum cosmology lectures, from Corfu Summer Institute: <a href="https://arxiv.org/abs/2202.13875">2202.13875</a> | <a href="https://youtu.be/38IQBs9qsLc?list=PLUX8Mk7mqLPLPDzcBV5VrCunaCtgQSZKm">Lectures recording 1</a> | <a href="https://youtu.be/zL5B_e91QFo?list=PLUX8Mk7mqLPLPDzcBV5VrCunaCtgQSZKm">Recording 2</a></li>
+            
+            <li>Cliff Burgess - <a href="https://www.physics.mcmaster.ca/~cburgess/cburgess/?page_id=630">Course materials, incl PDFs of his books, etc</a> | <a href="https://www.physics.mcmaster.ca/~cburgess/cburgess/?page_id=18">Course pages</a> | <a href="https://pirsa.org/speaker/Cliff-Burgess">Courses and lectures at Perimeter Institute</a> | <a href="https://youtu.be/cSCqIxBxmxs">Interview: Lessons on and from Quantum Gravity</a></li>
+            
+            <li>Carolina Cuesta-Lazaro - <a href="https://slides.com/carolcuesta">a large slides collection (~93) from her talks on machine learning topics in cosmology</a> | <a href="https://jrdmb.netlify.app/crt.html?s1=Cuesta-Lazaro">recorded talks</a></li>
+            
+            <li>Cole Miller - <a href="https://www.astro.umd.edu/~miller/teaching/astr422/">Cosmology course (2007), lecture notes and problem sets</a></li>
+            
+            <li>Daniel Baumann - <a href="https://www.lecospa.ntu.edu.tw/people/daniel-baumann">His LeCosPA website with selected talks and lecture notes</a> | <a href="https://www.uva.nl/en/content/news/professor-appointments/2016/03/daniel-baumann-professor-of-theoretical-cosmology.html">UvA web page</a>
+                <ul>
+                    <li><a href="https://arxiv.org/abs/1807.03098">TASI Lectures on Primordial Cosmology [1807.03098]</a> | <a href="https://jrdmb.netlify.app/crt.html?s1=baumann&s2=primordial+cosmology">lecture recordings</a></li>
+                    <li><a href="https://arxiv.org/abs/0907.5424">TASI Lectures on Inflation [0907.5424]</a> | <a href="https://jrdmb.netlify.app/crt.html?s1=baumann&s2=inflation%tasi">lecture recordings</a></li>
+                    <li><a href="https://www.dropbox.com/s/glzpfz2xfdbcpvw/AdvCosmo.pdf?dl=0">Advanced Cosmology: lecture notes, problem sets, and solutions</a></li>
+                    <li><a href="http://cosmology.amsterdam/education/cosmology/">UvA master's level cosmology lecture notes</a> | <a href="https://cmb.wintherscoming.no/pdfs/baumann.pdf">Cosmology lecture notes</a></li>
+                    <li><a href="https://nms.kcl.ac.uk/sakura.schafer-nameki/GGI/Baumann-CMB-Intro.pdf">Physics of the Cosmic Microwave Background</a></li>
+                    <li><a href="https://github.com/ddbaumann/cosmo-book">Color figures and other materials from Daniel's textbook 'Cosmology'</a> | <a href="https://www.cambridge.org/highereducation/books/cosmology/53783DD7B3CB15E2E37ADFBC0C1B930F/resources/student-resources/B3B89707FBB9F95DE18310093A529228">Book's website</a></li>
+                    <li><a href="https://www.dropbox.com/s/yxxhfmfha6gvhud/Book-History.pdf?dl=0">Notes on historical papers of importance to the field of Cosmology</a></li>
+                    <li><a href="https://www.slideshare.net/DanielBaumann11/presentations">Talk slides on slideshare</a></li>
+                    <li><a href="https://cds.cern.ch/search?ln=en&as=1&cc=General+Talks&m1=a&p1=daniel+baumann&f1=author&op1=a&m2=a&p2=Cosmology&f2=title">Introduction to Cosmology (2024 and 2022 CERN Summer Student Programme series, 3 lecture recordings with slides each year)</a></li>
+                    <li><a href="https://cdn.prod.website-files.com/65c089cfdfce11a0392e5c42/67469a196f855821380fffa4_GR-2024.pdf">General Relativity course lecture notes</a> (167 pages, his final notes as he is no longer teaching this course) | <a href="https://www.icts.res.in/sites/default/files/baumann_icts_dec2011.pdf">The Physics of Inflation</a></li>
+                    <li><a href="https://github.com/ddbaumann/cosmo-correlators">Lecture notes on "Cosmological Correlations" written together with Austin Joyce</a> | <a href="https://youtu.be/H0d4HJ_qwEY?t=2666">Lecture recording on this at the Kavli Asian Winter School, Jan 2023</a> | <a href="https://www.slideshare.net/DanielBaumann11/lectures-on-cosmological-correlations">lecture slides</a></li>
+                    <li><a href="https://arxiv.org/abs/2203.08121">[2203.08121] Snowmass White Paper: The Cosmological Bootstrap</a>, Baumann+</li>
+                    <li><a href="https://jrdmb.netlify.app/crt.html?s1=daniel+baumann">Recorded lectures/talks</a></li>
+                </ul>
+            </li>
+            
+            <li>Daniel Green - <a href="https://arxiv.org/abs/2212.08685">TASI Lectures on Cosmic Signals of Fundamental Physics [2212.08685]</a> | <a href="https://jrdmb.netlify.app/crt.html?s1=daniel+green&s2=TASI+2022">recorded lectures</a> | <a href="https://jrdmb.netlify.app/crm-search.html?s1=daniel+green">paper threads</a></li>
+            
+            <li>David Cerdeño - Astroparticle physics course: <a href="https://members.ift.uam-csic.es/david.cerdeno/wp-content/uploads/2022/03/DM.pdf">lecture notes</a>, <a href="https://members.ift.uam-csic.es/david.cerdeno/wp-content/uploads/2022/04/Exercises_full.pdf">exercises</a>, <a href="https://members.ift.uam-csic.es/david.cerdeno/astroparticle-physics/">course site with slides</a></li>
+            
+            <li>Dan Hooper - <a href="https://arxiv.org/abs/1812.02029">TASI Lectures on Indirect Searches For Dark Matter [1812.02029]</a></li>
+            
+            <li>David Tong+ - <a href="http://www.damtp.cam.ac.uk/user/tong/cosmo.html">Cosmology lectures and problem sheets</a> | <a href="https://cds.cern.ch/search?f=author&p=Tong%2C%20David&ln=en">Particle World Summer Lectures at CERN, video + slides</a></li>
+            
+            <li>David Wands - <a href="https://github.com/HAWinther/LectureNotes/blob/master/ICG_PhD_Lectures_Theoretical_Cosmology_2016/notes_david_wands.pdf">The Early Universe</a> | <a href="https://arxiv.org/abs/1504.06335">[1504.06335] Physics of the Cosmic Microwave Background Radiation</a>, by Wands et al</li>
+            
+            <li>Djuna Croon - Baryogenesis, Gravitational Waves, and Phase Transitions, TASI 2022: <a href="https://arxiv.org/abs/2307.00068">2307.00068</a>, <a href="https://sites.google.com/colorado.edu/tasi-2022-wiki/lecture-topics/baryogenesis">lecture notes at TASI site</a></li>
+            
+            <li>Eiichiro Komatsu - <a href="https://wwwmpa.mpa-garching.mpg.de/~komatsu/lectures--reviews.html">Lecture materials</a></li>
+            
+            <li>Enrico Pajer - <a href="http://www.damtp.cam.ac.uk/user/ep551/teaching.html">Cosmology, Field Theory in Cosmology, and Soft Theorems in Cosmology</a></li>
+            
+            <li>Eugene Lim - <a href="https://nms.kcl.ac.uk/eugene.lim/AdvCos/lecture2.pdf">Advanced Cosmology : Primordial non-Gaussianities</a> | <a href="https://nms.kcl.ac.uk/eugene.lim/">KCL page with additional materials</a></li>
+            
+            <li>Eva Silverstein - <a href="https://arxiv.org/abs/1606.03640">TASI lectures on cosmological observables and string theory [1606.03640]</a></li>
+            
+            <li>Florian Niedermann - Introduction to Cosmology: <a href="https://indico.fysik.su.se/event/8276/attachments/5708/7221/Problem%20sheet.pdf">problems sheet</a> and <a href="https://indico.fysik.su.se/event/8276/attachments/5708/7219/Solution.pdf">solutions</a></li>
+            
+            <li>Frank Wilczek - <a href="https://ocw.mit.edu/courses/8-952-particle-physics-of-the-early-universe-fall-2004/">Particle Physics of the Early Universe</a>, a 2004 MIT Open Courseware offering. Lecture notes and problem sets are available online.</li>
+            
+            <li>Frederic P. Schuller - <a href="https://github.com/lazierthanthou/Lecture_Notes_GR">Lecture notes on general relativity, based on his course</a> | <a href="https://jrdmb.netlify.app/crt.html?s1=Frederic+Schuller">recorded lectures</a></li>
+            
+            <li>George Djorgovski - <a href="https://sites.astro.caltech.edu/~george/ay21/">Caltech Galaxies and Cosmology course page, Winter 2022</a>, lecture videos, slides, notes, references</li>
+            
+            <li>George Efstathiou - <a href="https://people.ast.cam.ac.uk/~gpe/lectures.html">Particle Astrophysics: 16 lecture course including problem sets</a></li>
+            
+            <li>Gianluca Calcagni - <a href="https://arxiv.org/abs/2202.13875">[2202.13875] Lectures on classical and quantum cosmology</a> | recordings: <a href="https://youtu.be/38IQBs9qsLc">lecture 1</a>, <a href="https://www.youtube.com/watch?v=zL5B_e91QFo">lecture 2</a></li>
+            
+            <li>Hannu Kurki-Suonio <a href="https://www.mv.helsinki.fi/home/hkurkisu/">lecture notes</a>: Cosmology I/II, Cosmological Perturbation Theory I/II, Galaxy Survey Cosmology</li>
+            
+            <li>Hans Winther - <a href="https://github.com/HAWinther/LectureNotes">Theoretical Cosmology lecture notes</a> | <a href="https://cmb.wintherscoming.no/">Cosmology II course, U of Oslo</a></li>
+            
+            <li>ICG Portsmouth - <a href="https://github.com/HAWinther/LectureNotes">Theoretical Cosmology lecture notes</a></li>
+            
+            <li>James Bjorken - <a href="http://www.bjphysicsnotes.com/home.html">Physics Notes</a>, some cosmology-related materials, especially on dark energy.</li>
+            
+            <li>Jens Chluba - <a href="https://arxiv.org/abs/1806.02915">Future Steps in Cosmology using Spectral Distortions of the Cosmic Microwave Background [1806.02915]</a> | <a href="https://jrdmb.netlify.app/crt.html?s1=chluba">recorded talks</a> | <a href="https://www.icts.res.in/event/page/17487">Recombination readings, exercises and solutions</a></li>
+            
+            <li>Jim Cline - <a href="https://arxiv.org/abs/1807.08749">TASI Lectures on Early Universe Cosmology: Inflation, Baryogenesis and Dark Matter [1807.08749], updated 2021-08-02</a> | <a href="https://jrdmb.netlify.app/crt.html?s1=james+cline">recorded lectures</a></li>
+            
+            <li>Jo Dunkley - <a href="https://physics.princeton.edu/~jdunkley/uploads/3/9/7/7/39770842/cosmo_2016.pdf">Cosmology lecture notes</a> | <a href="https://www.aip.org/history-programs/niels-bohr-library/oral-histories/47468">AIP Oral History interview</a></li>
+            
+            <li>Joe Zuntz - <a href="https://github.com/joezuntz/michigan">Jupyter notebooks with exercises on essential cosmology software</a>, from the Michigan Cosmology Summer School 2020</li>
+            
+            <li>John Peacock - <a href="https://www.roe.ac.uk/japwww/teaching/cos5_1213/cos5_full.pdf">Notes for his MPhys Advanced Cosmology course</a> | <a href="https://www.roe.ac.uk/~jap/teaching/cos5.html">Problem sets, exam papers, etc</a> | <a href="https://sites.astro.caltech.edu/~george/ay21/readings/peacock_cosmology_notes.pdf">Astrophysical Cosmology</a> | <a href="https://pdg.lbl.gov/2022/reviews/rpp2022-rev-bbang-cosmology.pdf">Big-Bang Cosmology</a>, with Keith Olive</li>
+            
+            <li>Jon Gudmundsson - <a href="http://www.jon.fysik.su.se/teaching.html">cosmology lecture notes, exams and solutions, PDF versions</a> and <a href="https://github.com/jegudmunds/FK5024">LaTeX versions</a> | <a href="https://github.com/jegudmunds/CMBAnalysis_SummerSchool">Jupyter notebooks from the CMB Analysis Summer School 2015</a></li>
+            
+            <li>Josè Luis Bernal, Sarah Libanore: <a href="https://agenda.infn.it/event/33079/sessions/25414/attachments/103532/144884/GGI_tensions_preliminary.pdf">Cosmic Tensions lecture notes from March 2023 GGI program</a> | <a href="https://www.youtube.com/results?search_query=jose+luis+bernal+cosmic+tensions+Galileo+Galilei">recordings</a></li>
+            
+            <li>Julien Lesgourgues - <a href="https://arxiv.org/abs/1302.4640">TASI Lectures on Cosmological Perturbations [1302.4640]</a> | <a href="https://rwth-aachen.sciebo.de/s/16rDyvE8CIuFNP1">Cosmology lecture notes for his Master's level course, dated 2023-06-29, 139 pages</a></li>
+            
+            <li>Kaustuv Basu - <a href="https://drive.google.com/uc?export=download&id=1NFXpatryWvKUDexDNfGQPGjRMju7CXp2">Lecture notes for semester Master's level 2022 course on The Cosmic Microwave Background at U of Bonn</a>, <a href="https://astro.uni-bonn.de/~kbasu/cmb_localpage.html">slides for the 13 CMB course lectures</a></li>
+            
+            <li>Kendrick Smith - <a href="https://www.trisep.ca/2018/program/kendrick_smith_trisep2018.pdf">Observational Cosmology</a>, 128 pages of lecture notes from TRISEP 2018</li>
+            
+            <li>Kevin Zhou - <a href="https://knzhou.github.io/notes/cos.pdf">Cosmology lecture notes</a></li>
+            
+            <li>Kevork Abazajian - <a href="https://arxiv.org/abs/2102.10183">Neutrinos in Astrophysics and Cosmology: TASI 2020 Lectures [2102.10183]</a></li>
+            
+            <li>Licia Verde - papers on statistical methods in cosmology: <a href="https://arxiv.org/abs/0911.3105">0911.3105</a>, <a href="https://arxiv.org/abs/0712.3028">0712.3026</a> and <a href="https://jrdmb.netlify.app/crt.html?s1=licia+verde&s2=statistic">recorded lectures</a></li>
+            
+            <li>Luca Amendola - <a href="https://www.thphys.uni-heidelberg.de/~amendola/teaching/cosmology.pdf">Cosmology lecture notes</a>, dated 31-Jan-2023 | <a href="https://www.thphys.uni-heidelberg.de/~amendola/teaching/adv-cosm.pdf">Advanced Cosmology lecture notes</a>, dated 25-Jul-2023</li>
+            
+            <li>M. Sten Delos - <a href="https://wwwmpa.mpa-garching.mpg.de/~komatsu/lecturenotes/Sten_Delos_on_darkmatter_structure.pdf">The physical bases for the structures of collisionless dark matter halos</a></li>
+            
+            <li>Mariangela Lisanti - <a href="https://arxiv.org/abs/1603.03797">TASI Lectures on Dark Matter Physics [1603.03797]</a></li>
+            
+            <li>Mark Hindmarsh+ - <a href="https://arxiv.org/abs/2008.09136">Phase transitions in the early universe [2008.09136]</a> | <a href="https://indico.cern.ch/event/1128515/">recorded talk</a></li>
+            
+            <li>Mark Trodden and Sean Carroll - <a href="https://arxiv.org/abs/astro-ph/0401547">TASI Lectures: Introduction to Cosmology (2004)</a></li>
+            
+            <li>Matteo Maturi - Video playlists of his courses at Heidelberg U. in <a href="https://www.youtube.com/playlist?list=PLG4KhehRXgYsc0ipyKJa1QBQDSTbJ10ef">Advanced Cosmology</a>, <a href="https://www.youtube.com/playlist?list=PLG4KhehRXgYuKYvSgMMiN_amzwbperswo">Cosmology</a>, <a href="https://www.youtube.com/playlist?list=PLG4KhehRXgYsCJtYYk1A-7-TP-Q_pyFZT">General Relativity</a>, and <a href="https://www.youtube.com/playlist?list=PLG4KhehRXgYveRVcpac6eKeBN6SderjFo">Theoretical Astrophysics</a>. <a href="https://www.ita.uni-heidelberg.de/~maturi/teaching.html">More info</a>.</li>
+            
+            <li>Matthias Blau - <a href="http://www.blau.itp.unibe.ch/newlecturesGR.pdf">General Relativity lecture notes, updated Nov. 2022</a></li>
+            
+            <li>Mehrdad Mirbabayi - <a href="https://users.ictp.it/~mirbabayi/">Lecture notes for ICTP GR-I/II, EFT of LSS, and Inflation courses</a></li>
+            
+            <li>Moritz Munchmeyer - <a href="https://munchmeyer.physics.wisc.edu/lecture-notes/">Lecture notes on Computational Cosmology</a> | <a href="https://ai.physics.wisc.edu/teaching/">Lecture slides from Machine Learning in Physics course</a></li>
+            
+            <li>Mustafa Amin - <a href="https://www.dropbox.com/scl/fi/m4dmjkatlpm62w4eirx4z/Amin_DM_2023.pdf?dl=0&rlkey=iie1ucj4v5f49ks20z65vy0du">Dark Matter lecture notes</a> for the July 2023 Giambiagi Summer School for Cosmology</li>
+            
+            <li>Oliver F. Piattella - <a href="https://arxiv.org/abs/1803.00070">Lecture Notes in Cosmology [1803.00070]</a>, 377 page book on the arXiv and published by Springer in 2018; <a href="http://ofp.cosmo-ufes.org/uploads/1/3/7/0/13701821/errata_cosmology-ln-v1.pdf">errata</a></li>
+            
+            <li>Oliver Philcox - <a href="https://oliverphilcox.github.io/files/eft_intro.pdf">An Introduction to the EFTofLSS</a> | <a href="https://oliverphilcox.github.io/files/eft_talk.pdf">talk slides on the EFTofLSS</a></li>
+            
+            <li>Rachel Bean - <a href="https://arxiv.org/abs/1003.4468">TASI Lectures on Cosmic Acceleration [1003.4468]</a></li>
+            
+            <li>Raphael Flauger - Lectures on Theoretical Cosmology, from TRISEP 2018: <a href="https://www.trisep.ca/2018/program/R.%20Flauger%20-%20Lecture1.pdf">Lecture 1</a>, <a href="https://www.trisep.ca/2018/program/R.%20Flauger%20-%20Lecture2.pdf">Lecture 2</a>, <a href="https://www.trisep.ca/2018/program/R.%20Flauger%20-%20Lecture3.pdf">Lecture 3</a></li>
+            
+            <li>Richard Mushotzky - <a href="https://www.astro.umd.edu/~richard/">Astrophysics course materials, University of Maryland</a></li>
+            
+            <li>Rishi Khattri - <a href="https://theory.tifr.res.in/~khatri/lecturenotes/cosmology/cosmology.pdf">Cosmology Lecture Notes (195 pages)</a></li>
+            
+            <li>Sean M. Carroll - <a href="https://arxiv.org/abs/gr-qc/9712019">Lecture Notes on General Relativity</a> | <a href="https://cmb.wintherscoming.no/pdfs/carroll_gr.pdf">A No-Nonsense Intro to GR</a></li>
+            
+            <li>Sean McGee - <a href="https://www.sr.bham.ac.uk/~smcgee/ObsCosmo/">Observational Cosmology course materials</a></li>
+            
+            <li>Subir Sarkar - <a href="http://www-thphys.physics.ox.ac.uk/people/SubirSarkar/astropartphys.html">Astroparticle physics course materials, University of Oxford</a></li>
+            
+            <li>Tessa Baker - <a href="https://www.tessabaker.space/images/pdfs/lensing-lecture-tbaker-handout-40742.pdf">Lecture notes on Weak Lensing</a> | <a href="https://tessabaker.space/images/pdfs/Lecture_notes_MG_v2.pdf">Lecture Notes on Modified Gravity</a> | <a href="https://jrdmb.netlify.app/crt.html?s1=Tessa+Baker">recorded talks</a></li>
+            
+            <li>Tirthankar Roy - <a href="http://www.ncra.tifr.res.in/~tirth/Teaching/Cosmology-2021/index.html">Cosmology, IUCAA - NCRA Graduate School, April 2021 course, 21 lectures with videos and slides</a></li>
+            
+            <li>Tom Theuns - <a href="http://icc.dur.ac.uk/~tt/Lectures/UA/L4/cosmology.pdf">Physical Cosmology (81-page PDF file)</a></li>
+            
+            <li>Tonale Winter School on Cosmology, Lecture Notes - <a href="https://indico.physi.uni-heidelberg.de/event/569/page/67-materials">2022</a> | <a href="https://indico.physi.uni-heidelberg.de/event/297/page/47-materials">2021</a> | <a href="https://indico.physi.uni-heidelberg.de/event/103/timetable/#20191209">2019</a></li>
+            
+            <li>Tongyan Lin - <a href="https://arxiv.org/abs/1904.07915">TASI lectures on dark matter models and direct detection [1904.07915]</a></li>
+            
+            <li>Tracy Slatyer - <a href="https://arxiv.org/abs/1710.05137">TASI Lectures on Indirect Detection of Dark Matter [1710.05137]</a></li>
+            
+            <li>University of Oslo - <a href="https://cmb.wintherscoming.no/literature.php">Cosmology II lecture notes, problem sets, lecture videos</a> | <a href="https://arxiv.org/abs/astro-ph/0606683">[astro-ph/0606683] How to calculate the CMB spectrum</a></li>
+            
+            <li>Wayne Hu - <a href="http://background.uchicago.edu/">His U. of Chicago website with course materials, tutorials, codes, talk slides, etc</a>
+                <ul>
+                    <li><a href="https://background.uchicago.edu/~whu/Courses/ast242_16.html">Astro 242 Galaxies and the Universe</a></li>
+                    <li><a href="https://background.uchicago.edu/~whu/Courses/ast243_20.html">Astro 243 Intro to Cosmology: course materials</a></li>
+                    <li><a href="https://background.uchicago.edu/~whu/Courses/ast282_06.html">Astro 282 Current topics in CMB research</a></li>
+                    <li><a href="https://background.uchicago.edu/~whu/Courses/ast305_10.html">Astro 305 Radiative Processes</a></li>
+                    <li><a href="https://background.uchicago.edu/~whu/Courses/Ast321_11/">Astro 321 I focus on the inhomogeneous universe</a></li>
+                    <li><a href="https://background.uchicago.edu/~whu/Courses/ast321_17.html">Astro 321 II theoretical aspects of cosmology)</a></li>
+                    <li><a href="https://background.uchicago.edu/~whu/Courses/ast408_19.html">Astro 408 Relativistic Perturbation Theory</a></li>
+                    <li><a href="https://background.uchicago.edu/~whu/Courses/ast448_18.html">Astro 448 Cosmic Microwave Background</a></li>
+                    <li><a href="https://background.uchicago.edu/~whu/Courses/ast449_16.html">Astro 449 Cosmic Acceleration</a></li>
+                    <li><a href="https://background.uchicago.edu/~whu/Courses/">Single page listing of all course materials</a></li>
+                    <li><a href="https://background.uchicago.edu/~whu/beginners/introduction.html">Introduction to the CMB</a></li>
+                    <li><a href="https://arxiv.org/abs/0802.3688">[0802.3688] Lecture Notes on CMB Theory: From Nucleosynthesis to Recombination</a></li>
+                    <li><a href="https://arxiv.org/abs/astro-ph/0402060">[astro-ph/0402060] Covariant Linear Perturbation Formalism</a></li>
+                    <li><a href="https://arxiv.org/abs/astro-ph/9706147">[astro-ph/9706147] A CMB Polarization Primer</a></li>
+                </ul>
+            </li>
+            
+            <li>Will Handley - <a href="https://github.com/williamjameshandley/talks?tab=readme-ov-file">Academic talks (slides and source)</a>, many on cosmology topics, github repo</li>
+            
+            <li>Will Kinney - <a href="https://arxiv.org/abs/0902.1529">TASI Lectures on Inflation [0902.1529]</a> | <a href="https://jrdmb.netlify.app/crt.html?s1=william+h.+kinney">lectures/talks on inflation</a></li>
+        </ul>
+    </div>
+
+    <!-- Resources Section -->
+    <div class="resources-section" id="resourcesites">
+        <h2 class="section-title">
+            Resource Materials and Sites
+            <a href="#" class="back-to-top" title="Return to top of page">^</a>
+        </h2>
+        <ul class="resource-list">
+            <li><a href="http://universeinproblems.com/index.php/Main_Page">Dynamics of the Universe in Problems</a>: over 2,000 problems and solutions</li>
+            
+            <li><a href="https://pdg.lbl.gov/2024/reviews/astro-cosmo.html">All astrophysical and cosmology coverage in the Review of Particle Physics (2024)</a></li>
+            
+            <li><a href="https://pdg.lbl.gov/2024/reviews/rpp2024-rev-cosmological-parameters.pdf">The Cosmological Parameters (2024)</a> | earlier version <a href="https://arxiv.org/abs/2201.08666">2201.08666</a>: from the Particle Data Book</li>
+            
+            <li>Particle Data Group: <a href="https://pdg.lbl.gov/2024/reviews/rpp2024-rev-astrophysical-constants.pdf">Astrophysical Constants and Parameters</a> | <a href="https://pdg.lbl.gov/2024/reviews/rpp2024-rev-bbang-cosmology.pdf">Big Bang Cosmology</a> | <a href="https://pdg.lbl.gov/2024/reviews/rpp2024-rev-bbang-nucleosynthesis.pdf">Big Bang Nucleosynthesis</a> | <a href="https://pdg.lbl.gov/2024/reviews/rpp2024-rev-cosmic-microwave-background.pdf">Cosmic Microwave Background</a> | <a href="https://pdg.lbl.gov/2024/reviews/rpp2024-rev-cosmological-parameters.pdf">Cosmological Parameters</a> | <a href="https://pdg.lbl.gov/2024/reviews/rpp2024-rev-dark-energy.pdf">Dark Energy</a> | <a href="https://pdg.lbl.gov/2024/reviews/rpp2024-rev-dark-matter.pdf">Dark Matter</a> | <a href="https://pdg.lbl.gov/2024/reviews/rpp2024-rev-inflation.pdf">Inflation</a> | <a href="https://pdg.lbl.gov/2024/reviews/rpp2024-rev-neutrinos-in-cosmology.pdf">Neutrinos in Cosmology</a></li>
+            
+            <li><a href="https://www.redshiftzero.com/cosmowebapp/">Interactive Cosmological Power Spectra app</a>, how the matter power spectrum and the angular power spectrum of the cosmic microwave background change as a function of cosmological parameters</li>
+            
+            <li><a href="https://pdg.lbl.gov/2024/api/index.html">Programmatic Access (API) to PDG Data</a></li>
+            
+            <li><a href="https://adh-sj.info/bao_cmb.php">Baryon Acoustic Oscillations tutorial</a></li>
+            
+            <li><a href="https://lambda.gsfc.nasa.gov/bau/">CMB Power Spectrum Analyzer</a> | <a href="https://lambda.gsfc.nasa.gov/education/bau_documentation.html">docs</a> | <a href="https://lambda.gsfc.nasa.gov/education/">Other NASA LAMBDA educational tools</a></li>
+            
+            <li><a href="https://sites.google.com/uchicago.edu/themcmahoncosmologylab/cmb-summer-school">CMB Summer School (from The McMahon Cosmology Lab at U of Chicago)</a></li>
+            
+            <li><a href="https://github.com/georgestein/ml-in-cosmology">Machine Learning in Cosmology</a>, a comprehensive list of published machine learning applications to cosmology, organized by subject matter and arxiv posting date. Created by <a href="https://georgestein.github.io/">George Stein</a>, ML Scientist at UC Berkeley and LBNL</li>
+            
+            <li><a href="https://web.archive.org/web/20210309130159/https://pbs.twimg.com/media/EwCgcU9XEAMSVat.png">Redshift Lookup Table - paper and pencil cosmology calculator, updated for Planck18</a> | <a href="https://arxiv.org/abs/1303.5961">Source paper</a> | <a href="https://apod.nasa.gov/apod/ap130408.html">APOD version</a></li>
+            
+            <li><a href="https://lambda.gsfc.nasa.gov/education/Computing_Expansion_History_of_Universe.pdf">Computing the Expansion History of the Universe</a></li>
+            
+            <li><a href="https://speakerd.s3.amazonaws.com/presentations/3597334f3bec4e699827ccab82bd9c87/summary_lectures_01.pdf">Cosmology Cheatsheet 1</a> | <a href="https://speakerd.s3.amazonaws.com/presentations/c0d57d0ee80b41e59c528dce877963de/summary_lectures_02.pdf">Cheatsheet 2</a></li>
+            
+            <li><a href="https://phys.libretexts.org/Courses/University_of_California_Davis/UCD%3A_Physics_156_-_A_Cosmology_Workbook/A_Cosmology_Workbook">A Cosmology Workbook</a>, by <a href="https://www.lloydknox.com/">Lloyd Knox</a> at UC Davis, which he uses in his <a href="https://www.lloydknox.com/cosmology-for-physics-majors">undergrad cosmology course for physics majors</a></li>
+            
+            <li><a href="https://docs.google.com/document/d/1Tz_sZ92khJZVtx4Ru_4DICAEvMS6EPHL3lobHBzvC3A/edit">CosmoComments</a> and <a href="https://cosmocoffee.info/">CosmoCoffee</a></li>
+            
+            <li><a href="https://zenodo.org/search?page=1&size=20&q=cosmology&keywords=cosmology">Zenodo cosmology materials</a></li>
+            
+            <li><a href="https://mbustamante.net/my-daily-arxiv-picks/">Mauricio Bustamante's Daily arXiv Picks List</a></li>
+            
+            <li><a href="https://emfollow.docs.ligo.org/userguide/">LIGO/Virgo Public Alerts User Guide</a></li>
+            
+            <li><a href="https://en.wikipedia.org/wiki/List_of_common_astronomy_symbols">List of common astronomy symbols</a></li>
+            
+            <li><a href="https://berkeleysciencereview.com/article/2021/05/22/get-your-application-noticed">Get your application for an academic position noticed, by Miguel Zumalacarregui</a></li>
+            
+            <li><a href="http://www.philcosmo.uwo.ca/bibliography-on-philosophy-of-cosmology/">Annotated bibliography on philosophy of cosmology</a></li>
+            
+            <li><a href="https://old.reddit.com/r/astrophysics/wiki/index">Astrophysics subreddit wiki</a></li>
+            
+            <li><a href="http://hosting.astro.cornell.edu/~favata/gwresources.html">Marc Favata's gravitational-wave resources page</a></li>
+            
+            <li><a href="https://www.gw-openscience.org/">Gravitational Wave Open Science Center</a></li>
+            
+            <li><a href="https://www.aanda.org/">AandA.org</a>: Astronomy and Astrophysics research</li>
+            
+            <li><a href="https://www.astrobetter.com/">AstroBetter</a>: This blog is "intended for professional astronomers...to provide information and tips"</li>
+            
+            <li><a href="https://arxiv.org/abs/2006.12566">Astronomy Paper Seminar Participation Guide & Reading Walkthrough [2006.12566]</a></li>
+        </ul>
+    </div>
+
+    <!-- Codes and Tools Section -->
+    <div class="resources-section" id="codes">
+        <h2 class="section-title">
+            Codes and Tools
+            <a href="#" class="back-to-top" title="Return to top of page">^</a>
+        </h2>
+        <ul class="resource-list">
+            <li><a href="https://paperswithcode.com/search?q_meta=&q_type=&q=cosmology">Papers with Code, cosmology-related, an arXivLabs site</a></li>
+            
+            <li><a href="https://github.com/nikosarcevic/HEP-ASTRO-COSMO">HEP-ASTRO-COSMO</a>: a community effort github repo to collect open source packages/libraries/tools in one place for these fields</li>
+            
+            <li><a href="https://ascl.net/">Astrophysics Source Code Library</a> | <a href="https://github.com/teuben/ascl-tools">ASCL tools repo</a></li>
+            
+            <li><a href="https://lambda.gsfc.nasa.gov/toolbox/">NASA's LAMBDA-Tools</a>: lists of CMB and other tools for cosmology, astrophysics, and astronomy</li>
+            
+            <li><a href="https://cosmologist.info/">Code and materials at Antony Lewis' cosmologist.info site</a></li>
+            
+            <li><a href="https://nikosarcevic-cosmoracle-streamlit-app-pfsfnk.streamlit.app/">CosmΩracle: a web app that calculates and plots distances in cosmology</a> | <a href="https://github.com/nikosarcevic/CosmOracle">github repo</a> | created and maintained by Marco Bonici, Niko Sarcevic and Matthijs van der Wild</li>
+            
+            <li><a href="https://colossus.astro.umd.edu/">Colossus Cosmology Calculator</a> is now a web app that was <a href="https://staging.bsky.app/profile/benedikt.bsky.social/post/3knjo3adbf22r">introduced on 12-Mar-2024 by Benedikt Diemer</a>. It is based on the earlier Python tookkit: <a href="https://bitbucket.org/bdiemer/colossus">Colossus astrophysics/cosmology python toolkit</a> | <a href="https://bdiemer.bitbucket.io/colossus/">Documentation</a> | <a href="https://arxiv.org/abs/1712.04512">Benedikt Diemer 1712.04512 paper</a> | <a href="https://jrdmb.netlify.app?3hs5kclt8q4uhru1">Notes about Colossus</a></li>
+            
+            <li><a href="https://en.wikipedia.org/wiki/List_of_cosmological_computation_software">Wikipedia List of Computational Cosmology Software</a> | <a href="https://astrobites.org/guides/guide-to-astrophysical-software/">Astrobites Guide to Astrophysics Software</a></li>
+            
+            <li>Cosmologists using the Julia programming language:
+                <ul>
+                    <li>Eiichiro Komatsu: <a href="https://github.com/komatsu5147">github repos</a></li>
+                    <li>Marco Bonici: <a href="https://github.com/marcobonici/CosmoCentral.jl">CosmoCentral.jl</a></li>
+                    <li>Marius Millea: <a href="https://cosmicmar.com/CMBLensing.jl/stable/">CMBLensing.jl</a></li>
+                    <li>Robert Rosati: <a href="https://github.com/rjrosati/Inflation.jl">Inflation.jl</a> and talk <a href="https://youtu.be/gvUZiPPB3nI">Simulating the Early Universe with Inflation.jl</a></li>
+                </ul>
+            </li>
+            
+            <li><a href="https://gitlab.com/dhirajhazra/simple-codes-in-cosmology">Codes in Cosmology</a>: python code and Jupyter notebooks useful in studying cosmology, by Dhiraj Kumar Hazra | <a href="https://x.com/dhirajhazra/status/1435129171835953152">tweeted info</a></li>
+            
+            <li><a href="https://safe.nrao.edu/wiki/bin/view/Main/PythonResources">Python Resources: Astronomy, Scientific Plotting, and Data Analysis (at the NRAO wiki)</a></li>
+            
+            <li><a href="https://pypi.org/project/comparxiv/">comparxiv python module</a>: with one commmand, creates PDF diff of two versions of an arXiv paper; by <a href="https://timonemken.com/">Timon Emken</a></li>
+            
+            <li><a href="https://cmb.wintherscoming.no/calc.php">Cosmology calculators and plot generators (U. Oslo)</a>: background evolution, recombination history, perturbations, matter power spectrum | <a href="https://lambda.gsfc.nasa.gov/toolbox/tb_camb_form.cfm">CAMB web interface</a></li>
+            
+            <li>Other Cosmology Calculators: <a href="http://cosmocalc.icrar.org/">ICRAR</a> | <a href="http://www.icosmos.co.uk/index.html">iCosmos</a> | <a href="http://www.astro.ucla.edu/~wright/CosmoCalc.html">Ned Wright</a> | <a href="https://chrisnorth.github.io/planckapps/Simulator/">Chris North</a></li>
+            
+            <li><a href="https://github.com/rougier/matplotlib-cheatsheet">Matplotlib cheatsheet from Nicolas Rougier</a></li>
+            
+            <li><a href="http://www.astropython.org/">AstroPython</a></li>
+            
+            <li><a href="https://github.com/drgreen/COGS18_22">Daniel Green's course notes on scientific computing with python at UCSD</a>, available as a <a href="https://drgreen.github.io/Phys39-book/intro.html">Jupyter book</a>: "this is intended as a first course in python/scientific computing for freshman/sophomore. Hopefully we will also transition to python in subsequent physics courses so this is meant to be the foundation for the rest of their degree." | lecture notes and computer code from "Computation Physics" 2023 course (<a href="https://dropbox.com/s/w787ujp0v4nxsh6/Physics_105B.pdf">https://dropbox.com/s/w787ujp0v4nxsh6/Physics_105B.pdf</a> and <a href="https://github.com/drgreen/Phys_105B">https://github.com/drgreen/Phys_105B</a>) The course samples 3 themes: data analysis, stochastic processes, and numerical methods</li>
+            
+            <li><a href="https://github.com/darshanbeniwal/Astrophy_Py_STACUP_BDU_CUTN_IUCAA_2023?tab=readme-ov-file">Materials and code from the 'School on Statistical Techniques in Astrophysics & Cosmology Using Python', 2023</a></li>
+            
+            <li><a href="https://www.overleaf.com/latex/templates">Overleaf LaTeX templates</a> | new feature: PDF detach, <a href="https://overleaf.com/blog/new-feature-ready-set-detach">PDF preview of your project in a separate tab</a></li>
+        </ul>
+    </div>
+
+    <!-- Online Books Section -->
+    <div class="resources-section" id="books">
+        <h2 class="section-title">
+            Free Online Books
+            <a href="#" class="back-to-top" title="Return to top of page">^</a>
+        </h2>
+        <ul class="resource-list">
+            <li><a href="https://phys.libretexts.org/Courses/University_of_California_Davis/UCD%3A_Physics_156_-_A_Cosmology_Workbook/A_Cosmology_Workbook">A Cosmology Workbook</a>, by <a href="https://www.lloydknox.com/">Lloyd Knox</a> at UC Davis, which he uses in his <a href="https://www.lloydknox.com/cosmology-for-physics-majors">undergrad cosmology course for physics majors</a></li>
+            
+            <li><a href="https://arxiv.org/abs/1803.00070">Lecture Notes in Cosmology [1803.00070]</a>: 377 page book by Oliver F. Piattella published by Springer in 2018</li>
+            
+            <li><a href="https://arxiv.org/abs/2207.01633">Beyond the Standard Model Cocktail [2207.01633]</a>: "a thorough survey of important questions at the interface between theoretical particle physics and cosmology; submitted to Springer for publication"</li>
+            
+            <li><a href="https://arxiv.org/abs/2001.08297">The establishment of the Standard Cosmological Model through observations [2001.08297]</a>, by Ricardo T. Génova-Santos</li>
+            
+            <li><a href="https://galaxiesbook.org/">Dynamics and Astrophysics of Galaxies</a>: HTML version with interactive examples and live code in the browser, 100% free, by <a href="http://astro.utoronto.ca/~bovy/">Jo Bovy</a></li>
+            
+            <li><a href="https://www.ifa.hawaii.edu/~kaiser/lectures/">Elements of Astrophysics</a>, by <a href="https://en.wikipedia.org/wiki/Nick_Kaiser">Nick Kaiser</a></li>
+            
+            <li><a href="https://www.mathphysicsbook.com/mathematics/">Mathematics for Physics</a>, by <a href="https://cal.berkeley.edu/adamjmarsh">Adam Marsh</a></li>
+            
+            <li><a href="https://www.taylorfrancis.com/books/oa-mono/10.1201/9780367806637/cosmology-gauge-field-theory-string-theory-bailin-love">Cosmology in Gauge Field Theory and String Theory</a>, by D. Bailin, A. Love</li>
+        </ul>
+    </div>
+
+    <!-- Papers Section -->
+    <div class="resources-section" id="papers">
+        <h2 class="section-title">
+            Papers and pedagogical materials
+            <a href="#" class="back-to-top" title="Return to top of page">^</a>
+        </h2>
+        <ul class="resource-list">
+            <li><a href="https://jrdmb.netlify.app?x62ca5qxiy8nprhr">Some Cosmology Review Papers</a></li>
+            
+            <li><a href="https://jrdmb.netlify.app?Ubw/WJgEICWNXArz">Cosmologist threads on Research Papers</a></li>
+            
+            <li><a href="https://jrdmb.netlify.app/crt-papers.html"><strong>Cosmology Papers with Researcher Talks</strong></a></li>
+            
+            <li><a href="https://www.dropbox.com/s/yxxhfmfha6gvhud/Book-History.pdf?dl=0">Daniel Baumann: Cosmology: Notes on Historical Papers</a></li>
+            
+            <li><a href="https://arxiv.org/abs/2209.06854">Snowmass Theory Frontier: Astrophysics and Cosmology</a></li>
+            
+            <li><a href="https://arxiv.org/abs/2203.07506">Snowmass Cosmic Frontier White Paper: Cosmology and Fundamental Physics from the three-dimensional Large Scale Structure</a></li>
+            
+            <li><a href="https://arxiv.org/abs/2203.08232">Snowmass White Paper: Effective Field Theories in Cosmology</a></li>
+            
+            <li><a href="https://inspirehep.net/literature?sort=mostrecent&size=50&page=1&q=t%20Snowmass&arxiv_categories=astro-ph.CO">InspireHEP listing of astro-ph.CO Snowmass papers</a></li>
+            
+            <li><a href="https://jermity.gitlab.io/samples/astro2020_papers.html">Searchable list of 590 Astro2020 Decadal Survey papers</a> | <a href="https://www.cosmos.esa.int/web/voyage-2050/white-papers">ESA's Voyage 2050 White Papers</a></li>
+            
+            <li><a href="https://www.cosmos.esa.int/web/planck/publications">Planck Publications</a> | <a href="http://pla.esac.esa.int/pla/#home">Planck Legacy Archive</a></li>
+            
+            <li><a href="https://wiki.cosmos.esa.int/planck-legacy-archive/index.php/Main_Page">Planck 2018 Explanatory Supplement</a> | <a href="https://wiki.cosmos.esa.int/planck-legacy-archive/index.php/Cosmological_Parameters">Planck 2018 cosmological parameters and MC chains</a></li>
+            
+            <li><a href="http://astro.utoronto.ca/~cczhu/ZhuQual.pdf">Cosmology qualifier exam solutions, primer, and Q&As</a></li>
+            
+            <li><a href="https://www.annualreviews.org/doi/10.1146/annurev-astro-111021-084639">Cosmology and High-Energy Astrophysics: A 50-Year Perspective on Personalities, Progress, and Prospects, by Martin J. Rees; Annual Review of Astronomy and Astrophysics</a></li>
+            
+            <li>Astrobites Tools for Reading Papers: <a href="https://astrobites.org/2017/12/19/tools-for-reading-papers-part-1/">Part 1</a>, <a href="https://astrobites.org/2018/03/09/tools-for-reading-papers-part-2/">Part 2</a>, <a href="https://astrobites.org/2018/09/06/tools-for-reading-papers-part-3/">Part 3</a>, and <a href="https://astrobites.org/2011/04/19/journal-articles-in-astronomy/">this</a></li>
+            
+            <li><a href="http://web.mit.edu/redingtn/www/netadv/">Net Advance of Physics topic index of review papers and tutorials</a></li>
+            
+            <li><a href="https://jrdmb.netlify.app?Oe+KRztzUvOSXB5y">Misconceptions in Cosmology</a></li>
+            
+            <li><a href="https://arxiv.org/abs/astro-ph/9905116">Distance Measures in Cosmology</a>, by David Hogg | <a href="https://en.wikipedia.org/wiki/Distance_measures_(cosmology)">Wikipedia article</a></li>
+            
+            <li><a href="http://www.astro.ucla.edu/~wright/distance.htm">The ABCs of Distances</a>, by Ned Wright | <a href="https://wwwmpa.mpa-garching.mpg.de/~gamk/TUM_Lectures/Lecture3.pdf">Distances in Cosmology</a> | <a href="https://share.streamlit.io/nikosarcevic/cosmoracle/main">CosmΩracle web app to calculate and plot distances</a></li>
+            
+            <li><a href="http://www.atlasoftheuniverse.com/redshift.html">The Distance Scale of the Universe</a>, by Richard Powell</li>
+            
+            <li><a href="https://physicstoday.scitation.org/doi/10.1063/PT.3.4090">Measuring cosmic distances with standard sirens</a>, by Holz, Hughes, and Schutz</li>
+            
+            <li><a href="https://iopscience.iop.org/journal/2515-5172">Research Notes of the AAS (RNAAS)</a></li>
+            
+            <li><a href="https://github.com/seshnadathur/IntroductionToMCMC">Introduction to MCMC, Seshadri Nadathur github repo</a></li>
+            
+            <li>Robert Klauber materials: <a href="http://www.quantumfieldtheory.info/cmb_vers_2.pdf">Student Friendly Guide to the Cosmic Microwave Background</a> | <a href="http://www.quantumfieldtheory.info/Different_Horizons_in_Cosmology.pdf">Different Horizons in Cosmology</a> | <a href="http://www.quantumfieldtheory.info/Freeze_out.pdf">Freeze-Out in the Early Universe</a></li>
+            
+            <li><a href="https://arxiv.org/abs/2203.17223">Cosmological Neutrinos [2203.17223]</a></li>
+            
+            <li><a href="https://cplberry.com/2020/02/09/gw-data-guides/">An introduction to LIGO-Virgo data analysis, by Christopher Berry</a>: a guide to LIGO-Virgo detector noise and extraction of transient gravitational-wave signals. Also see <a href="https://arxiv.org/abs/1908.11170">https://arxiv.org/abs/1908.11170</a>.</li>
+        </ul>
+    </div>
+
+    <!-- Personal Sites Section -->
+    <div class="resources-section" id="websites">
+        <h2 class="section-title">
+            Personal Sites, Blogs, or Talk Series
+            <a href="#" class="back-to-top" title="Return to top of page">^</a>
+        </h2>
+        <ul class="resource-list">
+            <li><a href="https://www.agnesferte.com/">Agnès Ferté</a>: weak lensing and multi-probe data analysis and modeling | <a href="https://jrdmb.netlify.app/crt.html?s1=agnes+ferte">recorded talks</a></li>
+            
+            <li><a href="https://www.alkistispourtsidou.com/">Alkistis Pourtsidou</a>: large-scale structure, radio intensity mapping surveys, optical galaxy surveys, <a href="https://www.alkistispourtsidou.com/project/code/">public codes</a> | <a href="https://jrdmb.netlify.app/crt.html?s1=Alkistis+Pourtsidou">recorded talks</a></li>
+            
+            <li><a href="https://www.andrewjaffe.net/blog">Andrew Jaffe</a>: many CMB and Planck articles, though blog is inactive since mid-2018</li>
+            
+            <li><a href="https://ajshajib.github.io/">Anowar J. Shajib</a>: gravitational lensing and observational cosmology | <a href="https://jrdmb.netlify.app/crt.html?s1=Anowar+Shajib">recorded talks</a></li>
+            
+            <li><a href="https://cosmologist.info/">Antony Lewis</a>: cosmologist.info website; early universe, CMB, Planck, Simons Observatory | <a href="https://jrdmb.netlify.app/crt.html?s1=antony+lewis">recorded talks</a></li>
+            
+            <li><a href="https://astrobites.org/">Astrobites.org</a> | <a href="https://mcdonaldinstitute.ca/apbites/archive/">AstroparticleBites (unfortunately, no longer active as of 2020)</a></li>
+            
+            <li><a href="http://www.benediktdiemer.com/">Benedikt Diemer</a>: computational astrophysics, structure formation | <a href="https://jrdmb.netlify.app/crt.html?s1=benedikt+diemer">recorded talks</a> | also see Colossus entry in the <a href="#codes">Codes and Tools</a> section</li>
+            
+            <li><a href="https://benjamingiblin.wixsite.com/home">Benjamin Giblin</a>: weak gravitational lensing, machine learning | <a href="https://jrdmb.netlify.app/crt.html?s1=b%giblin¬=tom+giblin">recorded talks</a></li>
+            
+            <li><a href="http://www.chiaramingarelli.com/">Chiara Mingarelli</a>: gravitational waves astrophysics | <a href="https://jrdmb.netlify.app/crt.html?s1=chiara+mingarelli">recorded talks</a></li>
+            
+            <li><a href="https://cplberry.com/">Christopher Berry</a>: gravitational waves research</li>
+            
+            <li><a href="https://cajoha.re/">Ciaran O'Hare</a>: astroparticle physics, dark matter, detector technologies | <a href="https://arxiv.org/abs/2403.17697">[2403.17697] Cosmology of axion dark matter</a>, review paper</li>
+            
+            <li><a href="https://cmlamman.github.io/">Claire Lammen</a>: research on dark energy and dark matter, through observations of galaxies; part of the DESI collaboration</li>
+            
+            <li><a href="https://physics.mcmaster.ca/~cburgess/">Cliff Burgess</a>: website | <a href="https://jrdmb.nelify.app/crt.html?s1=cliff+burgess">recorded talks</a></li>
+            
+            <li><a href="http://www2.iap.fr/users/pitrou/">Cyril Pitrou</a>: relativistic cosmology, BBN, neutrino background decoupling | <a href="https://jrdmb.netlify.app/crt.html?s1=cyril+pitrou">recorded talks</a></li>
+            
+            <li><a href="https://danbthomas1.wixsite.com/research">Daniel B. Thomas</a>: "A key theme to my research is observational constraints on standard and alternative explanations of the dark sector"</li>
+            
+            <li><a href="https://drgreen.physics.ucsd.edu/research/">Daniel Green</a>: cosmologist and particle theorist, the <a href="https://drgreen.physics.ucsd.edu/teaching/">Teaching page</a> of his site has multiple lecture notes and other materials for his physics courses | <a href="https://jrdmb.netlify.app/crt/crt.html>s1=daniel+green">recorded talks</a></li>
+            
+            <li><a href="http://danielgrin.net/">Daniel Grin</a>: theoretical astrophysicist specializing in cosmology | <a href="https://jrdmb.netlify.app/crt.html?s1=daniel&s2=grin">recorded talks</a></li>
+            
+            <li><a href="https://hoggresearch.blogspot.com/">David Hogg</a>: Hoggs Research blog on galaxies, stellar dynamics, exoplanets, and fundamental astronomy; <a href="https://jrdmb.netlify.app/crt.html?s1=david+hogg">recorded cosmology-related talks</a></li>
+            
+            <li><a href="https://dchooper.com/">Deanna C. Hooper</a>: research focuses on dark matter and the early universe | <a href="https://cupofcosmology.com/">Cup of Cosmology blog and videos</a> aimed at a cosmology-enthusiast level | <a href="https://jrdmb.netlify.app/crt.html?s1=deanna&s2=hooper">recorded talks</a></li>
+            
+            <li><a href="https://sites.google.com/site/codecosmo/home?authuser=0">Dhiraj Hazra</a>: cosmological perturbations; <a href="https://sites.google.com/site/codecosmo/developed-codes?authuser=0">Codes useful in studying cosmology</a> | <a href="https://gitlab.com/dhirajhazra/simple-codes-in-cosmology">gitlab repo</a> | <a href="https://youtu.be/vyoPSwOer0I">recorded talks</a></li>
+            
+            <li><a href="https://djbrout.github.io/">Dillon Brout</a>: key positions on several teams: DES, Pantheon+, SH0ES, DESI, DEBASS (Dark Energy Bedrock All Sky Supernovae) | <a href="https://jrdmb.netlify.app/crt.html?s1=dillon+brout">recorded talks</a> | <a href="https://jrdmb.netlify.app/crm-search.html?s1=brout">paper threads</a> | <a href="https://djbrout.github.io/SH0ESrefs.html">Table of Cross-checks and Tests of Components of SH0ES Distance Ladder</a></li>
+            
+            <li><a href="https://www.djunacroon.com">Djuna Croon</a>: theoretical particle physics, astro-particle physics, and cosmology | <a href="https://jrdmb.netlify.app/crm-search.html?s1=djuna+croon">recorded talks</a></li>
+            
+            <li><a href="https://www.elisagmferreira.com/">Elisa Ferreira</a>: research in the interface between cosmology, astrophysics, and high energy physics, focus mostly on the dark sector | <a href="https://jrdmb.netlify.app/crt.html?s1=elisa+ferreira">recorded talks</a></li>
+            
+            <li><a href="https://bigthink.com/starts-with-a-bang/most-important-equation-cosmology/">Ethan Siegel</a>: prolific author of the <a href="https://bigthink.com/starts-with-a-bang/">Starts With A Bang</a> articles on BigThink</li>
+            
+            <li><a href="https://florent-leclercq.eu/index.php">Florent Leclercq</a>: numerical cosmology, cosmostatistics, focus on analysis of galaxy survey data | <a href="https://jrdmb.netlify.app/crt.html?s1=leclercq">recorded talks</a> | <a href="https://florent-leclercq.eu/talks.php">talk slides</a></li>
+            
+            <li><a href="https://darkuniverse.unm.edu/">Francis-Yan Cyr-Racine</a>: "research focuses on dark matter, gravitational lensing, neutrinos, and cosmology, with an emphasis on their relation with particle physics" | <a href="https://jrdmb.netlify.app/crt.html?s1=Francis-Yan+Cyr-Racine">recorded talks</a></li>
+            
+            <li><a href="https://cosmosimfrazza.myfreesites.net/">Franco Vazza</a>: the cosmic web, extragalactic magnetism, and galaxy clusters using large cosmological simulations | <a href="https://jrdmb.netlify.app/crt.html?s1=franco+vazza">recorded talks</a></li>
+            
+            <li><a href="https://georgealestas.github.io/">George Alestas</a>: Hubble tension, cosmological datasets, gravitational waves, theories of modified gravity, dark energy, dark matter, and solitons | <a href="https://jrdmb.netlify.app/crt.html?s1=George+Alestas">recorded talks</a></li>
+            
+            <li><a href="https://www.geraintflewis.com/">Geraint F. Lewis</a>: cosmology research focuses on dark matter and dark energy; author and science communicator | <a href="https://www.youtube.com/c/AlasLewisAndBarnes/videos">YouTube channel on cosmology with Luke Barnes</a> | <a href="https://jrdmb.netlify.app/crt.html?s1=geraint&s2=lewis">recorded talks</a></li>
+            
+            <li><a href="https://hayleyjm.github.io/">Hayley Macpherson</a>: numerical relativity, simulations, nonlinear general-relativistic effects, anisotropy and inhomogeneity | <a href="https://jrdmb.netlify.app/crt.html?s1=hayley+macpherson">recorded talks</a></li>
+            
+            <li><a href="https://www.jb.man.ac.uk/~jchluba/Science/index.html">Jens Chluba</a>: recombination, CMB spectral distortions caused by early-energy release, the Sunyaev-Zeldovich (SZ) effect, and related codes | <a href="https://jrdmb.netlify.app/crt.html?s1=chluba">recorded talks</a></li>
+            
+            <li><a href="https://cosmoprinciple.wordpress.com">Jenny Wagner</a> (the "<a href="https://thegravitygrinch.blogspot.com/">Gravity Grinch</a>"): observational cosmologist at the interface between observational evidence, simulation reconstructions and explanatory theory, co-organiser of cosmo-of-69 web blog beyond FLRW-cosmologies: <a href="https://cosmoprinciple.wordpress.com">cosmoprinciple.wordpress.com</a> | <a href="https://jrdmb.netlify.app/crt.html?s1=jenny+wagner">recorded talks</a></li>
+            
+            <li><a href="https://jerome-quintin.github.io/">Jerome Quintin</a>: theoretical cosmology | <a href="https://jerome-quintin.github.io/talks/">talks and slides page</a></li>
+            
+            <li><a href="https://liuxx479.github.io/#home">Jia Liu</a>: computational and observational cosmology, research focus on large-scale structure | <a href="https://jrdmb.netlify.app/crm-search-all.html?s1=jia+liu">talks and slides page</a></li>
+            
+            <li><a href="https://www.jillianscudder.com/">Jillian Scudder</a>: areas of <a href="https://www.jillianscudder.com/metallicities-manga">research</a> | hosts the <a href="https://astroquizzical.com/">Astroquizzical blog</a></li>
+            
+            <li><a href="https://www.jodunkley.com/">Jo Dunkley</a>: major projects involve ACT, Simons Observatory, and DESC | <a href="https://jrdmb.netlify.app/crt.html?s1=jo%dunkley">recorded talks</a></li>
+            
+            <li><a href="https://johannesulf.github.io/">Johannes U. Lange</a>: galaxies, cosmology, and machine learning | <a href="https://jrdmb.netlify.app/crt.html?s1=johannes%lange">recorded talks</a></li>
+            
+            <li><a href="http://www.jon.fysik.su.se/index.html">Jon Gudmundsson
+
+                </a>: experimental cosmology and astrophysics observations of the CMB</li>
+            
+            <li><a href="https://joshdillon.net/">Josh Dillon</a>: 21 cm cosmology, HERA | <a href="https://jrdmb.netlify.app/crt.html?s1=josh+dillon">recorded talks</a></li>
+            
+            <li><a href="https://katherinefreese.com/index.html">Katherine Freese</a>: theoretical cosmology and astroparticle physics | <a href="https://jrdmb.netlify.app/crt.html?s1=katherine+freese">recorded talks</a></li>
+            
+            <li><a href="http://www.astrokatie.com">Katie Mack</a>, theoretical cosmologist and prolific public science communicator, <a href="https://perimeterinstitute.ca/news/katie-mack-named-cifar-azrieli-global-scholar">recently joined Perimeter Institute</a> | <a href="https://jrdmb.netlify.app/crt.html?s1=kat%mack">recorded talks</a></li>
+            
+            <li><a href="https://keirkwame.github.io/">Keir Rogers</a>: dark matter, statistical methods, machine learning | <a href="https://jrdmb.netlify.app/crt.html?s1=keir+rogers">recorded talks</a></li>
+            
+            <li><a href="https://lauraherold.de/">Laura Herold</a>: main interest in testing cosmological models beyond the standard ΛCDM model with current observational probes by using statistical tools from both Bayesian and Frequentist statistics | <a href="https://jrdmb.netlify.app/crt.html?s1=laura+herold">recorded talks</a></li>
+            
+            <li><a href="https://duetosymmetry.com/">Leo C. Stein</a>, general relativity from an astrophysical standpoint</li>
+            
+            <li><a href="https://www.lloydknox.com/">Lloyd Knox</a>: analysis and interpretation of cosmic microwave background radiation and related data; member of the Planck and South Pole Telescope collaborations | <a href="https://jrdmb.netlify.app/crt.html?s1=lloyd%knox">recorded talks</a></li>
+            
+            <li><a href="https://lucaamendola.wordpress.com/">Luca Amendola</a>: Currently working mainly on topics related to Dark Energy, Large Scale Structure, Cosmic Microwave Background, and Statistics</li>
+            
+            <li><a href="http://marcelpawlowski.com/">Marcel Pawlowski</a>: Satellite galaxy planes, dwarf galaxies, near-field cosmology | <a href="https://jrdmb.netlify.app/crt.html?s1=marcel+pawlowski">recorded talks</a></li>
+            
+            <li><a href="https://darkmattercrisis.wordpress.com/">Marcel Pawlowski, Moritz Haslbauer, Pavel Kroupa</a>: The Dark Matter Crisis blog</li>
+            
+            <li><a href="https://cosmicmar.com/">Marius Millea</a>: a proponent of the Julia programming language, e.g., <a href="https://cosmicmar.com/CMBLensing.jl/stable/">CMBLensing.jl</a> and <a href="https://discourse.julialang.org/u/marius311/summary">Julia Discourse board</a> | <a href="https://jrdmb.netlify.app/crt.html?s1=Marius+Millea">recorded talks</a></li>
+            
+            <li><a href="http://www.physicsmatt.com/blog">Matt Buckley</a>: theoretical particle physics and theoretical astrophysics, with a particular interest in the nature of dark matter; includes 'Paper Explainer' articles on his blog for many of his papers</li>
+            
+            <li><a href="https://mmoresco.gitlab.io/home/">Michele Moresco</a>: observational cosmologist, galaxy evolution, large-scale structure, new cosmological probes to constrain the expansion rate of the Universe | <a href="https://jrdmb.netlify.app/crt.html?s1=michele+moresco">recorded talks</a></li>
+            
+            <li><a href="https://miguelzuma.github.io/index.html">Miguel Zumalacarregui</a>: works at the interface between cosmology, gravitation and fundamental physics | <a href="https://miguelzuma.github.io/hi_class_public/">hi_class</a> code developer | <a href="https://jrdmb.netlify.app/crt.html?s1=miguel+zuma">recorded talks</a></li>
+            
+            <li><a href="https://mrbk.github.io/index.html">Mike Boylan-Kolchin</a>: "research focuses on galaxy formation theory and its interface with cosmology" | <a href="https://jrdmb.netlify.app/crt.html?s1=boylan-kolchin">recorded talks</a></li>
+            
+            <li><a href="https://minhmpa.github.io/">Minh Nguyen</a> physical cosmology, large-scale structure</li>
+            
+            <li><a href="https://moritzhaslbauer.jimdofree.com/">Moritz Haslbauer</a>: galaxy formation/evolution models | <a href="https://jrdmb.netlify.app/crt.html?s1=moritz+haslbauer">recorded talks</a></li>
+            
+            <li><a href="https://natalidesanti.github.io/">Natalí de Santi</a>: large scale structure, dark matter, dark energy, cosmological covariance matrices, parameter inference, N-body and hydrodynamical simulations, halo-galaxy connection, data science, machine learning | <a href="https://youtu.be/b59ep7cyPOs">recorded talks</a></li>
+            
+            <li><a href="https://nataliebhogg.com/tag/cosmology/">Natalie B. Hogg</a>: primary interests in gravitational waves and strong gravitational lensing as probes of dark energy and modified gravity; also statistical challenges in cosmology | <a href="https://jrdmb.netlify.app/crt.html?s1=natalie%hogg">recorded talks</a></li>
+            
+            <li><a href="https://nikosarcevic.com/">Niko Sarcevic</a>: weak lensing, statistical problems in late-time cosmology, data visualization; a Cosmology from Home organizer | <a href="https://X.com/nikosarcevic">active on twitter (X.com)</a> and <a href="https://staging.bsky.app/profile/nikosarcevic.com">bsky</a> with others in the cosmology community | involved in creating <a href="https://share.streamlit.io/nikosarcevic/cosmoracle/main">CosmΩracle</a> and <a href="https://github.com/nikosarcevic/HEP-ASTRO-COSMO">HEP-ASTRO-COSMO</a> | <a href="https://jrdmb.netlify.app/crt.html?s1=niko+sarcevic">recorded talks</a> | <a href="https://github.com/LSSTDESC/CCLX/blob/master/Baryons%20Modules.ipynb">Baryonic Modules in pyCCL (ipynb)</a>, <a href="https://github.com/LSSTDESC/CCLX/blob/master/LSST_SRD_Redshift_Distributions_and_Binning.ipynb">SRD Tomographic Binning (ipynb)</a>, and <a href="https://X.com/NikoSarcevic/status/1709947025238978638">thread</a> | <a href="https://github.com/nikosarcevic/ComputingCourse2022?tab=readme-ov-file">Scientific Computation with Python - MAS2806-PHY2039 lectures at Newcastle University, fall 2022</a></li>
+            
+            <li><a href="https://telescoper.wordpress.com/">Peter Coles</a>: In the Dark blog and the force behind <a href="https://astro.theoj.org/">The Open Journal of Astrophysics</a></li>
+            
+            <li><a href="http://philbull.com/">Phil Bull</a>: theoretical cosmologist interested in mapping the large-scale structure of the Universe with radio and optical telescopes | <a href="https://philbull.wordpress.com/">Phil's blog on theoretical cosmology</a> | <a href="https://jrdmb.netlify.app/crt.html?s1=phil%bull">recorded talks</a></li>
+            
+            <li><a href="https://pmocz.github.io">Philip Mocz</a>: computational physicist, simulating quantum systems in cosmology, galaxy evolution | <a href="https://philip-mocz.medium.com/">tutorials on creating computer simulations</a></li>
+            
+            <li><a href="https://sites.google.com/site/rachaellbeaton/home?authuser=0">Rachael Beaton</a>: galaxy halos, Carnegie-Chicago Hubble Program | <a href="https://jrdmb.netlify.app/crt.html?s1=rachael+beaton">recorded talks</a></li>
+            
+            <li><a href="https://www.8rafael.com/en/">Rafael Alves Batista</a>: astroparticle physics, cosmic magnetic fields, dark matter, structure formation | <a href="https://jrdmb.netlify.app/crt.html?s1=rafael+alves+batista">recorded talks</a> | <a href="https://www.8rafael.com/en/talks/">talk slides on his website</a></li>
+            
+            <li><a href="https://sites.google.com/site/rauljimenez/">Raul Jimenez</a>: theoretical cosmologist "especially interested in analysing large datasets and in the development of rigorous statistical algorithms" | <a href="https://jrdmb.netlify.app/crt.html?s1=raul+jimenez">recorded talks</a></li>
+            
+            <li><a href="https://excursionset.com/">Richard Easther</a>: ExcursionSet blog | <a href="https://jrdmb.netlify.app/crt.html?s1=richard+easther">recorded talks</a></li>
+            
+            <li><a href="https://www.preposterousuniverse.com/blog/">Sean Carroll</a>: Preposterous Universe</li>
+            
+            <li><a href="https://seshnadathur.github.io/">Seshadri Nadathur</a>: dark energy, dark matter, large-scale structure | <a href="https://jrdmb.netlify.app/crt.html?s1=Sesh%Nadathur">recorded talks</a></li>
+            
+            <li><a href="https://www.youtube.com/c/CosmologyTalks/videos">Shaun Hotchkiss</a>: host of the <a href="https://www.youtube.com/channel/UCstdttIo3HM6h3hDk_v2hug/videos">Cosmology Talks</a> series on youtube aimed at researchers in the field; also an organizer of the innovative <a href="https://www.cosmologyfromhome.com">Cosmology from Home</a> annual (since 2020) online conference series</li>
+            
+            <li><a href="https://neucosmos.cnrs.fr/team/silvia-galli/">Silvia Galli</a>: PI of the <a href="https://neucosmos.cnrs.fr/">NEUCosmoS</a> project, <a href="https://cordis.europa.eu/project/id/101001897">Fact Sheet</a> | <a href="https://jrdmb.netlify.app/crt.html">recorded talks</a></li>
+            
+            <li><a href="https://minimalsubtraction.net/">Subodh Patil</a>: early universe cosmology and related aspects of particle physics phenomenology | <a href="http://patil.web.cern.ch/">professional site</a> | <a href="https://jrdmb.netlify.app/crt.html?s1=subodh+patil">recorded talks</a></li>
+            
+            <li><a href="https://www.sunnyvagnozzi.com/blog">Sunny Vagnozzi</a>: cosmologist with a strong background in particle theory working at the interface of cosmology, astrophysics, and particle physics. His blog has weekly reviews of current cosmology papers, <a href="https://jrdmb.netlify.app/vagnozzi-paper-reviews.html">here is a listing of them</a> (currently inactive while on parental leave) and here is a <a href="https://jrdmb.netlify.app/vagnozzi-blog-tags.html">topic tags index</a> | <a href="https://jrdmb.netlify.app/crt.html?s1=sunny+vagnozzi">recorded talks</a> | <a href="https://www.sunnyvagnozzi.com/en/talks">talk slides</a></li>
+            
+            <li><a href="https://swagatam18.wordpress.com/">Swagat Saurav Mishra</a>: <a href="https://arxiv.org/abs/2403.10606">Lecture notes on cosmic inflation</a> | <a href="https://jrdmb.netlify.app/crm-search-all.html?s1=swagat+saurav+mishra">talks, slides, resource materials</a></li>
+            
+            <li><a href="https://www.tessabaker.space/">Tessa Baker</a>: dark energy, modified gravity, gravitational waves, galaxy surveys and large-scale structure | <a href="https://jrdmb.netlify.app/crt.html?s1=tessa_baker">recorded talks</a></li>
+            
+            <li><a href="https://www2.kek.jp/qup/en/member/dehaan.html">Tijmen de Haan</a> | CMB is primary interest | <a href="https://github.com/tijmen/cosmosage">cosmosage</a>: a large language model trained on cosmology-specific datasets with the goal of making a general-purpose natural-language assistant for cosmologists; several models available on <a href="https://huggingface.co/Tijmen2">huggingface</a> | <a href="https://huggingface.co/Tijmen2/cosmosage-v3.1">cosmosage-v3.1</a> | <a href="https://youtu.be/azwfG2UTNEY">colloquium talk on cosmosage</a> | <a href="https://arxiv.org/abs/2407.04420">[2407.04420] cosmosage: A Natural-Language Assistant for Cosmologists</a></li>
+            
+            <li><a href="https://www.yashar-akrami.com/">Yashar Akrami</a>: theoretical and observational cosmology | <a href="https://jrdmb.netlify.app/crt.html?s1=Yashar+Akrami">recorded talks</a></li>
+        </ul>
+    </div>
+
+    <!-- Other Notable Links Section -->
+    <div class="resources-section" id="other">
+        <h2 class="section-title">
+            Other Notable Links
+            <a href="#" class="back-to-top" title="Return to top of page">^</a>
+        </h2>
+        <ul class="resource-list">
+            <li><a href="https://www.aip.org/history-programs/oral-histories/search?search_api_views_fulltext=cosmology&f%5B0%5D=subjects%3A3311">AIP Oral History Interviews: cosmology related</a></li>
+            <li><a href="https://jrdmb.netlify.app?2D7Ec9DW7Px+lrGR">Some non-Cosmology Physics Talks of Interest</a></li>
+            <li><a href="https://neutrinos.fnal.gov/">All Things Neutrino, from Fermilab</a></li>
+            <li><a href="https://github.com/cajohare/HowToMakeAPlot/blob/main/slides/presentation.pdf">Ciaran O'Hare - talks slides: How to Make a Plot (in physics)</a></li>
+        </ul>
+    </div>
+
+</div>
+</div>
+</div>
+</div>
+
+<div id="bottom">
+    <hr class="upper">
+    <hr class="lower">
+    <p>jrdmb: <a href="https://bsky.app/profile/jrdmb.bsky.social">Bluesky</a> | <a rel="me" href="https://scicomm.xyz/@jrdmb">Mastodon</a> | <a href="https://X.com/jrdmb">X.com</a> | <a href="https://github.com/jrdmb">Github</a></p>
+</div>
+</div>
+<a href="../index.html" class="home-corner" title="Back to Home" aria-label="Back to Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V10"/></svg></a>
+<script src="../site-nav.js?v=20260713-2010"></script>
+<script src="../tools/smukh-editor.js"></script>
+</body>
+</html>

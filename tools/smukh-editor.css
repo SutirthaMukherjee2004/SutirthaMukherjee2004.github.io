@@ -1,0 +1,35 @@
+/* smukh-editor.css — styling for the passphrase-gated inline text editor.
+   Injected only while editing; never affects the normal site. */
+.sed-editable{
+  outline:2px dashed #f5b700 !important;
+  outline-offset:3px;
+  cursor:text;
+  transition:background .15s ease;
+}
+.sed-editable:hover{ background:rgba(245,183,0,.08); }
+.sed-editable:focus{ outline:2px solid #58a6ff !important; background:rgba(88,166,255,.10); }
+
+#sed-bar{
+  position:fixed; left:50%; bottom:22px; transform:translateX(-50%);
+  z-index:2147483000; display:flex; gap:10px; align-items:center;
+  background:#161b22; border:1px solid #30363d; padding:10px 14px;
+  box-shadow:0 8px 28px rgba(0,0,0,.6); font-family:-apple-system,Segoe UI,Arial,sans-serif;
+}
+#sed-bar span{ color:#c9d1d9; font-size:14px; margin-right:4px; }
+#sed-bar button{
+  font-size:14px; padding:8px 16px; border:1px solid #30363d; cursor:pointer;
+  background:#21262d; color:#c9d1d9;
+}
+#sed-bar button.sed-save{ background:#238636; color:#fff; border-color:#238636; }
+#sed-bar button.sed-save:hover{ background:#2ea043; }
+#sed-bar button.sed-exit:hover{ background:#30363d; }
+#sed-bar .sed-count{ color:#f5b700; font-weight:600; }
+
+#sed-toast{
+  position:fixed; left:50%; bottom:80px; transform:translateX(-50%);
+  z-index:2147483000; background:#0d1117; color:#c9d1d9;
+  border:1px solid #30363d; padding:12px 18px; max-width:80vw;
+  font-family:-apple-system,Segoe UI,Arial,sans-serif; font-size:14px;
+  box-shadow:0 8px 28px rgba(0,0,0,.6);
+}
+#sed-toast b{ color:#58a6ff; }

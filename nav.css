@@ -1,0 +1,811 @@
+/* ============================================================
+   nav.css — shared navigation bar (with dropdowns), research
+   topic cards, and the fixed "back to home" corner button.
+   Additive only: every selector is a NEW class, so this file
+   cannot affect existing styles on any page.
+   Palette matches style.css (GitHub-dark).
+   ============================================================ */
+
+/* ---------- top navigation bar (with dropdowns) ---------- */
+.topnav{
+  display:flex;justify-content:center;align-items:center;flex-wrap:wrap;
+  gap:.15rem;font-size:1.1em;margin:1rem 0;
+}
+.topnav > a,
+.topnav .dropbtn{
+  color:#58a6ff;text-decoration:none;padding:.35rem .8rem;border-radius:6px;
+  display:inline-block;cursor:pointer;transition:all .25s ease;
+  background:none;border:none;font:inherit;
+}
+.topnav > a:hover,
+.topnav .dropbtn:hover,
+.topnav .dropdown:hover .dropbtn{
+  color:#1f6feb;background:#161b22;text-shadow:0 0 8px rgba(88,166,255,.5);
+}
+.topnav .dropdown{position:relative;display:inline-block;}
+.topnav .caret{font-size:.75em;opacity:.85;margin-left:.3rem;}
+
+.topnav .dropdown-content{
+  position:absolute;top:100%;left:50%;
+  transform:translateX(-50%) translateY(8px);
+  min-width:235px;background:#161b22;border:1px solid #30363d;border-radius:10px;
+  box-shadow:0 8px 28px rgba(0,0,0,.55);padding:.4rem 0;z-index:1000;text-align:left;
+  opacity:0;visibility:hidden;transition:all .2s ease;
+}
+.topnav .dropdown:hover .dropdown-content{
+  opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);
+}
+/* invisible hover-bridge so the panel doesn't flicker on the gap */
+.topnav .dropdown::after{content:"";position:absolute;left:0;right:0;top:100%;height:10px;}
+.topnav .dropdown-content a{
+  display:block;color:#c9d1d9;padding:.5rem 1.1rem;font-size:.92em;white-space:nowrap;
+  text-shadow:none;
+}
+.topnav .dropdown-content a:hover{background:#1c2128;color:#58a6ff;}
+
+/* ---------- research topic cards (IISER-style boxes) ---------- */
+.research-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;margin:2rem 0 1rem;
+}
+.rcard{
+  display:flex;flex-direction:column;background:#161b22;border:1px solid #30363d;
+  border-radius:14px;overflow:hidden;text-decoration:none;color:#c9d1d9;
+  transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease;
+}
+.rcard:hover{
+  transform:translateY(-6px);border-color:#58a6ff;
+  box-shadow:0 12px 30px rgba(88,166,255,.18);
+}
+.rcard .rcard-img{
+  width:100%;height:150px;object-fit:cover;background:#0d1117;
+  border-bottom:1px solid #30363d;filter:brightness(.9);transition:filter .25s ease;
+}
+.rcard:hover .rcard-img{filter:brightness(1.1);}
+.rcard .rcard-body{padding:1.1rem 1.2rem 1.3rem;display:flex;flex-direction:column;flex:1;}
+.rcard h3{font-size:1.12em;font-weight:500;color:#f0f6fc;margin:0 0 .5rem;text-align:left;}
+.rcard p{font-size:.9em;line-height:1.5;color:#9da7b3;margin:0 0 1.1rem;flex:1;text-align:left;}
+.rcard .read-more{
+  align-self:flex-start;color:#58a6ff;font-size:.9em;font-weight:500;
+  border:1px solid #30363d;border-radius:20px;padding:.3rem .95rem;transition:all .25s ease;
+}
+.rcard:hover .read-more{background:#1f6feb;color:#fff;border-color:#1f6feb;}
+
+@media (max-width:1100px){ .research-grid{grid-template-columns:repeat(2,1fr);} }
+@media (max-width:680px){
+  .research-grid{grid-template-columns:1fr;}
+  .topnav{flex-direction:column;gap:.1rem;}
+  .topnav .dropdown-content{position:static;transform:none;opacity:1;visibility:visible;
+    box-shadow:none;border:none;background:transparent;min-width:0;padding:0;}
+}
+
+/* ============================================================
+   Standardization pass (loaded on every top-level page):
+   sharp corners, full-width responsive layout, consistent header,
+   and the unified collapsible navigation drawer.
+   ============================================================ */
+
+/* sharp corners everywhere — no rounded boxes anywhere on the site */
+*, *::before, *::after{ border-radius:0 !important; }
+
+/* one consistent font across the whole site (matches the "My Research" pages) */
+body{ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }
+
+/* full-width responsive layout: the header rules + nav reach the
+   page edges on a 15"/16" laptop, with margins that scale by viewport */
+#layout{ max-width:1700px; width:100%; margin-left:auto; margin-right:auto; }
+/* landing page (.left-content) uses the SAME max-width + side padding as the inside pages (#layout/#main) so dimensions match */
+.left-content{ max-width:1700px !important; padding-left:clamp(1rem,4vw,3.5rem) !important; padding-right:clamp(1rem,4vw,3.5rem) !important; }
+#top{ padding:1rem clamp(1rem,4vw,3.5rem) 0; }
+#main{ padding:1em clamp(1rem,4vw,3.5rem); }
+#bottom{ padding-left:clamp(1rem,4vw,3.5rem); padding-right:clamp(1rem,4vw,3.5rem); }
+
+/* the double divider rules + nav span the full width of the header */
+#top hr{ max-width:none; }
+
+/* consistent centered header title across all pages (matches home) */
+#top h1{
+  text-align:center; font-weight:300; font-size:2.05em;
+  color:#f0f6fc; margin:.16em 0 .05em;
+}
+#top #galaxies,
+.top-header #galaxies{
+  max-width:min(96rem,96vw) !important;
+  max-height:180px !important;
+  object-fit:contain !important;
+  margin:.35rem auto .45rem !important;
+}
+#top .topnav,
+.top-header .topnav{ font-size:1em; margin:.65rem 0; }
+
+/* ---------- unified collapsible navigation drawer (identical on every page) ---------- */
+.snav-toggle{
+  position:fixed; top:14px; left:14px; z-index:3000;
+  width:48px; height:48px; background:transparent; border:0; color:#58a6ff;
+  cursor:pointer; display:flex; align-items:center; justify-content:center;
+  font-size:34px; line-height:1; box-shadow:none;
+  transition:color .2s ease,transform .2s ease,text-shadow .2s ease;
+}
+.snav-toggle:hover{
+  background:transparent; color:#8fc5ff; transform:translateY(-1px) scale(1.08);
+  text-shadow:0 0 16px rgba(88,166,255,.55);
+}
+.snav-toggle .snav-ic-dots{ display:block; font-size:40px; line-height:.9; }
+.snav-toggle .snav-ic-x{ display:none; font-size:30px; }
+.snav-toggle.is-open .snav-ic-dots{ display:none; }
+.snav-toggle.is-open .snav-ic-x{ display:block; }
+
+.snav-overlay{
+  position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:2900;
+  opacity:0; visibility:hidden; transition:opacity .25s ease;
+}
+body.snav-open .snav-overlay{ opacity:1; visibility:visible; }
+
+.snav-drawer{
+  position:fixed; top:0; left:0; height:100%; width:300px; max-width:84vw; z-index:3001;
+  background:#0d1117; border-right:1px solid #30363d; box-shadow:4px 0 24px rgba(0,0,0,.6);
+  transform:translateX(-100%); transition:transform .28s ease; overflow-y:auto;
+}
+body.snav-open .snav-drawer{ transform:translateX(0); }
+.snav-head{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:18px 18px 12px; border-bottom:1px solid #30363d;
+  position:sticky; top:0; background:#0d1117; z-index:1;
+}
+.snav-title{ color:#f0f6fc; font-size:1.2em; font-weight:600; }
+.snav-close{ background:none; border:none; color:#8b949e; font-size:30px; line-height:1; cursor:pointer; padding:0 6px; }
+.snav-close:hover{ color:#58a6ff; }
+.snav-list{ list-style:none; margin:0; padding:8px 0 40px; }
+.snav-list li{ margin:0; }
+.snav-row{ display:flex; align-items:stretch; }
+.snav-link{ display:block; flex:1; padding:.7rem 1.2rem; color:#c9d1d9; text-decoration:none; border-left:3px solid transparent; }
+.snav-link:hover{ background:#161b22; color:#58a6ff; border-left-color:#58a6ff; text-shadow:none; }
+.snav-sub-toggle{ background:none; border:none; color:#8b949e; width:46px; cursor:pointer; font-size:.85em; transition:transform .2s ease; }
+.snav-sub-toggle:hover{ color:#58a6ff; }
+.snav-list li.open .snav-sub-toggle{ transform:rotate(180deg); }
+.snav-sub{ list-style:none; margin:0; padding:0; max-height:0; overflow:hidden; transition:max-height .28s ease; background:#0b0e13; }
+.snav-list li.open .snav-sub{ max-height:520px; }
+.snav-sublink{ display:block; padding:.5rem 1.2rem .5rem 2.4rem; color:#9da7b3; text-decoration:none; font-size:.92em; }
+.snav-sublink:hover{ background:#161b22; color:#58a6ff; }
+
+/* ---------- research cards: auto plot montage + detail gallery ---------- */
+.card-montage{
+  width:100%; height:150px; background:#0d1117; border-bottom:1px solid #30363d;
+  display:grid; gap:2px; overflow:hidden;
+}
+.card-montage img{ width:100%; height:100%; object-fit:cover; display:block; filter:brightness(.9); transition:filter .25s ease; }
+.rcard:hover .card-montage img{ filter:brightness(1.06); }
+.card-montage.m1{ grid-template-columns:1fr; }
+.card-montage.m2{ grid-template-columns:1fr 1fr; }
+.card-montage.m3{ grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; }
+.card-montage.m3 img:first-child{ grid-column:1 / span 2; }
+.card-montage.m4{ grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; }
+.card-montage.empty{
+  display:flex; align-items:center; justify-content:center;
+  background:repeating-linear-gradient(45deg,#0d1117,#0d1117 10px,#11161d 10px,#11161d 20px);
+}
+.card-montage.empty::after{ content:'coming soon'; color:#586074; font-size:.82em; letter-spacing:.5px; }
+
+/* Pheno banner — sits OUTSIDE the cards, on the research page */
+.research-banner{ margin:1.6rem 0 0.4rem; text-align:center; }
+.research-banner img{ max-width:100%; width:640px; border:1px solid #30363d; display:inline-block; }
+
+/* active item in the research sidebar */
+#menu a.active{ background:#1c2128; color:#58a6ff; border-left-color:#58a6ff; }
+
+/* research detail page: writing + plots gallery */
+.research-writing{ margin:0 0 1.5rem; line-height:1.6; }
+.research-plots{ display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1.2rem; margin-top:1.5rem; }
+.research-plots figure{ margin:0; background:#161b22; border:1px solid #30363d; }
+.research-plots img{ width:100%; display:block; }
+.research-plots figcaption{ padding:.6rem .8rem; color:#9da7b3; font-size:.9em; }
+.research-empty{ color:#8b949e; font-style:italic; margin-top:1rem; }
+
+/* ---------- site-wide dark/light mode switch ---------- */
+.theme-toggle{
+  position:fixed; top:66px; left:24px; z-index:3000;
+  display:flex; align-items:center; justify-content:center;
+  width:26px; height:26px; padding:0; background:transparent; border:0;
+  color:#f6f8fa; cursor:pointer; overflow:visible;
+  font:800 13px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  box-shadow:none; transition:color .18s ease,transform .18s ease,filter .18s ease;
+}
+.theme-toggle:hover{ background:transparent; border-color:transparent; color:#ffffff; transform:scale(1.08); filter:drop-shadow(0 0 9px rgba(255,255,255,.24)); }
+.theme-moon{ width:18px; height:18px; display:block; fill:currentColor; }
+.language-toggle,
+.site-info-toggle{
+  position:fixed; left:19px; z-index:3000;
+  display:flex; align-items:center; justify-content:center;
+  width:36px; height:24px; padding:0; background:transparent; border:0;
+  color:#8fc5ff; box-shadow:none; cursor:pointer;
+  font:800 10px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  letter-spacing:.08em; transition:color .18s ease,transform .18s ease,text-shadow .18s ease;
+}
+.language-toggle{ top:98px; }
+.site-info-toggle{
+  top:128px; height:24px; font-family:Georgia,"Times New Roman",serif;
+  font-size:18px; font-style:italic; letter-spacing:0; color:#d7dee8;
+}
+.language-toggle:hover,
+.site-info-toggle:hover{
+  background:transparent; border-color:transparent; color:#ffffff; transform:translateY(-1px);
+  text-shadow:0 0 11px rgba(88,166,255,.45);
+}
+.site-info-popover{
+  position:fixed; left:54px; top:122px; width:min(260px,calc(100vw - 70px));
+  padding:.55rem .65rem; background:rgba(13,17,23,.9); border-left:2px solid #58a6ff;
+  color:#c9d1d9; font:600 12px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  letter-spacing:0; text-align:left; opacity:0; pointer-events:none; transform:translateX(-6px);
+  box-shadow:0 10px 24px rgba(0,0,0,.28);
+  transition:opacity .16s ease,transform .16s ease;
+}
+.site-info-toggle.is-open .site-info-popover{
+  opacity:1; transform:translateX(0);
+}
+.theme-toggle:focus-visible,
+.language-toggle:focus-visible,
+.site-info-toggle:focus-visible,
+.snav-toggle:focus-visible,
+.scroll-top-page:focus-visible,
+.scroll-top-panel:focus-visible{
+  outline:2px solid rgba(88,166,255,.9); outline-offset:4px;
+}
+.scroll-top-page,
+.scroll-top-panel{
+  position:fixed; z-index:2990; display:flex; align-items:center; justify-content:center;
+  background:transparent; border:0; color:#d7dee8; cursor:pointer;
+  font:700 22px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  opacity:0; pointer-events:none; transform:translateY(6px);
+  box-shadow:none;
+  transition:opacity .18s ease,transform .18s ease,color .2s ease,filter .2s ease;
+}
+.scroll-top-page{ right:22px; bottom:34px; width:34px; height:34px; }
+.scroll-top-panel{ width:26px; height:26px; font-size:17px; }
+.scroll-top-icon{
+  width:100%; height:100%; fill:none; stroke:currentColor; stroke-width:4.2;
+  stroke-linecap:round; stroke-linejoin:round; filter:drop-shadow(0 2px 5px rgba(0,0,0,.45));
+}
+.scroll-top-panel .scroll-top-icon{ stroke-width:4.8; }
+.scroll-top-page.is-visible,
+.scroll-top-panel.is-visible{
+  opacity:.95; pointer-events:auto; transform:translateY(0);
+}
+.scroll-top-page:hover,
+.scroll-top-panel:hover{
+  background:transparent; border-color:transparent; color:#8fc5ff;
+  transform:translateY(-2px) scale(1.08); filter:drop-shadow(0 0 10px rgba(88,166,255,.28));
+}
+body.light-mode .theme-toggle{
+  background:transparent; border-color:transparent; color:#0a3069; box-shadow:none;
+}
+body.light-mode .theme-toggle:hover{ background:transparent; border-color:transparent; color:#0969da; filter:drop-shadow(0 0 9px rgba(9,105,218,.22)); }
+body.light-mode .language-toggle{ color:#0969da; }
+body.light-mode .site-info-toggle{ color:#0a3069; }
+body.light-mode .language-toggle:hover,
+body.light-mode .site-info-toggle:hover{ color:#0969da; text-shadow:0 0 11px rgba(9,105,218,.22); }
+body.light-mode .site-info-popover{
+  background:rgba(255,255,255,.94); border-left-color:#0969da; color:#24292f;
+  box-shadow:0 10px 24px rgba(31,35,40,.16);
+}
+body.light-mode .scroll-top-page,
+body.light-mode .scroll-top-panel{
+  background:transparent; border-color:transparent; color:#1f2328; box-shadow:none;
+}
+body.light-mode .scroll-top-page:hover,
+body.light-mode .scroll-top-panel:hover{
+  background:transparent; border-color:transparent; color:#0969da;
+}
+
+.visitor-counter{
+  display:flex; justify-content:center; align-items:center;
+  margin:.55rem auto .15rem; min-height:22px; opacity:.82;
+}
+.visitor-counter a{
+  display:inline-flex; align-items:center; justify-content:center;
+  text-decoration:none; line-height:1;
+}
+.visitor-counter img{
+  display:block; height:20px; max-width:100%; border:0;
+  filter:saturate(.95);
+}
+body.light-mode .visitor-counter{ opacity:.9; }
+
+body.light-mode{
+  --bg-color:#f6f8fa;
+  --primary-text:#24292f;
+  --secondary-text:#57606a;
+  --header-text:#0f172a;
+  --accent-blue:#0969da;
+  --border-color:#d0d7de;
+  --menu-bg:#ffffff;
+  --active-bg:#eaf2ff;
+  background:#f6f8fa !important;
+  background-image:none !important;
+  color:#24292f !important;
+}
+body.light-mode::after{
+  background:radial-gradient(ellipse at bottom, rgba(9,105,218,.08) 0%, transparent 68%) !important;
+}
+body.light-mode #galaxies,
+body.light-mode .feature-card img,
+body.light-mode .experience-title img{
+  filter:brightness(0) contrast(1.08) !important;
+  opacity:.88 !important;
+}
+body.light-mode #layout,
+body.light-mode #sublayout,
+body.light-mode #top,
+body.light-mode #main,
+body.light-mode #bottom,
+body.light-mode .main-container,
+body.light-mode .left-content{
+  background:#f6f8fa !important;
+  color:#24292f !important;
+}
+body.light-mode h1,
+body.light-mode h2,
+body.light-mode h3,
+body.light-mode .profile-name,
+body.light-mode .experience-title,
+body.light-mode .widget-title,
+body.light-mode .panel-title,
+body.light-mode .job-title,
+body.light-mode .kp-title,
+body.light-mode .cv-header h1,
+body.light-mode .section-title,
+body.light-mode .snav-title{
+  color:#0f172a !important;
+}
+body.light-mode p,
+body.light-mode li,
+body.light-mode .description,
+body.light-mode .pub-meta,
+body.light-mode .pub-authors,
+body.light-mode .kp-blurb,
+body.light-mode .repo-stats-compact,
+body.light-mode .language-legend,
+body.light-mode .duration,
+body.light-mode .profile-title,
+body.light-mode .profile-institute,
+body.light-mode .entry-details,
+body.light-mode .entry-sub-details{
+  color:#57606a !important;
+}
+body.light-mode hr,
+body.light-mode #top hr,
+body.light-mode #bottom hr,
+body.light-mode .pub-rule,
+body.light-mode .section-title::after{
+  background-color:#d0d7de !important;
+}
+body.light-mode a,
+body.light-mode a:visited,
+body.light-mode .topnav > a,
+body.light-mode .topnav .dropbtn,
+body.light-mode .pub-title,
+body.light-mode .pub-btn,
+body.light-mode .ghc-msg a{
+  color:#0969da !important;
+}
+body.light-mode a:hover,
+body.light-mode .topnav > a:hover,
+body.light-mode .topnav .dropbtn:hover,
+body.light-mode .topnav .dropdown:hover .dropbtn{
+  color:#0550ae !important;
+  text-shadow:0 0 8px rgba(9,105,218,.22) !important;
+}
+body.light-mode .topnav .dropdown-content,
+body.light-mode .snav-drawer,
+body.light-mode .snav-head,
+body.light-mode .snav-sub,
+body.light-mode .right,
+body.light-mode .rightdark,
+body.light-mode .centerpic,
+body.light-mode .centerdark,
+body.light-mode .littlepic,
+body.light-mode .rcard,
+body.light-mode .research-plots figure,
+body.light-mode .feature-card,
+body.light-mode .repo-card-compact,
+body.light-mode .timeline-card,
+body.light-mode .pub-metric,
+body.light-mode .graph-tooltip,
+body.light-mode .card-montage,
+body.light-mode .sidebar-widget,
+body.light-mode .content-card,
+body.light-mode .info-card,
+body.light-mode .philosophy-card,
+body.light-mode .art-card{
+  background:#ffffff !important;
+  color:#24292f !important;
+  border-color:#d0d7de !important;
+}
+body.light-mode .feature-card,
+body.light-mode .sidebar-widget,
+body.light-mode .pub-metric{ border-color:transparent !important; }
+body.light-mode .timeline-card{ border-color:transparent !important; }
+body.light-mode .timeline-card:hover,
+body.light-mode .feature-card:hover,
+body.light-mode .repo-card-compact:hover,
+body.light-mode .rcard:hover{
+  border-color:#0969da !important;
+  box-shadow:0 10px 24px rgba(9,105,218,.12) !important;
+}
+body.light-mode .snav-toggle{
+  background:transparent; border-color:transparent; color:#0969da; box-shadow:none;
+}
+body.light-mode .snav-toggle:hover{
+  background:transparent; border-color:transparent; color:#0969da;
+  text-shadow:0 0 14px rgba(9,105,218,.22);
+}
+body.light-mode .snav-link,
+body.light-mode .snav-sublink{ color:#57606a; }
+body.light-mode .snav-link:hover,
+body.light-mode .snav-sublink:hover{
+  background:#eaf2ff; color:#0969da; border-left-color:#0969da;
+}
+body.light-mode .snav-overlay{ background:rgba(31,35,40,.28); }
+body.light-mode .pub-note,
+body.light-mode .pub-note .i,
+body.light-mode .pub-metric span,
+body.light-mode .pub-histo-legend,
+body.light-mode .pub-histo-year,
+body.light-mode .ghc-total,
+body.light-mode #github-calendar.ghc,
+body.light-mode .ghc-msg{
+  color:#57606a !important;
+}
+body.light-mode .pub-metric strong,
+body.light-mode .pub-venue,
+body.light-mode .pub-citations,
+body.light-mode .pub-authors .me,
+body.light-mode .ghc-total{
+  color:#24292f !important;
+}
+body.light-mode .pub-histo-axis{ background:rgba(31,35,40,.14) !important; }
+body.light-mode .pub-histo-handle{ background:#f6f8fa !important; }
+body.light-mode .pub-histo-key{ background:color-mix(in srgb, var(--key-color) 16%, transparent) !important; }
+body.light-mode .pub-histo-key::before{ box-shadow:0 0 0 1px rgba(31,35,40,.24) !important; }
+body.light-mode .kp-item,
+body.light-mode .pub-item{ border-bottom-color:#d0d7de !important; }
+body.light-mode .kp-thumb,
+body.light-mode .card-montage,
+body.light-mode .ghc-cell{
+  background:#ebedf0 !important;
+  outline-color:rgba(31,35,40,.08) !important;
+}
+body.light-mode .ghc-cell.l1{ background:#aceebb !important; }
+body.light-mode .ghc-cell.l2{ background:#4ac26b !important; }
+body.light-mode .ghc-cell.l3{ background:#2da44e !important; }
+body.light-mode .ghc-cell.l4{ background:#116329 !important; }
+body.light-mode .dropdown-content a{ color:#57606a !important; }
+body.light-mode .dropdown-content a:hover{ background:#eaf2ff !important; color:#0969da !important; }
+body.light-mode .main-content-wrapper{ background:transparent !important; }
+body.light-mode .edu-entry .cap{ color:#24292f !important; }
+
+/* ============================================================
+   Research + Academics subpage lock
+   Keeps sidebar, top header, and content start position identical
+   across every research and academic subsection.
+   ============================================================ */
+:root{
+  --sm-subnav-width:260px;
+  --sm-subnav-item-h:42px;
+  --sm-subpage-pad-y:1.25rem;
+  --sm-subpage-pad-x:clamp(1rem,2.2vw,2rem);
+}
+
+body:has(#sublayout){
+  font-size:17px !important;
+  line-height:1.55 !important;
+}
+
+body:has(#sublayout) #layout{
+  width:100% !important;
+  max-width:1700px !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+body:has(#sublayout) #top{
+  padding:.65rem clamp(1rem,4vw,3.5rem) 0 !important;
+  text-align:center !important;
+}
+
+body:has(#sublayout) #top #galaxies{
+  display:block !important;
+  width:min(96rem,96vw) !important;
+  max-width:100% !important;
+  max-height:132px !important;
+  height:auto !important;
+  object-fit:contain !important;
+  margin:.25rem auto .35rem !important;
+  opacity:.86 !important;
+  border:0 !important;
+  padding:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+}
+
+body:has(#sublayout) #top h1{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif !important;
+  font-size:2rem !important;
+  font-weight:300 !important;
+  line-height:1.15 !important;
+  color:#f0f6fc !important;
+  text-align:center !important;
+  margin:.15rem 0 .25rem !important;
+  letter-spacing:0 !important;
+}
+
+body:has(#sublayout) #top hr{
+  max-width:none !important;
+  width:100% !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+}
+
+body:has(#sublayout) #nav,
+body:has(#sublayout) .topnav{
+  display:flex !important;
+  justify-content:center !important;
+  align-items:center !important;
+  flex-wrap:wrap !important;
+  gap:.15rem !important;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif !important;
+  font-size:1rem !important;
+  line-height:1.35 !important;
+  margin:.6rem 0 !important;
+}
+
+body:has(#sublayout) #nav a,
+body:has(#sublayout) .topnav > a,
+body:has(#sublayout) .topnav .dropbtn{
+  padding:.35rem .8rem !important;
+  font-size:1em !important;
+  line-height:1.35 !important;
+}
+
+body:has(#sublayout) #main{
+  padding:.85rem clamp(1rem,4vw,3.5rem) 1rem !important;
+  width:100% !important;
+  overflow:visible !important;
+}
+
+body:has(#sublayout) #page{
+  width:100% !important;
+  max-width:100% !important;
+  margin:0 auto !important;
+  height:auto !important;
+}
+
+#sublayout{
+  width:100% !important;
+  border-spacing:0 !important;
+}
+
+table#sublayout{
+  table-layout:fixed !important;
+  border-collapse:collapse !important;
+}
+
+div#sublayout{
+  display:flex !important;
+  align-items:stretch !important;
+  min-height:calc(100vh - 230px) !important;
+  height:auto !important;
+}
+
+#menu{
+  width:var(--sm-subnav-width) !important;
+  min-width:var(--sm-subnav-width) !important;
+  max-width:var(--sm-subnav-width) !important;
+  padding:.55rem 0 !important;
+  margin:0 !important;
+  background:#161b22 !important;
+  border-right:1px solid #30363d !important;
+  border-bottom:0 !important;
+  box-sizing:border-box !important;
+  overflow-y:auto !important;
+  overflow-x:hidden !important;
+  flex:0 0 var(--sm-subnav-width) !important;
+  vertical-align:top !important;
+}
+
+#menu a{
+  display:flex !important;
+  align-items:center !important;
+  min-height:var(--sm-subnav-item-h) !important;
+  width:100% !important;
+  margin:0 !important;
+  padding:.55rem 1rem !important;
+  border:0 !important;
+  border-left:3px solid transparent !important;
+  background:transparent !important;
+  color:#c9d1d9 !important;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif !important;
+  font-size:.96rem !important;
+  font-weight:500 !important;
+  line-height:1.25 !important;
+  text-align:left !important;
+  white-space:normal !important;
+  text-shadow:none !important;
+  transform:none !important;
+  box-sizing:border-box !important;
+}
+
+#menu a:hover,
+#menu a.redcol,
+#menu a.active{
+  background:#1c2128 !important;
+  color:#58a6ff !important;
+  border-left-color:#58a6ff !important;
+  text-shadow:none !important;
+  transform:none !important;
+}
+
+#menu p{ margin:0 !important; }
+
+#subpage{
+  min-width:0 !important;
+  width:100% !important;
+  padding:var(--sm-subpage-pad-y) var(--sm-subpage-pad-x) !important;
+  background:transparent !important;
+  box-sizing:border-box !important;
+  overflow:auto !important;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif !important;
+  font-size:1rem !important;
+  line-height:1.6 !important;
+  color:#c9d1d9 !important;
+}
+
+#subpage h1,
+#subpage .physics-header h1,
+#subpage .resources-header h1{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif !important;
+  font-size:2rem !important;
+  font-weight:300 !important;
+  line-height:1.2 !important;
+  letter-spacing:0 !important;
+  text-align:left !important;
+  color:#58a6ff !important;
+  margin:0 0 .65rem !important;
+}
+
+#subpage .physics-header,
+#subpage .resources-header{
+  margin:0 0 1.35rem !important;
+  padding:0 0 1rem !important;
+  border-bottom:1px solid #30363d !important;
+}
+
+#subpage .physics-header p,
+#subpage .resources-header p{
+  margin:.25rem 0 0 !important;
+  color:#9da7b3 !important;
+  font-size:1rem !important;
+  line-height:1.45 !important;
+}
+
+body:has(#sublayout) .intro-text{
+  left:var(--sm-subpage-pad-x) !important;
+  top:var(--sm-subpage-pad-y) !important;
+  width:min(460px,calc(100% - 2 * var(--sm-subpage-pad-x))) !important;
+  max-width:min(460px,calc(100% - 2 * var(--sm-subpage-pad-x))) !important;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif !important;
+}
+
+body.light-mode:has(#sublayout) #menu{
+  background:#ffffff !important;
+  border-right-color:#d0d7de !important;
+}
+
+body.light-mode:has(#sublayout) #menu a{
+  color:#57606a !important;
+}
+
+body.light-mode:has(#sublayout) #menu a:hover,
+body.light-mode:has(#sublayout) #menu a.redcol,
+body.light-mode:has(#sublayout) #menu a.active{
+  background:#eaf2ff !important;
+  color:#0969da !important;
+  border-left-color:#0969da !important;
+}
+
+@media (max-width:760px){
+  body:has(#sublayout) #top #galaxies{ max-height:96px !important; }
+  body:has(#sublayout) #top h1{ font-size:1.65rem !important; }
+  table#sublayout,
+  table#sublayout tbody,
+  table#sublayout tr,
+  table#sublayout td{ display:block !important; width:100% !important; }
+  div#sublayout{ display:block !important; min-height:0 !important; }
+  #menu{
+    width:100% !important;
+    min-width:0 !important;
+    max-width:100% !important;
+    display:flex !important;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    border-right:0 !important;
+    border-bottom:1px solid #30363d !important;
+    padding:.25rem 0 !important;
+    flex:0 0 auto !important;
+  }
+  #menu a{
+    flex:0 0 auto !important;
+    min-height:38px !important;
+    width:auto !important;
+    white-space:nowrap !important;
+    padding:.5rem .85rem !important;
+    font-size:.9rem !important;
+  }
+  #subpage{ padding:1rem !important; }
+  #subpage h1,
+  #subpage .physics-header h1,
+  #subpage .resources-header h1{ font-size:1.55rem !important; }
+}
+
+/* Sitewide top header lock: identical header dimensions on every page. */
+#top{
+  padding:.65rem clamp(1rem,4vw,3.5rem) 0 !important;
+  text-align:center !important;
+}
+
+#top #galaxies{
+  display:block !important;
+  width:min(96rem,96vw) !important;
+  max-width:100% !important;
+  max-height:132px !important;
+  height:auto !important;
+  object-fit:contain !important;
+  margin:.25rem auto .35rem !important;
+  opacity:.86 !important;
+  border:0 !important;
+  padding:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+}
+
+#top h1{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif !important;
+  font-size:2rem !important;
+  font-weight:300 !important;
+  line-height:1.15 !important;
+  color:#f0f6fc !important;
+  text-align:center !important;
+  margin:.15rem 0 .25rem !important;
+  letter-spacing:0 !important;
+}
+
+#top hr{
+  max-width:none !important;
+  width:100% !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+}
+
+#nav,
+.topnav{
+  display:flex !important;
+  justify-content:center !important;
+  align-items:center !important;
+  flex-wrap:wrap !important;
+  gap:.15rem !important;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif !important;
+  font-size:1rem !important;
+  line-height:1.35 !important;
+  margin:.6rem 0 !important;
+}
+
+#nav a,
+.topnav > a,
+.topnav .dropbtn{
+  padding:.35rem .8rem !important;
+  font-size:1em !important;
+  line-height:1.35 !important;
+}
+
+@media (max-width:760px){
+  #top #galaxies{ max-height:96px !important; }
+  #top h1{ font-size:1.65rem !important; }
+}

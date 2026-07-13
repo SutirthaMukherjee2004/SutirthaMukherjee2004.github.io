@@ -1,0 +1,10 @@
+{
+    // Microsoft "Live Preview" (ms-vscode.live-server) settings.
+    // Opens an embedded browser inside VSCode — works over Remote-SSH.
+    "livePreview.serverRoot": "",
+    "livePreview.defaultPreviewPath": "/index.html",
+    "livePreview.openPreviewTarget": "Embedded Preview",
+    "livePreview.portNumber": 3000,
+    "livePreview.autoRefreshPreview": "On Changes to Saved Files",
+    "livePreview.showStatusBarItem": true
+}

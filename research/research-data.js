@@ -1,0 +1,180 @@
+/* ============================================================
+   research-data.js  —  single source of truth for BOTH the
+   Research section AND the "Key Projects" panel on the home page.
+
+   Per topic:
+     id, title, page (relative to /research/),
+     thumb   : single card image (optional),
+     blurb   : one-line description (shown on the Key Projects list),
+     category: one of 'Mini-Projects' | 'Major-Projects' | 'Thesis'
+               (drives the home-page project filter — edit freely),
+     summary : long writing for the detail page (optional),
+     plots   : [{src, caption}] (optional).
+   ============================================================ */
+(function () {
+  var me = document.currentScript;
+  window.RESEARCH = {
+    base: me ? new URL('.', me.src).href : '',
+    topics: [
+      { id: 'baryons-dm', title: 'Baryons & Dark Matter',
+        page: 'research_consp.html', thumb: 'gamma_fdm.png',
+        blurb: 'Interplay of the baryonic and dark components of galaxies.',
+        category: 'Major-Projects', summary: '', plots: [] },
+      { id: 'outer-halos', title: 'Outer Stellar Halos',
+        page: 'research_outer.html', thumb: '1on5020top.png',
+        blurb: 'Build-up of the faint outer stellar halos of galaxies.',
+        category: 'Major-Projects', summary: '', plots: [] },
+      { id: 'galaxy-kinematics', title: 'Galaxy Kinematics',
+        page: 'research_kinematics.html', thumb: 'kdc_map.png',
+        blurb: 'Kinematic structure and assembly history of galaxies.',
+        category: 'Mini-Projects', summary: '', plots: [] },
+      { id: 'high-redshift', title: 'High Redshift',
+        page: 'research_proto.html', thumb: 'rotcurve_webpage.png',
+        blurb: 'Formation of groups and clusters in the early universe.',
+        category: 'Mini-Projects', summary: '', plots: [] },
+      { id: 'downloads', title: 'Downloads',
+        page: 'research_download.html', thumb: 'mock_z_lensing.png',
+        blurb: 'Data, models and supplementary material.',
+        category: 'Mini-Projects', summary: '', plots: [] },
+
+      { id: 'relativistic-jets', title: 'Relativistic Jets',
+        page: 'research_jets.html',
+        blurb: 'Physics of relativistic jets from compact objects.',
+        category: 'Mini-Projects', summary: '', plots: [] },
+      { id: 'rotation-curve', title: 'Galactic Rotation Curve as a Dark Matter Probe',
+        page: 'research_rotcurve.html',
+        blurb: 'Galactic rotation curves as a probe of the dark matter distribution.',
+        category: 'Major-Projects', summary: '', plots: [] },
+      { id: 'cosmo-survey', title: 'Large-Scale Cosmological Survey',
+        page: 'research_survey.html',
+        blurb: 'Cosmology from large-scale galaxy surveys.',
+        category: 'Major-Projects', summary: '', plots: [] },
+      { id: 'madmax-axion', title: 'Magnetised Disc Axion Search Experiment',
+        page: 'research_axion.html',
+        blurb: 'Axion dark-matter search with a magnetised disc (MADMAX).',
+        category: 'Mini-Projects', summary: '', plots: [] },
+      { id: 'joint-likelihood', title: 'Joint Likelihood & Tight Constraints on the Local Dark Matter Density',
+        page: 'research_jointlike.html',
+        blurb: 'Joint-likelihood, data-driven inference of the local dark matter density.',
+        category: 'Thesis', summary: '', plots: [] },
+      { id: 'surface-density', title: 'Surface Density of the Milky Way',
+        page: 'research_surfdens.html',
+        blurb: 'Surface density of the Milky Way from stellar kinematics.',
+        category: 'Major-Projects', summary: '', plots: [] }
+    ]
+  };
+
+  var paperDetails = {
+    "cosmo-survey": {
+      blurb: "Unified Milky Way phase-space catalogue from Gaia DR3 and large spectroscopic surveys.",
+      thumb: "paper-figures-web/data-fig1-sky-grid.webp",
+      summary: "<p>This project builds a unified catalogue of accurate distances, radial velocities, and 6D phase-space information for Milky Way disc and halo tracers from the solar neighbourhood to roughly 250 kpc.</p><p>The draft combines Gaia DR3 astrometry with DESI, SDSS/BOSS, LAMOST, APOGEE, GALAH, RAVE, specialised variable-star catalogues, globular-cluster and dwarf-galaxy members, and Sagittarius-stream tracers. The catalogue contains about 4.56 million quality-assured sources, including more than 5e5 halo stars selected by Galactocentric position.</p><p>The analysis focuses on cross-matching, duplicate handling, survey-to-survey calibration, error normalisation, membership validation, and purity/completeness diagnostics. The main motivation is to move beyond the Gaia parallax limit and provide a robust outer-halo fossil record for Galactic dynamics and dark-matter mass modelling.</p>",
+      plots: [
+        { src: "paper-figures-web/data-fig1-sky-grid.webp", caption: "Sky coverage of the unified stellar catalog in Galactic coordinates (Mollweide projection), displayed across 5 3 = 15 panels with randomised positions. Each panel shows a HEALPix density map (NSIDE = 64, turbo colourmap, logarithmic scaling)." },
+        { src: "paper-figures-web/data-fig2-extinction.webp", caption: "Mean interstellar extinction in Galactic coordinates (Mollweide projection). Left: colour excess E(G_BP-G_RP) (afmhot colourmap)." },
+        { src: "paper-figures-web/data-fig3-hr-diagram.webp", caption: "Hertzsprung-Russell diagram of the catalog in dereddened colour (G_BP-G_RP)_0 versus absolute magnitude M_G. The gray 2D histogram (logarithmic density) shows all unfiltered stars; no contours are drawn on the unfiltered population to avoid visual clutter." },
+        { src: "paper-figures-web/data-fig4-keil.webp", caption: "Kiel diagram (T_eff versus g) of the catalog. Gray: all unfiltered stars (no contours drawn)." },
+        { src: "paper-figures-web/data-relative-distance-error-plot.webp", caption: "Mean relative distance error as a function of heliocentric distance for stars beyond 10 kpc. Each curve corresponds to a survey group in the unified catalog: Gaia XP Spectra 220M (solid blue, _/), Gaia 17M RGB (dashed teal, _/), Gaia DR3 33M RVS (dash-dot yellow-green, _/), DESI DR1 SpecDist (solid near-black, _d/d), BOSS-HALO..." },
+        { src: "paper-figures-web/data-relative-distance-error-plot1.webp", caption: "Mean relative distance error as a function of heliocentric distance for stars beyond 10 kpc. Each curve corresponds to a survey group in the unified catalog: Gaia XP Spectra 220M (solid blue, _/), Gaia 17M RGB (dashed teal, _/), Gaia DR3 33M RVS (dash-dot yellow-green, _/), DESI DR1 SpecDist (solid near-black, _d/d), BOSS-HALO..." },
+        { src: "paper-figures-web/data-distance-comparison-panels.webp", caption: "Comparison of catalog distance (d_cat) versus inverse-parallax distance (1/) for each derived sub-catalog in the unified survey. Each panel shows a 2D density histogram (log-scaled, \\_r colormap) for a single survey or combined group: AGB, BHB\\_SDSS, BOSS\\_HALO, CAT\\_125M+SOSI, CAT\\_ALL, DESI\\_BHB (combined), DESI\\_MAIN+RED,..." },
+        { src: "paper-figures-web/data-master-plot-with-inset-no-zeros.webp", caption: "Normalized radial velocity error distributions from the catalog pipeline, comparing pre-merge (Catalog 1) and post-merge (Catalog 2) processing stages. Main panel: The dotted red curve shows the combined RV+ZP error (_RV^2 + _ZP^2) from the pre-deduplication catalog (Catalog 1: single FITS file, raw survey errors with zero-point..." },
+        { src: "paper-figures-web/data-combined-gmag-distribution.webp", caption: "G-band magnitude distribution of stars across all constituent surveys in the unified catalog. Step histograms show star counts per 0.1 mag bin on a logarithmic scale." },
+        { src: "paper-figures-web/data-combined-feh-distribution.webp", caption: "Metallicity ([Fe/H]) distribution of stars from all surveys contributing to the unified catalog, plotted in 0.05 dex bins on a logarithmic count scale. From DESI DR1 FITS: RVS pipeline (solid near-black) and SP pipeline (dashed dark gray), with quality cuts requiring _[Fe/H] < 0.1, v i < 30 km s^-1, and S/N_R > 10." },
+        { src: "paper-figures-web/data-fig-5a-with-inset.webp", caption: "Normalized density of the relative radial velocity error _v_r/|v_r| for the six survey groups contributing RV measurements to the catalog. DESI (solid near-black), BOSS-HALO (dotted dark gray), LAMOST (dashed light gray), SOS-I (dashed cyan), Gaia 33M RVS (dash-dot green), and Gaia 125M XP (solid blue)." },
+        { src: "paper-figures-web/data-fig5b-plot.webp", caption: "Normalized mean radial velocity error as a function of absolute radial velocity |v_r| (in km s^-1), for each survey group. The y-axis employs a piecewise-linear stretch: the 0-0.2 range occupies 60\\ of the axis to resolve fine structure, while 0.2-1.0 is compressed into the remaining 40\\ ." },
+        { src: "paper-figures-web/data-fig6-error-analysis.webp", caption: "Radial velocity error diagnostics as a function of distance. Panel (a): Star count (log scale) versus distance for raw RV measurements (crimson), cumulative number of measurements n_meas (blue), and outlier count (green; RUWE >1.4 or RVS/N <3)." },
+        { src: "paper-figures-web/data-homo-fig6-dup-normdiff.webp", caption: "Normalised RV differences /_1^2+_2^2 from duplicate (DUP) observations, per survey. The dashed black curve shows the N(0,1) reference." },
+        { src: "paper-figures-web/data-homo-fig7-drv-zp.webp", caption: "= RV_Gaia - RV_survey histograms before (left) and after (right) the Gaia-based zero-point correction. Each survey is shown as a separate step histogram with median and MAD annotated." },
+        { src: "paper-figures-web/data-homo-fig8-drv-params.webp", caption: "Median versus six stellar parameters (G mag, [Fe/H], T_eff, g, S/N, and RV) for each survey relative to Gaia. Global polynomial fits (black dashed) with Bevington 68\\ confidence intervals (gray shading) are overlaid for the three parameters entering the Gaia calibration equations (Eqs." },
+        { src: "paper-figures-web/data-gc-ngc-6205-m-13.webp", caption: "Individual membership analysis results for four representative stellar systems spanning the full range of heliocentric distances probed in this work. Each 22 panel shows: upper left-proper motion diagram with P_ mem colour-coded on a red-yellow-green scale (the lime cross marks the EM-recovered cluster mean; lime ellipses show 1 and 2..." },
+        { src: "paper-figures-web/data-gc-ngc-5904-m-5.webp", caption: "Individual membership analysis results for four representative stellar systems spanning the full range of heliocentric distances probed in this work. Each 22 panel shows: upper left-proper motion diagram with P_ mem colour-coded on a red-yellow-green scale (the lime cross marks the EM-recovered cluster mean; lime ellipses show 1 and 2..." },
+        { src: "paper-figures-web/data-gc-ngc-5139-ocen.webp", caption: "Individual membership analysis results for four representative stellar systems spanning the full range of heliocentric distances probed in this work. Each 22 panel shows: upper left-proper motion diagram with P_ mem colour-coded on a red-yellow-green scale (the lime cross marks the EM-recovered cluster mean; lime ellipses show 1 and 2..." },
+        { src: "paper-figures-web/data-dw-draco.webp", caption: "Individual membership analysis results for four representative stellar systems spanning the full range of heliocentric distances probed in this work. Each 22 panel shows: upper left-proper motion diagram with P_ mem colour-coded on a red-yellow-green scale (the lime cross marks the EM-recovered cluster mean; lime ellipses show 1 and 2..." },
+        { src: "paper-figures-web/data-summary-dist-1.webp", caption: "Paginated summary of distance distributions for the gold sample (first page of 23; 66 panels per page, 803 objects total). Each panel shows a single stellar system with the same colour scheme as Fig." },
+        { src: "paper-figures-web/data-summary-rv-1.webp", caption: "Paginated summary of radial velocity distributions for the gold sample (first page of 23; 66 panels per page). Colour coding follows Fig." },
+        { src: "paper-figures-web/data-plot1-mixture-comparison.webp", caption: "Two-component mixture decomposition of the three catalog quality metrics. Each panel shows the normalised data histogram (blue shading), the fitted core component (green fill, weighted by ), the tail component (red fill, weighted by 1 - ), and the total model density (black dashed curve)." },
+        { src: "paper-figures-web/data-plot2-purity-curves-and-distributions.webp", caption: "Left: Core membership probability P_(x) as a function of the error metric value for all five fitted models. The RUWE curve (pink) is defined on a different x-axis range (0.5-5.0) from the relative errors (0-2.0)." },
+        { src: "paper-figures-web/data-plot3-radial-dist.webp", caption: "Radial selection effects for distance-error cuts. Top left: Mean purity as a function of R_ gal for different _d/d cut thresholds (colour-coded from tight/dark to loose/yellow)." },
+        { src: "paper-figures-web/data-plot3-radial-rv.webp", caption: "Radial selection effects for RV-error cuts. Layout as in Figure fig:radial_dist." },
+        { src: "paper-figures-web/data-plot3-radial-ruwe.webp", caption: "Radial selection effects for RUWE cuts. Layout as in Figure fig:radial_dist." },
+        { src: "paper-figures-web/data-plot4-core-fraction-eta.webp", caption: "Core fraction by model. The Log-Normal models for both _d/d and _v/v saturate at the prior upper bound = 0.90 (red dashed reference line), indicating that the LN parameterisation struggles to identify a distinct tail population." },
+        { src: "paper-figures-web/data-plot5-purity-by-method.webp", caption: "Mean purity by method. RUWE and the LN-based RV model yield optimistic mean purities (0.893 and 0.903, respectively)." },
+        { src: "paper-figures-web/data-plot6-gc-oc-sgr-completeness.webp", caption: "-sample completeness (Eq. eq:truth_completeness) versus quality cut for GC members (green circles), OC members (blue squares), and Sgr stream members (red diamonds)." },
+      ]
+    },
+    "rotation-curve": {
+      blurb: "Milky Way rotation curve from inner-disc and outer-halo tracer kinematics.",
+      thumb: "paper-figures-web/rc-fig-zslice-kinematics.webp",
+      summary: "<p>This project uses stellar kinematics to infer the Milky Way rotation curve as a probe of the Galaxy dark-matter distribution, joining the inner disc and the outer halo within a common dynamical framework.</p><p>The inner-disc analysis uses cylindrical Jeans modelling, tracer-density fits, velocity-dispersion profiles, cross-term corrections, selection tests, and systematic-error budgets. The outer-halo analysis uses halo tracers and spherical Jeans modelling, including number-density profiles, radial velocity dispersions, anisotropy modelling, and substructure rejection.</p><p>The combined rotation curve is designed to expose how assumptions about tracer density, anisotropy, substructure, the solar LSR, and visible-matter priors affect the inferred circular velocity and, therefore, estimates of the Milky Way dark-matter halo.</p>",
+      plots: [
+        { src: "paper-figures-web/rc-fig-zslice-kinematics.webp", caption: "Rotation-curve kinematics in |z| slices. Top left: radial velocity dispersion." },
+        { src: "paper-figures-web/rc-fig-thin-disc-second-moments.webp", caption: "Mean-square contributions in the thin-disc slice |z|=0-1 kpc. Blue: v_R^2; green: v_z^2." },
+        { src: "paper-figures-web/rc-fig-second-moments-components.webp", caption: "Component-by-component breakdown of v_i^2, v_i^2 and _i^2= v_i^2- v_i^2 for the inner-disc sample. The panel (top right and lower right) carries the largest mean-motion contribution; the R and z channels are sub-dominant." },
+        { src: "paper-figures-web/rc-fig-velocity-ellipsoid-ours.webp", caption: "Our implementation of the velocity-ellipsoid field, on a denser binning of the R-z plane. The grey background points mark where the stellar sample actually lies in R-z, so the ellipse field must be read together with the sample coverage: the mid-plane is well constrained, the outer-radius and high-|z| bins become sparse and noisy, and..." },
+        { src: "paper-figures-web/rc-fig-velocity-ellipsoid-linear-fits.webp", caption: "The cross moment v_Rv_z versus z in individual R bins. A linear trend is visible between roughly 5 and 15 kpc; the slope inverts at R<5 kpc and again at R>18 kpc." },
+        { src: "paper-figures-web/rc-fig-crossterm-vc-curve.webp", caption: "Inner rotation curve from the cylindrical Jeans equation, shown in three stages. The blue points use only v_^2; the orange points add the asymmetric-drift correction; the black points are the final second-moment rotation curve including the cross term C_Rz from Eq." },
+        { src: "paper-figures-web/rc-fig-jeans-term-maps.webp", caption: "R-z maps of the individual asymmetric-drift and cross-term contributions that enter the cylindrical Jeans equation in Eq. eq:vc_full, evaluated bin by bin." },
+        { src: "paper-figures-web/rc-fig-density-chi2.webp", caption: "Density-profile fit quality. The ^2 surface in the (h_R,h_z) plane for the double-exponential tracer-density fit is shown, with our best-fit value and the Eilers/Koop assumed value marked." },
+        { src: "paper-figures-web/rc-fig-density-map-panel.webp", caption: "Two-dimensional tracer-density fit. The fitted (R,z) model is compared with the measured density across the R-z plane, together with the corresponding fractional residuals." },
+        { src: "paper-figures-web/rc-fig-density-systematic-effect.webp", caption: "Effect of density-model systematics on the inferred circular velocity. We compare the resulting V_c profiles for three density choices: exponential, power law, and free-n truncated exponential." },
+        { src: "paper-figures-web/rc-fig-density-fits-zslices.webp", caption: "Density fits as a function of R in |z| slices, with exponential (solid), power-law (dotted) and free-n truncated exponential (dashed) fits overlaid. The legend lists the best-fit h_R, and R_t for each slice." },
+        { src: "paper-figures-web/rc-fig-dispersion-profile.webp", caption: "Top: data v_R^2(R) and three fits. The baseline exponential fit on 5<R<15 kpc returns h_ 8.66 kpc." },
+        { src: "paper-figures-web/rc-fig-crossterm-systematic.webp", caption: "Top: the inner rotation curve recomputed with several treatments of the cross term. Black is the no-crossterm baseline." },
+        { src: "paper-figures-web/rc-fig-selection-xyplane.webp", caption: "Selection-effect maps in the disc plane. Left: difference in v_R^2 between the z<0 and z>0 halves of the sample." },
+        { src: "paper-figures-web/rc-fig-systematic-selection-only.webp", caption: "Sequential build-up of the systematic budget on the inner rotation curve. Left: selection-only systematics from z and cuts." },
+        { src: "paper-figures-web/rc-fig-systematic-plus-dispersion.webp", caption: "Sequential build-up of the systematic budget on the inner rotation curve. Left: selection-only systematics from z and cuts." },
+        { src: "paper-figures-web/rc-fig-systematic-plus-density.webp", caption: "Sequential build-up of the systematic budget on the inner rotation curve. Left: selection-only systematics from z and cuts." },
+        { src: "paper-figures-web/rc-fig-systematic-all-combined.webp", caption: "All systematic contributions plotted together. Coloured dashed lines show individual sources (neglected cross term, h_R shifts, density-model choices, dispersion-model choices, selection cuts, Sgr A^* proper motion)." },
+        { src: "paper-figures-web/rc-fig-systematic-sequential.webp", caption: "Adopted-budget build-up, panel by panel. (1) Cross-term plus density plus power-law dispersion fit." },
+        { src: "paper-figures-web/rc-outer-halo-sigma-model-comparison.webp", caption: "Comparison of outer-halo radial-dispersion representations used as modelling diagnostics. Grey curves show the =0 baseline for power-law and truncated Dehnen tracer densities." },
+        { src: "paper-figures-web/rc-plot2-outer-grand-rc-per-lsr-constant-beta.webp", caption: "Outer halo circular velocity V_c(r) computed from Eq. eq:vc_per_bin for each of the four LSR choices (one panel per LSR), at three constant anisotropy values: =0 (blue circles), =0.5 (teal diamonds), and =1 (red squares)." },
+        { src: "paper-figures-web/rc-plot3b-full-grand-rc-inner-outer-multi-lsr-logx.webp", caption: "Grand rotation curve from r0.2 kpc to 250 kpc on a logarithmic radial axis, combining the sub-5-kpc per-LSR inner RC (coloured per LSR), the Eilers-style disc inner RC (5 R20 kpc, violet), and the outer halo Jeans RC (beyond 20 kpc, four LSR choices shown separately). The inner RC point at R<5 kpc are displayed with reduced opacity to..." },
+        { src: "paper-figures-web/rc-outer-halo-beta-pheno-literature-2x2-page1.webp", caption: "Radial variation of the anisotropy parameter (r) for different tracer subsets." },
+        { src: "paper-figures-web/rc-outer-halo-beta-pheno-literature-2x2-page2.webp", caption: "Radial variation of the anisotropy parameter (r) for different tracer subsets." },
+        { src: "paper-figures-web/rc-plot-panelwise-desi-li26-beta.webp", caption: "Panel-by-panel circular velocity V_c(r) for the five outer-halo tracer families over 25-100 kpc (linear radial scale). Blue diamonds: pre-Kim-cleaning raw data." },
+        { src: "paper-figures-web/rc-fig-beta-dip-substructure-panels.webp", caption: "Binwise (r) before (pink/red circles) and after (blue circles) raw HDBSCAN^+Kim substructure removal, for all seven tracer panels considered in this work. The lower sub-panel in each column shows the residual =_ after-_ before." },
+        { src: "paper-figures-web/rc-plot3-grand-rc-with-beta-overlay.webp", caption: "Full outer rotation curve from 5 to 260 kpc showing the = 0 baseline (coloured points, one curve per LSR choice; inner RC in gold) and the (r)-corrected overlay (red open squares, r 100 kpc). The red points combine all five tracer panels with mixed corrections: non-DESI tracers use the Kim-pipeline (r); the DESI panel uses the..." },
+        { src: "paper-figures-web/rc-plot3-grand-rc-r8p1-v229-only-logx-beta.webp", caption: "Rotation curve for the fiducial LSR (R_0=8.1 kpc, v_LSR=229 s^-1) on a logarithmic radial axis, 0.2-100 kpc. Violet points show the full RC: sub-5-kpc inner RC (faded, lower reliability), Eilers-style disc RC (5-20 kpc), and outer halo RC (r>20 kpc)." },
+        { src: "paper-figures-web/rc-plot4-our-rc-vs-literature-bhatt.webp", caption: "Comparison of this work's grand rotation curve with Bhattacharjee2014 (orange crosses) over 0-200 kpc on a linear radial axis. Coloured points show the four LSR outer-halo Jeans RCs beyond the inner-outer transition; the violet points show the Eilers-style inner RC." },
+      ]
+    },
+    "surface-density": {
+      blurb: "Updated Milky Way disc surface density from panel-wise red-clump vertical dynamics.",
+      thumb: "paper-figures-web/surface-current-fig11-fig6-solar-sigma.webp",
+      summary: "<p>This project applies the Cheng et al. (2024) tilt-corrected vertical Jeans / K_Z machinery to an eight-survey red-clump census built from Gaia DR3, DESI DR1, APOGEE DR17, GALAH DR4, RAVE DR6, Gaia-ESO DR5, LAMOST DR11, and Gaia-XP abundances.</p><p>The analysis classifies stars panel by panel in the alpha-metallicity plane using L1/L2 boundaries, carries thin-disc, thick-disc, and halo tracers separately, fits velocity-dispersion closures and tilt terms, and propagates these choices into Sigma(R, |Z|).</p><p>The gallery below is generated only from the captioned figures in the current surface-density paper draft at cheng2024_panelwise_combined_l1l2_strict_surface_density/surface_density_paper.tex.</p>",
+      plots: [
+        { src: "paper-figures-web/surface-current-fig01-alpha-m-vs-mh-clean-quality-hexbin.webp", caption: "Cleaned [alpha/M] vs [M/H] density (grey: pre-cut; viridis: post-cut), with overdensity contours and the sequence-ridge crest. Gaia-XP/APOGEE dominate; the thin ridge is overwhelming and the thick shoulder faint." },
+        { src: "paper-figures-web/surface-current-fig02-mgfe-vs-feh-clean-quality-hexbin.webp", caption: "Cleaned [Mg/Fe] vs [Fe/H] density. Built from the high-resolution surveys, this plane shows the sharpest thin/thick bimodality and the clearest density valley, and anchors the L2 separator definition." },
+        { src: "paper-figures-web/surface-current-fig03-alphafe-vs-feh-clean-quality-hexbin.webp", caption: "Cleaned [alpha/Fe] vs [Fe/H] density (DESI, RAVE, Gaia GSP-Spec). The ridges are broader, reflecting the lower precision of these alpha indices, but the same two sequences are present." },
+        { src: "paper-figures-web/surface-current-fig04-combined-xfe-or-alpham-vs-metallicity-clean-quality-hexbin.webp", caption: "The pooled combined plane - the union of all twelve pairs of the referenced table - which the classification uses. It keeps the bimodality of the Mg/Fe plane while gaining the reach of the Gaia-XP sample." },
+        { src: "paper-figures-web/surface-current-fig05-combined-xfe-or-alpham-vs-metallicity-quality-motivated-rz-panels.webp", caption: "The 5x9 R-|Z| grid (columns R, rows |Z|) of the combined plane. Each panel shows the cleaned density, overdensity contours and crest, the fixed L1 (solid magenta) and the fitted L2 (dotted). The alpha-bimodality is sharp in the well-sampled disc panels (3<= R<=13 kpc, |Z|<=1 kpc) and washes out at large |Z| and in the sparse outer bins, driving the direct/fallback L2 split. The three single-index planes produce analogous grids with the same qualitative behaviour." },
+        { src: "paper-figures-web/surface-current-fig06-panel-l1-l2-population-counts.webp", caption: "Population census in the R-|Z| grid: thin/thick/halo/unclassified counts per panel; ``fallback L2'' labels the 24 population-averaged panels. After classification no star is unassigned. The thin disc dominates the inner, low-|Z| panels; the thick disc and halo take over at |Z|> 2 kpc." },
+        { src: "paper-figures-web/surface-current-fig07-fig2-velocity-dispersion-r3-6.webp", caption: "Dispersions vs height in 1 kpc columns, R=3-6 kpc; thin (blue), thick (red), halo (green); rows sigma_R,sigma_phi,sigma_Z. The sigma_Z row carries the three closures (linear solid, quadratic dashed, tanh dotted) with per-model RMS." },
+        { src: "paper-figures-web/surface-current-fig08-fig3-velocity-dispersion-r6-9.webp", caption: "As the referenced figure for R=6-9 kpc, the range that brackets the solar circle. The dense solar bins (R=7-9) carry the tightest dispersions and anchor the solar-circle measurements." },
+        { src: "paper-figures-web/surface-current-fig09-fig4-velocity-dispersion-r9-12.webp", caption: "As the referenced figure for the outer disc R=9-12 kpc. Fewer stars per group inflate the uncertainties, and the dispersions fall mildly relative to the solar circle." },
+        { src: "paper-figures-web/surface-current-fig10-fig5-hsigma-fit.webp", caption: "Exponential fits for the dispersion scale length h_sigma of the tilt term sigma_RZ^2 at the fixed heights used in Eq. ()." },
+        { src: "paper-figures-web/surface-current-fig11-fig6-solar-sigma.webp", caption: "Sigma(R_sun,|Z|) under the three closures, one panel per tracer, each with its Monte-Carlo band. Linear (blue) and tanh (green) coincide; the quadratic (orange) departs near the mid-plane where its zero gradient removes the low-|Z| term. The closure separation is <=8 M_sun pc^-2 near the plane and <4 at |Z|=1 kpc." },
+        { src: "paper-figures-web/surface-current-fig12-fig6p1-solar-sigma-combined.webp", caption: "The same information on a single axis: all three tracers (colour) and all three closures (line style) at R_sun, with bands and the SHM (black). The tracer (colour) separation dwarfs the closure (style) separation." },
+        { src: "paper-figures-web/surface-current-fig13-fig8-sigma-vs-r.webp", caption: "Sigma(R,|Z|) vs radius at |Z|=0.3,1,3 kpc (accepted rows) with the SHM. The thin disc tracks the SHM most closely; the thick and halo tracers depart strongly at intermediate height." },
+        { src: "paper-figures-web/surface-current-fig14-fig7-sigma-grid.webp", caption: "The full Sigma(R,|Z|) grid for the three tracers with SHM overlays: the complete radial/vertical map behind the referenced figure." },
+        { src: "paper-figures-web/surface-current-fig15-sigmaz-model-sigma-r-comparison.webp", caption: "Sigma(R) under each closure. The model spread persists across radius but stays sub-dominant to the population spread." },
+        { src: "paper-figures-web/surface-current-fig16-thin-thick-sigma-r-discrepancy-by-sigz-model.webp", caption: "Thin-minus-thick Sigma(R) discrepancy per closure. The median absolute thin/thick difference is 22 M_sun pc^-2 at |Z|=0.3 kpc and 42 M_sun pc^-2 at 1 kpc - an order of magnitude above the closure-to-closure spread." },
+        { src: "paper-figures-web/surface-current-fig17-fig9-exp-vs-sech2.webp", caption: "Sigma(R_sun,|Z|) for the exponential (solid) versus sech^2 (dashed) tracer density law. The sech^2 law removes the mid-plane discontinuity (d/dz->0 at Z=0), bending Sigma downward near the origin; the two converge for |Z|> 2h_Z." },
+        { src: "paper-figures-web/surface-current-fig18-all-strict-panel-l2-sigma-r-overplot.webp", caption: "Population-separated Sigma(R) at several |Z| slices, each SHM in its slice colour." },
+        { src: "paper-figures-web/surface-current-fig19-original-panel-grid-sigma-r.webp", caption: "The 5x9 panel-layout Sigma(R) map: each cell is the measurement assigned to that R-|Z| selection panel of the referenced figure." },
+        { src: "paper-figures-web/surface-current-fig20-original-panel-sigma-r-assignments.webp", caption: "Sigma(R) assignment plot: accepted (coloured) and rejected non-physical (grey) rows mapped back onto the panel rows, with the SHM and the K_Z right axis." },
+        { src: "paper-figures-web/surface-current-fig21-original-panel-sigma-z-assignments.webp", caption: "Sigma(|Z|) assignment plot, separated by population; the thin/thick split of the vertical run is visible column by column." },
+        { src: "paper-figures-web/surface-current-fig22-sigma-z-profiles.webp", caption: "Per-population diagnostic (thin disc shown): Sigma(|Z|) in each radial bin, with SHM overlay - the internal check that the accepted rows are non-negative and rise monotonically with height." },
+        { src: "paper-figures-web/surface-current-fig23-sigma-z-model-comparison.webp", caption: "Per-population three-closure comparison (thin disc shown): Sigma(|Z|) under linear/quadratic/tanh across representative radii, with Monte-Carlo bands - the per-population view of the closure systematic." },
+        { src: "paper-figures-web/surface-current-fig24-chemical-selection-l1-l2.webp", caption: "Representative single-panel chemical selection (5<R<7 kpc, |Z|<0.5 kpc): the combined plane restricted to that cell, with L1 (solid) and its L2 separator (dotted), overdensity contours, and the thin/thick/halo counts. Analogous plots exist for all 45 panels." },
+        { src: "paper-figures-web/surface-current-fig25-fig10-kg-integral.webp", caption: "KG89 integral fits (the referenced equations) to sigma_Z^2(|Z|) at R=8.5 kpc. Light points: raw Z-groups; dark points: median rebinning; black curve: the exact-integral fit, on top. Thin: Sigma_ disc=29.9+/-3.4, rho_ dm=0.017+/-0.002 (residual 0.47sigma). The thick fit reaches Sigma_ disc=70.7 only by driving rho_ dm to its upper bound." },
+      ]
+    },
+  };
+  window.RESEARCH.topics.forEach(function (topic) {
+    var detail = paperDetails[topic.id];
+    if (!detail) return;
+    Object.keys(detail).forEach(function (key) { topic[key] = detail[key]; });
+    if (detail.thumb) topic.previewPlots = [{ src: detail.thumb, caption: topic.title }];
+  });
+})();

@@ -1,0 +1,530 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280, user-scalable=yes">
+<title>Sutirtha Mukherjee</title>
+    <meta name="description" content="Generated theoretical physics notes by Sutirtha Mukherjee, including the direct PDF Perturbative String Theory and Its Non-Perturbative Probes.">
+    <meta name="keywords" content="Sutirtha Mukherjee, astrophysics, cosmology, dark matter, galactic dynamics, Milky Way, axions, conformal field theory, theoretical physics">
+    <meta name="author" content="Sutirtha Mukherjee">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="application-name" content="Sutirtha Mukherjee">
+    <meta name="apple-mobile-web-app-title" content="Sutirtha Mukherjee">
+    <meta name="theme-color" content="#0d1117">
+    <link rel="canonical" href="https://sutirthamukherjee2004.github.io/teaching/lecture_canary.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sutirthamukherjee2004.github.io/teaching/lecture_canary.html">
+    <meta property="og:title" content="Sutirtha Mukherjee">
+    <meta property="og:site_name" content="Sutirtha Mukherjee">
+    <meta property="og:description" content="Generated theoretical physics notes by Sutirtha Mukherjee, including the direct PDF Perturbative String Theory and Its Non-Perturbative Probes.">
+    <meta property="og:image" content="https://sutirthamukherjee2004.github.io/images/Profile.jpeg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sutirtha Mukherjee">
+    <meta name="twitter:description" content="Generated theoretical physics notes by Sutirtha Mukherjee, including the direct PDF Perturbative String Theory and Its Non-Perturbative Probes.">
+    <meta name="twitter:image" content="https://sutirthamukherjee2004.github.io/images/Profile.jpeg">
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Sutirtha Mukherjee",
+  "headline": "Sutirtha Mukherjee",
+  "url": "https://sutirthamukherjee2004.github.io/teaching/lecture_canary.html",
+  "description": "Generated theoretical physics notes by Sutirtha Mukherjee, including the direct PDF Perturbative String Theory and Its Non-Perturbative Probes.",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Sutirtha Mukherjee",
+    "url": "https://sutirthamukherjee2004.github.io/"
+  },
+  "about": {
+    "@type": "Person",
+    "name": "Sutirtha Mukherjee",
+    "url": "https://sutirthamukherjee2004.github.io/",
+    "image": "https://sutirthamukherjee2004.github.io/images/Profile.jpeg"
+  },
+  "primaryImageOfPage": {
+    "@type": "ImageObject",
+    "url": "https://sutirthamukherjee2004.github.io/images/Profile.jpeg"
+  }
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "name": "Perturbative String Theory and Its Non-Perturbative Probes",
+      "headline": "Perturbative String Theory and Its Non-Perturbative Probes",
+      "author": {
+        "@type": "Person",
+        "name": "Sutirtha Mukherjee",
+        "url": "https://sutirthamukherjee2004.github.io/"
+      },
+      "url": "https://sutirthamukherjee2004.github.io/docs/CFT_TIFR_Notes_2.pdf",
+      "encoding": {
+        "@type": "MediaObject",
+        "contentUrl": "https://sutirthamukherjee2004.github.io/docs/CFT_TIFR_Notes_2.pdf",
+        "encodingFormat": "application/pdf"
+      },
+      "about": [
+        "Perturbative string theory",
+        "Non-perturbative probes",
+        "Conformal field theory",
+        "D-branes",
+        "TIFR"
+      ]
+    }
+    </script>
+    <link rel="icon" type="image/jpeg" href="../images/Profile.jpeg">
+    <link rel="apple-touch-icon" href="../images/Profile.jpeg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css">
+
+<style>
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'EB Garamond', serif;
+    background-color: #0d1117;
+    color: #e6edf3;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* Layout Structure */
+#layout {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#top {
+    background-color: #0d1117;
+    padding: 20px;
+    text-align: center;
+}
+
+#galaxies {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Navigation */
+hr {
+    border: none;
+    height: 1px;
+    background-color: #30363d;
+    margin: 0 auto;
+    max-width: 90%;
+}
+
+.upper { margin-bottom: 2px; }
+.lower { margin-top: 2px; }
+
+#nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-size: 1.5em;
+    margin: 1rem 0;
+}
+
+#nav a {
+    color: #58a6ff;
+    text-decoration: none;
+    padding: 0 0.7rem;
+    transition: all 0.3s ease;
+}
+
+#nav a:hover {
+    color: #1f6feb;
+    text-shadow: 0 0 8px rgba(88, 166, 255, 0.5);
+}
+
+#nav a:not(:last-child)::after {
+    content: "·";
+    margin-left: 0.7rem;
+    color: #484f58;
+}
+
+/* Main Content Area */
+#main {
+    flex: 1;
+    width: 100%;
+    overflow: hidden;
+}
+
+#page {
+    width: 100%;
+    height: 100%;
+}
+
+#sublayout {
+    width: 100%;
+    min-height: calc(100vh - 200px);
+    display: flex;
+}
+
+/* Menu Sidebar */
+#menu {
+    width: 200px;
+    min-width: 180px;
+    background: #161b22;
+    padding: 20px 15px;
+    height: 100%;
+    overflow-y: auto;
+    flex-shrink: 0;
+}
+
+#menu a {
+    display: block;
+    margin: 20px 0;
+    padding: 10px;
+    background: transparent;
+    color: #58a6ff;
+    text-decoration: none;
+    text-align: center;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+#menu a:hover {
+    background: rgba(28, 33, 40, 0.3);
+    transform: translateX(5px);
+    text-shadow: 0 0 8px rgba(88, 166, 255, 0.5);
+}
+
+#menu a.redcol {
+    color: #ff6b6b;
+    font-weight: 600;
+}
+
+/* Subpage Content */
+#subpage {
+    flex: 1;
+    position: relative;
+    background: #0d1117;
+    overflow: auto;
+    padding: 20px;
+    max-width: 100%;
+}
+
+/* Physics Resources Specific Styles */
+.physics-header {
+    margin-bottom: 48px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #30363d;
+}
+
+.physics-header h1 {
+    font-size: 2.2em;
+    font-weight: 300;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+    color: #58a6ff;
+}
+
+.physics-header p {
+    color: #8b949e;
+    font-size: 0.95em;
+}
+
+.resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.resource-card {
+    background: #161b22;
+    border: 1px solid #30363d;
+    height: 280px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: block;
+    text-decoration: none;
+}
+
+.resource-card:hover {
+    border-color: #58a6ff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(88, 166, 255, 0.15);
+}
+
+.resource-card:hover .latex-thumbnail {
+    transform: scale(1.05);
+}
+
+.latex-thumbnail {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.latex-content {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Computer Modern', 'Times New Roman', serif;
+}
+
+.latex-title {
+    font-size: 1.8em;
+    color: #e6edf3;
+    margin-bottom: 12px;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.latex-subtitle {
+    font-size: 1em;
+    color: #8b949e;
+    font-style: italic;
+    opacity: 0.8;
+}
+
+.latex-formula {
+    margin-top: 20px;
+    opacity: 0.4;
+    font-size: 0.9em;
+    color: #58a6ff;
+}
+
+.card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 50%, transparent 100%);
+    padding: 24px;
+    transition: all 0.3s ease;
+}
+
+.resource-type {
+    display: inline-block;
+    padding: 3px 10px;
+    font-size: 0.7em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    border: 1px solid;
+    opacity: 0.9;
+}
+
+.type-direct {
+    color: #f87171;
+    border-color: #f87171;
+}
+
+.overlay-title {
+    font-size: 1.1em;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.overlay-description {
+    font-size: 0.85em;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Bottom Section */
+#bottom {
+    background-color: #0d1117;
+    padding: 20px;
+    text-align: center;
+    color: #8b949e;
+    font-size: 0.9em;
+    margin-top: 3em;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    #menu {
+        width: 160px;
+        min-width: 140px;
+    }
+    
+    .resources-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    #sublayout {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    #menu {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 10px;
+        gap: 10px;
+    }
+    
+    #menu a {
+        flex: 1 1 calc(50% - 5px);
+        margin: 0;
+        font-size: 16px;
+    }
+    
+    #subpage {
+        min-height: 600px;
+    }
+    
+    .resources-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    #menu a {
+        flex: 1 1 100%;
+        font-size: 14px;
+    }
+    
+    #subpage {
+        min-height: 500px;
+        padding: 10px;
+    }
+    
+    .physics-header h1 {
+        font-size: 1.8em;
+    }
+}
+</style>
+<link rel="stylesheet" href="../nav.css?v=20260713-2145">
+</head>
+
+<body>
+<div id="layout">
+<div id="top">
+<img src="../images/galaxies_comic.png" alt="Galaxies comic" id="galaxies">
+<h1>Sutirtha Mukherjee</h1>
+<hr class="upper">
+<hr class="lower">
+<nav class="topnav">
+  <a href="../index.html">Home</a>
+  <div class="dropdown">
+    <a href="../research.html" class="dropbtn">Research<span class="caret">&#9662;</span></a>
+    <div class="dropdown-content">
+      <a href="../research.html">Overview</a>
+      <a href="../research/research_consp.html">Baryons & Dark Matter</a>
+      <a href="../research/research_outer.html">Outer Stellar Halos</a>
+      <a href="../research/research_kinematics.html">Galaxy Kinematics</a>
+      <a href="../research/research_proto.html">High Redshift</a>
+      <a href="../research/research_jets.html">Relativistic Jets</a>
+      <a href="../research/research_rotcurve.html">Galactic Rotation Curve</a>
+      <a href="../research/research_survey.html">Large-Scale Cosmological Survey</a>
+      <a href="../research/research_axion.html">Magnetised Disc Axion Search</a>
+      <a href="../research/research_jointlike.html">Joint Likelihood & Local DM Density</a>
+      <a href="../research/research_surfdens.html">Surface Density of the Milky Way</a>
+      <a href="../research/research_download.html">Downloads</a>
+    </div>
+  </div>
+  <a href="../publications.html">Publications</a>
+  <div class="dropdown">
+    <a href="../comics.html" class="dropbtn">Galaxy Comics<span class="caret">&#9662;</span></a>
+    <div class="dropdown-content">
+      <a href="../comics.html">Overview</a>
+      <a href="../comics/comic_rampressure.html">Ram Pressure Stripping</a>
+      <a href="../comics/comic_majormerger.html">Major Merger</a>
+      <a href="../comics/comic_harassment.html">Galaxy Harassment</a>
+      <a href="../comics/comic_compact.html">Compact Group</a>
+      <a href="../comics/comic_fossil.html">Fossil Group</a>
+      <a href="../comics/comic_multi_minor.html">Multi Minor Merger</a>
+    </div>
+  </div>
+  <div class="dropdown">
+    <a href="../teaching.html" class="dropbtn">Academics<span class="caret">&#9662;</span></a>
+    <div class="dropdown-content">
+      <a href="../teaching.html">Overview</a>
+      <a href="../teaching/grav_dyn.html">Gravitational Dynamics</a>
+      <a href="../teaching/fluid_dyn.html">Fluid Dynamics</a>
+      <a href="../teaching/num_cos.html">Numerical Cosmology</a>
+      <a href="../teaching/lecture_canary.html">Notes of Theoretical Physics</a>
+      <a href="../teaching/movies/index.html">Movies</a>
+    </div>
+  </div>
+  <a href="../vita.html">About Me</a>
+</nav>
+<hr class="upper">
+<hr class="lower">
+</div>
+
+<div id="main">
+<div id="page">
+<div id="sublayout">
+<div id="menu">
+<a href="movies/index.html">Movie Gallery</a>
+<a class="redcol" href="lecture_canary.html">Notes of Theoretical Physics</a>
+<a href="num_cos.html">Numerical Cosmology and Galaxy Formation</a>
+<a href="fluid_dyn.html">Astrophysical Fluid Dynamics</a>
+<a href="grav_dyn.html">Gravitational Dynamics</a>
+</div>
+
+<div id="subpage">
+    <div class="physics-header">
+        <h1>Notes of Theoretical Physics</h1>
+        <p>Generated notes by Sutirtha Mukherjee</p>
+    </div>
+
+    <div class="resources-grid">
+        <!-- LOCAL PDF - Direct crawlable PDF link -->
+        <a href="../docs/CFT_TIFR_Notes_2.pdf" target="_blank" rel="noopener noreferrer" class="resource-card" type="application/pdf">
+            <div class="latex-thumbnail">
+                <div class="latex-content">
+                    <div class="latex-title">Perturbative String Theory</div>
+                    <div class="latex-subtitle">Sutirtha Mukherjee</div>
+                    <div class="latex-formula">T(z)T(w) &sim; c/(z-w)<sup>4</sup></div>
+                </div>
+            </div>
+            <div class="card-overlay">
+                <span class="resource-type type-direct">PDF</span>
+                <div class="overlay-title">Perturbative String Theory and Its Non-Perturbative Probes</div>
+                <div class="overlay-description">Direct hosted PDF notes - opens as a .pdf file</div>
+            </div>
+        </a>
+
+    </div>
+</div>
+</div>
+</div>
+
+<div id="bottom">
+<hr class="upper">
+<hr class="lower">
+Last update 08.05.2022 by Sutirtha Mukherjee
+</div>
+
+</div>
+
+<a href="../index.html" class="home-corner" title="Back to Home" aria-label="Back to Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V10"/></svg></a>
+<script src="../site-nav.js?v=20260713-2010"></script>
+<script src="../tools/smukh-editor.js"></script>
+</body>
+</html>
