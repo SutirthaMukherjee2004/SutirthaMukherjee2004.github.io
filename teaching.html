@@ -1293,8 +1293,9 @@
         return centers[key] || centers.iitm;
     };
     const clusterCenter = d => clusterCenterForKey(clusterKey(d));
+    const clusterRadius = () => Math.max(150, Math.min(230, Math.min(width, height) * 0.29));
     function drawClusterBlobs() {
-        const radius = Math.max(132, Math.min(width, height) * 0.25);
+        const radius = clusterRadius();
         const blobs = blobLayer.selectAll("g.cluster-blob-group")
             .data(clusterSpecs, d => d.key)
             .join(enter => {
@@ -1319,6 +1320,23 @@
         });
     }
     drawClusterBlobs();
+
+    function keepNodesInsideClusters() {
+        const radius = clusterRadius() * 0.92;
+        simulation.nodes().forEach(d => {
+            if (d.fx != null || d.fy != null) return;
+            const center = clusterCenter(d);
+            const dx = d.x - center.x;
+            const dy = d.y - center.y;
+            const distance = Math.hypot(dx, dy);
+            const maxDistance = radius + (d.type === "central" ? 24 : 0);
+            if (distance > maxDistance) {
+                const pull = ((distance - maxDistance) / distance) * 0.22;
+                d.x -= dx * pull;
+                d.y -= dy * pull;
+            }
+        });
+    }
 
     const simulation = d3.forceSimulation()
         .force("link", d3.forceLink()
@@ -1447,6 +1465,7 @@
     }
 
     simulation.on("tick", () => {
+        keepNodesInsideClusters();
         link.attr("x1", d => d.source.x)
             .attr("y1", d => d.source.y)
             .attr("x2", d => d.target.x)
