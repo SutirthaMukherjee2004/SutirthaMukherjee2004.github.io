@@ -1501,6 +1501,7 @@
             };
 
             const linkColor = function (d) {
+                if (d.direct) return '#3c434d';
                 if ((d.source && d.source.startsWith('tifr')) || (d.target && d.target.startsWith('tifr'))) return '#b832d4';
                 if ((d.source && d.source.startsWith('iitm')) || (d.target && d.target.startsWith('iitm'))) return '#6d5532';
                 return '#3c434d';
@@ -1511,8 +1512,8 @@
                 const target = nodeById[d.target] || {};
                 const line = document.createElementNS(svgNS, 'line');
                 line.setAttribute('stroke', linkColor(d));
-                line.setAttribute('stroke-width', d.direct ? '1.8' : '1.35');
-                line.setAttribute('stroke-opacity', d.direct ? '0.58' : '0.75');
+                line.setAttribute('stroke-width', '1.35');
+                line.setAttribute('stroke-opacity', '0.75');
                 line.setAttribute('x1', source.x || 0);
                 line.setAttribute('y1', source.y || 0);
                 line.setAttribute('x2', target.x || 0);
