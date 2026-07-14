@@ -958,9 +958,16 @@
     });
 
     const g = svg.append("g");
+    // While true, the view auto-fits every tick so the whole graph is ALWAYS
+    // visible (even during the intro popup / settling). It turns off the moment
+    // the user zooms or pans by hand, so we never fight their gesture.
+    let autoFit = true;
     const zoom = d3.zoom()
         .scaleExtent([0.1, 8])
-        .on("zoom", (event) => g.attr("transform", event.transform));
+        .on("zoom", (event) => {
+            if (event.sourceEvent) autoFit = false; // a real user gesture -> hand over control
+            g.attr("transform", event.transform);
+        });
     svg.call(zoom);
 
     let link = g.append("g").selectAll("line");
@@ -1080,6 +1087,8 @@
             .attr("x2", d => d.target.x)
             .attr("y2", d => d.target.y);
         node.attr("transform", d => `translate(${d.x},${d.y})`);
+        // Continuously keep the ENTIRE graph in frame while it moves/settles.
+        if (autoFit) fitToView(0);
     });
 
     // --- Zoom-to-fit: keep every node inside the viewport (no cropping) ---
@@ -1113,16 +1122,21 @@
         const cx = padding + availW / 2, cy = padding + availH / 2;
         const gcx = (minX + maxX) / 2, gcy = (minY + maxY) / 2;
         const tx = cx - scale * gcx, ty = cy - scale * gcy;
-        svg.transition().duration(duration).call(
-            zoom.transform, d3.zoomIdentity.translate(tx, ty).scale(scale)
-        );
+        const t = d3.zoomIdentity.translate(tx, ty).scale(scale);
+        if (duration > 0) {
+            svg.transition().duration(duration).call(zoom.transform, t);
+        } else {
+            svg.call(zoom.transform, t); // instant — used on every tick, no queued transitions
+        }
     }
-    // Fit once the layout settles, and again on resize.
-    simulation.on("end", () => fitToView());
-    window.addEventListener('resize', () => setTimeout(() => fitToView(300), 250));
+    // Crisp final fit when the layout settles (only if still auto-fitting).
+    simulation.on("end", () => { if (autoFit) fitToView(0); });
+    // A resize is a strong "re-frame everything" signal — always refit.
+    window.addEventListener('resize', () => { autoFit = true; setTimeout(() => fitToView(200), 150); });
 
     function drag(simulation) {
         function dragstarted(event, d) {
+            autoFit = false; // user is manipulating the graph -> stop auto-fitting
             if (!event.active) simulation.alphaTarget(0.3).restart();
             d.fx = d.x;
             d.fy = d.y;
@@ -1157,15 +1171,13 @@
     document.getElementById("toggleCourses").addEventListener("change", updateGraph);
     document.getElementById("toggleGrades").addEventListener("change", updateGraph);
     document.getElementById("toggleLabs").addEventListener("change", updateGraph);
-    // Re-fit whenever a filter changes the visible node set.
+    // A filter change is a new node set -> re-frame the whole thing.
     ["toggleSemesters","toggleCourses","toggleGrades","toggleLabs"].forEach(id =>
-        document.getElementById(id).addEventListener("change", () => setTimeout(() => fitToView(500), 700)));
+        document.getElementById(id).addEventListener("change", () => { autoFit = true; }));
 
     updateGraph();
-    // Fit repeatedly as the force layout settles, so it always fills the space.
-    setTimeout(() => fitToView(600), 1200);
-    setTimeout(() => fitToView(500), 2600);
-    setTimeout(() => fitToView(400), 4200);
+    // The per-tick auto-fit (see the tick handler) keeps the ENTIRE graph in
+    // frame from the very first frame through settling — no landing crop.
 
     // Auto-hide intro text after 10 seconds (reveals + fits the full graph)
     setTimeout(() => {
