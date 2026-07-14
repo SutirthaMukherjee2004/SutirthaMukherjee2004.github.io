@@ -1020,8 +1020,9 @@
         .kp-slide {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             display: block;
+            background: #f7f7f4;
         }
         .kp-more {
             position: absolute;
@@ -1059,8 +1060,34 @@
             opacity: 0;
         }
         .kp-item:hover .kp-slideshow {
+            position: fixed;
             opacity: 1;
-            inset: -48px -4px -48px -190px;
+            inset: auto;
+            left: 50%;
+            top: 50%;
+            width: min(760px, 74vw);
+            height: min(440px, 62vh);
+            transform: translate(-50%, -50%);
+            pointer-events: auto;
+            z-index: 1000;
+        }
+        .kp-highres {
+            position: absolute;
+            right: 0.65rem;
+            bottom: 0.65rem;
+            z-index: 3;
+            padding: 0.28rem 0.55rem;
+            background: rgba(13, 17, 23, 0.76);
+            border: 1px solid rgba(240, 246, 252, 0.24);
+            color: #f0f6fc;
+            font-size: 0.68em;
+            line-height: 1;
+            cursor: pointer;
+            backdrop-filter: blur(6px);
+        }
+        .kp-highres:hover {
+            border-color: #58a6ff;
+            color: #ffffff;
         }
         .kp-thumb.empty { width: 148px; height: 54px; display: flex; align-items: center; justify-content: center; color: #586074; font-size: 0.72em; background: #0d1117; flex: 0 0 148px; }
 
@@ -1135,19 +1162,19 @@
         .pub-meta { color: #8b949e; font-size: 0.76em; line-height: 1.4; }
         .pub-venue { color: #c9d1d9; }
         .pub-citations { color: #d8dee9; white-space: nowrap; }
-        .pub-btns { margin-top: 0.45rem; display: flex; flex-wrap: wrap; gap: 0.35rem; }
-        .pub-btn { font-size: 0.72em; padding: 0.15rem 0.6rem; border: 1px solid #30363d; color: #58a6ff; text-decoration: none; }
-        .pub-btn:hover { background: #1f6feb; color: #fff; border-color: #1f6feb; }
-        .pub-btn.pdf { width: 1.7rem; height: 1.7rem; padding: 0; display: inline-flex; align-items: center; justify-content: center; color: #d8dee9; border-color: rgba(216, 222, 233, 0.3); }
+        .pub-btns { margin-top: 0.45rem; display: flex; flex-wrap: wrap; gap: 0.32rem; }
+        .pub-btn { height: 1.55rem; padding: 0 0.58rem; border: 1px solid transparent; border-radius: 0; color: #f7fbff; background: rgba(139, 148, 158, 0.28); text-decoration: none; display: inline-flex; align-items: center; justify-content: center; font-size: 0.7em; line-height: 1; box-shadow: none; }
+        .pub-btn:hover { background: rgba(88, 166, 255, 0.2); color: #fff; border-color: #58a6ff; text-shadow: none; }
+        .pub-btn.pdf { width: auto; min-width: 3.05rem; height: 1.55rem; padding: 0 0.48rem; color: #f7fbff; gap: 0.3rem; }
         .pub-btn.pdf svg { display: none; }
         .pub-btn.pdf::before {
             content: '';
-            width: 1.12rem;
-            height: 1.12rem;
+            width: 1.02rem;
+            height: 1.02rem;
             display: block;
             background: url("images/adobe-acrobat-reader.svg") center / contain no-repeat;
         }
-        .pub-btn.unavailable { color: #586074; border-color: rgba(88, 96, 116, 0.45); pointer-events: none; }
+        .pub-btn.unavailable { color: rgba(247, 251, 255, 0.58); background: rgba(139, 148, 158, 0.16); pointer-events: none; }
         .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
         .pub-histo {
             --pub-group-width: 18px;
@@ -1305,10 +1332,13 @@
             .kp-item { flex-direction: column; }
             .kp-media,
             .kp-thumb.empty { width: 100%; height: 86px; flex-basis: auto; }
-            .kp-item:hover .kp-slideshow { inset: 0; }
+            .kp-item:hover .kp-slideshow {
+                width: calc(100vw - 1.5rem);
+                height: min(68vh, 420px);
+            }
         }
     </style>
-    <link rel="stylesheet" href="nav.css?v=20260714j">
+    <link rel="stylesheet" href="nav.css?v=20260714l">
 </head>
 <body>
     <div class="main-container">
@@ -1959,7 +1989,7 @@
         runWhenIdle(fetchGitHubData);
     });
     </script>
-<script src="research/research-data.js?v=20260714b"></script>
+<script src="research/research-data.js?v=20260714c"></script>
 <script>
   /* Key Projects (borrowed from the Research cards) + Publications */
   (function () {
@@ -1998,17 +2028,38 @@
       window.addEventListener('resize', schedulePubHistogramResize, { passive: true });
     }
 
+    function projectImagePreview(src) {
+      if (!src || typeof src !== 'string') return src;
+      return src.indexOf('paper-figures-web/') !== -1
+        ? src.replace('paper-figures-web/', 'paper-figures-thumb/')
+        : src;
+    }
+
+    function normalizeProjectImage(item, topic) {
+      if (!item) return null;
+      var source = typeof item === 'string' ? item : (item.preview || item.src || item.thumb || '');
+      var full = typeof item === 'string' ? item : (item.full || item.src || source);
+      if (!source && !full) return null;
+      return {
+        src: projectImagePreview(source || full),
+        full: full || source,
+        caption: (typeof item === 'string' ? '' : item.caption) || (topic && topic.title) || ''
+      };
+    }
+
     function projectImages(topic) {
       var images = [];
-      function add(src) {
-        if (!src || images.indexOf(src) !== -1) return;
-        images.push(src);
+      function add(item) {
+        var image = normalizeProjectImage(item, topic);
+        if (!image || !image.src) return;
+        if (images.some(function (old) { return sameImage(old.full || old.src, image.full || image.src); })) return;
+        images.push(image);
       }
       if (topic && Array.isArray(topic.plots)) {
-        topic.plots.forEach(function (plot) { add(plot && plot.src); });
+        topic.plots.forEach(add);
       }
       if (topic && Array.isArray(topic.previewPlots)) {
-        topic.previewPlots.forEach(function (plot) { add(plot && plot.src); });
+        topic.previewPlots.forEach(add);
       }
       if (topic && topic.thumb) add(topic.thumb);
       return images;
@@ -2019,13 +2070,21 @@
       catch (e) { return a === b; }
     }
 
-    function mergeProjectImages(base, extra) {
+    function mergeProjectImages(base, extra, topic) {
       var merged = base.slice();
-      extra.forEach(function (src) {
-        if (!src || merged.some(function (old) { return sameImage(old, src); })) return;
-        merged.push(src);
+      extra.forEach(function (item) {
+        var image = normalizeProjectImage(item, topic);
+        if (!image || !image.src) return;
+        if (merged.some(function (old) { return sameImage(old.full || old.src, image.full || image.src); })) return;
+        merged.push(image);
       });
       return merged;
+    }
+
+    function setHighResolutionTarget(media, slide) {
+      var button = media && media.querySelector('.kp-highres');
+      if (!button || !slide) return;
+      button.setAttribute('data-full', slide.getAttribute('data-full') || slide.src);
     }
 
     function hydrateProjectSlides(media, images, title) {
@@ -2033,13 +2092,14 @@
       if (!slideshow) return [];
       if (!slideshow.__hydrated) {
         slideshow.__hydrated = true;
-        images.forEach(function (src, index) {
+        images.forEach(function (item, index) {
           var img = document.createElement('img');
           img.className = 'kp-slide' + (index === 0 ? ' is-active' : '');
-          img.src = url(src);
-          img.alt = title + ' image ' + (index + 1);
+          img.src = url(item.src);
+          img.alt = item.caption || (title + ' image ' + (index + 1));
           img.loading = 'lazy';
           img.decoding = 'async';
+          img.setAttribute('data-full', url(item.full || item.src));
           slideshow.appendChild(img);
         });
       }
@@ -2050,10 +2110,13 @@
       var slides = hydrateProjectSlides(media, images, title);
       if (!slides.length || media.__slideTimer) return;
       var index = Math.max(0, slides.findIndex(function (slide) { return slide.classList.contains('is-active'); }));
+      setHighResolutionTarget(media, slides[index]);
+      if (slides.length < 2) return;
       media.__slideTimer = window.setInterval(function () {
         slides[index].classList.remove('is-active');
         index = (index + 1) % slides.length;
         slides[index].classList.add('is-active');
+        setHighResolutionTarget(media, slides[index]);
       }, 1450);
     }
 
@@ -2081,12 +2144,12 @@
       strip.className = 'kp-static-strip';
       var visible = images.slice(0, Math.min(4, images.length));
       strip.style.gridTemplateColumns = 'repeat(' + visible.length + ', minmax(0, 1fr))';
-      visible.forEach(function (src, index) {
+      visible.forEach(function (item, index) {
         var tile = document.createElement('div');
         tile.className = 'kp-tile';
         var img = document.createElement('img');
-        img.src = url(src);
-        img.alt = topic.title + ' image ' + (index + 1);
+        img.src = url(item.src);
+        img.alt = item.caption || (topic.title + ' image ' + (index + 1));
         img.loading = 'lazy';
         img.decoding = 'async';
         tile.appendChild(img);
@@ -2102,6 +2165,23 @@
 
       var slideshow = document.createElement('div');
       slideshow.className = 'kp-slideshow';
+      var highres = document.createElement('span');
+      highres.className = 'kp-highres';
+      highres.setAttribute('role', 'button');
+      highres.setAttribute('tabindex', '0');
+      highres.textContent = 'See higher resolution';
+      highres.addEventListener('click', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var full = highres.getAttribute('data-full') || (images[0] && url(images[0].full || images[0].src));
+        if (full) window.open(full, '_blank', 'noopener,noreferrer');
+      });
+      highres.addEventListener('keydown', function (event) {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        highres.click();
+      });
+      slideshow.appendChild(highres);
       media.appendChild(slideshow);
       media.addEventListener('mouseenter', function () { startProjectSlides(media, images, topic.title); });
       media.addEventListener('mouseleave', function () { stopProjectSlides(media); });
@@ -2114,7 +2194,7 @@
       if (!media || !images.length) return media;
       var freshTopic = {
         title: topic.title,
-        plots: images.map(function (src) { return { src: src }; })
+        plots: images
       };
       var replacement = renderProjectMedia(freshTopic);
       media.replaceWith(replacement);
@@ -2137,7 +2217,7 @@
       var pageHref = url(topic.page);
       var existing = media.__projectImages || [];
       if (Object.prototype.hasOwnProperty.call(projectPageImageCache, pageHref)) {
-        var cached = mergeProjectImages(existing, projectPageImageCache[pageHref]);
+        var cached = mergeProjectImages(existing, projectPageImageCache[pageHref], topic);
         if (cached.length > existing.length) applyProjectMediaImages(media, topic, cached);
         return;
       }
@@ -2147,7 +2227,7 @@
           .then(function (html) {
             var pageImages = html ? pageImagesFromHtml(html, pageHref) : [];
             projectPageImageCache[pageHref] = pageImages;
-            var merged = mergeProjectImages(existing, pageImages);
+            var merged = mergeProjectImages(existing, pageImages, topic);
             if (merged.length > existing.length && media.isConnected) {
               applyProjectMediaImages(media, topic, merged);
             }
@@ -2344,7 +2424,7 @@
     function renderPubs() {
       var list = document.getElementById('pub-list'); if (!list) return;
       list.innerHTML = '';
-      var pdfIcon = '<span class="sr-only">PDF</span>';
+      var pdfIcon = '<span aria-hidden="true" class="pdf-text">pdf</span><span class="sr-only">PDF</span>';
       PUBS.forEach(function (p) {
         var d = document.createElement('div'); d.className = 'pub-item';
         var titleHref = p.ads || p.pdf || '#';

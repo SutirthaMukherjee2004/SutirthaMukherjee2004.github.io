@@ -11,6 +11,14 @@
   if (!R) return;
   function url(rel) { return new URL(rel, R.base).href; }
   function el(tag, cls) { var e = document.createElement(tag); if (cls) e.className = cls; return e; }
+  function previewSrc(src) {
+    if (!src || typeof src !== 'string') return src;
+    return src.indexOf('paper-figures-web/') !== -1
+      ? src.replace('paper-figures-web/', 'paper-figures-thumb/')
+      : src;
+  }
+  function plotPreview(plot) { return (plot && plot.preview) || previewSrc(plot && plot.src); }
+  function plotFull(plot) { return (plot && (plot.full || plot.src)) || ''; }
 
   /* ---- sidebar: identical list of topics on every research page ---- */
   function buildMenu(container) {
@@ -33,14 +41,14 @@
       box.classList.add('m' + shown.length);
       shown.forEach(function (p) {
         var img = document.createElement('img');
-        img.src = url(p.src); img.alt = p.caption || topic.title; img.loading = 'lazy';
+        img.src = url(plotPreview(p)); img.alt = p.caption || topic.title; img.loading = 'lazy';
         img.decoding = 'async';
         box.appendChild(img);
       });
     } else if (topic.thumb) {                  // legacy single figure
       box.classList.add('m1');
       var t = document.createElement('img');
-      t.src = url(topic.thumb); t.alt = topic.title; t.loading = 'lazy';
+      t.src = url(previewSrc(topic.thumb)); t.alt = topic.title; t.loading = 'lazy';
       t.decoding = 'async';
       box.appendChild(t);
     } else {                                   // nothing yet -> blank top
@@ -81,9 +89,23 @@
       var grid = el('div', 'research-plots');
       topic.plots.forEach(function (pl) {
         var fig = document.createElement('figure');
-        var img = document.createElement('img'); img.src = url(pl.src); img.alt = pl.caption || topic.title; img.loading = 'lazy'; img.decoding = 'async';
-        fig.appendChild(img);
+        var high = plotFull(pl);
+        var link = document.createElement('a');
+        link.className = 'plot-image-link';
+        link.href = url(high);
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        var img = document.createElement('img'); img.src = url(plotPreview(pl)); img.alt = pl.caption || topic.title; img.loading = 'lazy'; img.decoding = 'async';
+        link.appendChild(img);
+        fig.appendChild(link);
         if (pl.caption) { var cap = document.createElement('figcaption'); cap.textContent = pl.caption; fig.appendChild(cap); }
+        var hi = document.createElement('a');
+        hi.className = 'plot-highres';
+        hi.href = url(high);
+        hi.target = '_blank';
+        hi.rel = 'noopener noreferrer';
+        hi.textContent = 'See higher resolution';
+        fig.appendChild(hi);
         grid.appendChild(fig);
       });
       container.appendChild(grid);

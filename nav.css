@@ -189,7 +189,7 @@ body.snav-open .snav-drawer{ transform:translateX(0); }
   width:100%; height:150px; background:#0d1117; border-bottom:1px solid #30363d;
   display:grid; gap:2px; overflow:hidden;
 }
-.card-montage img{ width:100%; height:100%; object-fit:cover; display:block; filter:brightness(.9); transition:filter .25s ease; }
+.card-montage img{ width:100%; height:100%; object-fit:contain; display:block; filter:brightness(.9); transition:filter .25s ease; background:#f7f7f4; }
 .rcard:hover .card-montage img{ filter:brightness(1.06); }
 .card-montage.m1{ grid-template-columns:1fr; }
 .card-montage.m2{ grid-template-columns:1fr 1fr; }
@@ -213,8 +213,11 @@ body.snav-open .snav-drawer{ transform:translateX(0); }
 .research-writing{ margin:0 0 1.5rem; line-height:1.6; }
 .research-plots{ display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1.2rem; margin-top:1.5rem; }
 .research-plots figure{ margin:0; background:#161b22; border:1px solid #30363d; }
-.research-plots img{ width:100%; display:block; }
+.research-plots .plot-image-link{ display:block; background:#f7f7f4; }
+.research-plots img{ width:100%; height:auto; max-height:480px; object-fit:contain; display:block; }
 .research-plots figcaption{ padding:.6rem .8rem; color:#9da7b3; font-size:.9em; }
+.plot-highres{ display:inline-flex; margin:.15rem .8rem .8rem; padding:.28rem .55rem; color:#f0f6fc; background:rgba(139,148,158,.22); border:1px solid transparent; font-size:.78em; line-height:1.1; text-decoration:none; }
+.plot-highres:hover{ color:#fff; border-color:#58a6ff; background:rgba(88,166,255,.18); text-shadow:none; }
 .research-empty{ color:#8b949e; font-style:italic; margin-top:1rem; }
 
 /* ---------- site-wide dark/light mode switch ---------- */
@@ -409,6 +412,21 @@ body.light-mode .topnav .dropbtn:hover,
 body.light-mode .topnav .dropdown:hover .dropbtn{
   color:#0550ae !important;
   text-shadow:0 0 8px rgba(9,105,218,.22) !important;
+}
+body.light-mode .pub-btn,
+body.light-mode .pub-btn:visited,
+body.light-mode .pub-links a,
+body.light-mode .pub-links a:visited,
+body.light-mode .pub-links span{
+  color:#f7fbff !important;
+  background:rgba(87,96,106,.62) !important;
+  text-shadow:none !important;
+}
+body.light-mode .pub-btn:hover,
+body.light-mode .pub-links a:hover{
+  color:#fff !important;
+  background:rgba(9,105,218,.72) !important;
+  border-color:#0969da !important;
 }
 body.light-mode .topnav .dropdown-content,
 body.light-mode .snav-drawer,
