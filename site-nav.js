@@ -106,8 +106,7 @@
       ['Large-Scale Cosmological Survey', 'research/research_survey.html'],
       ['Magnetised Disc Axion Search Experiment', 'research/research_axion.html'],
       ['Joint Likelihood & Local Dark Matter Density', 'research/research_jointlike.html'],
-      ['Surface Density of the Milky Way', 'research/research_surfdens.html'],
-      ['Downloads', 'research/research_download.html']
+      ['Surface Density of the Milky Way', 'research/research_surfdens.html']
     ]},
     { label: 'Publications', href: 'publications.html' },
     { label: 'Galaxy Comics', href: 'comics.html', children: [
@@ -128,8 +127,10 @@
       ['Movies', 'teaching/movies/index.html']
     ]},
     { label: 'About Me', href: 'vita.html' },
-    { label: 'My Arts', href: 'arts.html' },
-    { label: 'Philosophy', href: 'philosophy.html' }
+    { label: "What's New", href: 'whatsnew.html' },
+    { label: 'Arts', href: 'arts.html' },
+    { label: 'Philosophy', href: 'philosophy.html' },
+    { label: 'Downloads', href: 'research/research_download.html' }
   ];
 
   function el(tag, cls, txt) {
@@ -139,6 +140,58 @@
     return e;
   }
   function abs(h) { return BASE + h; }
+  function normalizedPath(url) {
+    var path = new URL(url, location.href).pathname;
+    path = path.replace(/\/+$/, '/');
+    path = path.replace(/\/index\.html$/, '/');
+    return path;
+  }
+  function itemIsActive(item) {
+    var current = normalizedPath(location.href);
+    if (current === normalizedPath(abs(item.href))) return true;
+    if (item.children) {
+      return item.children.some(function (child) {
+        return current === normalizedPath(abs(child[1]));
+      });
+    }
+    return false;
+  }
+  function buildHeaderNavItem(item) {
+    var active = itemIsActive(item);
+    if (item.children) {
+      var dd = el('div', 'dropdown');
+      var a = el('a', 'dropbtn' + (active ? ' active' : ''));
+      a.href = abs(item.href);
+      if (active) a.setAttribute('aria-current', 'page');
+      a.appendChild(document.createTextNode(item.label));
+      var caret = el('span', 'caret');
+      caret.innerHTML = '&#9662;';
+      a.appendChild(caret);
+      dd.appendChild(a);
+      var menu = el('div', 'dropdown-content');
+      item.children.forEach(function (child) {
+        var childActive = normalizedPath(location.href) === normalizedPath(abs(child[1]));
+        var ca = el('a', childActive ? 'active' : '', child[0]);
+        ca.href = abs(child[1]);
+        if (childActive) ca.setAttribute('aria-current', 'page');
+        menu.appendChild(ca);
+      });
+      dd.appendChild(menu);
+      return dd;
+    }
+    var link = el('a', active ? 'active' : '', item.label);
+    link.href = abs(item.href);
+    if (active) link.setAttribute('aria-current', 'page');
+    return link;
+  }
+  function normalizeTopNav() {
+    Array.prototype.forEach.call(document.querySelectorAll('.topnav'), function (nav) {
+      nav.innerHTML = '';
+      NAV.forEach(function (item) {
+        nav.appendChild(buildHeaderNavItem(item));
+      });
+    });
+  }
   function readTheme() {
     try {
       return localStorage.getItem(THEME_KEY) === 'light' ? 'light' : 'dark';
@@ -386,6 +439,7 @@
   }
 
   function init() {
+    normalizeTopNav();
     if (document.querySelector('.snav-toggle')) return; // never double-inject
 
     var btn = el('button', 'snav-toggle');

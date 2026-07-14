@@ -536,7 +536,7 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="nav.css?v=20260714b">
+    <link rel="stylesheet" href="nav.css?v=20260714c">
     <style>
     /* ===== Academics graph: fill the viewport + frameless modern controls =====
        Loaded AFTER nav.css so these rules win over the shared standardization. */
@@ -1254,24 +1254,43 @@
 
     let link = g.append("g").selectAll("line");
     let node = g.append("g").selectAll("g");
+    const graphCluster = d => {
+        const id = d && d.id ? d.id : "";
+        if (id === "iitm_bs" || id.startsWith("iitm_")) return "iitm";
+        if (id === "tifr_main" || id.startsWith("tifr_")) return "tifr";
+        return "iiser";
+    };
+    const graphAnchorX = d => {
+        const sidebarWidth = 220;
+        const availableWidth = Math.max(420, width - sidebarWidth);
+        const anchors = {
+            iiser: availableWidth * 0.14,
+            tifr: availableWidth * 0.50,
+            iitm: availableWidth * 0.86
+        };
+        return anchors[graphCluster(d)] || anchors.tifr;
+    };
+    const graphLabel = d => {
+        if (!d) return "";
+        if (d.type === "central" || d.type === "semester" || d.id.endsWith("_dept") || d.id.endsWith("_hub") || d.id.includes("physics_")) {
+            return d.name || "";
+        }
+        if (d.code) return d.code;
+        if (typeof d.semester === "number") return (d.id || d.name || "").replace(/_\d+$/, "");
+        if (typeof d.semester === "string" && d.id.startsWith("tifr_phy")) return (d.name || "").split(/\s+/)[0];
+        if (typeof d.semester === "string" && d.id.startsWith("iitm_")) return d.code || (d.id || "").replace(/^iitm_/, "").toUpperCase();
+        return d.name || d.id || "";
+    };
 
     const simulation = d3.forceSimulation()
         .force("link", d3.forceLink()
             .id(d => d.id)
             .distance(d => d.distance || 200)
             .strength(d => d.strength || 0.1))
-        .force("charge", d3.forceManyBody().strength(-400))
+        .force("charge", d3.forceManyBody().strength(d => d.type === "central" ? -820 : -520))
         .force("collision", d3.forceCollide().radius(d => d.size + 8))
         .force("center", d3.forceCenter(width / 2, height / 2))
-        .force("x", d3.forceX(d => {
-            const sidebarWidth = 220;
-            const availableWidth = width - sidebarWidth;
-            if (d.id === 'sutirtha' || (d.id.startsWith('sem') && !d.id.startsWith('iitm') && !d.id.startsWith('tifr')))
-                return availableWidth * 0.3;
-            else if (d.id === 'iitm_bs' || d.id.startsWith('iitm'))
-                return availableWidth * 0.65;
-            return availableWidth * 0.5;
-        }).strength(0.1))
+        .force("x", d3.forceX(d => graphAnchorX(d)).strength(d => d.type === "central" ? 0.22 : 0.12))
         .force("y", d3.forceY(height / 2).strength(0.05));
 
     function updateGraph() {
@@ -1302,7 +1321,7 @@
                 g.append("text")
                     .attr("class", "node-label")
                     .attr("dy", d => d.size + 12)
-                    .text(d => d.name);
+                    .text(d => graphLabel(d));
                 return g;
             },
             update => update,
@@ -1409,7 +1428,7 @@
             const rad = (d.size || 10);
             // Labels are centred UNDER each node and are far wider than the dot,
             // so measure their real footprint or edge nodes get clipped.
-            const nameLen = d.name ? d.name.length : 0;
+            const nameLen = graphLabel(d).length;
             const halfLabel = nameLen * 3.5 + 8;          // ~half the rendered label width
             const halfW = Math.max(rad + 10, halfLabel);
             minX = Math.min(minX, d.x - halfW);
@@ -1501,7 +1520,7 @@
         }
     }, 10000);
 </script>
-<script src="site-nav.js?v=20260714b"></script>
+<script src="site-nav.js?v=20260714c"></script>
 <script src="tools/smukh-editor.js"></script>
 </body>
 </html>

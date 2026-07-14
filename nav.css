@@ -22,6 +22,18 @@
 .topnav .dropdown:hover .dropbtn{
   color:#1f6feb;background:#161b22;text-shadow:0 0 8px rgba(88,166,255,.5);
 }
+.topnav > a.active,
+.topnav .dropbtn.active{
+  color:#f0f6fc;
+  font-weight:800;
+  font-size:1.16em;
+  text-shadow:0 0 10px rgba(88,166,255,.45);
+}
+.topnav .dropdown-content a.active{
+  background:#1c2128;
+  color:#f0f6fc;
+  font-weight:700;
+}
 .topnav .dropdown{position:relative;display:inline-block;}
 .topnav .caret{font-size:.75em;opacity:.85;margin-left:.3rem;}
 
