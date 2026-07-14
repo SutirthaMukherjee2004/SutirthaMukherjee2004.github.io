@@ -498,10 +498,12 @@
     /* ===== Academics graph: fill the viewport + frameless modern controls =====
        Loaded AFTER nav.css so these rules win over the shared standardization. */
 
-    /* Let the visualization use the full available height (no tiny box + dead space). */
-    div#sublayout{ height:auto !important; min-height:calc(100vh - 150px) !important; }
+    /* The graph height is set precisely in JS (sizeGraph) to the on-screen space
+       from its top to the bottom of the viewport, so it never runs past the fold
+       (that below-the-fold overhang was the real cause of the landing crop). */
+    div#sublayout{ height:auto !important; min-height:0 !important; }
     #subpage{ overflow:hidden !important; }
-    #graph{ width:100% !important; height:100% !important; min-height:calc(100vh - 160px) !important; }
+    #graph{ width:100% !important; height:72vh; }
 
     /* Frameless, glassy control panel — no boxy border, soft + modern. */
     .graph-sidebar{
@@ -940,6 +942,19 @@
         }
     });
 
+    // Size the graph to the on-screen space from its top to the bottom of the
+    // viewport, so the container never extends past the fold (which is what made
+    // the graph land cropped on tall/16" screens).
+    function sizeGraph() {
+        const el = document.getElementById("graph");
+        if (!el) return 0;
+        const top = el.getBoundingClientRect().top;   // distance from viewport top
+        const h = Math.max(360, Math.floor(window.innerHeight - top - 12));
+        el.style.height = h + "px";
+        return h;
+    }
+    sizeGraph();
+
     // D3.js Graph Setup
     const svg = d3.select("#graph").append("svg")
         .attr("width", "100%")
@@ -950,6 +965,7 @@
 
     // Update dimensions on window resize
     window.addEventListener('resize', () => {
+        sizeGraph();
         width = document.getElementById("graph").clientWidth;
         height = document.getElementById("graph").clientHeight;
         svg.attr("width", width).attr("height", height);
@@ -1111,7 +1127,10 @@
         });
         if (!isFinite(minX)) return;
         const el = document.getElementById("graph");
-        const w = el.clientWidth, h = el.clientHeight;
+        const rect = el.getBoundingClientRect();
+        const w = el.clientWidth;
+        // Never fit into space past the fold: cap height to what's on screen.
+        const h = Math.max(160, Math.min(el.clientHeight, window.innerHeight - rect.top - 10));
         if (!w || !h) return;
         const rightSidebar = w > 720 ? 205 : 0; // stay clear of the controls panel on wide screens
         const availW = Math.max(120, w - rightSidebar - padding * 2);
@@ -1178,6 +1197,10 @@
     updateGraph();
     // The per-tick auto-fit (see the tick handler) keeps the ENTIRE graph in
     // frame from the very first frame through settling — no landing crop.
+    // Re-measure after the header image/fonts finish loading (they shift the
+    // graph's top position), then re-fit.
+    window.addEventListener('load', () => { sizeGraph(); autoFit = true; setTimeout(() => fitToView(300), 60); });
+    [150, 500, 1200].forEach(ms => setTimeout(() => { sizeGraph(); }, ms));
 
     // Auto-hide intro text after 10 seconds (reveals + fits the full graph)
     setTimeout(() => {
