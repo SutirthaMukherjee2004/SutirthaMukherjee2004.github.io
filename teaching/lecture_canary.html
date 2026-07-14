@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=1280, user-scalable=yes">
 <title>Sutirtha Mukherjee</title>
-    <meta name="description" content="Theoretical physics notes by Sutirtha Mukherjee, including PDF notes and papers on axion-photon conversion, perturbative string theory, local dark matter density, and relativistic thermodynamics.">
+    <meta name="description" content="Theoretical physics manuscripts by Sutirtha Mukherjee on axion-photon conversion, perturbative string theory, local dark matter density, and relativistic thermodynamics.">
     <meta name="keywords" content="Sutirtha Mukherjee, axion-photon conversion, axions, ALPs, astrophysical environments, astrophysics, cosmology, dark matter, galactic dynamics, Milky Way, conformal field theory, theoretical physics">
     <meta name="author" content="Sutirtha Mukherjee">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -17,11 +17,11 @@
     <meta property="og:url" content="https://sutirthamukherjee2004.github.io/teaching/lecture_canary.html">
     <meta property="og:title" content="Sutirtha Mukherjee">
     <meta property="og:site_name" content="Sutirtha Mukherjee">
-    <meta property="og:description" content="Theoretical physics notes by Sutirtha Mukherjee, including PDF notes and papers on axion-photon conversion, perturbative string theory, local dark matter density, and relativistic thermodynamics.">
+    <meta property="og:description" content="Theoretical physics manuscripts by Sutirtha Mukherjee on axion-photon conversion, perturbative string theory, local dark matter density, and relativistic thermodynamics.">
     <meta property="og:image" content="https://sutirthamukherjee2004.github.io/images/Profile.jpeg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Sutirtha Mukherjee">
-    <meta name="twitter:description" content="Theoretical physics notes by Sutirtha Mukherjee, including PDF notes and papers on axion-photon conversion, perturbative string theory, local dark matter density, and relativistic thermodynamics.">
+    <meta name="twitter:description" content="Theoretical physics manuscripts by Sutirtha Mukherjee on axion-photon conversion, perturbative string theory, local dark matter density, and relativistic thermodynamics.">
     <meta name="twitter:image" content="https://sutirthamukherjee2004.github.io/images/Profile.jpeg">
     <script type="application/ld+json">
     {
@@ -30,7 +30,7 @@
   "name": "Sutirtha Mukherjee",
   "headline": "Sutirtha Mukherjee",
   "url": "https://sutirthamukherjee2004.github.io/teaching/lecture_canary.html",
-  "description": "Theoretical physics notes by Sutirtha Mukherjee, including PDF notes and papers on axion-photon conversion, perturbative string theory, local dark matter density, and relativistic thermodynamics.",
+  "description": "Theoretical physics manuscripts by Sutirtha Mukherjee on axion-photon conversion, perturbative string theory, local dark matter density, and relativistic thermodynamics.",
   "isPartOf": {
     "@type": "WebSite",
     "name": "Sutirtha Mukherjee",
@@ -352,52 +352,20 @@ hr {
     box-shadow: 0 8px 24px rgba(88, 166, 255, 0.15);
 }
 
-.resource-card:hover .latex-thumbnail {
+.resource-card:hover .pdf-visual {
     transform: scale(1.05);
 }
 
-.latex-thumbnail {
+.pdf-visual {
     width: 100%;
     height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(88px, 0.85fr);
+    gap: 8px;
+    padding: 10px;
+    background: #10151d;
     position: relative;
     transition: transform 0.3s ease;
-}
-
-.latex-content {
-    text-align: center;
-    padding: 20px;
-    font-family: 'Computer Modern', 'Times New Roman', serif;
-}
-
-.latex-title {
-    font-size: 1.8em;
-    color: #e6edf3;
-    margin-bottom: 12px;
-    font-weight: 400;
-    line-height: 1.2;
-}
-
-.latex-title.compact-title {
-    font-size: 1.12em;
-    line-height: 1.18;
-}
-
-.latex-subtitle {
-    font-size: 1em;
-    color: #8b949e;
-    font-style: italic;
-    opacity: 0.8;
-}
-
-.latex-formula {
-    margin-top: 20px;
-    opacity: 0.4;
-    font-size: 0.9em;
-    color: #58a6ff;
 }
 
 .card-overlay {
@@ -410,56 +378,19 @@ hr {
     transition: all 0.3s ease;
 }
 
-.resource-type {
-    display: inline-block;
-    padding: 3px 10px;
-    font-size: 0.7em;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 12px;
-    border: 1px solid;
-    opacity: 0.9;
-}
-
-.type-direct {
-    color: #f87171;
-    border-color: #f87171;
-}
-
 .overlay-title {
     font-size: 1.1em;
-    margin-bottom: 6px;
+    margin-bottom: 0;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.95);
 }
 
-.overlay-description {
-    font-size: 0.85em;
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.4;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-.resource-card.pdf-preview-card {
+.resource-card.pdf-card {
     height: 300px;
 }
 
-.pdf-preview-shell {
-    width: 100%;
-    height: 100%;
-    display: grid;
-    grid-template-columns: minmax(0, 1.45fr) minmax(88px, 0.85fr);
-    gap: 8px;
-    padding: 10px;
-    background: #10151d;
-}
-
-.pdf-cover-preview,
-.pdf-figure-preview {
+.pdf-cover-image,
+.pdf-page-image {
     width: 100%;
     height: 100%;
     display: block;
@@ -469,19 +400,26 @@ hr {
     border: 1px solid rgba(139, 148, 158, 0.25);
 }
 
-.pdf-cover-preview {
+.pdf-cover-image {
     object-fit: contain;
     background: #f7f7f4;
 }
 
-.pdf-figure-strip {
+.pdf-page-strip {
     display: grid;
     grid-template-rows: repeat(3, 1fr);
     gap: 8px;
     min-height: 0;
 }
 
-.resource-card.pdf-preview-card .card-overlay {
+.pdf-native {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: #f7f7f4;
+}
+
+.resource-card.pdf-card .card-overlay {
     padding: 18px;
 }
 
@@ -633,64 +571,59 @@ hr {
     </div>
 
     <div class="resources-grid">
-        <a href="../docs/CFT_TIFR_Notes_2.pdf" target="_blank" rel="noopener noreferrer" class="resource-card" type="application/pdf">
-            <div class="latex-thumbnail">
-                <div class="latex-content">
-                    <div class="latex-title">Perturbative String Theory</div>
-                    <div class="latex-subtitle">Sutirtha Mukherjee</div>
-                    <div class="latex-formula">T(z)T(w) &sim; c/(z-w)<sup>4</sup></div>
+        <a href="../docs/CFT_TIFR_Notes_2.pdf" target="_blank" rel="noopener noreferrer" class="resource-card pdf-card" type="application/pdf" data-pdf-slug="cft-tifr-notes-2">
+            <div class="pdf-visual" aria-hidden="true">
+                <img src="../images/pdf-previews/cft-tifr-notes-2-cover.jpg" alt="" class="pdf-cover-image" loading="lazy" decoding="async">
+                <div class="pdf-page-strip">
+                    <img src="../images/pdf-previews/cft-tifr-notes-2-page-2.jpg" alt="" class="pdf-page-image" loading="lazy" decoding="async">
+                    <img src="../images/pdf-previews/cft-tifr-notes-2-page-3.jpg" alt="" class="pdf-page-image" loading="lazy" decoding="async">
+                    <img src="../images/pdf-previews/cft-tifr-notes-2-page-4.jpg" alt="" class="pdf-page-image" loading="lazy" decoding="async">
                 </div>
             </div>
             <div class="card-overlay">
-                <span class="resource-type type-direct">PDF</span>
                 <div class="overlay-title">Perturbative String Theory and Its Non-Perturbative Probes</div>
-                <div class="overlay-description">PDF notes</div>
             </div>
         </a>
 
-        <a href="../docs/Axion-Photon-Conversion-in-Astrophysical-Environments.pdf" target="_blank" rel="noopener noreferrer" class="resource-card pdf-preview-card" type="application/pdf">
-            <div class="pdf-preview-shell" aria-hidden="true">
-                <img src="../images/pdf-previews/axion-notes-cover.jpg" alt="" class="pdf-cover-preview" loading="lazy" decoding="async">
-                <div class="pdf-figure-strip">
-                    <img src="../images/pdf-previews/axion-notes-figure-probability.jpg" alt="" class="pdf-figure-preview" loading="lazy" decoding="async">
-                    <img src="../images/pdf-previews/axion-notes-figure-conversion.jpg" alt="" class="pdf-figure-preview" loading="lazy" decoding="async">
-                    <img src="../images/pdf-previews/axion-notes-figure-spectrum.jpg" alt="" class="pdf-figure-preview" loading="lazy" decoding="async">
+        <a href="../docs/Axion-Photon-Conversion-in-Astrophysical-Environments.pdf" target="_blank" rel="noopener noreferrer" class="resource-card pdf-card" type="application/pdf" data-pdf-slug="axion-notes">
+            <div class="pdf-visual" aria-hidden="true">
+                <img src="../images/pdf-previews/axion-notes-cover.jpg" alt="" class="pdf-cover-image" loading="lazy" decoding="async">
+                <div class="pdf-page-strip">
+                    <img src="../images/pdf-previews/axion-notes-page-2.jpg" alt="" class="pdf-page-image" loading="lazy" decoding="async">
+                    <img src="../images/pdf-previews/axion-notes-page-3.jpg" alt="" class="pdf-page-image" loading="lazy" decoding="async">
+                    <img src="../images/pdf-previews/axion-notes-page-4.jpg" alt="" class="pdf-page-image" loading="lazy" decoding="async">
                 </div>
             </div>
             <div class="card-overlay">
-                <span class="resource-type type-direct">PDF</span>
                 <div class="overlay-title">Axion&ndash;Photon Resonant Conversion in Astrophysical Environment</div>
-                <div class="overlay-description">Cover preview and selected figures</div>
             </div>
         </a>
 
-        <a href="../2402.0326v2.pdf" target="_blank" rel="noopener noreferrer" class="resource-card" type="application/pdf">
-            <div class="latex-thumbnail">
-                <div class="latex-content">
-                    <div class="latex-title compact-title">Tight Constraint on Local Dark Matter Density from a Joint Analysis of Local Kinematics and Rotation Curves</div>
-                    <div class="latex-subtitle">Sutirtha Mukherjee et al.</div>
-                    <div class="latex-formula">&rho;<sub>DM,&odot;</sub> &middot; v<sub>c</sub>(R)</div>
+        <a href="../2402.0326v2.pdf" target="_blank" rel="noopener noreferrer" class="resource-card pdf-card" type="application/pdf" data-pdf-slug="2402-0326v2">
+            <div class="pdf-visual" aria-hidden="true">
+                <img src="../images/pdf-previews/2402-0326v2-cover.jpg" alt="" class="pdf-cover-image" loading="lazy" decoding="async">
+                <div class="pdf-page-strip">
+                    <img src="../images/pdf-previews/2402-0326v2-page-2.jpg" alt="" class="pdf-page-image" loading="lazy" decoding="async">
+                    <img src="../images/pdf-previews/2402-0326v2-page-3.jpg" alt="" class="pdf-page-image" loading="lazy" decoding="async">
+                    <img src="../images/pdf-previews/2402-0326v2-page-4.jpg" alt="" class="pdf-page-image" loading="lazy" decoding="async">
                 </div>
             </div>
             <div class="card-overlay">
-                <span class="resource-type type-direct">PDF</span>
                 <div class="overlay-title">Tight Constraint on Local Dark Matter Density from a Joint Analysis of Local Kinematics and Rotation Curves</div>
-                <div class="overlay-description">PDF</div>
             </div>
         </a>
 
-        <a href="../rel_tdy_1_main_tex__Copy_%20%283%29.pdf" target="_blank" rel="noopener noreferrer" class="resource-card" type="application/pdf">
-            <div class="latex-thumbnail">
-                <div class="latex-content">
-                    <div class="latex-title compact-title">A Revisit on Covariant Approach in Relativistic Thermodynamics</div>
-                    <div class="latex-subtitle">Sutirtha Mukherjee</div>
-                    <div class="latex-formula">T&#771; = &gamma;<sup>a</sup>T</div>
+        <a href="../rel_tdy_1_main_tex__Copy_%20%283%29.pdf" target="_blank" rel="noopener noreferrer" class="resource-card pdf-card" type="application/pdf" data-pdf-slug="rel-tdy">
+            <div class="pdf-visual" aria-hidden="true">
+                <img src="../images/pdf-previews/rel-tdy-cover.jpg" alt="" class="pdf-cover-image" loading="lazy" decoding="async">
+                <div class="pdf-page-strip">
+                    <img src="../images/pdf-previews/rel-tdy-page-2.jpg" alt="" class="pdf-page-image" loading="lazy" decoding="async">
+                    <img src="../images/pdf-previews/rel-tdy-page-3.jpg" alt="" class="pdf-page-image" loading="lazy" decoding="async">
+                    <img src="../images/pdf-previews/rel-tdy-page-4.jpg" alt="" class="pdf-page-image" loading="lazy" decoding="async">
                 </div>
             </div>
             <div class="card-overlay">
-                <span class="resource-type type-direct">PDF</span>
                 <div class="overlay-title">A Revisit on Covariant Approach in Relativistic Thermodynamics</div>
-                <div class="overlay-description">PDF</div>
             </div>
         </a>
 
@@ -708,7 +641,66 @@ Last update 08.05.2022 by Sutirtha Mukherjee
 </div>
 
 <a href="../index.html" class="home-corner" title="Back to Home" aria-label="Back to Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V10"/></svg></a>
-<script src="../site-nav.js?v=20260714j"></script>
+<script>
+  (function () {
+    function slugFromHref(href) {
+      var file = decodeURIComponent(String(href || '').split('/').pop() || '');
+      return file.replace(/\.pdf$/i, '').toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    }
+
+    function makeImage(src, cls) {
+      var img = document.createElement('img');
+      img.src = src;
+      img.alt = '';
+      img.className = cls;
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.onerror = function () { img.remove(); };
+      return img;
+    }
+
+    function addPdfVisual(card) {
+      if (!card || card.querySelector('.pdf-visual')) return;
+      var href = card.getAttribute('href') || '';
+      var slug = card.getAttribute('data-pdf-slug') || slugFromHref(href);
+      if (!slug) return;
+
+      card.classList.add('pdf-card');
+      var shell = document.createElement('div');
+      shell.className = 'pdf-visual';
+      shell.setAttribute('aria-hidden', 'true');
+      shell.appendChild(makeImage('../images/pdf-previews/' + slug + '-cover.jpg', 'pdf-cover-image'));
+
+      var strip = document.createElement('div');
+      strip.className = 'pdf-page-strip';
+      [2, 3, 4].forEach(function (page) {
+        strip.appendChild(makeImage('../images/pdf-previews/' + slug + '-page-' + page + '.jpg', 'pdf-page-image'));
+      });
+      shell.appendChild(strip);
+
+      window.setTimeout(function () {
+        if (shell.querySelector('img')) return;
+        var nativePdf = document.createElement('object');
+        nativePdf.className = 'pdf-native';
+        nativePdf.type = 'application/pdf';
+        nativePdf.data = href + '#page=1&toolbar=0&navpanes=0&scrollbar=0';
+        shell.appendChild(nativePdf);
+      }, 500);
+
+      card.insertBefore(shell, card.firstChild);
+    }
+
+    function initPdfVisuals() {
+      document.querySelectorAll('.resources-grid a[type="application/pdf"], .resources-grid a[href$=".pdf"]').forEach(addPdfVisual);
+    }
+
+    if (document.readyState !== 'loading') initPdfVisuals();
+    else document.addEventListener('DOMContentLoaded', initPdfVisuals);
+  })();
+</script>
+<script src="../site-nav.js?v=20260714k"></script>
 <script src="../tools/smukh-editor.js"></script>
 </body>
 </html>

@@ -985,8 +985,84 @@
             position: relative;
             z-index: 4;
         }
-        .kp-thumb { width: 82px; height: 42px; object-fit: cover; background: #0d1117; border: 1px solid #30363d; flex-shrink: 0; }
-        .kp-thumb.empty { display: flex; align-items: center; justify-content: center; color: #586074; font-size: 0.72em; }
+        .kp-media {
+            --kp-cycle: 7.2s;
+            width: 148px;
+            height: 54px;
+            position: relative;
+            flex: 0 0 148px;
+            align-self: stretch;
+            display: block;
+            overflow: visible;
+            transform-origin: right center;
+            z-index: 1;
+        }
+        .kp-item:hover .kp-media {
+            z-index: 18;
+        }
+        .kp-static-strip {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 4px;
+            transition: opacity 0.16s ease;
+        }
+        .kp-tile {
+            position: relative;
+            min-width: 0;
+            height: 100%;
+            overflow: hidden;
+            background: #0d1117;
+            border: 1px solid rgba(88, 166, 255, 0.18);
+        }
+        .kp-tile img,
+        .kp-slide {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .kp-more {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(13, 17, 23, 0.58);
+            color: #f0f6fc;
+            font-size: 1.25em;
+            font-weight: 800;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.75);
+        }
+        .kp-slideshow {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            opacity: 0;
+            pointer-events: none;
+            background: #0d1117;
+            border: 1px solid rgba(88, 166, 255, 0.55);
+            box-shadow: 0 16px 38px rgba(0, 0, 0, 0.38);
+            transition: opacity 0.16s ease, inset 0.16s ease;
+        }
+        .kp-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.22s ease;
+        }
+        .kp-slide.is-active {
+            opacity: 1;
+        }
+        .kp-item:hover .kp-static-strip {
+            opacity: 0;
+        }
+        .kp-item:hover .kp-slideshow {
+            opacity: 1;
+            inset: -48px -4px -48px -190px;
+        }
+        .kp-thumb.empty { width: 148px; height: 54px; display: flex; align-items: center; justify-content: center; color: #586074; font-size: 0.72em; background: #0d1117; flex: 0 0 148px; }
 
         .pub-note {
             background: transparent;
@@ -1063,7 +1139,14 @@
         .pub-btn { font-size: 0.72em; padding: 0.15rem 0.6rem; border: 1px solid #30363d; color: #58a6ff; text-decoration: none; }
         .pub-btn:hover { background: #1f6feb; color: #fff; border-color: #1f6feb; }
         .pub-btn.pdf { width: 1.7rem; height: 1.7rem; padding: 0; display: inline-flex; align-items: center; justify-content: center; color: #d8dee9; border-color: rgba(216, 222, 233, 0.3); }
-        .pub-btn.pdf svg { width: 1rem; height: 1rem; display: block; }
+        .pub-btn.pdf svg { display: none; }
+        .pub-btn.pdf::before {
+            content: '';
+            width: 1.12rem;
+            height: 1.12rem;
+            display: block;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23e53935' d='M12 4h28l12 12v44H12z'/%3E%3Cpath fill='%23ffcdd2' d='M40 4v14h12z'/%3E%3Crect x='17' y='34' width='30' height='13' rx='2' fill='%23fff'/%3E%3Ctext x='20' y='44' font-family='Arial,sans-serif' font-size='9' font-weight='700' fill='%23e53935'%3EPDF%3C/text%3E%3C/svg%3E") center / contain no-repeat;
+        }
         .pub-btn.unavailable { color: #586074; border-color: rgba(88, 96, 116, 0.45); pointer-events: none; }
         .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
         .pub-histo {
@@ -1220,7 +1303,9 @@
         @media (max-width: 460px) {
             .hub-left .features-grid { grid-template-columns: 1fr; }
             .kp-item { flex-direction: column; }
-            .kp-thumb { width: 100%; height: 86px; }
+            .kp-media,
+            .kp-thumb.empty { width: 100%; height: 86px; flex-basis: auto; }
+            .kp-item:hover .kp-slideshow { inset: 0; }
         }
     </style>
     <link rel="stylesheet" href="nav.css?v=20260714j">
@@ -1303,7 +1388,7 @@
                     </div>
                 </div>
                 <div class="content">
-                    <p data-ed="home-bio-1"><span class="intro-hi">Hi!</span> I am a passionate master&rsquo;s student in physics with research interests in gravitation and cosmology, theoretical astrophysics, and dark matter phenomenology. My broader motivation is to understand the nature and history of the universe, from the smallest to the largest scales. My current research is to construct the local dark matter phase space from a data-driven Bayesian inference of baryonic matter, the direct and indirect detection of &ldquo;dark matter,&rdquo; and its associated near-field cosmological implications.</p>
+                    <p data-ed="home-bio-1"><span class="intro-hi">Hi!</span> I am Sutirtha, a passionate master&rsquo;s student in physics with research interests in gravitation and cosmology, theoretical astrophysics, and dark matter phenomenology. My broader motivation is to understand the nature and history of the universe, from the smallest to the largest scales. My current research is to construct the local dark matter phase space from a data-driven Bayesian inference of baryonic matter, the direct and indirect detection of &ldquo;dark matter,&rdquo; and its associated near-field cosmological implications.</p>
                     <p data-ed="home-bio-3" class="bio-collapsible" tabindex="0" role="button" aria-expanded="false" aria-label="Expand academic background paragraph">My academic background helped me to gain a deeper understanding of both theoretical physics and data science and computational methods. I have explored a variety of subfields on problems related to observational cosmology, large-scale structure formation, galaxy evolution, radio astronomy, and astrophysical data analysis. I use Bayesian statistical inference, machine learning, and numerical methods to study large-scale datasets. I am also interested in understanding conformal field theory (CFT) and AdS<sub>d+1</sub>/CFT<sub>d</sub> duality and aspects of perturbative string theory.</p>
                     <p data-ed="home-bio-4">I am open to collaborating with researchers and academic groups on projects of mutual interest. Please feel free to reach out to discuss potential problem statements. Outside of academics, I pursue the arts and music as my hobbies; I hold a diploma in fine arts, play the violin, and am currently learning the flute.</p>
 
@@ -1420,7 +1505,7 @@
                                 <div class="description">IIT Madras BS academic track in Data Science and Applications, covering probability, statistics, programming, algorithms, database systems, machine learning, deep learning, natural language processing, computer vision, responsible AI, projects, and internship work. Opens the Academic Journey view for the full IITM BS graph and course map.</div>
                             </a>
                         </div>
-                        <div class="timeline-item" data-highlight="tifr-all">
+                        <div class="timeline-item" data-highlight="tifr-summer">
                             <div class="timeline-dot"></div>
                             <div class="timeline-card">
                                 <div class="job-header"><div class="job-icon"><img src="images/fz-juelich-logo.svg" alt="Forschungszentrum Juelich logo" crossorigin="anonymous" loading="lazy" decoding="async"></div><div class="job-content"><div class="job-title"><strong>Research Intern - Relativistic Quantum Information</strong></div><div class="company">Forschungszentrum J&uuml;lich</div><div class="duration">Jan. 2023 - Present &bull; J&uuml;lich, Germany</div></div></div>
@@ -1884,6 +1969,7 @@
     var current = 'All';
     var pubHistogramResizeTimer = null;
     var pubHistogramWidth = 0;
+    var projectPageImageCache = {};
 
     function measurePubHistogramWidth() {
       var target = document.getElementById('pub-joint-histo');
@@ -1912,6 +1998,166 @@
       window.addEventListener('resize', schedulePubHistogramResize, { passive: true });
     }
 
+    function projectImages(topic) {
+      var images = [];
+      function add(src) {
+        if (!src || images.indexOf(src) !== -1) return;
+        images.push(src);
+      }
+      if (topic && Array.isArray(topic.plots)) {
+        topic.plots.forEach(function (plot) { add(plot && plot.src); });
+      }
+      if (topic && Array.isArray(topic.previewPlots)) {
+        topic.previewPlots.forEach(function (plot) { add(plot && plot.src); });
+      }
+      if (topic && topic.thumb) add(topic.thumb);
+      return images;
+    }
+
+    function sameImage(a, b) {
+      try { return new URL(a, window.location.href).href === new URL(b, window.location.href).href; }
+      catch (e) { return a === b; }
+    }
+
+    function mergeProjectImages(base, extra) {
+      var merged = base.slice();
+      extra.forEach(function (src) {
+        if (!src || merged.some(function (old) { return sameImage(old, src); })) return;
+        merged.push(src);
+      });
+      return merged;
+    }
+
+    function hydrateProjectSlides(media, images, title) {
+      var slideshow = media && media.querySelector('.kp-slideshow');
+      if (!slideshow) return [];
+      if (!slideshow.__hydrated) {
+        slideshow.__hydrated = true;
+        images.forEach(function (src, index) {
+          var img = document.createElement('img');
+          img.className = 'kp-slide' + (index === 0 ? ' is-active' : '');
+          img.src = url(src);
+          img.alt = title + ' image ' + (index + 1);
+          img.loading = 'lazy';
+          img.decoding = 'async';
+          slideshow.appendChild(img);
+        });
+      }
+      return Array.from(slideshow.querySelectorAll('.kp-slide'));
+    }
+
+    function startProjectSlides(media, images, title) {
+      var slides = hydrateProjectSlides(media, images, title);
+      if (!slides.length || media.__slideTimer) return;
+      var index = Math.max(0, slides.findIndex(function (slide) { return slide.classList.contains('is-active'); }));
+      media.__slideTimer = window.setInterval(function () {
+        slides[index].classList.remove('is-active');
+        index = (index + 1) % slides.length;
+        slides[index].classList.add('is-active');
+      }, 1450);
+    }
+
+    function stopProjectSlides(media) {
+      if (!media || !media.__slideTimer) return;
+      window.clearInterval(media.__slideTimer);
+      media.__slideTimer = null;
+    }
+
+    function renderProjectMedia(topic) {
+      var images = projectImages(topic);
+      if (!images.length) {
+        var empty = document.createElement('div');
+        empty.className = 'kp-thumb empty';
+        empty.textContent = 'soon';
+        empty.__projectImages = [];
+        return empty;
+      }
+      var media = document.createElement('div');
+      media.className = 'kp-media';
+      media.__projectImages = images;
+      media.style.setProperty('--kp-cycle', (Math.max(images.length, 1) * 1.55) + 's');
+
+      var strip = document.createElement('div');
+      strip.className = 'kp-static-strip';
+      var visible = images.slice(0, Math.min(4, images.length));
+      strip.style.gridTemplateColumns = 'repeat(' + visible.length + ', minmax(0, 1fr))';
+      visible.forEach(function (src, index) {
+        var tile = document.createElement('div');
+        tile.className = 'kp-tile';
+        var img = document.createElement('img');
+        img.src = url(src);
+        img.alt = topic.title + ' image ' + (index + 1);
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        tile.appendChild(img);
+        if (index === 3 && images.length > 4) {
+          var more = document.createElement('span');
+          more.className = 'kp-more';
+          more.textContent = '+' + (images.length - 4);
+          tile.appendChild(more);
+        }
+        strip.appendChild(tile);
+      });
+      media.appendChild(strip);
+
+      var slideshow = document.createElement('div');
+      slideshow.className = 'kp-slideshow';
+      media.appendChild(slideshow);
+      media.addEventListener('mouseenter', function () { startProjectSlides(media, images, topic.title); });
+      media.addEventListener('mouseleave', function () { stopProjectSlides(media); });
+      media.addEventListener('focusin', function () { startProjectSlides(media, images, topic.title); });
+      media.addEventListener('focusout', function () { stopProjectSlides(media); });
+      return media;
+    }
+
+    function applyProjectMediaImages(media, topic, images) {
+      if (!media || !images.length) return media;
+      var freshTopic = {
+        title: topic.title,
+        plots: images.map(function (src) { return { src: src }; })
+      };
+      var replacement = renderProjectMedia(freshTopic);
+      media.replaceWith(replacement);
+      return replacement;
+    }
+
+    function pageImagesFromHtml(html, pageHref) {
+      if (!window.DOMParser) return [];
+      var doc = new DOMParser().parseFromString(html, 'text/html');
+      return Array.from(doc.querySelectorAll('img')).map(function (img) {
+        var src = img.getAttribute('src') || '';
+        if (!src || /galaxies_comic|Profile|profile|logo|favicon/i.test(src)) return '';
+        try { return new URL(src, pageHref).href; }
+        catch (e) { return ''; }
+      }).filter(Boolean);
+    }
+
+    function queryProjectPageImages(topic, media) {
+      if (!topic || !topic.page || !window.fetch) return;
+      var pageHref = url(topic.page);
+      var existing = media.__projectImages || [];
+      if (Object.prototype.hasOwnProperty.call(projectPageImageCache, pageHref)) {
+        var cached = mergeProjectImages(existing, projectPageImageCache[pageHref]);
+        if (cached.length > existing.length) applyProjectMediaImages(media, topic, cached);
+        return;
+      }
+      var run = function () {
+        fetch(pageHref, { credentials: 'same-origin' })
+          .then(function (res) { return res.ok ? res.text() : ''; })
+          .then(function (html) {
+            var pageImages = html ? pageImagesFromHtml(html, pageHref) : [];
+            projectPageImageCache[pageHref] = pageImages;
+            var merged = mergeProjectImages(existing, pageImages);
+            if (merged.length > existing.length && media.isConnected) {
+              applyProjectMediaImages(media, topic, merged);
+            }
+          })
+          .catch(function () { projectPageImageCache[pageHref] = []; });
+      };
+      if ('requestIdleCallback' in window) requestIdleCallback(run, { timeout: 1800 });
+      else window.setTimeout(run, 700);
+    }
+
     function renderProjects() {
       var list = document.getElementById('kp-list'); if (!list || !R) return;
       list.innerHTML = '';
@@ -1921,9 +2167,9 @@
         var ti = document.createElement('div'); ti.className = 'kp-title'; ti.textContent = t.title;
         var bl = document.createElement('div'); bl.className = 'kp-blurb'; bl.textContent = t.blurb || '';
         body.appendChild(ti); body.appendChild(bl); a.appendChild(body);
-        var thumb = (t.plots && t.plots.length) ? t.plots[0].src : t.thumb;
-        if (thumb) { var img = document.createElement('img'); img.className = 'kp-thumb'; img.src = url(thumb); img.alt = t.title; img.loading = 'lazy'; a.appendChild(img); }
-        else { var d = document.createElement('div'); d.className = 'kp-thumb empty'; d.textContent = 'soon'; a.appendChild(d); }
+        var media = renderProjectMedia(t);
+        a.appendChild(media);
+        queryProjectPageImages(t, media);
         list.appendChild(a);
       });
     }
@@ -2143,7 +2389,7 @@
     else document.addEventListener('DOMContentLoaded', initBioCollapse);
   })();
 </script>
-<script src="site-nav.js?v=20260714j"></script>
+<script src="site-nav.js?v=20260714k"></script>
 <script src="tools/smukh-editor.js"></script>
 </body>
 </html>
