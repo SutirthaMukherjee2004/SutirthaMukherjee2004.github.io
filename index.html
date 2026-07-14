@@ -635,9 +635,10 @@
             position: absolute;
             left: 15px;
             top: 25px;
-            bottom: 0;
+            bottom: auto;
+            height: var(--timeline-line-height, calc(100% - 25px));
             width: 2px;
-            background: linear-gradient(to bottom, #30363d, #161b22);
+            background: linear-gradient(to bottom, #30363d, #30363d 85%, rgba(48, 54, 61, 0.35));
         }
 
         .timeline-item {
@@ -1058,7 +1059,7 @@
             background: #0d1117;
             border: 1px solid rgba(88, 166, 255, 0.55);
             box-shadow: 0 16px 38px rgba(0, 0, 0, 0.38);
-            transition: opacity 0.16s ease, inset 0.16s ease;
+            transition: opacity 0.16s ease, transform 0.16s ease;
         }
         .kp-slide {
             position: absolute;
@@ -1069,20 +1070,22 @@
         .kp-slide.is-active {
             opacity: 1;
         }
-        .kp-item:hover .kp-static-strip {
+        .kp-media:hover .kp-static-strip,
+        .kp-media:focus-within .kp-static-strip {
             opacity: 0;
         }
-        .kp-item:hover .kp-slideshow {
-            position: fixed;
+        .kp-media:hover .kp-slideshow,
+        .kp-media:focus-within .kp-slideshow {
+            position: absolute;
             opacity: 1;
             inset: auto;
-            left: 50%;
+            right: calc(100% + 0.28rem);
             top: 50%;
-            width: min(760px, 74vw);
-            height: min(440px, 62vh);
-            transform: translate(-50%, -50%);
+            width: min(330px, 34vw);
+            height: min(205px, 28vh);
+            transform: translateY(-50%);
             pointer-events: auto;
-            z-index: 1000;
+            z-index: 60;
         }
         .kp-highres {
             position: absolute;
@@ -1103,6 +1106,42 @@
             color: #ffffff;
         }
         .kp-thumb.empty { width: 148px; height: 54px; display: flex; align-items: center; justify-content: center; color: #586074; font-size: 0.72em; background: #0d1117; flex: 0 0 148px; }
+        .kp-title-row {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            min-width: 0;
+        }
+        .kp-title-row .kp-title {
+            flex: 1 1 auto;
+            min-width: 0;
+        }
+        .kp-new-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            color: #b7f7c9;
+            font-size: 0.58em;
+            font-weight: 800;
+            letter-spacing: 0;
+            text-transform: uppercase;
+            white-space: nowrap;
+            flex: 0 0 auto;
+        }
+        .kp-new-badge::before {
+            content: '';
+            width: 0.48rem;
+            height: 0.48rem;
+            border-radius: 50%;
+            background: #3fb950;
+            box-shadow: 0 0 0 0 rgba(63, 185, 80, 0.62);
+            animation: newPulse 1.7s ease-out infinite;
+        }
+        @keyframes newPulse {
+            0% { box-shadow: 0 0 0 0 rgba(63, 185, 80, 0.62); }
+            70% { box-shadow: 0 0 0 7px rgba(63, 185, 80, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(63, 185, 80, 0); }
+        }
 
         .pub-note {
             background: transparent;
@@ -1345,9 +1384,14 @@
             .kp-item { flex-direction: column; }
             .kp-media,
             .kp-thumb.empty { width: 100%; height: 86px; flex-basis: auto; }
-            .kp-item:hover .kp-slideshow {
-                width: calc(100vw - 1.5rem);
-                height: min(68vh, 420px);
+            .kp-media:hover .kp-slideshow,
+            .kp-media:focus-within .kp-slideshow {
+                right: auto;
+                left: 0;
+                top: calc(100% + 0.35rem);
+                width: min(100%, 360px);
+                height: min(220px, 42vh);
+                transform: none;
             }
         }
     </style>
@@ -1875,18 +1919,33 @@
             container.style.maxHeight = Math.ceil(height) + 'px';
         }
 
+        function syncTimelineLineHeight() {
+            const timeline = document.querySelector('.timeline');
+            if (!timeline) return;
+            const dots = timeline.querySelectorAll('.timeline-dot');
+            if (!dots.length) return;
+            const lineTop = 25;
+            const lastDot = dots[dots.length - 1];
+            const timelineRect = timeline.getBoundingClientRect();
+            const lastRect = lastDot.getBoundingClientRect();
+            const lastCenter = lastRect.top - timelineRect.top + timeline.scrollTop + (lastRect.height / 2);
+            timeline.style.setProperty('--timeline-line-height', Math.max(40, Math.ceil(lastCenter - lineTop)) + 'px');
+        }
+
         function syncExperiencePanelHeight() {
             const wrapper = document.querySelector('.main-content-wrapper');
             const right = document.querySelector('.right-sidebar');
             const timeline = document.querySelector('.timeline');
             const repoPane = document.getElementById('github-repos-container');
             if (!wrapper || !right) return;
+            syncTimelineLineHeight();
             if (window.matchMedia('(max-width: 1200px)').matches) {
                 wrapper.style.removeProperty('--experience-panel-height');
                 if (timeline) {
                     timeline.style.removeProperty('height');
                     timeline.style.removeProperty('max-height');
                 }
+                syncTimelineLineHeight();
                 return;
             }
             wrapper.style.removeProperty('--experience-panel-height');
@@ -1901,6 +1960,7 @@
                     const alignedHeight = Math.max(220, Math.ceil(repoBottom - timelineTop));
                     timeline.style.height = alignedHeight + 'px';
                     timeline.style.maxHeight = alignedHeight + 'px';
+                    syncTimelineLineHeight();
                 });
             });
         }
@@ -2002,7 +2062,7 @@
         runWhenIdle(fetchGitHubData);
     });
     </script>
-<script src="research/research-data.js?v=20260714c"></script>
+<script src="research/research-data.js?v=20260714d"></script>
 <script>
   /* Key Projects (borrowed from the Research cards) + Publications */
   (function () {
@@ -2254,12 +2314,20 @@
     function renderProjects() {
       var list = document.getElementById('kp-list'); if (!list || !R) return;
       list.innerHTML = '';
-      R.topics.filter(function (t) { return current === 'All' || t.category === current; }).forEach(function (t) {
+      R.topics.filter(function (t) { return current === 'All' || t.category === current; }).forEach(function (t, index) {
         var a = document.createElement('a'); a.className = 'kp-item'; a.href = url(t.page);
         var body = document.createElement('div'); body.className = 'kp-body';
         var ti = document.createElement('div'); ti.className = 'kp-title'; ti.textContent = t.title;
+        var titleRow = document.createElement('div'); titleRow.className = 'kp-title-row';
+        titleRow.appendChild(ti);
+        if (index < 2) {
+          var badge = document.createElement('span');
+          badge.className = 'kp-new-badge';
+          badge.textContent = 'New';
+          titleRow.appendChild(badge);
+        }
         var bl = document.createElement('div'); bl.className = 'kp-blurb'; bl.textContent = t.blurb || '';
-        body.appendChild(ti); body.appendChild(bl); a.appendChild(body);
+        body.appendChild(titleRow); body.appendChild(bl); a.appendChild(body);
         var media = renderProjectMedia(t);
         a.appendChild(media);
         queryProjectPageImages(t, media);
