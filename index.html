@@ -1426,38 +1426,45 @@
         // --- D3.js Academic Journey Graph (Smaller) ---
         const miniGraphData = {
             nodes: [
-                { id: "winter0", name: "Pre-Start", type: "winter", size: 7, x: 70, y: 15 },
-                { id: "sem1", name: "Sem 1", type: "semester", size: 12, x: 120, y: 35 },
-                { id: "summer1", name: "Summer", type: "summer", size: 9, x: 175, y: 55 },
-                { id: "sem2", name: "Sem 2", type: "semester", size: 12, x: 120, y: 75 },
-                { id: "winter1", name: "Winter", type: "winter", size: 9, x: 70, y: 95 },
-                { id: "sem3", name: "Sem 3", type: "semester", size: 12, x: 120, y: 115 },
-                { id: "summer2", name: "Summer", type: "summer", size: 9, x: 175, y: 135 },
-                { id: "sem4", name: "Sem 4", type: "semester", size: 12, x: 120, y: 155 },
-                { id: "winter2", name: "Winter", type: "winter", size: 9, x: 70, y: 175 },
-                { id: "sem5", name: "Sem 5", type: "semester", size: 12, x: 120, y: 195 },
-                { id: "summer3", name: "Summer", type: "summer", size: 9, x: 175, y: 215 },
-                { id: "sem6", name: "Sem 6", type: "semester", size: 12, x: 120, y: 235 },
-                { id: "winter3", name: "Winter", type: "winter", size: 9, x: 70, y: 255 },
-                { id: "sem7", name: "Sem 7", type: "semester", size: 12, x: 120, y: 275 },
-                { id: "summer4", name: "Summer", type: "summer", size: 9, x: 175, y: 295 },
-                { id: "sem8", name: "Sem 8", type: "semester", size: 12, x: 120, y: 315 },
-                { id: "winter4", name: "Winter", type: "winter", size: 9, x: 70, y: 335 },
-                { id: "iitm_central", name: "IIT Madras", type: "iitm-central", size: 18, x: 270, y: 170 },
-                { id: "iitm_sem1", name: "IITM S1", type: "iitm-semester", size: 11, x: 230, y: 35 },
-                { id: "iitm_sem2", name: "IITM S2", type: "iitm-semester", size: 11, x: 310, y: 55 },
-                { id: "iitm_sem3", name: "IITM S3", type: "iitm-semester", size: 11, x: 230, y: 75 },
-                { id: "iitm_sem4", name: "IITM S4", type: "iitm-semester", size: 11, x: 310, y: 95 },
-                { id: "iitm_sem5", name: "IITM S5", type: "iitm-semester", size: 11, x: 230, y: 115 },
-                { id: "iitm_sem6", name: "IITM S6", type: "iitm-semester", size: 11, x: 310, y: 135 },
-                { id: "iitm_sem7", name: "IITM S7", type: "iitm-semester", size: 11, x: 230, y: 155 },
-                { id: "iitm_sem8", name: "IITM S8", type: "iitm-semester", size: 11, x: 310, y: 175 },
-                { id: "iitm_math", name: "Math", type: "iitm-subject", size: 9, x: 270, y: 220 },
-                { id: "iitm_cs", name: "CS/AI", type: "iitm-subject", size: 9, x: 230, y: 250 },
-                { id: "iitm_data", name: "Data Sci", type: "iitm-subject", size: 9, x: 310, y: 250 },
-                { id: "iitm_ml", name: "ML/DL", type: "iitm-subject", size: 9, x: 270, y: 280 }
+                { id: "winter0", name: "Pre", type: "winter", size: 5, x: 35, y: 18 },
+                { id: "sem1", name: "IISER S1", type: "semester", size: 9, x: 76, y: 34 },
+                { id: "summer1", name: "Summer", type: "summer", size: 7, x: 116, y: 52 },
+                { id: "sem2", name: "IISER S2", type: "semester", size: 9, x: 76, y: 70 },
+                { id: "winter1", name: "Winter", type: "winter", size: 7, x: 35, y: 88 },
+                { id: "sem3", name: "IISER S3", type: "semester", size: 9, x: 76, y: 106 },
+                { id: "summer2", name: "Summer", type: "summer", size: 7, x: 116, y: 124 },
+                { id: "sem4", name: "IISER S4", type: "semester", size: 9, x: 76, y: 142 },
+                { id: "winter2", name: "Winter", type: "winter", size: 7, x: 35, y: 160 },
+                { id: "sem5", name: "IISER S5", type: "semester", size: 9, x: 76, y: 178 },
+                { id: "summer3", name: "Summer", type: "summer", size: 7, x: 116, y: 196 },
+                { id: "sem6", name: "IISER S6", type: "semester", size: 9, x: 76, y: 214 },
+                { id: "winter3", name: "Winter", type: "winter", size: 7, x: 35, y: 232 },
+                { id: "sem7", name: "IISER S7", type: "semester", size: 9, x: 76, y: 250 },
+                { id: "summer4", name: "Summer", type: "summer", size: 7, x: 116, y: 268 },
+                { id: "sem8", name: "IISER S8", type: "semester", size: 9, x: 76, y: 286 },
+                { id: "winter4", name: "Winter", type: "winter", size: 7, x: 35, y: 304 },
+                { id: "iitm_central", name: "IITM", type: "iitm-central", size: 13, x: 220, y: 158 },
+                { id: "iitm_sem1", name: "IITM S1", type: "iitm-semester", size: 8, x: 190, y: 42 },
+                { id: "iitm_sem2", name: "IITM S2", type: "iitm-semester", size: 8, x: 250, y: 62 },
+                { id: "iitm_sem3", name: "IITM S3", type: "iitm-semester", size: 8, x: 190, y: 82 },
+                { id: "iitm_sem4", name: "IITM S4", type: "iitm-semester", size: 8, x: 250, y: 102 },
+                { id: "iitm_sem5", name: "IITM S5", type: "iitm-semester", size: 8, x: 190, y: 122 },
+                { id: "iitm_sem6", name: "IITM S6", type: "iitm-semester", size: 8, x: 250, y: 142 },
+                { id: "iitm_sem7", name: "IITM S7", type: "iitm-semester", size: 8, x: 190, y: 162 },
+                { id: "iitm_sem8", name: "IITM S8", type: "iitm-semester", size: 8, x: 250, y: 182 },
+                { id: "iitm_math", name: "Math", type: "iitm-subject", size: 7, x: 220, y: 222 },
+                { id: "iitm_cs", name: "CS/AI", type: "iitm-subject", size: 7, x: 188, y: 250 },
+                { id: "iitm_data", name: "Data", type: "iitm-subject", size: 7, x: 252, y: 250 },
+                { id: "iitm_ml", name: "ML/DL", type: "iitm-subject", size: 7, x: 220, y: 278 },
+                { id: "tifr_central", name: "TIFR", type: "tifr-central", size: 13, x: 350, y: 158 },
+                { id: "tifr_sem1", name: "TIFR S1", type: "tifr-semester", size: 8, x: 350, y: 44 },
+                { id: "tifr_sem2", name: "TIFR S2", type: "tifr-semester", size: 8, x: 350, y: 88 },
+                { id: "tifr_summer", name: "Summer", type: "tifr-summer", size: 7, x: 390, y: 116 },
+                { id: "tifr_sem3", name: "TIFR S3", type: "tifr-semester", size: 8, x: 350, y: 144 },
+                { id: "tifr_winter", name: "Winter", type: "tifr-winter", size: 7, x: 310, y: 172 },
+                { id: "tifr_sem4", name: "TIFR S4", type: "tifr-semester", size: 8, x: 350, y: 200 }
             ],
-            links: [ { source: "winter0", target: "sem1" }, { source: "sem1", target: "sem2" }, { source: "sem2", target: "sem3" }, { source: "sem3", target: "sem4" }, { source: "sem4", target: "sem5" }, { source: "sem5", target: "sem6" }, { source: "sem6", target: "sem7" }, { source: "sem7", target: "sem8" }, { source: "sem1", target: "summer1" }, { source: "summer1", target: "sem2" }, { source: "sem2", target: "winter1" }, { source: "winter1", target: "sem3" }, { source: "sem3", target: "summer2" }, { source: "summer2", target: "sem4" }, { source: "sem4", target: "winter2" }, { source: "winter2", target: "sem5" }, { source: "sem5", target: "summer3" }, { source: "summer3", target: "sem6" }, { source: "sem6", target: "winter3" }, { source: "winter3", target: "sem7" }, { source: "sem7", target: "summer4" }, { source: "summer4", target: "sem8" }, { source: "sem8", target: "winter4" }, { source: "iitm_central", target: "iitm_sem1" }, { source: "iitm_central", target: "iitm_sem2" }, { source: "iitm_central", target: "iitm_sem3" }, { source: "iitm_central", target: "iitm_sem4" }, { source: "iitm_central", target: "iitm_sem5" }, { source: "iitm_central", target: "iitm_sem6" }, { source: "iitm_central", target: "iitm_sem7" }, { source: "iitm_central", target: "iitm_sem8" }, { source: "iitm_central", target: "iitm_math" }, { source: "iitm_central", target: "iitm_cs" }, { source: "iitm_central", target: "iitm_data" }, { source: "iitm_central", target: "iitm_ml" }, { source: "iitm_sem1", target: "iitm_sem2" }, { source: "iitm_sem2", target: "iitm_sem3" }, { source: "iitm_sem3", target: "iitm_sem4" }, { source: "iitm_sem4", target: "iitm_sem5" }, { source: "iitm_sem5", target: "iitm_sem6" }, { source: "iitm_sem6", target: "iitm_sem7" }, { source: "iitm_sem7", target: "iitm_sem8" } ]
+            links: [ { source: "winter0", target: "sem1" }, { source: "sem1", target: "sem2" }, { source: "sem2", target: "sem3" }, { source: "sem3", target: "sem4" }, { source: "sem4", target: "sem5" }, { source: "sem5", target: "sem6" }, { source: "sem6", target: "sem7" }, { source: "sem7", target: "sem8" }, { source: "sem1", target: "summer1" }, { source: "summer1", target: "sem2" }, { source: "sem2", target: "winter1" }, { source: "winter1", target: "sem3" }, { source: "sem3", target: "summer2" }, { source: "summer2", target: "sem4" }, { source: "sem4", target: "winter2" }, { source: "winter2", target: "sem5" }, { source: "sem5", target: "summer3" }, { source: "summer3", target: "sem6" }, { source: "sem6", target: "winter3" }, { source: "winter3", target: "sem7" }, { source: "sem7", target: "summer4" }, { source: "summer4", target: "sem8" }, { source: "sem8", target: "winter4" }, { source: "iitm_central", target: "iitm_sem1" }, { source: "iitm_central", target: "iitm_sem2" }, { source: "iitm_central", target: "iitm_sem3" }, { source: "iitm_central", target: "iitm_sem4" }, { source: "iitm_central", target: "iitm_sem5" }, { source: "iitm_central", target: "iitm_sem6" }, { source: "iitm_central", target: "iitm_sem7" }, { source: "iitm_central", target: "iitm_sem8" }, { source: "iitm_central", target: "iitm_math" }, { source: "iitm_central", target: "iitm_cs" }, { source: "iitm_central", target: "iitm_data" }, { source: "iitm_central", target: "iitm_ml" }, { source: "iitm_sem1", target: "iitm_sem2" }, { source: "iitm_sem2", target: "iitm_sem3" }, { source: "iitm_sem3", target: "iitm_sem4" }, { source: "iitm_sem4", target: "iitm_sem5" }, { source: "iitm_sem5", target: "iitm_sem6" }, { source: "iitm_sem6", target: "iitm_sem7" }, { source: "iitm_sem7", target: "iitm_sem8" }, { source: "tifr_central", target: "tifr_sem1" }, { source: "tifr_central", target: "tifr_sem2" }, { source: "tifr_central", target: "tifr_sem3" }, { source: "tifr_central", target: "tifr_sem4" }, { source: "tifr_sem1", target: "tifr_sem2" }, { source: "tifr_sem2", target: "tifr_summer" }, { source: "tifr_summer", target: "tifr_sem3" }, { source: "tifr_sem3", target: "tifr_winter" }, { source: "tifr_winter", target: "tifr_sem4" }, { source: "tifr_central", target: "iitm_central" }, { source: "tifr_central", target: "sem8" } ]
         };
 
         const miniGraphEl = document.getElementById('miniGraph');
@@ -1467,8 +1474,8 @@
             const miniSvg = document.createElementNS(svgNS, 'svg');
             miniSvg.setAttribute('width', '100%');
             miniSvg.setAttribute('height', '100%');
-            miniSvg.setAttribute('viewBox', '0 0 380 350');
-            miniSvg.addEventListener('click', function () { window.location.href = 'vita.html'; });
+            miniSvg.setAttribute('viewBox', '0 0 430 320');
+            miniSvg.addEventListener('click', function () { window.location.href = 'teaching.html'; });
             miniGraphEl.appendChild(miniSvg);
 
             const linkLayer = document.createElementNS(svgNS, 'g');
@@ -1481,18 +1488,30 @@
 
             const nodeColor = function (d) {
                 if (d.type && d.type.startsWith('iitm')) return '#f39c12';
+                if (d.type && d.type.startsWith('tifr')) {
+                    if (d.type === 'tifr-summer') return '#f0b429';
+                    if (d.type === 'tifr-winter') return '#7cc0ff';
+                    return '#58a6ff';
+                }
                 if (d.type === 'semester') return '#4a90c2';
                 if (d.type === 'summer') return '#ff6b35';
                 if (d.type === 'winter') return '#58a6ff';
                 return '#8b949e';
             };
 
+            const linkColor = function (d) {
+                if ((d.source && d.source.startsWith('tifr')) || (d.target && d.target.startsWith('tifr'))) return '#487db3';
+                if ((d.source && d.source.startsWith('iitm')) || (d.target && d.target.startsWith('iitm'))) return '#6d5532';
+                return '#3c434d';
+            };
+
             miniGraphData.links.forEach(function (d) {
                 const source = nodeById[d.source] || {};
                 const target = nodeById[d.target] || {};
                 const line = document.createElementNS(svgNS, 'line');
-                line.setAttribute('stroke', '#3c434d');
-                line.setAttribute('stroke-width', '1.5');
+                line.setAttribute('stroke', linkColor(d));
+                line.setAttribute('stroke-width', (d.source === 'tifr_central' && (d.target === 'iitm_central' || d.target === 'sem8')) ? '1.2' : '1.35');
+                line.setAttribute('stroke-opacity', (d.source === 'tifr_central' && (d.target === 'iitm_central' || d.target === 'sem8')) ? '0.5' : '0.75');
                 line.setAttribute('x1', source.x || 0);
                 line.setAttribute('y1', source.y || 0);
                 line.setAttribute('x2', target.x || 0);
@@ -1530,7 +1549,7 @@
                     "mpp-summer": d => d.id === "summer3" || d.id === "winter4",
                     "sem8": d => d.id === "sem8",
                     "iitm-bs": d => d.type && d.type.startsWith("iitm"),
-                    "tifr-all": d => ["winter0", "winter1", "winter2", "winter3", "summer4"].includes(d.id)
+                    "tifr-all": d => d.type && d.type.startsWith("tifr")
                 };
                 if (highlightLogic[highlightType]) {
                     item.addEventListener('mouseenter', () => {

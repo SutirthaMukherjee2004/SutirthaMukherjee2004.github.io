@@ -341,6 +341,27 @@
         .node-grade-c { fill: #f6ad55; }
         .node-lab { fill: #a0e7e5; }
         .node-seminar { fill: #f0932b; }
+        .node-tifr { fill: #58a6ff; }
+        .node-tifr-core { fill: #7cc0ff; }
+        .node-tifr-lab { fill: #80e2d3; }
+        .node-tifr-elective { fill: #c084fc; }
+        .node-tifr-project { fill: #f0b429; }
+        .node-tifr-admin { fill: #94a3b8; }
+        .node-tifr-warning { fill: #fb7185; }
+        .node-tifr-terminal { fill: #38bdf8; }
+
+        .link-tifr {
+            stroke: #58a6ff;
+            stroke-opacity: 0.75;
+            stroke-width: 2.2px;
+        }
+
+        .link-tifr-admin {
+            stroke: #94a3b8;
+            stroke-opacity: 0.65;
+            stroke-width: 1.7px;
+            stroke-dasharray: 4,5;
+        }
 
         .graph-sidebar {
             position: absolute;
@@ -638,10 +659,10 @@
                         <button class="close-intro" onclick="hideIntro()" title="Close">×</button>
                         <h2> My Academic Journey</h2>
                         <p>
-                            Welcome to an interactive visualization of my academic path through <strong>IISER Mohali</strong> and <strong>IIT Madras BS in Data Science & AI</strong>.
+                            Welcome to an interactive visualization of my academic path through <strong>IISER Mohali</strong>, <strong>IIT Madras BS in Data Science & AI</strong>, and <strong>TIFR Hyderabad</strong>.
                         </p>
                         <p>
-                            This graph shows all the courses I've taken, connected by their relationships - from foundational sciences to advanced physics and data science.
+                            This graph shows coursework, programme structure, and the TIFR Hyderabad Integrated M.Sc.-Ph.D. Physics M.Sc. exit pathway, connected by their relationships.
                         </p>
                         <div class="instructions">
                              <strong>Tips:</strong> Hover over any node to see details • Drag nodes to reorganize • Scroll to zoom • Use controls on the right to filter
@@ -667,6 +688,8 @@
                             <div class="legend-item"><div class="legend-color" style="background: #48bb78;"></div><span>Biology</span></div>
                             <div class="legend-item"><div class="legend-color" style="background: #9f7aea;"></div><span>Mathematics</span></div>
                             <div class="legend-item"><div class="legend-color" style="background: #a0e7e5;"></div><span>Lab</span></div>
+                            <div class="legend-item"><div class="legend-color" style="background: #58a6ff;"></div><span>TIFR</span></div>
+                            <div class="legend-item"><div class="legend-color" style="background: #c084fc;"></div><span>TIFR Elective Pool</span></div>
                             <div class="legend-item"><div class="legend-color" style="background: #26a641;"></div><span>Semester Links</span></div>
                         </div>
                     </div>
@@ -717,6 +740,15 @@
             // --- CENTRAL NODES ---
             { id: "sutirtha", name: "Sutirtha Mukherjee (IISER)", type: "central", size: 25, cgpa: 9.3 },
             { id: "iitm_bs", name: "IITM BS in Data Science & AI", type: "central", size: 25 },
+            {
+                id: "tifr_hyd",
+                name: "TIFR Hyderabad",
+                fullName: "TIFR Hyderabad Integrated M.Sc.-Ph.D. Physics",
+                type: "tifr",
+                size: 25,
+                status: "M.Sc. exit path represented from the TIFR Hyderabad catalogue notes.",
+                note: "Exact elective requirement to be confirmed by the TIFR Hyderabad Physics Subject Board."
+            },
 
             // --- IISER MOHALI DATA ---
             { id: "sem1", name: "IISER Sem I", type: "semester", size: 18, sgpa: 9.1, credits: 19 },
@@ -856,6 +888,97 @@
     // Build all the links
     const astroMinorCourses = new Set(["PHY637", "PHY654V.2", "PHY669V2", "PHY635V2", "IDC402V2", "IDC621V2", "PHY638"]);
 
+    const tifrCoreNote = "Core summary: Integrated M.Sc.-Ph.D. core 28 credits; Ph.D.-level core included 28 credits; Research Methodology 4 credits; total 60 credits.";
+    const tifrElectiveNote = "Exact elective requirement to be confirmed by the TIFR Hyderabad Physics Subject Board.";
+
+    allGraphData.nodes.push(
+        { id: "tifr_sem1", name: "TIFR Sem I", type: "semester", size: 18, credits: 12, program: "TIFR Hyderabad Physics", description: "First-semester core: Numerical Methods and Algorithms in Chemical Physics, Mathematical Methods for Physicists, Classical Mechanics." },
+        { id: "tifr_sem2", name: "TIFR Sem II", type: "semester", size: 18, credits: 16, program: "TIFR Hyderabad Physics", description: "Second-semester core: Quantum Mechanics I, Classical Electrodynamics I, Experimental Methods." },
+        { id: "tifr_summer", name: "Summer Research", type: "tifr-project", size: 15, program: "TIFR Hyderabad Physics", note: "Research/project window connected to Departmental Project I where applicable; confirm requirement with the Subject Board." },
+        { id: "tifr_sem3", name: "TIFR Sem III", type: "semester", size: 18, credits: 12, program: "TIFR Hyderabad Physics", description: "Third-semester core: Numerical Methods II, Statistical Mechanics I, Research Methodology." },
+        { id: "tifr_winter", name: "Winter Research", type: "tifr-project", size: 15, program: "TIFR Hyderabad Physics", note: "Reading/project window connected to Departmental Project II where applicable; confirm requirement with the Subject Board." },
+        { id: "tifr_sem4", name: "TIFR Sem IV", type: "semester", size: 18, credits: 20, program: "TIFR Hyderabad Physics", description: "Fourth-semester core: Quantum Mechanics II / Advanced Quantum Mechanics, Classical Electrodynamics II, Advanced Experimental Methods." },
+        { id: "tifr_core_summary", name: "Core: 60 credits", type: "tifr-core", size: 17, credits: 60, program: "TIFR Hyderabad Physics", description: tifrCoreNote },
+        { id: "tifr_phy1027", name: "PHY-102.7", fullName: "PHY-102.7 Numerical Methods and Algorithms in Chemical Physics", type: "tifr-core", size: 10, credits: 4, semester: "tifr_sem1", program: "TIFR Hyderabad Physics" },
+        { id: "tifr_phy1037", name: "PHY-103.7", fullName: "PHY-103.7 Mathematical Methods for Physicists", type: "tifr-core", size: 10, credits: 4, semester: "tifr_sem1", program: "TIFR Hyderabad Physics" },
+        { id: "tifr_phy1047", name: "PHY-104.7", fullName: "PHY-104.7 Classical Mechanics", type: "tifr-core", size: 10, credits: 4, semester: "tifr_sem1", program: "TIFR Hyderabad Physics" },
+        { id: "tifr_phy1067", name: "PHY-106.7", fullName: "PHY-106.7 Quantum Mechanics I", type: "tifr-core", size: 10, credits: 4, semester: "tifr_sem2", program: "TIFR Hyderabad Physics" },
+        { id: "tifr_phy1077", name: "PHY-107.7", fullName: "PHY-107.7 Classical Electrodynamics I", type: "tifr-core", size: 10, credits: 4, semester: "tifr_sem2", program: "TIFR Hyderabad Physics" },
+        { id: "tifr_phy1087", name: "PHY-108.7", fullName: "PHY-108.7 Experimental Methods", type: "tifr-lab", size: 11, credits: 8, semester: "tifr_sem2", program: "TIFR Hyderabad Physics" },
+        { id: "tifr_phy2027", name: "PHY-202.7", fullName: "PHY-202.7 Numerical Methods II", type: "tifr-core", size: 10, credits: 4, semester: "tifr_sem3", program: "TIFR Hyderabad Physics" },
+        { id: "tifr_phy2057", name: "PHY-205.7", fullName: "PHY-205.7 Statistical Mechanics I", type: "tifr-core", size: 10, credits: 4, semester: "tifr_sem3", program: "TIFR Hyderabad Physics" },
+        { id: "tifr_phy2007", name: "PHY-200.7", fullName: "PHY-200.7 Research Methodology", type: "tifr-core", size: 10, credits: 4, semester: "tifr_sem3", program: "TIFR Hyderabad Physics", status: "Compulsory Course" },
+        { id: "tifr_phy2067", name: "PHY-206.7", fullName: "PHY-206.7 Quantum Mechanics II / Advanced Quantum Mechanics", type: "tifr-core", size: 10, credits: 4, semester: "tifr_sem4", program: "TIFR Hyderabad Physics" },
+        { id: "tifr_phy2077", name: "PHY-207.7", fullName: "PHY-207.7 Classical Electrodynamics II", type: "tifr-core", size: 10, credits: 4, semester: "tifr_sem4", program: "TIFR Hyderabad Physics" },
+        { id: "tifr_phy2087", name: "PHY-208.7", fullName: "PHY-208.7 Advanced Experimental Methods", type: "tifr-lab", size: 12, credits: 12, semester: "tifr_sem4", program: "TIFR Hyderabad Physics" },
+        { id: "tifr_dp1", name: "DP-I", fullName: "PHY-300.7 Departmental Project I", type: "tifr-project", size: 11, credits: 8, program: "TIFR Hyderabad Physics", note: "Departmental Project I is listed as 8 credits; whether it is compulsory for the M.Sc. exit path should be confirmed with the TIFR Hyderabad Physics Subject Board." },
+        { id: "tifr_dp2", name: "DP-II", fullName: "PHY-400.7 Departmental Project II", type: "tifr-project", size: 11, credits: 8, program: "TIFR Hyderabad Physics", note: "Departmental Project II is listed as 8 credits; whether it is compulsory for the M.Sc. exit path should be confirmed with the TIFR Hyderabad Physics Subject Board." },
+        { id: "tifr_reading_courses", name: "Reading Courses", fullName: "PHY-399.7 and PHY-499.7 Reading Courses", type: "tifr-project", size: 11, program: "TIFR Hyderabad Physics", note: "Reading courses are optional or requirement-dependent." },
+        { id: "tifr_elective_board", name: "Elective Check", type: "tifr-warning", size: 14, program: "TIFR Hyderabad Physics", note: tifrElectiveNote },
+        { id: "tifr_elec_condensed", name: "Condensed Matter", type: "tifr-elective", size: 10, program: "TIFR Hyderabad Physics", codes: "PHY-302.7, PHY-303.7, PHY-313.7, PHY-417.7, PHY-419.7, PHY-429.7", note: tifrElectiveNote },
+        { id: "tifr_elec_soft_bio", name: "Soft/Bio Physics", type: "tifr-elective", size: 10, program: "TIFR Hyderabad Physics", codes: "PHY-225.7, PHY-325.7, PHY-405.7, PHY-428.7", note: tifrElectiveNote },
+        { id: "tifr_elec_stat", name: "Stat/Noneq", type: "tifr-elective", size: 10, program: "TIFR Hyderabad Physics", codes: "PHY-403.7, PHY-404.7, PHY-418.7, PHY-424.7 (2 credits), PHY-425.7, PHY-426.7", note: tifrElectiveNote },
+        { id: "tifr_elec_optics", name: "Optics/Atomic", type: "tifr-elective", size: 10, program: "TIFR Hyderabad Physics", codes: "PHY-301.7, PHY-304.7, PHY-305.7, PHY-410.7, PHY-427.7", note: tifrElectiveNote },
+        { id: "tifr_elec_mathcomp", name: "Math/Comp/Dyn", type: "tifr-elective", size: 10, program: "TIFR Hyderabad Physics", codes: "PHY-401.7, PHY-402.7, PHY-406.7, PHY-407.7, PHY-409.7, PHY-415.7, PHY-422.7", note: tifrElectiveNote },
+        { id: "tifr_elec_qft", name: "Field Theory", type: "tifr-elective", size: 10, program: "TIFR Hyderabad Physics", codes: "PHY-408.7", note: tifrElectiveNote },
+        { id: "tifr_elec_interdisciplinary", name: "Interdisciplinary", type: "tifr-elective", size: 10, program: "TIFR Hyderabad Physics", codes: "CHM-222.7, BIO-205.7, BIO-203.7, CHM-113.7, CHM-215.7, CHM-200.7, CHM-210.7, CHM-220.7, CHM-213.7/BIO-202.7, CHM-217.7, CHM-212.7/BIO-101.7", note: tifrElectiveNote },
+        { id: "tifr_exit_eligibility", name: "Eligibility Check", type: "tifr-admin", size: 11, program: "TIFR Hyderabad Physics", description: "M.Sc. eligibility checkpoint before declaring the exit option." },
+        { id: "tifr_exit_declare", name: "Declare M.Sc. Exit", type: "tifr-admin", size: 11, program: "TIFR Hyderabad Physics", description: "Declare the M.Sc. exit option through the required academic-administrative process." },
+        { id: "tifr_exit_datanet", name: "Datanet 2", type: "tifr-admin", size: 11, program: "TIFR Hyderabad Physics", description: "Apply for the M.Sc. degree through Datanet 2 after completing the required academic record." },
+        { id: "tifr_exit_project", name: "M.Sc. Research Project", type: "tifr-project", size: 13, program: "TIFR Hyderabad Physics", description: "M.Sc. Research Project for the exit pathway. This page intentionally uses the catalogue wording and does not relabel it." },
+        { id: "tifr_exit_report", name: "Project Report", type: "tifr-admin", size: 10, program: "TIFR Hyderabad Physics", description: "Project report submission for the M.Sc. Research Project." },
+        { id: "tifr_exit_oral", name: "Oral Evaluation", type: "tifr-admin", size: 10, program: "TIFR Hyderabad Physics", description: "Oral presentation and M.Sc. Committee evaluation." },
+        { id: "tifr_exit_records", name: "Academic Record", type: "tifr-admin", size: 10, program: "TIFR Hyderabad Physics", description: "Complete academic record, final transcript, and supervisor documents." },
+        { id: "tifr_exit_warning", name: "Fellowship Check", type: "tifr-warning", size: 11, program: "TIFR Hyderabad Physics", warning: "Fellowship recovery or repayment implications should be checked with TIFR administration before confirming an exit." },
+        { id: "tifr_exit_approval", name: "Admin Approval", type: "tifr-admin", size: 10, program: "TIFR Hyderabad Physics", description: "Academic and administrative approval for the M.Sc. exit application." },
+        { id: "tifr_exit_provisional", name: "Provisional Certificate", type: "tifr-admin", size: 10, program: "TIFR Hyderabad Physics", description: "Provisional certificate after approval." },
+        { id: "tifr_exit_final", name: "Final Certificate", type: "tifr-admin", size: 10, program: "TIFR Hyderabad Physics", description: "Final certificate issued after completion of the approval process." },
+        { id: "tifr_exit_awarded", name: "M.Sc. Degree Awarded", fullName: "M.Sc. DEGREE AWARDED - Exit from the TIFR Integrated M.Sc.-Ph.D. Physics Programme", type: "tifr-terminal", size: 14, program: "TIFR Hyderabad Physics", description: "Terminal node for the M.Sc. exit path." }
+    );
+
+    allGraphData.links.push(
+        { source: "tifr_hyd", target: "sutirtha", strength: 0.18, color: "tifr", distance: 720 },
+        { source: "tifr_hyd", target: "iitm_bs", strength: 0.16, color: "tifr", distance: 760 },
+        { source: "tifr_hyd", target: "tifr_core_summary", strength: 0.8, color: "tifr", distance: 150 },
+        { source: "tifr_hyd", target: "tifr_sem1", strength: 0.9, color: "tifr", distance: 130 },
+        { source: "tifr_sem1", target: "tifr_sem2", strength: 0.65, semesterLink: true, distance: 120 },
+        { source: "tifr_sem2", target: "tifr_summer", strength: 0.55, color: "tifrAdmin", distance: 115 },
+        { source: "tifr_summer", target: "tifr_sem3", strength: 0.55, color: "tifrAdmin", distance: 115 },
+        { source: "tifr_sem3", target: "tifr_winter", strength: 0.55, color: "tifrAdmin", distance: 115 },
+        { source: "tifr_winter", target: "tifr_sem4", strength: 0.55, color: "tifrAdmin", distance: 115 },
+        { source: "tifr_sem4", target: "tifr_elective_board", strength: 0.5, color: "tifr", distance: 145 },
+        { source: "tifr_summer", target: "tifr_dp1", strength: 0.5, color: "tifrAdmin", distance: 85 },
+        { source: "tifr_winter", target: "tifr_dp2", strength: 0.5, color: "tifrAdmin", distance: 85 },
+        { source: "tifr_winter", target: "tifr_reading_courses", strength: 0.4, color: "tifrAdmin", distance: 100 }
+    );
+
+    ["tifr_elec_condensed", "tifr_elec_soft_bio", "tifr_elec_stat", "tifr_elec_optics", "tifr_elec_mathcomp", "tifr_elec_qft", "tifr_elec_interdisciplinary"].forEach(id => {
+        allGraphData.links.push({ source: "tifr_elective_board", target: id, strength: 0.45, color: "tifr", distance: 105 });
+    });
+
+    [
+        "tifr_exit_eligibility",
+        "tifr_exit_declare",
+        "tifr_exit_datanet",
+        "tifr_exit_project",
+        "tifr_exit_report",
+        "tifr_exit_oral",
+        "tifr_exit_records",
+        "tifr_exit_warning",
+        "tifr_exit_approval",
+        "tifr_exit_provisional",
+        "tifr_exit_final",
+        "tifr_exit_awarded"
+    ].forEach((id, index, path) => {
+        allGraphData.links.push({
+            source: index === 0 ? "tifr_sem4" : path[index - 1],
+            target: id,
+            strength: 0.45,
+            color: "tifrAdmin",
+            distance: 95
+        });
+    });
+
     // Main connection between IISER and IITM with green color and longer distance
     allGraphData.links.push(
         { source: "sutirtha", target: "iitm_bs", strength: 0.3, color: "green", distance: 400 }
@@ -939,6 +1062,9 @@
             if (node.grade) allGraphData.links.push({ source: node.id, target: `grade_${node.grade}`, strength: 0.2 });
         } else if (node.semester && typeof node.semester === 'string') {
             allGraphData.links.push({ source: node.semester, target: node.id, strength: 1 });
+            if (node.id.startsWith("tifr_phy")) {
+                allGraphData.links.push({ source: node.id, target: "tifr_core_summary", strength: 0.35, color: "tifr", distance: 90 });
+            }
         }
     });
 
@@ -988,25 +1114,35 @@
 
     let link = g.append("g").selectAll("line");
     let node = g.append("g").selectAll("g");
+    let linkDistanceScale = 1;
+    const isTifrNode = d => d && typeof d.id === "string" && (d.id === "tifr_hyd" || d.id.startsWith("tifr_"));
 
     const simulation = d3.forceSimulation()
         .force("link", d3.forceLink()
             .id(d => d.id)
-            .distance(d => d.distance || 200)
+            .distance(d => (d.distance || 200) * linkDistanceScale)
             .strength(d => d.strength || 0.1))
         .force("charge", d3.forceManyBody().strength(-400))
         .force("collision", d3.forceCollide().radius(d => d.size + 8))
         .force("center", d3.forceCenter(width / 2, height / 2))
         .force("x", d3.forceX(d => {
             const sidebarWidth = 220; // Account for right sidebar
-            const availableWidth = width - sidebarWidth;
+            const availableWidth = Math.max(320, width - sidebarWidth);
+            if (isTifrNode(d))
+                return availableWidth * 0.9;
             if (d.id === 'sutirtha' || (d.id.startsWith('sem') && !d.id.startsWith('iitm')))
                 return availableWidth * 0.3;
             else if (d.id === 'iitm_bs' || d.id.startsWith('iitm'))
                 return availableWidth * 0.65;
             return availableWidth * 0.5;
-        }).strength(0.1))
-        .force("y", d3.forceY(height / 2).strength(0.05));
+        }).strength(d => isTifrNode(d) ? 0.18 : 0.1))
+        .force("y", d3.forceY(d => {
+            if (!isTifrNode(d)) return height / 2;
+            if (["tifr-admin", "tifr-terminal", "tifr-warning"].includes(d.type)) return height * 0.72;
+            if (d.type === "tifr-elective" || d.id === "tifr_elective_board") return height * 0.48;
+            if (d.type === "semester" || d.type === "tifr-core" || d.type === "tifr-lab") return height * 0.24;
+            return height * 0.38;
+        }).strength(d => isTifrNode(d) ? 0.1 : 0.05));
 
     function updateGraph() {
         const showSemesters = document.getElementById("toggleSemesters").checked;
@@ -1015,10 +1151,11 @@
         const showLabs = document.getElementById("toggleLabs").checked;
 
         const filteredNodes = allGraphData.nodes.filter(d => {
+            const isTifrPathNode = ["tifr", "tifr-admin", "tifr-project", "tifr-warning", "tifr-terminal"].includes(d.type) || d.id === "tifr_core_summary";
             if (!showSemesters && d.type === 'semester') return false;
-            if (!showCourses && !d.type.startsWith('grade-') && d.type !== 'semester' && d.type !== 'central' && !d.id.endsWith('_dept') && !d.id.endsWith('_hub') && !d.id.includes('physics_')) return false;
+            if (!showCourses && !d.type.startsWith('grade-') && d.type !== 'semester' && d.type !== 'central' && !isTifrPathNode && !d.id.endsWith('_dept') && !d.id.endsWith('_hub') && !d.id.includes('physics_')) return false;
             if (!showGrades && d.type.startsWith('grade-')) return false;
-            if (!showLabs && d.type === 'lab') return false;
+            if (!showLabs && (d.type === 'lab' || d.type === 'tifr-lab')) return false;
             return true;
         });
 
@@ -1047,11 +1184,15 @@
             enter => enter.append("line")
                 .attr("class", d => {
                     if (d.color === "green") return "link-green";
+                    if (d.color === "tifr") return "link-tifr";
+                    if (d.color === "tifrAdmin") return "link-tifr-admin";
                     if (d.semesterLink) return "link-semester";
                     return "link";
                 })
                 .attr("stroke", d => {
                     if (d.color === "green") return "#48bb78";
+                    if (d.color === "tifr") return "#58a6ff";
+                    if (d.color === "tifrAdmin") return "#94a3b8";
                     if (d.semesterLink) return "#26a641";
                     return "#484f58";
                 }),
@@ -1081,11 +1222,21 @@
 
             infoTitle.textContent = d.fullName || d.name;
             let html = "";
+            if (d.program) html += `<p><strong>Program:</strong> ${d.program}</p>`;
             if (d.cgpa) html += `<p><strong>Final CGPA:</strong> ${d.cgpa}</p>`;
             if (d.sgpa) html += `<p><strong>SGPA:</strong> ${d.sgpa}</p>`;
             if (d.credits) html += `<p><strong>Credits:</strong> ${d.credits}</p>`;
             if (d.grade) html += `<p><strong>Grade:</strong> ${d.grade}</p>`;
             if (typeof d.semester === 'number') html += `<p><strong>Semester:</strong> ${d.semester}</p>`;
+            if (typeof d.semester === 'string') {
+                const semesterNode = allGraphData.nodes.find(n => n.id === d.semester);
+                html += `<p><strong>Semester:</strong> ${semesterNode ? semesterNode.name : d.semester}</p>`;
+            }
+            if (d.status) html += `<p><strong>Status:</strong> ${d.status}</p>`;
+            if (d.codes) html += `<p><strong>Codes:</strong> ${d.codes}</p>`;
+            if (d.description) html += `<p>${d.description}</p>`;
+            if (d.note) html += `<p><strong>Note:</strong> ${d.note}</p>`;
+            if (d.warning) html += `<p><strong>Warning:</strong> ${d.warning}</p>`;
             infoContent.innerHTML = html;
             infoPanel.style.display = "block";
         });
@@ -1177,7 +1328,8 @@
 
     // Control listeners
     document.getElementById("linkDistance").addEventListener("input", e => {
-        simulation.force("link").distance(+e.target.value);
+        linkDistanceScale = +e.target.value / 200;
+        simulation.force("link").distance(d => (d.distance || 200) * linkDistanceScale);
         simulation.alpha(0.3).restart();
     });
 
