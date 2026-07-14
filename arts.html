@@ -406,56 +406,39 @@
                     <p data-ed="art-1" class="subtitle">A collection of my creative works</p>
                 </header>
 
-                <div class="upload-section">
-                    <button class="upload-btn" onclick="alert('Add your artwork upload functionality here!')">+ Add New Artwork</button>
-                </div>
-
                 <div class="gallery" id="gallery">
                     <div class="artwork-card" onclick="openModal(this)">
-                        <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=800&h=600&fit=crop" alt="Artwork 1" class="artwork-image">
+                        <img src="images/gallery/display/astronomical-society-meet-2026.webp" data-full="images/gallery/full/astronomical-society-meet-2026.jpg" alt="Astronomical Society Meet 2026" class="artwork-image" loading="lazy" decoding="async">
                         <div class="artwork-info">
-                            <h3 data-ed="art-2" class="artwork-title">Artwork Title 1</h3>
-                            <p data-ed="art-3" class="artwork-description">Description of your artwork goes here. Add details about the medium, inspiration, or technique.</p>
+                            <h3 data-ed="art-2" class="artwork-title">Astronomical Society Meet 2026</h3>
                         </div>
                     </div>
 
                     <div class="artwork-card" onclick="openModal(this)">
-                        <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=800&h=600&fit=crop" alt="Artwork 2" class="artwork-image">
+                        <img src="images/gallery/display/ms21-farewell.webp" data-full="images/gallery/full/ms21-farewell.jfif" alt="MS21 Farewell" class="artwork-image" loading="lazy" decoding="async">
                         <div class="artwork-info">
-                            <h3 data-ed="art-4" class="artwork-title">Artwork Title 2</h3>
-                            <p data-ed="art-5" class="artwork-description">Description of your artwork goes here. Add details about the medium, inspiration, or technique.</p>
+                            <h3 data-ed="art-4" class="artwork-title">MS21 Farewell</h3>
                         </div>
                     </div>
 
                     <div class="artwork-card" onclick="openModal(this)">
-                        <img src="https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?w=800&h=600&fit=crop" alt="Artwork 3" class="artwork-image">
+                        <img src="images/gallery/display/rkmvvm-malda.webp" data-full="images/gallery/full/rkmvvm-malda.webp" alt="Ramkrishna Mission Vivekananda Vidyamandir (RKMVVM), Malda, West Bengal" class="artwork-image" loading="lazy" decoding="async">
                         <div class="artwork-info">
-                            <h3 data-ed="art-6" class="artwork-title">Artwork Title 3</h3>
-                            <p data-ed="art-7" class="artwork-description">Description of your artwork goes here. Add details about the medium, inspiration, or technique.</p>
+                            <h3 data-ed="art-6" class="artwork-title">Ramkrishna Mission Vivekananda Vidyamandir (RKMVVM), Malda, West Bengal</h3>
                         </div>
                     </div>
 
                     <div class="artwork-card" onclick="openModal(this)">
-                        <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=800&h=600&fit=crop" alt="Artwork 4" class="artwork-image">
+                        <img src="images/gallery/display/iiser-mohali-bsms-2021.webp" data-full="images/gallery/full/iiser-mohali-bsms-2021.webp" alt="IISER Mohali BS-MS Batch 2021" class="artwork-image" loading="lazy" decoding="async">
                         <div class="artwork-info">
-                            <h3 data-ed="art-8" class="artwork-title">Artwork Title 4</h3>
-                            <p data-ed="art-9" class="artwork-description">Description of your artwork goes here. Add details about the medium, inspiration, or technique.</p>
+                            <h3 data-ed="art-8" class="artwork-title">IISER Mohali BS-MS Batch 2021</h3>
                         </div>
                     </div>
 
                     <div class="artwork-card" onclick="openModal(this)">
-                        <img src="https://images.unsplash.com/photo-1549887534-1541e9326642?w=800&h=600&fit=crop" alt="Artwork 5" class="artwork-image">
+                        <img src="images/gallery/display/tifr-dtp-picnic.webp" data-full="images/gallery/full/tifr-dtp-picnic.jpeg" alt="TIFR Mumbai DTP Picnic" class="artwork-image" loading="lazy" decoding="async">
                         <div class="artwork-info">
-                            <h3 data-ed="art-10" class="artwork-title">Artwork Title 5</h3>
-                            <p data-ed="art-11" class="artwork-description">Description of your artwork goes here. Add details about the medium, inspiration, or technique.</p>
-                        </div>
-                    </div>
-
-                    <div class="artwork-card" onclick="openModal(this)">
-                        <img src="https://images.unsplash.com/photo-1515405295579-ba7b45403062?w=800&h=600&fit=crop" alt="Artwork 6" class="artwork-image">
-                        <div class="artwork-info">
-                            <h3 data-ed="art-12" class="artwork-title">Artwork Title 6</h3>
-                            <p data-ed="art-13" class="artwork-description">Description of your artwork goes here. Add details about the medium, inspiration, or technique.</p>
+                            <h3 data-ed="art-10" class="artwork-title">TIFR Mumbai DTP Picnic</h3>
                         </div>
                     </div>
                 </div>
@@ -480,7 +463,8 @@
             const modal = document.getElementById('modal');
             const modalImg = document.getElementById('modalImage');
 
-            modalImg.src = img.src;
+            modalImg.src = img.getAttribute('data-full') || img.src;
+            modalImg.alt = img.alt;
             modal.classList.add('active');
         }
 
