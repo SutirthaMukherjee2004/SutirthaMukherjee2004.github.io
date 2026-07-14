@@ -64,6 +64,19 @@
   };
 
   var paperDetails = {
+    "madmax-axion": {
+      blurb: "MADMAX signal-processing diagnostics for axion-search false-positive and false-negative tests.",
+      thumb: "paper-figures-web/madmax-paper-fig1-kernels-frequency.webp",
+      summary: "<p>This project studies signal extraction and false-positive / false-negative behaviour in MADMAX-style dielectric-haloscope spectra. The gallery collects kernel-frequency diagnostics, per-step p-value behaviour, and four MADMAX run panels used to compare analysis choices.</p>",
+      plots: [
+        { src: "paper-figures-web/madmax-paper-fig1-kernels-frequency.webp", full: "paper-figures-full/madmax-paper-fig1-kernels-frequency.png", caption: "" },
+        { src: "paper-figures-web/madmax-bn06-qiid-pvalues.webp", full: "paper-figures-full/madmax-bn06-qiid-pvalues.png", caption: "" },
+        { src: "paper-figures-web/madmax-1.webp", full: "paper-figures-full/madmax-1.png", caption: "" },
+        { src: "paper-figures-web/madmax-2.webp", full: "paper-figures-full/madmax-2.png", caption: "" },
+        { src: "paper-figures-web/madmax-3.webp", full: "paper-figures-full/madmax-3.png", caption: "" },
+        { src: "paper-figures-web/madmax-4.webp", full: "paper-figures-full/madmax-4.png", caption: "" },
+      ]
+    },
     "cosmo-survey": {
       blurb: "Unified Milky Way phase-space catalogue from Gaia DR3 and large spectroscopic surveys.",
       thumb: "paper-figures-web/data-fig1-sky-grid.webp",
@@ -190,6 +203,10 @@
       .replace(/^fig[0-9]+[a-z]?\b[-_]?/i, '')
       .replace(/^current[-_]?fig[0-9]+[a-z]?\b[-_]?/i, '')
       .replace(/[-_]+/g, ' ')
+      .replace(/^madmax\s+/i, '')
+      .replace(/\bbn06\b/gi, 'BN06')
+      .replace(/\bqiid\b/gi, 'QIID')
+      .replace(/\bpvalues\b/gi, 'p values')
       .replace(/\brhodm\b/gi, 'rho DM')
       .replace(/\brs\b/gi, 'scale radius')
       .replace(/\bvdf\b/gi, 'velocity distribution')
@@ -208,6 +225,7 @@
       .replace(/\bsigma\b/gi, 'sigma')
       .replace(/\s+/g, ' ')
       .trim();
+    label = label.replace(/^([1-4])$/, 'run panel $1');
     return label || 'research figure';
   }
 
