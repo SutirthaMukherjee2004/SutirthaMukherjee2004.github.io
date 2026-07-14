@@ -188,6 +188,9 @@
             flex-wrap: wrap;
             gap: 2rem;
             align-items: flex-start;
+            width: min(100%, 1480px);
+            margin-left: auto;
+            margin-right: auto;
             margin-bottom: 3rem;
             opacity: 0;
             animation: fadeIn 1.5s ease forwards;
@@ -200,6 +203,7 @@
         .profile-and-intro-container > .content {
             flex: 1;
             min-width: 350px;
+            max-width: 930px;
         }
 
         .content p {
@@ -207,6 +211,15 @@
             line-height: 1.5;
             color: #e6edf3;
             margin-bottom: 0.8rem;
+        }
+
+        .intro-hi {
+            display: inline-block;
+            font-size: 1.45em;
+            line-height: 0.9;
+            font-weight: 850;
+            color: #f0f6fc;
+            margin-right: 0.16rem;
         }
 
         .content p.bio-collapsible {
@@ -1028,8 +1041,10 @@
         .pub-btns { margin-top: 0.45rem; display: flex; flex-wrap: wrap; gap: 0.35rem; }
         .pub-btn { font-size: 0.72em; padding: 0.15rem 0.6rem; border: 1px solid #30363d; color: #58a6ff; text-decoration: none; }
         .pub-btn:hover { background: #1f6feb; color: #fff; border-color: #1f6feb; }
-        .pub-btn.pdf { color: #d8dee9; border-color: rgba(216, 222, 233, 0.3); }
+        .pub-btn.pdf { width: 1.7rem; height: 1.7rem; padding: 0; display: inline-flex; align-items: center; justify-content: center; color: #d8dee9; border-color: rgba(216, 222, 233, 0.3); }
+        .pub-btn.pdf svg { width: 1rem; height: 1rem; display: block; }
         .pub-btn.unavailable { color: #586074; border-color: rgba(88, 96, 116, 0.45); pointer-events: none; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
         .pub-histo {
             --pub-group-width: 18px;
             --pub-group-half: 9px;
@@ -1187,7 +1202,7 @@
             .kp-thumb { width: 100%; height: 86px; }
         }
     </style>
-    <link rel="stylesheet" href="nav.css?v=20260714i">
+    <link rel="stylesheet" href="nav.css?v=20260714j">
 </head>
 <body>
     <div class="main-container">
@@ -1242,7 +1257,7 @@
   </div>
   <a href="vita.html">About Me</a>
   <a href="whatsnew.html">What&#x27;s New</a>
-  <a href="arts.html">Arts and gallery</a>
+  <a href="arts.html">Arts/Gallery</a>
   <a href="philosophy.html">Philosophy</a>
   <a href="research/research_download.html">Downloads</a>
 </nav>
@@ -1267,11 +1282,9 @@
                     </div>
                 </div>
                 <div class="content">
-                    <p data-ed="home-bio-1">Hi! I am a passionate master&rsquo;s student in physics with research interests in gravitation and cosmology, theoretical astrophysics, and dark matter phenomenology. My broader motivation is to understand the nature and history of the universe, from the smallest to the largest scales.</p>
-                    <p data-ed="home-bio-2">My current research is to construct the local dark matter phase space from a data-driven Bayesian inference of baryonic matter, the direct and indirect detection of &ldquo;dark matter,&rdquo; and its associated near-field cosmological implications.</p>
+                    <p data-ed="home-bio-1"><span class="intro-hi">Hi!</span> I am a passionate master&rsquo;s student in physics with research interests in gravitation and cosmology, theoretical astrophysics, and dark matter phenomenology. My broader motivation is to understand the nature and history of the universe, from the smallest to the largest scales. My current research is to construct the local dark matter phase space from a data-driven Bayesian inference of baryonic matter, the direct and indirect detection of &ldquo;dark matter,&rdquo; and its associated near-field cosmological implications.</p>
                     <p data-ed="home-bio-3" class="bio-collapsible" tabindex="0" role="button" aria-expanded="false" aria-label="Expand academic background paragraph">My academic background helped me to gain a deeper understanding of both theoretical physics and data science and computational methods. I have explored a variety of subfields on problems related to observational cosmology, large-scale structure formation, galaxy evolution, radio astronomy, and astrophysical data analysis. I use Bayesian statistical inference, machine learning, and numerical methods to study large-scale datasets. I am also interested in understanding conformal field theory (CFT) and AdS<sub>d+1</sub>/CFT<sub>d</sub> duality and aspects of perturbative string theory.</p>
-                    <p data-ed="home-bio-4">I am open to collaborating with researchers and academic groups on projects of mutual interest. Please feel free to reach out to discuss potential problem statements.</p>
-                    <p data-ed="home-bio-5">Outside of academics, I pursue the arts and music as my hobbies; I hold a diploma in fine arts, play the violin, and am currently learning the flute.</p>
+                    <p data-ed="home-bio-4">I am open to collaborating with researchers and academic groups on projects of mutual interest. Please feel free to reach out to discuss potential problem statements. Outside of academics, I pursue the arts and music as my hobbies; I hold a diploma in fine arts, play the violin, and am currently learning the flute.</p>
 
                     <div class="info-blocks">
                         <div class="info-col">
@@ -1303,7 +1316,7 @@
                         <a href="teaching.html" class="feature-card"><img src="images/teaching.png" alt="Academics" loading="lazy" decoding="async"><h3>Academics</h3></a>
                         <a href="vita.html" class="feature-card"><img src="images/about_me.png" alt="About Me" loading="lazy" decoding="async"><h3>About Me</h3></a>
                         <a href="whatsnew.html" class="feature-card"><img src="images/whatsnew.png" alt="What's New" loading="lazy" decoding="async"><h3>What's New</h3></a>
-                        <a href="arts.html" class="feature-card"><img src="images/Culture.png" alt="Arts and gallery" loading="lazy" decoding="async"><h3>Arts and gallery</h3></a>
+                        <a href="arts.html" class="feature-card"><img src="images/Culture.png" alt="Arts/Gallery" loading="lazy" decoding="async"><h3>Arts/Gallery</h3></a>
                         <a href="philosophy.html" class="feature-card"><img src="images/philosophy.png" alt="Philosophy" loading="lazy" decoding="async"><h3>Philosophy</h3></a>
                         <a href="research/research_download.html" class="feature-card"><img src="images/downloads.png" alt="Downloads" loading="lazy" decoding="async"><h3>Downloads</h3></a>
                     </div>
@@ -2064,11 +2077,12 @@
     function renderPubs() {
       var list = document.getElementById('pub-list'); if (!list) return;
       list.innerHTML = '';
+      var pdfIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h8l4 4v16H6z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M14 2v5h5" fill="none" stroke="currentColor" stroke-width="1.7"/><text x="7.1" y="17" font-size="5.7" font-weight="800" fill="currentColor">PDF</text></svg><span class="sr-only">PDF</span>';
       PUBS.forEach(function (p) {
         var d = document.createElement('div'); d.className = 'pub-item';
         var titleHref = p.ads || p.pdf || '#';
         var buttons = (p.cite ? '<a class="pub-btn" href="' + p.cite + '">Cite</a>' : '') +
-          (p.pdf ? '<a class="pub-btn pdf" href="' + p.pdf + '" target="_blank">PDF</a>' : '<span class="pub-btn pdf unavailable">PDF</span>') +
+          (p.pdf ? '<a class="pub-btn pdf" href="' + p.pdf + '" target="_blank" aria-label="PDF">' + pdfIcon + '</a>' : '<span class="pub-btn pdf unavailable" aria-label="PDF unavailable">' + pdfIcon.replace('PDF</span>', 'PDF unavailable</span>') + '</span>') +
           (p.doi ? '<a class="pub-btn" href="' + p.doi + '" target="_blank">DOI</a>' : '') +
           (p.ads ? '<a class="pub-btn" href="' + p.ads + '" target="_blank">INSPIRE</a>' : '');
         var venue = p.venue ? '<span class="pub-venue">' + p.venue + '.</span> ' : '';
@@ -2108,7 +2122,7 @@
     else document.addEventListener('DOMContentLoaded', initBioCollapse);
   })();
 </script>
-<script src="site-nav.js?v=20260714i"></script>
+<script src="site-nav.js?v=20260714j"></script>
 <script src="tools/smukh-editor.js"></script>
 </body>
 </html>

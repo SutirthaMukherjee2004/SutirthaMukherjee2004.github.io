@@ -26,11 +26,9 @@
   var TRANSLATIONS = {
     hi: {
       html: {
-        'home-bio-1': 'नमस्ते! मैं भौतिकी का एक उत्साही मास्टर छात्र हूँ, जिसकी रुचि गुरुत्वाकर्षण और ब्रह्माण्ड विज्ञान, सैद्धांतिक खगोलभौतिकी और डार्क मैटर फिनोमेनोलॉजी में है। मेरी व्यापक प्रेरणा ब्रह्माण्ड की प्रकृति और इतिहास को सबसे छोटे से सबसे बड़े पैमानों तक समझना है।',
-        'home-bio-2': 'मेरा वर्तमान शोध बैरियोनिक पदार्थ के डेटा-आधारित Bayesian inference से स्थानीय dark matter phase space बनाना, dark matter के प्रत्यक्ष और अप्रत्यक्ष detection, और उनके near-field cosmological implications पर केंद्रित है।',
+        'home-bio-1': '<span class="intro-hi">नमस्ते!</span> मैं भौतिकी का एक उत्साही मास्टर छात्र हूँ, जिसकी रुचि गुरुत्वाकर्षण और ब्रह्माण्ड विज्ञान, सैद्धांतिक खगोलभौतिकी और डार्क मैटर फिनोमेनोलॉजी में है। मेरी व्यापक प्रेरणा ब्रह्माण्ड की प्रकृति और इतिहास को सबसे छोटे से सबसे बड़े पैमानों तक समझना है। मेरा वर्तमान शोध बैरियोनिक पदार्थ के डेटा-आधारित Bayesian inference से स्थानीय dark matter phase space बनाना, dark matter के प्रत्यक्ष और अप्रत्यक्ष detection, और उनके near-field cosmological implications पर केंद्रित है।',
         'home-bio-3': 'मेरी शैक्षणिक पृष्ठभूमि ने theoretical physics, data science और computational methods की गहरी समझ विकसित करने में मदद की है। मैंने observational cosmology, large-scale structure formation, galaxy evolution, radio astronomy और astrophysical data analysis से जुड़े विषयों पर काम किया है। बड़े datasets के अध्ययन के लिए मैं Bayesian statistical inference, machine learning और numerical methods का उपयोग करता हूँ। मेरी रुचि conformal field theory (CFT), AdS/CFT duality और perturbative string theory के पहलुओं में भी है।',
-        'home-bio-4': 'मैं आपसी रुचि वाले प्रोजेक्ट्स पर शोधकर्ताओं और अकादमिक समूहों के साथ सहयोग के लिए खुला हूँ। संभावित problem statements पर चर्चा करने के लिए बेझिझक संपर्क करें।',
-        'home-bio-5': 'अकादमिक कार्य के बाहर, कला और संगीत मेरे शौक हैं; मेरे पास fine arts में diploma है, मैं violin बजाता हूँ, और अभी flute सीख रहा हूँ।',
+        'home-bio-4': 'मैं आपसी रुचि वाले प्रोजेक्ट्स पर शोधकर्ताओं और अकादमिक समूहों के साथ सहयोग के लिए खुला हूँ। संभावित problem statements पर चर्चा करने के लिए बेझिझक संपर्क करें। अकादमिक कार्य के बाहर, कला और संगीत मेरे शौक हैं; मेरे पास fine arts में diploma है, मैं violin बजाता हूँ, और अभी flute सीख रहा हूँ।',
         'pub-note': '<span class="i">&#9432;</span>और सामग्री जल्द ही धीरे-धीरे दिखाई देगी।',
         'exp-0': '<strong>Supervisor:</strong> Prof. Allen Caldwell; <strong>Collaboration:</strong> DESY-CERN. MADMAX dielectric haloscope में signal extraction का अध्ययन, जहाँ लगभग 80 high-index disks और 10 T magnet axion-induced microwave signals को बहुत कमजोर power scale से ऊपर उठाते हैं। Background removal, Bayesian MCMC, और statistical tests से axion detectability को realistic conditions में quantify किया।',
         'exp-1': '<strong>Supervisor:</strong> Prof. Subha Majumdar. Gaia DR3, DESI, SDSS और LAMOST stellar kinematics तथा Milky Way rotation curves से local dark matter density को constrain किया। 6D phase-space data, spectro-photometry और astrometry के साथ mass models बनाए और MCMC methods से virial mass, concentration और anisotropy effects का अध्ययन किया।',
@@ -59,11 +57,9 @@
     },
     bn: {
       html: {
-        'home-bio-1': 'নমস্কার! আমি পদার্থবিদ্যার একজন উৎসাহী মাস্টার্স ছাত্র; আমার গবেষণার আগ্রহ মাধ্যাকর্ষণ ও মহাবিশ্বতত্ত্ব, তাত্ত্বিক জ্যোতির্বিজ্ঞান এবং dark matter phenomenology। ক্ষুদ্রতম থেকে বৃহত্তম স্কেল পর্যন্ত মহাবিশ্বের প্রকৃতি ও ইতিহাস বোঝাই আমার বৃহত্তর প্রেরণা।',
-        'home-bio-2': 'আমার বর্তমান গবেষণা baryonic matter-এর data-driven Bayesian inference থেকে local dark matter phase space নির্মাণ, dark matter-এর direct ও indirect detection, এবং সংশ্লিষ্ট near-field cosmological implications নিয়ে।',
+        'home-bio-1': '<span class="intro-hi">নমস্কার!</span> আমি পদার্থবিদ্যার একজন উৎসাহী মাস্টার্স ছাত্র; আমার গবেষণার আগ্রহ মাধ্যাকর্ষণ ও মহাবিশ্বতত্ত্ব, তাত্ত্বিক জ্যোতির্বিজ্ঞান এবং dark matter phenomenology। ক্ষুদ্রতম থেকে বৃহত্তম স্কেল পর্যন্ত মহাবিশ্বের প্রকৃতি ও ইতিহাস বোঝাই আমার বৃহত্তর প্রেরণা। আমার বর্তমান গবেষণা baryonic matter-এর data-driven Bayesian inference থেকে local dark matter phase space নির্মাণ, dark matter-এর direct ও indirect detection, এবং সংশ্লিষ্ট near-field cosmological implications নিয়ে।',
         'home-bio-3': 'আমার একাডেমিক পটভূমি theoretical physics, data science এবং computational methods সম্পর্কে গভীর বোঝাপড়া তৈরি করেছে। observational cosmology, large-scale structure formation, galaxy evolution, radio astronomy এবং astrophysical data analysis-সম্পর্কিত নানা সমস্যায় কাজ করেছি। বড় datasets বিশ্লেষণে আমি Bayesian statistical inference, machine learning এবং numerical methods ব্যবহার করি। conformal field theory (CFT), AdS/CFT duality এবং perturbative string theory-র দিকগুলোতেও আমার আগ্রহ আছে।',
-        'home-bio-4': 'পারস্পরিক আগ্রহের প্রকল্পে গবেষক ও একাডেমিক গোষ্ঠীর সঙ্গে সহযোগিতার জন্য আমি উন্মুক্ত। সম্ভাব্য problem statements নিয়ে আলোচনা করতে নির্দ্বিধায় যোগাযোগ করুন।',
-        'home-bio-5': 'একাডেমিক কাজের বাইরে শিল্প ও সঙ্গীত আমার শখ; fine arts-এ আমার diploma আছে, আমি violin বাজাই এবং বর্তমানে flute শিখছি।',
+        'home-bio-4': 'পারস্পরিক আগ্রহের প্রকল্পে গবেষক ও একাডেমিক গোষ্ঠীর সঙ্গে সহযোগিতার জন্য আমি উন্মুক্ত। সম্ভাব্য problem statements নিয়ে আলোচনা করতে নির্দ্বিধায় যোগাযোগ করুন। একাডেমিক কাজের বাইরে শিল্প ও সঙ্গীত আমার শখ; fine arts-এ আমার diploma আছে, আমি violin বাজাই এবং বর্তমানে flute শিখছি।',
         'pub-note': '<span class="i">&#9432;</span>আরও কনটেন্ট শিগগিরই ধীরে ধীরে দেখা যাবে।',
         'exp-0': '<strong>Supervisor:</strong> Prof. Allen Caldwell; <strong>Collaboration:</strong> DESY-CERN. MADMAX dielectric haloscope-এ signal extraction নিয়ে কাজ, যেখানে প্রায় 80 high-index disks এবং 10 T magnet অত্যন্ত দুর্বল axion-induced microwave signal বাড়িয়ে তোলে। Background removal, Bayesian MCMC এবং statistical tests দিয়ে realistic conditions-এ axion detectability পরিমাপ করা হয়েছে।',
         'exp-1': '<strong>Supervisor:</strong> Prof. Subha Majumdar. Gaia DR3, DESI, SDSS এবং LAMOST stellar kinematics ও Milky Way rotation curves থেকে local dark matter density constrain করা হয়েছে। 6D phase-space data, spectro-photometry এবং astrometry দিয়ে mass models তৈরি করে MCMC পদ্ধতিতে virial mass, concentration ও anisotropy effects বিশ্লেষণ করা হয়েছে।',
@@ -128,7 +124,7 @@
     ]},
     { label: 'About Me', href: 'vita.html' },
     { label: "What's New", href: 'whatsnew.html' },
-    { label: 'Arts and gallery', href: 'arts.html' },
+    { label: 'Arts/Gallery', href: 'arts.html' },
     { label: 'Philosophy', href: 'philosophy.html' },
     { label: 'Downloads', href: 'research/research_download.html' }
   ];
