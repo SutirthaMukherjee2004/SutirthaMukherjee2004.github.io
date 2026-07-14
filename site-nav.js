@@ -10,6 +10,11 @@
   var BASE = me ? new URL('.', me.src).href : location.href.replace(/[^/]*$/, '');
   var THEME_KEY = 'sutirtha-theme';
   var LANG_KEY = 'sutirtha-lang';
+  var LOVE_KEY = 'sutirtha-loved-site';
+  var LAST_UPDATED_TEXT = 'Last updated 23 March 2025';
+  var SITE_INFO_TEXT = "Last updated 23rd March 2025. The doodles are inspired by Prof. Rhea-Silvia Remus's LMU website; some signed doodles are borrowed from that source, and some are my own. The artworks hosted in Arts/Gallery are my own artwork. Please contact me before using them.";
+  var LOVE_COUNTER_URL =
+    'https://hits.sh/sutirthamukherjee2004.github.io/love.svg?label=Love&extraCount=23&color=3fb950&labelColor=0d1117&style=flat-square';
   var themeButton = null;
   var langButton = null;
   var infoButton = null;
@@ -401,6 +406,45 @@
     target.appendChild(wrap);
   }
 
+  function addLastUpdatedNote() {
+    if (document.querySelector('.site-last-updated')) return;
+    var target = document.getElementById('bottom') || document.querySelector('footer') || document.body;
+    if (!target) return;
+    var note = el('div', 'site-last-updated', LAST_UPDATED_TEXT);
+    target.appendChild(note);
+  }
+
+  function readLoved() {
+    try { return localStorage.getItem(LOVE_KEY) === '1'; }
+    catch (e) { return false; }
+  }
+
+  function writeLoved() {
+    try { localStorage.setItem(LOVE_KEY, '1'); }
+    catch (e) {}
+  }
+
+  function addLoveCounter() {
+    if (document.querySelector('.site-love-toggle')) return;
+    var loved = readLoved();
+    var loveButton = el('button', 'site-love-toggle' + (loved ? ' is-loved' : ''));
+    loveButton.type = 'button';
+    loveButton.setAttribute('aria-label', loved ? 'Website loved' : 'Love this website');
+    loveButton.innerHTML = '<span>Love</span><span class="site-love-count">' + (loved ? '24' : '23') + '</span>';
+    loveButton.addEventListener('click', function () {
+      if (readLoved()) return;
+      writeLoved();
+      loveButton.classList.add('is-loved');
+      loveButton.setAttribute('aria-label', 'Website loved');
+      var count = loveButton.querySelector('.site-love-count');
+      if (count) count.textContent = '24';
+      var hit = new Image();
+      hit.referrerPolicy = 'no-referrer-when-downgrade';
+      hit.src = LOVE_COUNTER_URL + '&t=' + Date.now();
+    });
+    document.body.appendChild(loveButton);
+  }
+
   function init() {
     normalizeTopNav();
     if (document.querySelector('.snav-toggle')) return; // never double-inject
@@ -479,7 +523,7 @@
     infoButton.setAttribute('aria-expanded', 'false');
     infoButton.innerHTML =
       '<span aria-hidden="true">i</span>' +
-      '<span class="site-info-popover" role="note">This website is designed and maintained by Sutirtha Mukherjee. Currently under construction. &copy; 2026 Sutirtha Mukherjee. All rights reserved.</span>';
+      '<span class="site-info-popover" role="note">' + SITE_INFO_TEXT + '</span>';
     document.body.appendChild(infoButton);
     infoButton.addEventListener('click', function () {
       var openInfo = !infoButton.classList.contains('is-open');
@@ -502,7 +546,9 @@
       new MutationObserver(scheduleLanguageApply).observe(document.body, { childList: true, subtree: true });
     }
     initScrollTopControls();
+    addLastUpdatedNote();
     addVisitorCounter();
+    addLoveCounter();
 
     function open() { document.body.classList.add('snav-open'); btn.classList.add('is-open'); btn.setAttribute('aria-label', 'Close navigation'); }
     function shut() { document.body.classList.remove('snav-open'); btn.classList.remove('is-open'); btn.setAttribute('aria-label', 'Open navigation'); }

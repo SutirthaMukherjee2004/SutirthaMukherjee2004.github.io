@@ -200,8 +200,10 @@
     var file = String(src || '').split('/').pop().replace(/\.[a-z0-9]+$/i, '');
     var label = file
       .replace(/^(data|rc|surface-current|surface|joint-likelihood)[-_]/i, '')
-      .replace(/^fig[0-9]+[a-z]?\b[-_]?/i, '')
+      .replace(/^fig[-_ ]?[0-9]+[a-z]?\b[-_]?/i, '')
       .replace(/^current[-_]?fig[0-9]+[a-z]?\b[-_]?/i, '')
+      .replace(/^plot[-_ ]?[0-9]+[a-z]?\b[-_]?/i, '')
+      .replace(/\bfig[-_ ]?[0-9]+[a-z]?\b[-_]?/gi, '')
       .replace(/[-_]+/g, ' ')
       .replace(/^madmax\s+/i, '')
       .replace(/\bbn06\b/gi, 'BN06')
@@ -229,16 +231,53 @@
     return label || 'research figure';
   }
 
-  function siteCaption(topic, plot, index) {
+  function captionSentence(label) {
+    var lower = String(label || '').toLowerCase();
+    if (/kernel|frequency/.test(lower)) return 'Kernel response and frequency-domain structure for the MADMAX signal model';
+    if (/qiid|p values/.test(lower)) return 'Per-step QIID p-value behaviour across repeated MADMAX search runs';
+    if (/run panel 1/.test(lower)) return 'MADMAX run diagnostic for the first simulated search configuration';
+    if (/run panel 2/.test(lower)) return 'MADMAX run diagnostic for the second simulated search configuration';
+    if (/run panel 3/.test(lower)) return 'MADMAX run diagnostic for the third simulated search configuration';
+    if (/run panel 4/.test(lower)) return 'MADMAX run diagnostic for the fourth simulated search configuration';
+    if (/sky grid/.test(lower)) return 'Sky-footprint grid used to organize the stellar catalogue';
+    if (/extinction/.test(lower)) return 'Extinction correction diagnostic across the compiled stellar sample';
+    if (/hr diagram/.test(lower)) return 'Hertzsprung-Russell structure of the selected catalogue sources';
+    if (/keil/.test(lower)) return 'Kiel-diagram view of the stellar-parameter selection';
+    if (/relative distance error/.test(lower)) return 'Relative-distance uncertainty behaviour for the catalogue calibration';
+    if (/distance comparison/.test(lower)) return 'Cross-survey comparison of distance estimates and calibration residuals';
+    if (/gmag/.test(lower)) return 'G-band magnitude distribution for the assembled stellar sample';
+    if (/fe h|metallicity|mh/.test(lower)) return 'Metallicity-space diagnostic for the selected tracer population';
+    if (/radial velocity|drv/.test(lower)) return 'Radial-velocity calibration and survey-to-survey consistency diagnostic';
+    if (/globular cluster|ngc|draco|sgr/.test(lower)) return 'Validation against known halo tracers, clusters, or satellite systems';
+    if (/purity|completeness/.test(lower)) return 'Purity and completeness diagnostic for the catalogue-selection method';
+    if (/radial dist/.test(lower)) return 'Radial-distribution comparison for the selected tracer sample';
+    if (/ruwe/.test(lower)) return 'RUWE quality-control diagnostic for the astrometric selection';
+    if (/zslice|thin disc|second moments|velocity ellipsoid|dispersion/.test(lower)) return 'Stellar-kinematic moment diagnostic used in the rotation-curve analysis';
+    if (/crossterm|jeans|density|selection|systematic/.test(lower)) return 'Systematic-control diagnostic for the Jeans and rotation-curve reconstruction';
+    if (/outer halo|beta|anisotropy/.test(lower)) return 'Outer-halo anisotropy and rotation-curve comparison diagnostic';
+    if (/rho dm|scale radius|standard halo model|velocity distribution|rotation curve prior|mcmc/.test(lower)) return 'Joint-likelihood dark-matter constraint and local phase-space diagnostic';
+    if (/alpha|mg fe|population counts|chemical/.test(lower)) return 'Chemical-abundance selection diagnostic for separating Milky Way tracer populations';
+    if (/sigma|surface density|kg integral|hsigma|sech/.test(lower)) return 'Surface-density and vertical-force diagnostic from stellar-kinematic modelling';
+    var cleaned = String(label || 'research figure')
+      .replace(/\bvs\b/gi, 'versus')
+      .replace(/\bmcmc\b/gi, 'MCMC')
+      .replace(/\blsr\b/gi, 'LSR')
+      .replace(/\bq iid\b/gi, 'QIID')
+      .replace(/\s+/g, ' ')
+      .trim();
+    return cleaned.charAt(0).toUpperCase() + cleaned.slice(1);
+  }
+
+  function siteCaption(topic, plot) {
     var label = figureLabel(plot && plot.src);
-    return topic.title + ': ' + label + ' panel ' + (index + 1) + '.';
+    return topic.title + ': ' + captionSentence(label) + '.';
   }
 
   function refreshCaptions(topic) {
     if (!topic || !Array.isArray(topic.plots)) return;
-    topic.plots = topic.plots.map(function (plot, index) {
+    topic.plots = topic.plots.map(function (plot) {
       var copy = Object.assign({}, plot);
-      copy.caption = siteCaption(topic, copy, index);
+      copy.caption = siteCaption(topic, copy);
       return copy;
     });
   }

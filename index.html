@@ -911,7 +911,7 @@
             min-width: 0;
             min-height: 0;
             height: 100%;
-            overflow: hidden;
+            overflow: visible;
         }
         .key-projects,
         .pub-panel {
@@ -919,6 +919,11 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
+        }
+        .pub-panel {
+            overflow: visible;
+            position: relative;
+            z-index: 30;
         }
         .panel-title {
             font-size: 1.45em;
@@ -1161,6 +1166,8 @@
             grid-template-columns: minmax(0, 0.95fr) minmax(230px, 1.05fr);
             gap: clamp(0.75rem, 1.5vw, 1rem);
             overflow: visible;
+            position: relative;
+            z-index: 35;
         }
         .pub-side {
             min-width: 0;
@@ -1170,6 +1177,8 @@
             flex-direction: column;
             justify-content: flex-start;
             overflow: visible;
+            position: relative;
+            z-index: 45;
         }
         .pub-metrics {
             display: grid;
@@ -1203,6 +1212,8 @@
             width: 100%;
             min-width: 0;
             max-width: 100%;
+            position: relative;
+            z-index: 70;
         }
         .pub-item { padding: 0.65rem 0; border-bottom: 1px solid #21262d; }
         .pub-item:last-child { border-bottom: none; }
@@ -1210,6 +1221,37 @@
         .pub-authors .me { color: #e6edf3; font-weight: 700; }
         .pub-title { color: #58a6ff; text-decoration: none; }
         .pub-title-line { display: block; font-size: 0.84em; line-height: 1.35; font-weight: 700; margin-bottom: 0.25rem; }
+        .pub-title-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.42rem;
+            min-width: 0;
+        }
+        .pub-title-row .pub-title {
+            flex: 1 1 auto;
+            min-width: 0;
+        }
+        .pub-new-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.24rem;
+            color: #b7f7c9;
+            font-size: 0.58em;
+            font-weight: 800;
+            line-height: 1.15;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            white-space: nowrap;
+            margin-top: 0.1rem;
+        }
+        .pub-new-badge::before {
+            content: '';
+            width: 0.42rem;
+            height: 0.42rem;
+            border-radius: 50%;
+            background: #3fb950;
+            box-shadow: 0 0 0 3px rgba(63, 185, 80, 0.13), 0 0 12px rgba(63, 185, 80, 0.7);
+        }
         .pub-title:hover { text-decoration: underline; }
         .pub-meta { color: #8b949e; font-size: 0.76em; line-height: 1.4; }
         .pub-venue { color: #c9d1d9; }
@@ -1237,10 +1279,11 @@
             --pub-axis-active: 32px;
             position: relative;
             width: 100%;
-            height: clamp(142px, 22vw, 168px);
+            height: clamp(156px, 23vw, 188px);
             margin: 0;
             padding: 0;
             overflow: visible;
+            z-index: 80;
         }
         .pub-histo-legend {
             display: flex;
@@ -1276,10 +1319,11 @@
             position: absolute;
             left: calc(var(--pub-axis-start) - var(--pub-group-half));
             bottom: clamp(42px, 6.2vw, 48px);
-            height: clamp(82px, 13vw, 98px);
+            height: clamp(92px, 13.8vw, 112px);
             display: flex;
             align-items: end;
             gap: var(--pub-group-gap);
+            z-index: 3;
         }
         .pub-histo-year-group {
             width: var(--pub-group-width);
@@ -1337,6 +1381,7 @@
             display: flex;
             align-items: flex-start;
             gap: var(--pub-group-gap);
+            z-index: 4;
         }
         .pub-histo-year {
             width: var(--pub-group-width);
@@ -1346,6 +1391,26 @@
             text-align: center;
             white-space: nowrap;
         }
+        .pub-histo-y-axis {
+            position: absolute;
+            left: 0;
+            bottom: clamp(42px, 6.2vw, 48px);
+            height: clamp(92px, 13.8vw, 112px);
+            width: calc(var(--pub-axis-start) - 8px);
+            z-index: 4;
+            color: rgba(240, 246, 252, 0.68);
+            font-size: 0.56em;
+            line-height: 1;
+        }
+        .pub-histo-y-mark {
+            position: absolute;
+            right: 4px;
+            transform: translateY(50%);
+            white-space: nowrap;
+        }
+        .pub-histo-y-mark.top { top: -0.1rem; transform: translateY(-10%); }
+        .pub-histo-y-mark.mid { top: 50%; }
+        .pub-histo-y-mark.zero { bottom: -0.1rem; }
 
         /* education: real graduation-cap SVG icon instead of an emoji */
         .edu-entry .cap { width: 20px; height: 20px; flex-shrink: 0; margin-top: 1px; color: #f1eee5; opacity: 0.92; display: inline-block; }
@@ -1394,7 +1459,7 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="nav.css?v=20260714l">
+    <link rel="stylesheet" href="nav.css?v=20260714m">
 </head>
 <body>
     <div class="main-container">
@@ -2061,7 +2126,7 @@
         runWhenIdle(fetchGitHubData);
     });
     </script>
-<script src="research/research-data.js?v=20260714e"></script>
+<script src="research/research-data.js?v=20260714f"></script>
 <script>
   /* Key Projects (borrowed from the Research cards) + Publications */
   (function () {
@@ -2456,11 +2521,13 @@
       for (var year = minYear; year <= maxYear; year++) years.push(year);
       var maxPapers = Math.max(1, Math.max.apply(null, years.map(function (y) { return pubCounts[y] || 0; })));
       var maxCites = Math.max(1, Math.max.apply(null, years.map(function (y) { return cumulativeCitations[y] || 0; })));
+      var maxY = Math.max(maxPapers, maxCites);
       var histo = document.createElement('div');
       histo.className = 'pub-histo';
       var targetWidth = Math.max(96, measurePubHistogramWidth() || target.clientWidth || 260);
-      var availableWidth = Math.max(84, targetWidth - 24);
-      var responsiveWidth = Math.min(availableWidth, Math.max(84, targetWidth * 0.54));
+      var axisStart = targetWidth < 210 ? 28 : 34;
+      var availableWidth = Math.max(84, targetWidth - axisStart - 12);
+      var responsiveWidth = Math.min(availableWidth, Math.max(84, targetWidth * 0.62));
       var groupWidth = Math.max(14, Math.min(22, Math.floor(responsiveWidth / Math.max(years.length, 1))));
       var barWidth = Math.max(3, Math.min(4, Math.floor((groupWidth - 2) / 2)));
       var groupGap = 0;
@@ -2469,7 +2536,7 @@
       histo.style.setProperty('--pub-group-half', (groupWidth / 2) + 'px');
       histo.style.setProperty('--pub-group-gap', groupGap + 'px');
       histo.style.setProperty('--pub-bar-width', barWidth + 'px');
-      histo.style.setProperty('--pub-axis-start', (groupWidth / 2) + 'px');
+      histo.style.setProperty('--pub-axis-start', axisStart + 'px');
       histo.style.setProperty('--pub-axis-active', activeSpan + 'px');
       var bars = document.createElement('div');
       bars.className = 'pub-histo-bars';
@@ -2481,10 +2548,10 @@
         group.title = y + ': ' + papers + ' paper' + (papers === 1 ? '' : 's') + ', ' + cites + ' cumulative citation' + (cites === 1 ? '' : 's');
         var paperBar = document.createElement('div');
         paperBar.className = 'pub-histo-bar paper';
-        paperBar.style.height = (papers ? 6 + (papers / maxPapers) * 84 : 2) + 'px';
+        paperBar.style.height = (papers ? 6 + (papers / maxY) * 98 : 2) + 'px';
         var citeBar = document.createElement('div');
         citeBar.className = 'pub-histo-bar citation';
-        citeBar.style.height = (cites ? 6 + (cites / maxCites) * 84 : 2) + 'px';
+        citeBar.style.height = (cites ? 6 + (cites / maxY) * 98 : 2) + 'px';
         group.appendChild(paperBar);
         group.appendChild(citeBar);
         bars.appendChild(group);
@@ -2493,7 +2560,13 @@
       var yearLabels = years.map(function (y) {
         return '<span class="pub-histo-year">' + y + '</span>';
       }).join('');
+      var midY = Math.ceil(maxY / 2);
       histo.insertAdjacentHTML('beforeend',
+        '<div class="pub-histo-y-axis" aria-hidden="true">' +
+          '<span class="pub-histo-y-mark top">' + maxY + '</span>' +
+          '<span class="pub-histo-y-mark mid">' + midY + '</span>' +
+          '<span class="pub-histo-y-mark zero">0</span>' +
+        '</div>' +
         '<div class="pub-histo-axis"></div>' +
         '<div class="pub-histo-axis-active"></div>' +
         '<span class="pub-histo-handle start" aria-hidden="true"></span>' +
@@ -2537,16 +2610,17 @@
       var list = document.getElementById('pub-list'); if (!list) return;
       list.innerHTML = '';
       var pdfIcon = '<span aria-hidden="true" class="pdf-text">pdf</span><span class="sr-only">PDF</span>';
-      PUBS.forEach(function (p) {
+      PUBS.forEach(function (p, index) {
         var d = document.createElement('div'); d.className = 'pub-item';
         var titleHref = p.ads || p.pdf || '#';
+        var newBadge = index < 2 ? '<span class="pub-new-badge">New</span>' : '';
         var buttons = (p.cite ? '<a class="pub-btn" href="' + p.cite + '">Cite</a>' : '') +
           (p.pdf ? '<a class="pub-btn pdf" href="' + p.pdf + '" target="_blank" aria-label="PDF">' + pdfIcon + '</a>' : '<span class="pub-btn pdf unavailable" aria-label="PDF unavailable">' + pdfIcon.replace('PDF</span>', 'PDF unavailable</span>') + '</span>') +
           (p.doi ? '<a class="pub-btn" href="' + p.doi + '" target="_blank">DOI</a>' : '') +
           (p.ads ? '<a class="pub-btn" href="' + p.ads + '" target="_blank">INSPIRE</a>' : '');
         var venue = p.venue ? '<span class="pub-venue">' + p.venue + '.</span> ' : '';
         d.innerHTML =
-          '<a class="pub-title pub-title-line" href="' + titleHref + '" target="_blank">' + p.title + '</a>' +
+          '<div class="pub-title-row"><a class="pub-title pub-title-line" href="' + titleHref + '" target="_blank">' + p.title + '</a>' + newBadge + '</div>' +
           '<div class="pub-meta">' + p.authors + ' (' + p.year + '). ' +
           venue +
           '<span class="pub-citations">Citations: ' + p.citations + '</span></div>' +
@@ -2581,7 +2655,7 @@
     else document.addEventListener('DOMContentLoaded', initBioCollapse);
   })();
 </script>
-<script src="site-nav.js?v=20260714k"></script>
+<script src="site-nav.js?v=20260714m"></script>
 <script src="tools/smukh-editor.js"></script>
 </body>
 </html>

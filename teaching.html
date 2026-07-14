@@ -537,7 +537,7 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="nav.css?v=20260714l">
+    <link rel="stylesheet" href="nav.css?v=20260714m">
     <style>
     /* ===== Academics graph: fill the viewport + frameless modern controls =====
        Loaded AFTER nav.css so these rules win over the shared standardization. */
@@ -545,9 +545,30 @@
     /* The graph height is set precisely in JS (sizeGraph) to the on-screen space
        from its top to the bottom of the viewport, so it never runs past the fold
        (that below-the-fold overhang was the real cause of the landing crop). */
-    div#sublayout{ height:auto !important; min-height:0 !important; }
-    #subpage{ overflow:hidden !important; }
-    #graph{ width:100% !important; height:72vh; }
+    div#sublayout{
+      height:auto !important;
+      min-height:0 !important;
+      overflow:visible !important;
+      position:relative !important;
+    }
+    #menu{ position:relative !important; z-index:2 !important; }
+    #subpage{
+      overflow:visible !important;
+      position:relative !important;
+      z-index:20 !important;
+    }
+    #graph{
+      width:100% !important;
+      height:72vh;
+      position:relative !important;
+      z-index:30 !important;
+      overflow:visible !important;
+    }
+    #graph svg{
+      overflow:visible !important;
+      position:relative;
+      z-index:31;
+    }
 
     /* Frameless, glassy control panel — no boxy border, soft + modern. */
     .graph-sidebar{
@@ -1524,7 +1545,7 @@
         }
     }, 10000);
 </script>
-<script src="site-nav.js?v=20260714k"></script>
+<script src="site-nav.js?v=20260714m"></script>
 <script src="tools/smukh-editor.js"></script>
 </body>
 </html>

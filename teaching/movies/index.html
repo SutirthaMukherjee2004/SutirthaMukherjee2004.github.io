@@ -278,6 +278,14 @@ h2 {
     transition: transform 0.3s ease;
 }
 
+.image-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    background: #0d1117;
+}
+
 .image-card:hover .image-container img {
     transform: scale(1.1);
 }
@@ -510,7 +518,7 @@ div[style*="clear"] {
     }
 }
 </style>
-<link rel="stylesheet" href="../../nav.css?v=20260714l">
+<link rel="stylesheet" href="../../nav.css?v=20260714m">
 </head>
 
 <body>
@@ -598,230 +606,201 @@ div[style*="clear"] {
 // AUTOMATIC IMAGE DETECTION SYSTEM - FIXED VERSION
 // ============================================
 
-// Based on the files visible in your Images folder
-const knownImages = [
-    'Asteroid.jpeg',
-    'Barnsley Fern Fractal.jpeg',
-    'Butterfly.jpeg',
-    'Epicycle.jpeg',
-    'Heart Fireworks.jpeg',
-    'Hilbert Curve Image Processing.jpeg',
-    'Hilbert Flower Curve.jpeg',
-    'Lizagaus Figure.jpeg',
-    'Mesh grid generator.jpeg',
-    'Perlin Noise.jpeg',
-    'Polar Fireworks.jpeg',
-    'Shrinki Maze.jpeg',
-    'Spirograph.jpeg',
-    'Super Shape Generator.jpeg'
+const knownMedia = [
+    'Images/Astar.jpeg',
+    'Images/1e0657_bullett_anim_sm.mov',
+    'Fractals.mp4',
+    'WhatsApp Video 2026-07-14 at 22.26.22.mp4',
+    'WhatsApp Video 2026-07-14 at 22.26.22 (1).mp4',
+    'Images/Polar Fireworks.jpeg',
+    'Images/Heart Fireworks.jpeg',
+    'Images/Mesh grid generator.jpeg',
+    'Images/Perlin Noise.jpeg',
+    'Images/Butterfly.jpeg',
+    'Images/Hilbert Curve Image Processing.jpeg',
+    'Images/Hilbert Flower Curve.jpeg',
+    'Images/Barnsley Fern Fractal.jpeg',
+    'Images/Epicycle.jpeg',
+    'Images/Spirograph.jpeg',
+    'Images/Lissajous Figure.jpeg',
+    'Images/Print Maze.jpeg',
+    'Images/Super Shape Generator.jpeg'
 ];
 
-// Additional patterns to try if you add new images
+const githubMediaApi =
+    'https://api.github.com/repos/SutirthaMukherjee2004/SutirthaMukherjee2004.github.io/contents/teaching/movies/Images';
+
+const mediaExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'mp4', 'webm', 'mov'];
 const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
-const imagesToTry = [];
+const videoExtensions = ['mp4', 'webm', 'mov'];
+const mediaTitles = {
+    'WhatsApp Video 2026-07-14 at 22.26.22.mp4': 'Movie 1',
+    'WhatsApp Video 2026-07-14 at 22.26.22 (1).mp4': 'Movie 2'
+};
 
-// Generate potential image names to try
-for(let i = 1; i <= 30; i++) {
-    imagesToTry.push(`image${i}.png`, `image${i}.jpg`, `image${i}.jpeg`);
-    imagesToTry.push(`img${i}.png`, `img${i}.jpg`, `img${i}.jpeg`);
-    imagesToTry.push(`picture${i}.png`, `picture${i}.jpg`, `picture${i}.jpeg`);
-}
+// Backward-compatible alias for any old console checks.
+const knownImages = knownMedia.slice();
 
-// Array to store successfully loaded images
-let imageFiles = [];
+// Additional patterns to try if you add new images with simple generated names.
+const imagesToTry = [
+    'Images/Astar.jpeg',
+    'Images/Lissajous Figure.jpeg',
+    'Images/Print Maze.jpeg',
+    'Barnsley Fern Fractal.jpeg',
+    'Butterfly.jpeg'
+];
 
-// Function to check if an image exists
-function checkImage(filename) {
-    return new Promise((resolve) => {
-        const img = new Image();
-        img.onload = () => {
-            console.log(`✓ Found: ${filename}`);
-            resolve(filename);
-        };
-        img.onerror = () => {
-            console.log(`✗ Not found: ${filename}`);
-            resolve(null);
-        };
-        // FIXED: Changed path from 'movies/Images/' to 'Images/'
-        img.src = 'Images/' + filename;
+for (let i = 1; i <= 30; i++) {
+    ['png', 'jpg', 'jpeg', 'webp', 'gif', 'mp4', 'webm', 'mov'].forEach(ext => {
+        imagesToTry.push(`Images/image${i}.${ext}`, `Images/img${i}.${ext}`, `Images/picture${i}.${ext}`);
     });
 }
 
-// Function to extract filename without extension
+let mediaFiles = [];
+
+function mediaPath(filename) {
+    return filename.indexOf('/') === -1 && filename.indexOf('Images') !== 0 ? 'Images/' + filename : filename;
+}
+
+function mediaExt(filename) {
+    return (filename.split('.').pop() || '').toLowerCase();
+}
+
+function isVideo(filename) {
+    return videoExtensions.includes(mediaExt(filename));
+}
+
+function isSupportedMedia(filename) {
+    return mediaExtensions.includes(mediaExt(filename));
+}
+
+function checkMedia(filename) {
+    return new Promise((resolve) => {
+        const src = mediaPath(filename);
+        if (isVideo(src)) {
+            resolve(src);
+            return;
+        }
+        const img = new Image();
+        img.onload = () => resolve(src);
+        img.onerror = () => resolve(null);
+        img.src = src;
+    });
+}
+
+async function discoverGithubMedia() {
+    if (!window.fetch) return [];
+    try {
+        const response = await fetch(githubMediaApi, { cache: 'no-store' });
+        if (!response.ok) return [];
+        const entries = await response.json();
+        if (!Array.isArray(entries)) return [];
+        return entries
+            .filter(entry => entry && entry.type === 'file' && isSupportedMedia(entry.name || ''))
+            .map(entry => 'Images/' + entry.name);
+    } catch (error) {
+        return [];
+    }
+}
+
+function uniqueMedia(files) {
+    const seen = new Set();
+    return files.filter(file => {
+        const normalized = mediaPath(file);
+        const key = normalized.toLowerCase();
+        if (!isSupportedMedia(normalized) || seen.has(key)) return false;
+        seen.add(key);
+        return true;
+    });
+}
+
 function getImageName(filename) {
-    // Remove file extension and clean up the name
-    let name = filename.substring(0, filename.lastIndexOf('.')) || filename;
-    // Remove .jpeg or .jpg extension properly
-    name = name.replace(/\.(jpeg|jpg|png|gif|webp)$/i, '');
+    let base = filename.split('/').pop() || filename;
+    if (mediaTitles[base]) return mediaTitles[base];
+    let name = base.replace(/\.(jpeg|jpg|png|gif|webp|mp4|webm|mov)$/i, '');
+    name = name.replace(/[_-]+/g, ' ').replace(/\s+/g, ' ').trim();
     return name;
 }
 
-// Function to create image cards
 function createImageCard(filename) {
-    const imageName = getImageName(filename);
-    
-    // Create card element
+    const src = mediaPath(filename);
+    const imageName = getImageName(src);
     const card = document.createElement('div');
     card.className = 'image-card';
-    
-    // Create link element
+
     const link = document.createElement('a');
-    link.href = 'https://github.com/SutirthaMukherjee2004/Processing-p5.js';
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
-    link.title = `View ${imageName} project`;
-    
-    // Create image container
+    link.href = src;
+    link.title = `Open ${imageName}`;
+
     const imageContainer = document.createElement('div');
     imageContainer.className = 'image-container';
-    
-    // Create image element
-    const img = document.createElement('img');
-    // FIXED: Changed path from 'movies/Images/' to 'Images/'
-    img.src = 'Images/' + filename;
-    img.alt = imageName;
-    img.loading = 'lazy';
-    
-    // Handle image loading errors
-    img.onerror = function() {
-        console.error(`Failed to load image: ${filename}`);
-        // Try alternative paths if the direct path fails
-        if (!this.dataset.retried) {
-            this.dataset.retried = 'true';
-            this.src = './Images/' + filename;
-        }
-    };
-    
-    // Create title element
+
+    if (isVideo(src)) {
+        const video = document.createElement('video');
+        video.src = src;
+        video.muted = true;
+        video.loop = true;
+        video.playsInline = true;
+        video.preload = 'metadata';
+        video.setAttribute('aria-label', imageName);
+        imageContainer.appendChild(video);
+        card.addEventListener('mouseenter', () => video.play().catch(() => {}));
+        card.addEventListener('mouseleave', () => {
+            video.pause();
+            video.currentTime = 0;
+        });
+    } else {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = imageName;
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        img.onerror = function() {
+            if (!this.dataset.retried) {
+                this.dataset.retried = 'true';
+                this.src = './' + src;
+            }
+        };
+        imageContainer.appendChild(img);
+    }
+
     const title = document.createElement('div');
     title.className = 'image-title';
     title.textContent = imageName;
-    title.title = imageName; // Add tooltip for long names
-    
-    // Assemble the card
-    imageContainer.appendChild(img);
+    title.title = imageName;
+
     link.appendChild(imageContainer);
     link.appendChild(title);
     card.appendChild(link);
-    
+
     return card;
 }
 
-// Function to automatically detect and load images
-async function autoDetectImages() {
+async function autoDetectMedia() {
     const gridContainer = document.getElementById('imageGrid');
-    
-    // Show loading message
-    gridContainer.innerHTML = '<div class="gallery-message">Scanning for images in Images folder...</div>';
-    
-    console.log('Starting image detection...');
-    console.log('Looking for images in: ./Images/ folder');
-    
-    // Try server-side detection first (if you have PHP setup)
-    try {
-        const response = await fetch('get_images.php');
-        if (response.ok) {
-            const serverImages = await response.json();
-            if (serverImages && serverImages.length > 0) {
-                imageFiles = serverImages;
-                console.log('Loaded images from server:', imageFiles);
-            }
-        }
-    } catch (e) {
-        console.log('Server-side detection not available, using client-side detection');
-    }
-    
-    // If no server images, use client-side detection
-    if (imageFiles.length === 0) {
-        console.log('Checking known images from your Images folder...');
-        
-        // First, try the known images from your folder
-        const checkPromises = knownImages.map(img => checkImage(img));
-        const results = await Promise.all(checkPromises);
-        imageFiles = results.filter(img => img !== null);
-        
-        // If we found less than expected, try additional patterns
-        if (imageFiles.length < knownImages.length) {
-            console.log(`Found ${imageFiles.length} of ${knownImages.length} expected images`);
-            console.log('Trying additional image patterns...');
-            
-            // Try some common patterns
-            const additionalPromises = imagesToTry.slice(0, 10).map(img => checkImage(img));
-            const additionalResults = await Promise.all(additionalPromises);
-            const additionalImages = additionalResults.filter(img => img !== null && !imageFiles.includes(img));
-            imageFiles = [...imageFiles, ...additionalImages];
-        }
-    }
-    
-    // Clear loading message
+    if (!gridContainer) return;
+    const githubMedia = await discoverGithubMedia();
+    const candidates = uniqueMedia([...knownMedia, ...githubMedia, ...imagesToTry]);
+    const results = await Promise.all(candidates.map(item => checkMedia(item)));
+    mediaFiles = uniqueMedia(results.filter(Boolean));
     gridContainer.innerHTML = '';
-    
-    // Create gallery
-    if (imageFiles.length > 0) {
-        console.log(`Creating gallery with ${imageFiles.length} images`);
-        imageFiles.forEach(filename => {
+
+    if (mediaFiles.length > 0) {
+        mediaFiles.forEach(filename => {
             gridContainer.appendChild(createImageCard(filename));
         });
-        console.log('Gallery created successfully!');
     } else {
-        // No images found message
-        gridContainer.innerHTML = `
-            <div class="gallery-message">
-                <h3>No Images Detected</h3>
-                <p>Unable to load images from the Images folder.</p>
-                <p style="margin-top: 1em; font-size: 0.9em;">Please ensure:</p>
-                <ul style="text-align: left; display: inline-block; margin-top: 1em;">
-                    <li>The 'Images' folder exists in the same directory as this HTML file</li>
-                    <li>The folder contains image files (JPEG, PNG, GIF, WebP)</li>
-                    <li>File permissions allow reading the images</li>
-                </ul>
-                <p style="margin-top: 2em; font-size: 0.85em; color: #666;">
-                    For automatic detection, you can also create a PHP file named 'get_images.php'
-                </p>
-            </div>
-        `;
+        gridContainer.innerHTML = '<div class="gallery-message">No Processing or p5.js media found.</div>';
     }
 }
 
-// Manual refresh function
 function refreshGallery() {
-    console.log('Refreshing gallery...');
-    autoDetectImages();
+    autoDetectMedia();
 }
 
-// Initialize gallery when page loads
 window.addEventListener('DOMContentLoaded', () => {
-    console.log('==============================================');
-    console.log('Image Gallery Auto-Detection Started');
-    console.log('Expected images from your folder:', knownImages);
-    console.log('==============================================');
-    autoDetectImages();
+    autoDetectMedia();
 });
-
-// Optional: Create PHP file content for server-side detection
-const phpScript = `<?php
-header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
-
-$images = array();
-$dir = 'Images/';  // Changed from 'Image/' to 'Images/'
-
-if (is_dir($dir)) {
-    $files = scandir($dir);
-    foreach($files as $file) {
-        $ext = pathinfo($file, PATHINFO_EXTENSION);
-        if(in_array(strtolower($ext), ['jpg', 'jpeg', 'png', 'gif', 'webp'])) {
-            $images[] = $file;
-        }
-    }
-}
-
-echo json_encode($images);
-?>`;
-
-// Log PHP script for reference
-console.log('If you want server-side detection, create a file named "get_images.php" with this content:');
-console.log(phpScript);
 </script>
 
 <!-- Original Movie Gallery Content -->
@@ -838,6 +817,14 @@ You may use these movies for educational purposes as long as you give credit to 
 <ul>
 <li> <a class="col" href="Randomness parameter = 0.00618.mp4">Randomness parameter =0.00168</a></li>
 <li> <a class="col" href="n body grav - Made with Clipchamp (1).mp4">N -body simulation with different r dependance</a></li>
+</ul>
+<div style="clear: both"></div>
+</div>
+
+<div class="movie-section">
+<h2>Fractals</h2>
+<ul>
+<li><a class="col" href="Fractals.mp4">Fractals</a></li>
 </ul>
 <div style="clear: both"></div>
 </div>
@@ -950,7 +937,7 @@ Last update 08.05.2022 by Sutirtha Mukherjee
 
 </div>
 <a href="../../index.html" class="home-corner" title="Back to Home" aria-label="Back to Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V10"/></svg></a>
-<script src="../../site-nav.js?v=20260714k"></script>
+<script src="../../site-nav.js?v=20260714m"></script>
 <script src="../../tools/smukh-editor.js"></script>
 </body>
 </html>
