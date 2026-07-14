@@ -327,6 +327,26 @@
             stroke-dasharray: 5,5;
         }
 
+        .link-iitm {
+            stroke: #f59e0b;
+            stroke-opacity: 0.72;
+            stroke-width: 1.9px;
+        }
+
+        .link-iitm-optional {
+            stroke: #fbbf24;
+            stroke-opacity: 0.55;
+            stroke-width: 1.4px;
+            stroke-dasharray: 4,4;
+        }
+
+        .link-iitm-coreq {
+            stroke: #fde68a;
+            stroke-opacity: 0.75;
+            stroke-width: 1.5px;
+            stroke-dasharray: 2,3;
+        }
+
         /* Node color classes */
         .node-central { fill: #ff6b6b; }
         .node-semester { fill: #667eea; }
@@ -336,13 +356,15 @@
         .node-math { fill: #9f7aea; }
         .node-idc { fill: #fc8181; }
         .node-hss { fill: #ffd93d; }
-        .node-grade-a { fill: #48bb78; }
-        .node-grade-b { fill: #4299e1; }
-        .node-grade-c { fill: #f6ad55; }
         .node-lab { fill: #a0e7e5; }
         .node-seminar { fill: #f0932b; }
-        .node-tifr { fill: #58a6ff; }
-        .node-tifr-core { fill: #7cc0ff; }
+        .node-iitm-level { fill: #f59e0b; }
+        .node-iitm-course { fill: #fbbf24; }
+        .node-iitm-project { fill: #f97316; }
+        .node-iitm-elective { fill: #fde68a; }
+        .node-iitm-award { fill: #facc15; }
+        .node-iitm-note { fill: #94a3b8; }
+        .node-tifr-core { fill: #d946ef; }
         .node-tifr-lab { fill: #80e2d3; }
         .node-tifr-elective { fill: #c084fc; }
         .node-tifr-project { fill: #f0b429; }
@@ -351,7 +373,7 @@
         .node-tifr-terminal { fill: #38bdf8; }
 
         .link-tifr {
-            stroke: #58a6ff;
+            stroke: #d946ef;
             stroke-opacity: 0.75;
             stroke-width: 2.2px;
         }
@@ -659,10 +681,10 @@
                         <button class="close-intro" onclick="hideIntro()" title="Close">×</button>
                         <h2> My Academic Journey</h2>
                         <p>
-                            Welcome to an interactive visualization of my academic path through <strong>IISER Mohali</strong>, <strong>IIT Madras BS in Data Science & AI</strong>, and <strong>TIFR Hyderabad</strong>.
+                            Welcome to an interactive visualization of my academic path through <strong>IISER Mohali</strong>, <strong>IIT Madras BS in Data Science and Applications</strong>, and <strong>TIFR</strong>.
                         </p>
                         <p>
-                            This graph shows coursework, programme structure, and the TIFR Hyderabad Integrated M.Sc.-Ph.D. Physics M.Sc. exit pathway, connected by their relationships.
+                            This graph shows coursework, programme structure, and the TIFR Integrated M.Sc.-Ph.D. Physics M.Sc. exit pathway, connected by their relationships.
                         </p>
                         <div class="instructions">
                              <strong>Tips:</strong> Hover over any node to see details • Drag nodes to reorganize • Scroll to zoom • Use controls on the right to filter
@@ -674,7 +696,6 @@
                         <button class="graph-controls-btn" onclick="showIntro()">ℹ Show Instructions</button>
                         <label><input type="checkbox" id="toggleSemesters" checked> Semesters</label>
                         <label><input type="checkbox" id="toggleCourses" checked> Courses</label>
-                        <label><input type="checkbox" id="toggleGrades" checked> Grades</label>
                         <label><input type="checkbox" id="toggleLabs" checked> Labs</label>
                         <label>Link Distance: <input type="range" id="linkDistance" min="20" max="500" value="200"></label>
                         <label>Charge Force: <input type="range" id="chargeForce" min="-1000" max="-10" value="-400"></label>
@@ -688,8 +709,8 @@
                             <div class="legend-item"><div class="legend-color" style="background: #48bb78;"></div><span>Biology</span></div>
                             <div class="legend-item"><div class="legend-color" style="background: #9f7aea;"></div><span>Mathematics</span></div>
                             <div class="legend-item"><div class="legend-color" style="background: #a0e7e5;"></div><span>Lab</span></div>
-                            <div class="legend-item"><div class="legend-color" style="background: #58a6ff;"></div><span>TIFR</span></div>
-                            <div class="legend-item"><div class="legend-color" style="background: #c084fc;"></div><span>TIFR Elective Pool</span></div>
+                            <div class="legend-item"><div class="legend-color" style="background: #d946ef;"></div><span>TIFR Coursework</span></div>
+                            <div class="legend-item"><div class="legend-color" style="background: #c084fc;"></div><span>Elective Pool</span></div>
                             <div class="legend-item"><div class="legend-color" style="background: #26a641;"></div><span>Semester Links</span></div>
                         </div>
                     </div>
@@ -738,28 +759,28 @@
     const allGraphData = {
         nodes: [
             // --- CENTRAL NODES ---
-            { id: "sutirtha", name: "Sutirtha Mukherjee (IISER)", type: "central", size: 25, cgpa: 9.3 },
-            { id: "iitm_bs", name: "IITM BS in Data Science & AI", type: "central", size: 25 },
+            { id: "sutirtha", name: "Sutirtha Mukherjee (IISER)", type: "central", size: 25 },
+            { id: "iitm_bs", name: "IITM BS in Data Science and Applications", type: "central", size: 25 },
             {
-                id: "tifr_hyd",
-                name: "TIFR Hyderabad",
-                fullName: "TIFR Hyderabad Integrated M.Sc.-Ph.D. Physics",
-                type: "tifr",
+                id: "tifr_main",
+                name: "TIFR",
+                fullName: "TIFR Integrated M.Sc.-Ph.D. Physics",
+                type: "central",
                 size: 25,
-                status: "M.Sc. exit path represented from the TIFR Hyderabad catalogue notes.",
-                note: "Exact elective requirement to be confirmed by the TIFR Hyderabad Physics Subject Board."
+                status: "Integrated M.Sc.-Ph.D. Physics M.Sc. exit path.",
+                note: "Exact elective requirement to be confirmed by the TIFR Physics Subject Board."
             },
 
             // --- IISER MOHALI DATA ---
-            { id: "sem1", name: "IISER Sem I", type: "semester", size: 18, sgpa: 9.1, credits: 19 },
-            { id: "sem2", name: "IISER Sem II", type: "semester", size: 18, sgpa: 9.5, credits: 19 },
-            { id: "sem3", name: "IISER Sem III", type: "semester", size: 18, sgpa: 9.0, credits: 18 },
-            { id: "sem4", name: "IISER Sem IV", type: "semester", size: 18, sgpa: 9.5, credits: 19 },
-            { id: "sem5", name: "IISER Sem V", type: "semester", size: 18, sgpa: 8.5, credits: 21 },
-            { id: "sem6", name: "IISER Sem VI", type: "semester", size: 18, sgpa: 9.0, credits: 25 },
-            { id: "sem7", name: "IISER Sem VII", type: "semester", size: 18, sgpa: 9.0, credits: 25 },
-            { id: "sem8", name: "IISER Sem VIII", type: "semester", size: 18, sgpa: 9.0, credits: 25 },
-            { id: "sem15", name: "IISER Sem XV", type: "semester", size: 15, sgpa: 10, credits: 5 },
+            { id: "sem1", name: "IISER Sem I", type: "semester", size: 18, credits: 19 },
+            { id: "sem2", name: "IISER Sem II", type: "semester", size: 18, credits: 19 },
+            { id: "sem3", name: "IISER Sem III", type: "semester", size: 18, credits: 18 },
+            { id: "sem4", name: "IISER Sem IV", type: "semester", size: 18, credits: 19 },
+            { id: "sem5", name: "IISER Sem V", type: "semester", size: 18, credits: 21 },
+            { id: "sem6", name: "IISER Sem VI", type: "semester", size: 18, credits: 25 },
+            { id: "sem7", name: "IISER Sem VII", type: "semester", size: 18, credits: 25 },
+            { id: "sem8", name: "IISER Sem VIII", type: "semester", size: 18, credits: 25 },
+            { id: "sem15", name: "IISER Sem XV", type: "semester", size: 15, credits: 5 },
             { id: "physics_hub", name: "Physics", type: "physics", size: 22 },
             { id: "physics_core", name: "Physics Core (Sem 1-4)", type: "physics", size: 18 },
             { id: "physics_major", name: "Physics Major (Sem 5-8)", type: "physics", size: 18 },
@@ -769,118 +790,72 @@
             { id: "math_dept", name: "Mathematics", type: "math", size: 15 },
             { id: "idc_dept", name: "Interdisciplinary", type: "idc", size: 15 },
             { id: "hss_dept", name: "Humanities", type: "hss", size: 15 },
-            { id: "grade_A", name: "A Grades", type: "grade-a", size: 15 },
-            { id: "grade_B", name: "B Grades", type: "grade-b", size: 12 },
-            { id: "grade_C", name: "C Grades", type: "grade-c", size: 8 },
-            { id: "grade_F", name: "F Grades", type: "grade-c", size: 8 },
             // --- ALL IISER COURSES ---
-            { id: "BIO101_1", name: "Cellular Basis of Life", type: "biology", size: 10, grade: "F", semester: 1, credits: 3 },
-            { id: "BIO111", name: "Biology Lab I", type: "lab", size: 8, grade: "A", semester: 1, credits: 1 },
-            { id: "CHM101", name: "Chemistry Elements", type: "chemistry", size: 10, grade: "B", semester: 1, credits: 3 },
-            { id: "CHM111", name: "Chemistry Lab I", type: "lab", size: 8, grade: "A", semester: 1, credits: 1 },
-            { id: "HSS101A_1", name: "Language Skills-A", type: "hss", size: 10, grade: "F", semester: 1, credits: 2 },
-            { id: "IDC101", name: "Intro to Computers", type: "idc", size: 10, grade: "A", semester: 1, credits: 2 },
-            { id: "MTH101", name: "Symmetry", type: "math", size: 10, grade: "A", semester: 1, credits: 3 },
-            { id: "PHY101", name: "Mechanics", type: "physics", size: 10, grade: "B", semester: 1, credits: 3 },
-            { id: "PHY111", name: "Physics Lab I", type: "lab", size: 8, grade: "A", semester: 1, credits: 1 },
-            { id: "BIO102", name: "Gene Expression", type: "biology", size: 10, grade: "A", semester: 2, credits: 3 },
-            { id: "BIO112", name: "Biology Lab II", type: "lab", size: 8, grade: "A", semester: 2, credits: 1 },
-            { id: "CHM102", name: "Atoms & Molecules", type: "chemistry", size: 10, grade: "B", semester: 2, credits: 3 },
-            { id: "CHM112", name: "Chemistry Lab II", type: "lab", size: 8, grade: "A", semester: 2, credits: 1 },
-            { id: "HSS102", name: "History of Science", type: "hss", size: 10, grade: "B", semester: 2, credits: 2 },
-            { id: "IDC102", name: "Hands-On Electronics", type: "idc", size: 10, grade: "A", semester: 2, credits: 2 },
-            { id: "MTH102", name: "Analysis in One Var", type: "math", size: 10, grade: "A", semester: 2, credits: 3 },
-            { id: "PHY102", name: "Electromagnetism", type: "physics", size: 10, grade: "A", semester: 2, credits: 3 },
-            { id: "PHY112", name: "Physics Lab II", type: "lab", size: 8, grade: "A", semester: 2, credits: 1 },
-            { id: "BIO201", name: "Genetics & Evolution", type: "biology", size: 10, grade: "B", semester: 3, credits: 3 },
-            { id: "BIO211", name: "Biology Lab III", type: "lab", size: 8, grade: "A", semester: 3, credits: 1 },
-            { id: "CHM201", name: "Spectroscopy", type: "chemistry", size: 10, grade: "B", semester: 3, credits: 3 },
-            { id: "CHM211", name: "Chemistry Lab III", type: "lab", size: 8, grade: "A", semester: 3, credits: 1 },
-            { id: "IDC205", name: "Diff. Equations", type: "idc", size: 10, grade: "B", semester: 3, credits: 2 },
-            { id: "IDC211", name: "Workshop Training", type: "idc", size: 8, grade: "A", semester: 3, credits: 1 },
-            { id: "MTH201", name: "Curves & Surfaces", type: "math", size: 10, grade: "A", semester: 3, credits: 3 },
-            { id: "PHY201", name: "Waves & Optics", type: "physics", size: 10, grade: "A", semester: 3, credits: 3 },
-            { id: "PHY211", name: "Physics Lab III", type: "lab", size: 8, grade: "B", semester: 3, credits: 1 },
-            { id: "BIO202", name: "Behaviour & Ecology", type: "biology", size: 10, grade: "A", semester: 4, credits: 3 },
-            { id: "BIO212", name: "Biology Lab IV", type: "lab", size: 8, grade: "A", semester: 4, credits: 1 },
-            { id: "CHM202", name: "Energetics & Dynamics", type: "chemistry", size: 10, grade: "A", semester: 4, credits: 3 },
-            { id: "CHM212", name: "Chemistry Lab IV", type: "lab", size: 8, grade: "A", semester: 4, credits: 1 },
-            { id: "HSS202", name: "Philosophy of Science", type: "hss", size: 10, grade: "A", semester: 4, credits: 2 },
-            { id: "IDC204", name: "Theory of Computation", type: "idc", size: 10, grade: "B", semester: 4, credits: 2 },
-            { id: "MTH202", name: "Probability & Stats", type: "math", size: 10, grade: "A", semester: 4, credits: 3 },
-            { id: "PHY202", name: "Thermo & Stat Phys", type: "physics", size: 10, grade: "B", semester: 4, credits: 3 },
-            { id: "PHY212", name: "Physics Lab IV", type: "lab", size: 8, grade: "A", semester: 4, credits: 1 },
-            { id: "IDC351", name: "Seminar (Participating)", type: "seminar", size: 8, grade: "A", semester: 5, credits: 1 },
-            { id: "PHY301", name: "Classical Mechanics", type: "physics", size: 12, grade: "A", semester: 5, credits: 4 },
-            { id: "PHY302", name: "Quantum Mechanics", type: "physics", size: 12, grade: "B", semester: 5, credits: 4 },
-            { id: "PHY303", name: "Electrodynamics", type: "physics", size: 12, grade: "B", semester: 5, credits: 4 },
-            { id: "PHY310", name: "Math Methods I", type: "physics", size: 12, grade: "B", semester: 5, credits: 4 },
-            { id: "PHY311", name: "Adv. Optics Lab", type: "lab", size: 10, grade: "A", semester: 5, credits: 4 },
-            { id: "HSS621", name: "Sources of Modernity", type: "hss", size: 10, grade: "A", semester: 6, credits: 4 },
-            { id: "IDC352", name: "Seminar (Attending)", type: "seminar", size: 8, grade: "A", semester: 6, credits: 1 },
-            { id: "PHY304", name: "Statistical Mechanics", type: "physics", size: 12, grade: "B", semester: 6, credits: 4 },
-            { id: "PHY306", name: "Adv. Quantum Mech.", type: "physics", size: 12, grade: "B", semester: 6, credits: 4 },
-            { id: "PHY312", name: "Adv. Electronics Lab", type: "lab", size: 10, grade: "A", semester: 6, credits: 4 },
-            { id: "PHY637", name: "Astrophysics I", type: "physics", size: 12, grade: "A", semester: 6, credits: 4 },
-            { id: "PHY638", name: "Physics of Fluids", type: "physics", size: 12, grade: "B", semester: 6, credits: 4 },
-            { id: "HSS653V.2", name: "Culture & Media Studies", type: "hss", size: 10, grade: "A", semester: 7, credits: 4 },
-            { id: "IDC451", name: "Seminar (Delivering)", type: "seminar", size: 8, grade: "A", semester: 7, credits: 1 },
-            { id: "IDC621V2", name: "Modelling Complex Systems", type: "idc", size: 12, grade: "A", semester: 7, credits: 4 },
-            { id: "PHY401V2", name: "Nuclear & Particle Phys", type: "physics", size: 12, grade: "A", semester: 7, credits: 4 },
-            { id: "PHY402V2", name: "Solid State Physics", type: "physics", size: 12, grade: "A", semester: 7, credits: 4 },
-            { id: "PHY403V2", name: "Atomic & Molecular Phys", type: "physics", size: 12, grade: "B", semester: 7, credits: 4 },
-            { id: "PHY411V2", name: "Nuclear Physics Lab", type: "lab", size: 10, grade: "B", semester: 7, credits: 4 },
-            { id: "IDC452", name: "Seminar (Delivering)", type: "seminar", size: 8, grade: "A", semester: 8, credits: 1 },
-            { id: "PHY412V2", name: "Condensed Matter Lab", type: "lab", size: 10, grade: "A", semester: 8, credits: 4 },
-            { id: "PHY669V2", name: "Astronomical Techniques", type: "physics", size: 12, grade: "B", semester: 8, credits: 4 },
-            { id: "PHY654V.2", name: "Astro II: Galaxies", type: "physics", size: 12, grade: "A", semester: 8, credits: 4 },
-            { id: "PHY635V2", name: "Gravitation & Cosmology", type: "physics", size: 12, grade: "B", semester: 8, credits: 4 },
-            { id: "PHY640V2", name: "Non-Equilibrium Stat Mech", type: "physics", size: 12, grade: "B", semester: 8, credits: 4 },
-            { id: "IDC402V2", name: "Nonlinear Dynamics", type: "idc", size: 12, grade: "A", semester: 8, credits: 4 },
-            { id: "BIO101_15", name: "Cellular Basis of Life", type: "biology", size: 10, grade: "A", semester: 15, credits: 3 },
-            { id: "HSS101A_15", name: "Language Skills-A", type: "hss", size: 10, grade: "A", semester: 15, credits: 2 },
-            // --- IIT MADRAS BS PROGRAM DATA ---
-            { id: "iitm_sem1", name: "IITM Sem I", type: "semester", size: 18, credits: 47 },
-            { id: "iitm_sem2", name: "IITM Sem II", type: "semester", size: 18, credits: 51 },
-            { id: "iitm_sem3", name: "IITM Sem III", type: "semester", size: 18, credits: 51 },
-            { id: "iitm_sem4", name: "IITM Sem IV", type: "semester", size: 18, credits: 54 },
-            { id: "iitm_sem5", name: "IITM Sem V", type: "semester", size: 18, credits: 54 },
-            { id: "iitm_sem6", name: "IITM Sem VI", type: "semester", size: 18, credits: 55 },
-            { id: "iitm_sem7", name: "IITM Sem VII", type: "semester", size: 18, credits: 46 },
-            { id: "iitm_sem8", name: "IITM Sem VIII", type: "semester", size: 18, credits: 54 },
-            // IITM Courses
-            { id: "iitm_calc", fullName: "Introduction to Calculus", name: "Calculus", type: "math", size: 10, credits: 10, semester: "iitm_sem1" },
-            { id: "iitm_phy", fullName: "Physics for Data Scientists", name: "Physics for DS", type: "physics", size: 10, credits: 10, semester: "iitm_sem1" },
-            { id: "iitm_engcalc", fullName: "Engineering Calculations", name: "Eng. Calc.", type: "idc", size: 10, credits: 6, semester: "iitm_sem1" },
-            { id: "iitm_computing", fullName: "Basics of Computing", name: "Computing", type: "idc", size: 10, credits: 12, semester: "iitm_sem1" },
-            { id: "iitm_writing1", fullName: "Writing for Self", name: "Writing for Self", type: "hss", size: 10, credits: 9, semester: "iitm_sem1" },
-            { id: "iitm_prob", fullName: "Introduction to Probability", name: "Probability", type: "math", size: 10, credits: 10, semester: "iitm_sem2" },
-            { id: "iitm_chem", fullName: "Chemistry for Data Scientists", name: "Chemistry for DS", type: "chemistry", size: 10, credits: 10, semester: "iitm_sem2" },
-            { id: "iitm_discrete", fullName: "Discrete Mathematics", name: "Discrete Math", type: "math", size: 10, credits: 10, semester: "iitm_sem2" },
-            { id: "iitm_engprinc", fullName: "Basics of Eng. Principles", name: "Eng. Principles", type: "idc", size: 10, credits: 12, semester: "iitm_sem2" },
-            { id: "iitm_writing2", fullName: "Writing seminar", name: "Writing Seminar", type: "hss", size: 10, credits: 9, semester: "iitm_sem2" },
-            { id: "iitm_linalg", fullName: "Applied Linear Algebra", name: "Linear Algebra", type: "math", size: 10, credits: 10, semester: "iitm_sem3" },
-            { id: "iitm_stats", fullName: "Statistical theory for Engineers", name: "Stats for Eng.", type: "math", size: 10, credits: 10, semester: "iitm_sem3" },
-            { id: "iitm_pdsa", fullName: "Programming & Data Structures", name: "PDSA", type: "idc", size: 10, credits: 15, semester: "iitm_sem3" },
-            { id: "iitm_opt", fullName: "Introduction to Optimization", name: "Optimization", type: "idc", size: 10, credits: 10, semester: "iitm_sem3" },
-            { id: "iitm_progeng", fullName: "Programming for Engineers", name: "Prog. for Eng.", type: "idc", size: 10, credits: 10, semester: "iitm_sem3" },
-            { id: "iitm_algo", fullName: "Design of algorithms", name: "Algorithms", type: "idc", size: 10, credits: 10, semester: "iitm_sem4" },
-            { id: "iitm_dbms", fullName: "Database Management Systems", name: "DBMS", type: "idc", size: 10, credits: 10, semester: "iitm_sem4" },
-            { id: "iitm_mlf", fullName: "Foundations of Machine Learning", name: "ML Foundations", type: "idc", size: 10, credits: 10, semester: "iitm_sem4" },
-            { id: "iitm_mllab", fullName: "Machine Learning Lab", name: "ML Lab", type: "lab", size: 8, credits: 6, semester: "iitm_sem4" },
-            { id: "iitm_bioeng", fullName: "Biology for Engineers", name: "Bio for Eng.", type: "biology", size: 10, credits: 9, semester: "iitm_sem4" },
-            { id: "iitm_hss_elec", fullName: "Humanities Elective", name: "Humanities Elec.", type: "hss", size: 10, credits: 9, semester: "iitm_sem4" },
-            { id: "iitm_graph", fullName: "Introduction to Graph Theory", name: "Graph Theory", type: "math", size: 10, credits: 10, semester: "iitm_sem5" },
-            { id: "iitm_datamine", fullName: "Data Mining", name: "Data Mining", type: "idc", size: 10, credits: 10, semester: "iitm_sem5" },
-            { id: "iitm_dl", fullName: "Deep Learning", name: "Deep Learning", type: "idc", size: 10, credits: 10, semester: "iitm_sem5" },
-            { id: "iitm_dllab", fullName: "Deep Learning Lab", name: "DL Lab", type: "lab", size: 8, credits: 6, semester: "iitm_sem5" },
-            { id: "iitm_nlp", fullName: "Natural Language Processing", name: "NLP", type: "idc", size: 10, credits: 10, semester: "iitm_sem6" },
-            { id: "iitm_nlpcvlab", fullName: "NLP & Computer Vision Lab", name: "NLP/CV Lab", type: "lab", size: 8, credits: 6, semester: "iitm_sem6" },
-            { id: "iitm_cv", fullName: "Computer Vision", name: "Computer Vision", type: "idc", size: 10, credits: 12, semester: "iitm_sem6" },
-            { id: "iitm_intern", fullName: "Summer Industrial Internship", name: "Internship", type: "idc", size: 12, credits: 20, semester: "iitm_sem6" },
-            { id: "iitm_rai", fullName: "Responsible AI", name: "Responsible AI", type: "hss", size: 10, credits: 10, semester: "iitm_sem7" },
-            { id: "iitm_proj1", fullName: "Project I", name: "Project I", type: "idc", size: 12, credits: 9, semester: "iitm_sem7" },
-            { id: "iitm_proj2", fullName: "Project II", name: "Project II", type: "idc", size: 15, credits: 18, semester: "iitm_sem8" }
+            { id: "BIO101_1", name: "Cellular Basis of Life", type: "biology", size: 10, semester: 1, credits: 3 },
+            { id: "BIO111", name: "Biology Lab I", type: "lab", size: 8, semester: 1, credits: 1 },
+            { id: "CHM101", name: "Chemistry Elements", type: "chemistry", size: 10, semester: 1, credits: 3 },
+            { id: "CHM111", name: "Chemistry Lab I", type: "lab", size: 8, semester: 1, credits: 1 },
+            { id: "HSS101A_1", name: "Language Skills-A", type: "hss", size: 10, semester: 1, credits: 2 },
+            { id: "IDC101", name: "Intro to Computers", type: "idc", size: 10, semester: 1, credits: 2 },
+            { id: "MTH101", name: "Symmetry", type: "math", size: 10, semester: 1, credits: 3 },
+            { id: "PHY101", name: "Mechanics", type: "physics", size: 10, semester: 1, credits: 3 },
+            { id: "PHY111", name: "Physics Lab I", type: "lab", size: 8, semester: 1, credits: 1 },
+            { id: "BIO102", name: "Gene Expression", type: "biology", size: 10, semester: 2, credits: 3 },
+            { id: "BIO112", name: "Biology Lab II", type: "lab", size: 8, semester: 2, credits: 1 },
+            { id: "CHM102", name: "Atoms & Molecules", type: "chemistry", size: 10, semester: 2, credits: 3 },
+            { id: "CHM112", name: "Chemistry Lab II", type: "lab", size: 8, semester: 2, credits: 1 },
+            { id: "HSS102", name: "History of Science", type: "hss", size: 10, semester: 2, credits: 2 },
+            { id: "IDC102", name: "Hands-On Electronics", type: "idc", size: 10, semester: 2, credits: 2 },
+            { id: "MTH102", name: "Analysis in One Var", type: "math", size: 10, semester: 2, credits: 3 },
+            { id: "PHY102", name: "Electromagnetism", type: "physics", size: 10, semester: 2, credits: 3 },
+            { id: "PHY112", name: "Physics Lab II", type: "lab", size: 8, semester: 2, credits: 1 },
+            { id: "BIO201", name: "Genetics & Evolution", type: "biology", size: 10, semester: 3, credits: 3 },
+            { id: "BIO211", name: "Biology Lab III", type: "lab", size: 8, semester: 3, credits: 1 },
+            { id: "CHM201", name: "Spectroscopy", type: "chemistry", size: 10, semester: 3, credits: 3 },
+            { id: "CHM211", name: "Chemistry Lab III", type: "lab", size: 8, semester: 3, credits: 1 },
+            { id: "IDC205", name: "Diff. Equations", type: "idc", size: 10, semester: 3, credits: 2 },
+            { id: "IDC211", name: "Workshop Training", type: "idc", size: 8, semester: 3, credits: 1 },
+            { id: "MTH201", name: "Curves & Surfaces", type: "math", size: 10, semester: 3, credits: 3 },
+            { id: "PHY201", name: "Waves & Optics", type: "physics", size: 10, semester: 3, credits: 3 },
+            { id: "PHY211", name: "Physics Lab III", type: "lab", size: 8, semester: 3, credits: 1 },
+            { id: "BIO202", name: "Behaviour & Ecology", type: "biology", size: 10, semester: 4, credits: 3 },
+            { id: "BIO212", name: "Biology Lab IV", type: "lab", size: 8, semester: 4, credits: 1 },
+            { id: "CHM202", name: "Energetics & Dynamics", type: "chemistry", size: 10, semester: 4, credits: 3 },
+            { id: "CHM212", name: "Chemistry Lab IV", type: "lab", size: 8, semester: 4, credits: 1 },
+            { id: "HSS202", name: "Philosophy of Science", type: "hss", size: 10, semester: 4, credits: 2 },
+            { id: "IDC204", name: "Theory of Computation", type: "idc", size: 10, semester: 4, credits: 2 },
+            { id: "MTH202", name: "Probability & Stats", type: "math", size: 10, semester: 4, credits: 3 },
+            { id: "PHY202", name: "Thermo & Stat Phys", type: "physics", size: 10, semester: 4, credits: 3 },
+            { id: "PHY212", name: "Physics Lab IV", type: "lab", size: 8, semester: 4, credits: 1 },
+            { id: "IDC351", name: "Seminar (Participating)", type: "seminar", size: 8, semester: 5, credits: 1 },
+            { id: "PHY301", name: "Classical Mechanics", type: "physics", size: 12, semester: 5, credits: 4 },
+            { id: "PHY302", name: "Quantum Mechanics", type: "physics", size: 12, semester: 5, credits: 4 },
+            { id: "PHY303", name: "Electrodynamics", type: "physics", size: 12, semester: 5, credits: 4 },
+            { id: "PHY310", name: "Math Methods I", type: "physics", size: 12, semester: 5, credits: 4 },
+            { id: "PHY311", name: "Adv. Optics Lab", type: "lab", size: 10, semester: 5, credits: 4 },
+            { id: "HSS621", name: "Sources of Modernity", type: "hss", size: 10, semester: 6, credits: 4 },
+            { id: "IDC352", name: "Seminar (Attending)", type: "seminar", size: 8, semester: 6, credits: 1 },
+            { id: "PHY304", name: "Statistical Mechanics", type: "physics", size: 12, semester: 6, credits: 4 },
+            { id: "PHY306", name: "Adv. Quantum Mech.", type: "physics", size: 12, semester: 6, credits: 4 },
+            { id: "PHY312", name: "Adv. Electronics Lab", type: "lab", size: 10, semester: 6, credits: 4 },
+            { id: "PHY637", name: "Astrophysics I", type: "physics", size: 12, semester: 6, credits: 4 },
+            { id: "PHY638", name: "Physics of Fluids", type: "physics", size: 12, semester: 6, credits: 4 },
+            { id: "HSS653V.2", name: "Culture & Media Studies", type: "hss", size: 10, semester: 7, credits: 4 },
+            { id: "IDC451", name: "Seminar (Delivering)", type: "seminar", size: 8, semester: 7, credits: 1 },
+            { id: "IDC621V2", name: "Modelling Complex Systems", type: "idc", size: 12, semester: 7, credits: 4 },
+            { id: "PHY401V2", name: "Nuclear & Particle Phys", type: "physics", size: 12, semester: 7, credits: 4 },
+            { id: "PHY402V2", name: "Solid State Physics", type: "physics", size: 12, semester: 7, credits: 4 },
+            { id: "PHY403V2", name: "Atomic & Molecular Phys", type: "physics", size: 12, semester: 7, credits: 4 },
+            { id: "PHY411V2", name: "Nuclear Physics Lab", type: "lab", size: 10, semester: 7, credits: 4 },
+            { id: "IDC452", name: "Seminar (Delivering)", type: "seminar", size: 8, semester: 8, credits: 1 },
+            { id: "PHY412V2", name: "Condensed Matter Lab", type: "lab", size: 10, semester: 8, credits: 4 },
+            { id: "PHY669V2", name: "Astronomical Techniques", type: "physics", size: 12, semester: 8, credits: 4 },
+            { id: "PHY654V.2", name: "Astro II: Galaxies", type: "physics", size: 12, semester: 8, credits: 4 },
+            { id: "PHY635V2", name: "Gravitation & Cosmology", type: "physics", size: 12, semester: 8, credits: 4 },
+            { id: "PHY640V2", name: "Non-Equilibrium Stat Mech", type: "physics", size: 12, semester: 8, credits: 4 },
+            { id: "IDC402V2", name: "Nonlinear Dynamics", type: "idc", size: 12, semester: 8, credits: 4 },
+            { id: "BIO101_15", name: "Cellular Basis of Life", type: "biology", size: 10, semester: 15, credits: 3 },
+            { id: "HSS101A_15", name: "Language Skills-A", type: "hss", size: 10, semester: 15, credits: 2 },
         ],
         links: []
     };
@@ -888,59 +863,179 @@
     // Build all the links
     const astroMinorCourses = new Set(["PHY637", "PHY654V.2", "PHY669V2", "PHY635V2", "IDC402V2", "IDC621V2", "PHY638"]);
 
-    const tifrCoreNote = "Core summary: Integrated M.Sc.-Ph.D. core 28 credits; Ph.D.-level core included 28 credits; Research Methodology 4 credits; total 60 credits.";
-    const tifrElectiveNote = "Exact elective requirement to be confirmed by the TIFR Hyderabad Physics Subject Board.";
+    const iitmProgramNote = "Level-based curriculum map: Qualifier, Foundation, two Diplomas, BSc Degree Level and BS Degree Level. Registration uses January, May and September terms, not fixed semesters.";
+    const iitmCourse = (id, code, title, level, type, credits, extra = {}) => ({
+        id,
+        code,
+        name: `${code} ${title}`,
+        fullName: `${code} ${title}`,
+        level,
+        type,
+        credits,
+        size: extra.size || 8,
+        program: "IIT Madras BS in Data Science and Applications",
+        ...extra
+    });
+
+    const iitmCourses = [
+        iitmCourse("iitm_BSMA1001", "BSMA1001", "Mathematics for Data Science I", "iitm_foundation", "math", 4),
+        iitmCourse("iitm_BSMA1002", "BSMA1002", "Statistics for Data Science I", "iitm_foundation", "math", 4),
+        iitmCourse("iitm_BSCS1001", "BSCS1001", "Computational Thinking", "iitm_foundation", "iitm-course", 4),
+        iitmCourse("iitm_BSHS1001", "BSHS1001", "English I", "iitm_foundation", "hss", 4),
+        iitmCourse("iitm_BSMA1003", "BSMA1003", "Mathematics for Data Science II", "iitm_foundation", "math", 4, { prerequisite: "BSMA1001 Mathematics for Data Science I" }),
+        iitmCourse("iitm_BSMA1004", "BSMA1004", "Statistics for Data Science II", "iitm_foundation", "math", 4, { prerequisite: "BSMA1002 Statistics for Data Science I; BSMA1001 Mathematics for Data Science I", corequisite: "BSMA1003 Mathematics for Data Science II" }),
+        iitmCourse("iitm_BSCS1002", "BSCS1002", "Programming in Python", "iitm_foundation", "iitm-course", 4, { prerequisite: "BSCS1001 Computational Thinking" }),
+        iitmCourse("iitm_BSHS1002", "BSHS1002", "English II", "iitm_foundation", "hss", 4, { prerequisite: "BSHS1001 English I" }),
+        iitmCourse("iitm_BSCS2001", "BSCS2001", "Database Management Systems", "iitm_programming_diploma", "iitm-course", 4),
+        iitmCourse("iitm_BSCS2002", "BSCS2002", "Programming, Data Structures and Algorithms Using Python", "iitm_programming_diploma", "iitm-course", 4),
+        iitmCourse("iitm_BSCS2003", "BSCS2003", "Modern Application Development I", "iitm_programming_diploma", "iitm-course", 4, { corequisite: "BSCS2001 Database Management Systems" }),
+        iitmCourse("iitm_BSCS2003P", "BSCS2003P", "Modern Application Development I Project", "iitm_programming_diploma", "iitm-project", 2, { corequisite: "BSCS2003 Modern Application Development I", size: 9 }),
+        iitmCourse("iitm_BSCS2005", "BSCS2005", "Programming Concepts Using Java", "iitm_programming_diploma", "iitm-course", 4),
+        iitmCourse("iitm_BSCS2006", "BSCS2006", "Modern Application Development II", "iitm_programming_diploma", "iitm-course", 4, { prerequisite: "BSCS2003 Modern Application Development I" }),
+        iitmCourse("iitm_BSCS2006P", "BSCS2006P", "Modern Application Development II Project", "iitm_programming_diploma", "iitm-project", 2, { prerequisite: "BSCS2003P Modern Application Development I Project", corequisite: "BSCS2006 Modern Application Development II", size: 9 }),
+        iitmCourse("iitm_BSSE2001", "BSSE2001", "System Commands", "iitm_programming_diploma", "iitm-course", 3),
+        iitmCourse("iitm_BSCS2004", "BSCS2004", "Machine Learning Foundations", "iitm_ds_diploma", "iitm-course", 4),
+        iitmCourse("iitm_BSMS2001", "BSMS2001", "Business Data Management", "iitm_ds_diploma", "iitm-course", 4),
+        iitmCourse("iitm_BSCS2007", "BSCS2007", "Machine Learning Techniques", "iitm_ds_diploma", "iitm-course", 4, { corequisite: "BSCS2004 Machine Learning Foundations" }),
+        iitmCourse("iitm_BSCS2008", "BSCS2008", "Machine Learning Practice", "iitm_ds_diploma", "iitm-course", 4, { prerequisite: "BSCS2004 Machine Learning Foundations; BSCS2007 Machine Learning Techniques" }),
+        iitmCourse("iitm_BSCS2008P", "BSCS2008P", "Machine Learning Practice Project", "iitm_ds_diploma", "iitm-project", 2, { corequisite: "BSCS2008 Machine Learning Practice", size: 9 }),
+        iitmCourse("iitm_BSSE2002", "BSSE2002", "Tools in Data Science", "iitm_ds_diploma", "iitm-course", 3, { corequisite: "BSCS2008 Machine Learning Practice" }),
+        iitmCourse("iitm_BSMS2002", "BSMS2002", "Business Analytics", "iitm_ds_track_business", "iitm-course", 4, { prerequisite: "BSMS2001 Business Data Management", track: "Business Analytics Track" }),
+        iitmCourse("iitm_BSMS2001P", "BSMS2001P", "Business Data Management Project", "iitm_ds_track_business", "iitm-project", 2, { corequisite: "BSMS2001 Business Data Management", track: "Business Analytics Track", size: 9 }),
+        iitmCourse("iitm_BSDA2001", "BSDA2001", "Introduction to Deep Learning and Generative AI", "iitm_ds_track_deep", "iitm-course", 4, { corequisite: "BSCS2008 Machine Learning Practice", track: "Deep Learning and Generative AI Track" }),
+        iitmCourse("iitm_BSDA2001P", "BSDA2001P", "Deep Learning and Generative AI Project", "iitm_ds_track_deep", "iitm-project", 2, { prerequisite: "BSCS2007 Machine Learning Techniques", corequisite: "BSCS2008 Machine Learning Practice; BSDA2001 Introduction to Deep Learning and Generative AI", track: "Deep Learning and Generative AI Track", size: 9 }),
+        iitmCourse("iitm_BSCS3001", "BSCS3001", "Software Engineering", "iitm_degree_core", "iitm-course", 4),
+        iitmCourse("iitm_BSCS3002", "BSCS3002", "Software Testing", "iitm_degree_core", "iitm-course", 4),
+        iitmCourse("iitm_BSCS3003", "BSCS3003", "AI: Search Methods for Problem Solving", "iitm_degree_core", "iitm-course", 4),
+        iitmCourse("iitm_BSCS3004", "BSCS3004", "Deep Learning", "iitm_degree_core", "iitm-course", 4),
+        iitmCourse("iitm_BSGN3001", "BSGN3001", "Strategies for Professional Growth", "iitm_degree_core", "hss", 4)
+    ];
+
+    const iitmElectives = [
+        ["iitm_BSDA5001", "BSDA5001", "Introduction to Big Data", "iitm_elective_ai"],
+        ["iitm_BSDA5004", "BSDA5004", "Large Language Models", "iitm_elective_ai"],
+        ["iitm_BSDA5005", "BSDA5005", "Introduction to Natural Language Processing", "iitm_elective_ai"],
+        ["iitm_BSDA5006", "BSDA5006", "Deep Learning for Computer Vision", "iitm_elective_ai"],
+        ["iitm_BSDA5013", "BSDA5013", "Deep Learning Practice", "iitm_elective_ai"],
+        ["iitm_BSDA5002", "BSDA5002", "Mathematical Foundations of Generative AI", "iitm_elective_ai"],
+        ["iitm_BSDA5003", "BSDA5003", "Algorithms for Data Science", "iitm_elective_ai"],
+        ["iitm_BSDA5014", "BSDA5014", "Machine Learning Operations", "iitm_elective_ai"],
+        ["iitm_BSDA4001", "BSDA4001", "Data Science and AI Lab", "iitm_elective_ai"],
+        ["iitm_BSDA5007", "BSDA5007", "Reinforcement Learning", "iitm_elective_ai"],
+        ["iitm_BSDA6004", "BSDA6004", "Sequential Decision Making", "iitm_elective_ai"],
+        ["iitm_BSCS4021", "BSCS4021", "Advanced Algorithms", "iitm_elective_systems"],
+        ["iitm_BSCS3031", "BSCS3031", "Computer Systems Design", "iitm_elective_systems"],
+        ["iitm_BSCS3005", "BSCS3005", "Programming in C", "iitm_elective_systems"],
+        ["iitm_BSCS4022", "BSCS4022", "Operating Systems", "iitm_elective_systems"],
+        ["iitm_BSCS4010", "BSCS4010", "App Development Lab", "iitm_elective_systems"],
+        ["iitm_BSCS4024", "BSCS4024", "Computer Networks", "iitm_elective_systems"],
+        ["iitm_BSCS3021", "BSCS3021", "Theory of Computation", "iitm_elective_systems"],
+        ["iitm_BSCS4032", "BSCS4032", "Compiler Design", "iitm_elective_systems"],
+        ["iitm_BSCS4003", "BSCS4003", "Privacy and Security in Online Social Media", "iitm_elective_systems"],
+        ["iitm_BSMA3012", "BSMA3012", "Linear Statistical Models", "iitm_elective_math"],
+        ["iitm_BSMA3014", "BSMA3014", "Statistical Computing", "iitm_elective_math"],
+        ["iitm_BSMA2001", "BSMA2001", "Mathematical Thinking", "iitm_elective_math"],
+        ["iitm_BSMA3001", "BSMA3001", "Discrete Mathematics", "iitm_elective_math"],
+        ["iitm_BSBT4001", "BSBT4001", "Algorithmic Thinking in Bioinformatics", "iitm_elective_bio"],
+        ["iitm_BSBT4002", "BSBT4002", "Big Data and Biological Networks", "iitm_elective_bio"],
+        ["iitm_BSCS4001", "BSCS4001", "Data Visualization Design", "iitm_elective_design"],
+        ["iitm_BSEE4001", "BSEE4001", "Speech Technology", "iitm_elective_design"],
+        ["iitm_BSMS4002", "BSMS4002", "Design Thinking for Data-Driven Application Development", "iitm_elective_design"],
+        ["iitm_BSMS4001", "BSMS4001", "Industry 4.0", "iitm_elective_business"],
+        ["iitm_BSMS3002", "BSMS3002", "Market Research", "iitm_elective_business"],
+        ["iitm_BSMS4003", "BSMS4003", "Financial Forensics", "iitm_elective_business"],
+        ["iitm_BSMS3033", "BSMS3033", "Managerial Economics", "iitm_elective_business"],
+        ["iitm_BSMS4023", "BSMS4023", "Game Theory and Strategy", "iitm_elective_business"],
+        ["iitm_BSMS3034", "BSMS3034", "Corporate Finance", "iitm_elective_business"]
+    ].map(([id, code, title, level]) => iitmCourse(id, code, title, level, "iitm-elective", 4, { electiveGroup: level.replace("iitm_elective_", "").replace("_", " ") }));
 
     allGraphData.nodes.push(
-        { id: "tifr_sem1", name: "TIFR Sem I", type: "semester", size: 18, credits: 12, program: "TIFR Hyderabad Physics", description: "First-semester core: Numerical Methods and Algorithms in Chemical Physics, Mathematical Methods for Physicists, Classical Mechanics." },
-        { id: "tifr_sem2", name: "TIFR Sem II", type: "semester", size: 18, credits: 16, program: "TIFR Hyderabad Physics", description: "Second-semester core: Quantum Mechanics I, Classical Electrodynamics I, Experimental Methods." },
-        { id: "tifr_summer", name: "Summer Research", type: "tifr-project", size: 15, program: "TIFR Hyderabad Physics", note: "Research/project window connected to Departmental Project I where applicable; confirm requirement with the Subject Board." },
-        { id: "tifr_sem3", name: "TIFR Sem III", type: "semester", size: 18, credits: 12, program: "TIFR Hyderabad Physics", description: "Third-semester core: Numerical Methods II, Statistical Mechanics I, Research Methodology." },
-        { id: "tifr_winter", name: "Winter Research", type: "tifr-project", size: 15, program: "TIFR Hyderabad Physics", note: "Reading/project window connected to Departmental Project II where applicable; confirm requirement with the Subject Board." },
-        { id: "tifr_sem4", name: "TIFR Sem IV", type: "semester", size: 18, credits: 20, program: "TIFR Hyderabad Physics", description: "Fourth-semester core: Quantum Mechanics II / Advanced Quantum Mechanics, Classical Electrodynamics II, Advanced Experimental Methods." },
-        { id: "tifr_core_summary", name: "Core: 60 credits", type: "tifr-core", size: 17, credits: 60, program: "TIFR Hyderabad Physics", description: tifrCoreNote },
-        { id: "tifr_phy1027", name: "PHY-102.7", fullName: "PHY-102.7 Numerical Methods and Algorithms in Chemical Physics", type: "tifr-core", size: 10, credits: 4, semester: "tifr_sem1", program: "TIFR Hyderabad Physics" },
-        { id: "tifr_phy1037", name: "PHY-103.7", fullName: "PHY-103.7 Mathematical Methods for Physicists", type: "tifr-core", size: 10, credits: 4, semester: "tifr_sem1", program: "TIFR Hyderabad Physics" },
-        { id: "tifr_phy1047", name: "PHY-104.7", fullName: "PHY-104.7 Classical Mechanics", type: "tifr-core", size: 10, credits: 4, semester: "tifr_sem1", program: "TIFR Hyderabad Physics" },
-        { id: "tifr_phy1067", name: "PHY-106.7", fullName: "PHY-106.7 Quantum Mechanics I", type: "tifr-core", size: 10, credits: 4, semester: "tifr_sem2", program: "TIFR Hyderabad Physics" },
-        { id: "tifr_phy1077", name: "PHY-107.7", fullName: "PHY-107.7 Classical Electrodynamics I", type: "tifr-core", size: 10, credits: 4, semester: "tifr_sem2", program: "TIFR Hyderabad Physics" },
-        { id: "tifr_phy1087", name: "PHY-108.7", fullName: "PHY-108.7 Experimental Methods", type: "tifr-lab", size: 11, credits: 8, semester: "tifr_sem2", program: "TIFR Hyderabad Physics" },
-        { id: "tifr_phy2027", name: "PHY-202.7", fullName: "PHY-202.7 Numerical Methods II", type: "tifr-core", size: 10, credits: 4, semester: "tifr_sem3", program: "TIFR Hyderabad Physics" },
-        { id: "tifr_phy2057", name: "PHY-205.7", fullName: "PHY-205.7 Statistical Mechanics I", type: "tifr-core", size: 10, credits: 4, semester: "tifr_sem3", program: "TIFR Hyderabad Physics" },
-        { id: "tifr_phy2007", name: "PHY-200.7", fullName: "PHY-200.7 Research Methodology", type: "tifr-core", size: 10, credits: 4, semester: "tifr_sem3", program: "TIFR Hyderabad Physics", status: "Compulsory Course" },
-        { id: "tifr_phy2067", name: "PHY-206.7", fullName: "PHY-206.7 Quantum Mechanics II / Advanced Quantum Mechanics", type: "tifr-core", size: 10, credits: 4, semester: "tifr_sem4", program: "TIFR Hyderabad Physics" },
-        { id: "tifr_phy2077", name: "PHY-207.7", fullName: "PHY-207.7 Classical Electrodynamics II", type: "tifr-core", size: 10, credits: 4, semester: "tifr_sem4", program: "TIFR Hyderabad Physics" },
-        { id: "tifr_phy2087", name: "PHY-208.7", fullName: "PHY-208.7 Advanced Experimental Methods", type: "tifr-lab", size: 12, credits: 12, semester: "tifr_sem4", program: "TIFR Hyderabad Physics" },
-        { id: "tifr_dp1", name: "DP-I", fullName: "PHY-300.7 Departmental Project I", type: "tifr-project", size: 11, credits: 8, program: "TIFR Hyderabad Physics", note: "Departmental Project I is listed as 8 credits; whether it is compulsory for the M.Sc. exit path should be confirmed with the TIFR Hyderabad Physics Subject Board." },
-        { id: "tifr_dp2", name: "DP-II", fullName: "PHY-400.7 Departmental Project II", type: "tifr-project", size: 11, credits: 8, program: "TIFR Hyderabad Physics", note: "Departmental Project II is listed as 8 credits; whether it is compulsory for the M.Sc. exit path should be confirmed with the TIFR Hyderabad Physics Subject Board." },
-        { id: "tifr_reading_courses", name: "Reading Courses", fullName: "PHY-399.7 and PHY-499.7 Reading Courses", type: "tifr-project", size: 11, program: "TIFR Hyderabad Physics", note: "Reading courses are optional or requirement-dependent." },
-        { id: "tifr_elective_board", name: "Elective Check", type: "tifr-warning", size: 14, program: "TIFR Hyderabad Physics", note: tifrElectiveNote },
-        { id: "tifr_elec_condensed", name: "Condensed Matter", type: "tifr-elective", size: 10, program: "TIFR Hyderabad Physics", codes: "PHY-302.7, PHY-303.7, PHY-313.7, PHY-417.7, PHY-419.7, PHY-429.7", note: tifrElectiveNote },
-        { id: "tifr_elec_soft_bio", name: "Soft/Bio Physics", type: "tifr-elective", size: 10, program: "TIFR Hyderabad Physics", codes: "PHY-225.7, PHY-325.7, PHY-405.7, PHY-428.7", note: tifrElectiveNote },
-        { id: "tifr_elec_stat", name: "Stat/Noneq", type: "tifr-elective", size: 10, program: "TIFR Hyderabad Physics", codes: "PHY-403.7, PHY-404.7, PHY-418.7, PHY-424.7 (2 credits), PHY-425.7, PHY-426.7", note: tifrElectiveNote },
-        { id: "tifr_elec_optics", name: "Optics/Atomic", type: "tifr-elective", size: 10, program: "TIFR Hyderabad Physics", codes: "PHY-301.7, PHY-304.7, PHY-305.7, PHY-410.7, PHY-427.7", note: tifrElectiveNote },
-        { id: "tifr_elec_mathcomp", name: "Math/Comp/Dyn", type: "tifr-elective", size: 10, program: "TIFR Hyderabad Physics", codes: "PHY-401.7, PHY-402.7, PHY-406.7, PHY-407.7, PHY-409.7, PHY-415.7, PHY-422.7", note: tifrElectiveNote },
-        { id: "tifr_elec_qft", name: "Field Theory", type: "tifr-elective", size: 10, program: "TIFR Hyderabad Physics", codes: "PHY-408.7", note: tifrElectiveNote },
-        { id: "tifr_elec_interdisciplinary", name: "Interdisciplinary", type: "tifr-elective", size: 10, program: "TIFR Hyderabad Physics", codes: "CHM-222.7, BIO-205.7, BIO-203.7, CHM-113.7, CHM-215.7, CHM-200.7, CHM-210.7, CHM-220.7, CHM-213.7/BIO-202.7, CHM-217.7, CHM-212.7/BIO-101.7", note: tifrElectiveNote },
-        { id: "tifr_exit_eligibility", name: "Eligibility Check", type: "tifr-admin", size: 11, program: "TIFR Hyderabad Physics", description: "M.Sc. eligibility checkpoint before declaring the exit option." },
-        { id: "tifr_exit_declare", name: "Declare M.Sc. Exit", type: "tifr-admin", size: 11, program: "TIFR Hyderabad Physics", description: "Declare the M.Sc. exit option through the required academic-administrative process." },
-        { id: "tifr_exit_datanet", name: "Datanet 2", type: "tifr-admin", size: 11, program: "TIFR Hyderabad Physics", description: "Apply for the M.Sc. degree through Datanet 2 after completing the required academic record." },
-        { id: "tifr_exit_project", name: "M.Sc. Research Project", type: "tifr-project", size: 13, program: "TIFR Hyderabad Physics", description: "M.Sc. Research Project for the exit pathway. This page intentionally uses the catalogue wording and does not relabel it." },
-        { id: "tifr_exit_report", name: "Project Report", type: "tifr-admin", size: 10, program: "TIFR Hyderabad Physics", description: "Project report submission for the M.Sc. Research Project." },
-        { id: "tifr_exit_oral", name: "Oral Evaluation", type: "tifr-admin", size: 10, program: "TIFR Hyderabad Physics", description: "Oral presentation and M.Sc. Committee evaluation." },
-        { id: "tifr_exit_records", name: "Academic Record", type: "tifr-admin", size: 10, program: "TIFR Hyderabad Physics", description: "Complete academic record, final transcript, and supervisor documents." },
-        { id: "tifr_exit_warning", name: "Fellowship Check", type: "tifr-warning", size: 11, program: "TIFR Hyderabad Physics", warning: "Fellowship recovery or repayment implications should be checked with TIFR administration before confirming an exit." },
-        { id: "tifr_exit_approval", name: "Admin Approval", type: "tifr-admin", size: 10, program: "TIFR Hyderabad Physics", description: "Academic and administrative approval for the M.Sc. exit application." },
-        { id: "tifr_exit_provisional", name: "Provisional Certificate", type: "tifr-admin", size: 10, program: "TIFR Hyderabad Physics", description: "Provisional certificate after approval." },
-        { id: "tifr_exit_final", name: "Final Certificate", type: "tifr-admin", size: 10, program: "TIFR Hyderabad Physics", description: "Final certificate issued after completion of the approval process." },
-        { id: "tifr_exit_awarded", name: "M.Sc. Degree Awarded", fullName: "M.Sc. DEGREE AWARDED - Exit from the TIFR Integrated M.Sc.-Ph.D. Physics Programme", type: "tifr-terminal", size: 14, program: "TIFR Hyderabad Physics", description: "Terminal node for the M.Sc. exit path." }
+        { id: "iitm_entry", name: "Entry", fullName: "Entry into the IIT Madras Degree Programme", type: "iitm-level", size: 15, program: "IIT Madras BS in Data Science and Applications", description: "Application, qualifier preparation/process, qualifier examination, and eligibility for Foundation-Level registration." },
+        { id: "iitm_qualifier", name: "Qualifier", fullName: "Qualifier Process Successfully Cleared?", type: "iitm-level", size: 15, program: "IIT Madras BS in Data Science and Applications", description: "Successful qualifier process leads to Foundation-Level registration." },
+        { id: "iitm_foundation", name: "Foundation: 32 cr", fullName: "Foundation Level - 8 Courses, 32 Credits", type: "iitm-level", size: 18, credits: 32, program: "IIT Madras BS in Data Science and Applications", description: "Foundation in mathematics, statistics, computational thinking, programming and English." },
+        { id: "iitm_foundation_award", name: "Foundation Certificate", type: "iitm-award", size: 13, credits: 32, program: "IIT Madras BS in Data Science and Applications", description: "Foundation Certificate from IITM CODE after all eight Foundation courses." },
+        { id: "iitm_diploma_level", name: "Diploma Level", fullName: "Diploma Level - Two Parallel Diplomas", type: "iitm-level", size: 17, credits: 54, program: "IIT Madras BS in Data Science and Applications", description: "Diploma in Programming and Diploma in Data Science; both together contribute 54 credits beyond Foundation." },
+        { id: "iitm_programming_diploma", name: "Programming Diploma", fullName: "Diploma in Programming - 6 Courses + 2 Projects - 27 Credits", type: "iitm-level", size: 16, credits: 27, program: "IIT Madras BS in Data Science and Applications", description: "Programming, databases, data structures, algorithms and complete web-application development." },
+        { id: "iitm_programming_award", name: "Programming Diploma Award", type: "iitm-award", size: 12, credits: 59, program: "IIT Madras BS in Data Science and Applications", description: "Diploma in Programming from IIT Madras; 59 cumulative credits with Foundation." },
+        { id: "iitm_ds_diploma", name: "Data Science Diploma", fullName: "Diploma in Data Science - 6 Courses + 2 Projects - 27 Credits", type: "iitm-level", size: 16, credits: 27, program: "IIT Madras BS in Data Science and Applications", description: "Data collection, business context, statistical analysis, machine learning, practical tools and one approved specialisation track." },
+        { id: "iitm_ds_track_choice", name: "Choose 1 DS Track", fullName: "Choose One 6-Credit Data Science Track", type: "iitm-level", size: 13, program: "IIT Madras BS in Data Science and Applications", description: "Choose either the Business Analytics track or the Deep Learning and Generative AI track." },
+        { id: "iitm_ds_track_business", name: "Business Analytics Track", type: "iitm-level", size: 12, credits: 6, program: "IIT Madras BS in Data Science and Applications", description: "Business Analytics plus Business Data Management Project." },
+        { id: "iitm_ds_track_deep", name: "Deep Learning Track", fullName: "Deep Learning and Generative AI Track", type: "iitm-level", size: 12, credits: 6, program: "IIT Madras BS in Data Science and Applications", description: "Introduction to Deep Learning and Generative AI plus applied project." },
+        { id: "iitm_ds_award", name: "Data Science Diploma Award", type: "iitm-award", size: 12, credits: 59, program: "IIT Madras BS in Data Science and Applications", description: "Diploma in Data Science from IIT Madras; 59 cumulative credits with Foundation." },
+        { id: "iitm_both_diplomas", name: "Both Diplomas: 86 cr", fullName: "Both Diplomas Completed - 86 Cumulative Credits", type: "iitm-level", size: 18, credits: 86, program: "IIT Madras BS in Data Science and Applications", description: "Foundation 32 credits + Programming Diploma 27 credits + Data Science Diploma 27 credits. Includes 12 Diploma courses and 4 compulsory Diploma projects." },
+        { id: "iitm_both_award", name: "Both Diplomas Award", type: "iitm-award", size: 12, credits: 86, program: "IIT Madras BS in Data Science and Applications", description: "Exit with both IIT Madras Diplomas after 86 cumulative credits." },
+        { id: "iitm_bsc_level", name: "BSc Level: +28 cr", fullName: "BSc Degree Level - 28 Additional Credits", type: "iitm-level", size: 17, credits: 28, program: "IIT Madras BS in Data Science and Applications", description: "Complete applicable Degree-Level core and approved credits to reach 114 cumulative credits." },
+        { id: "iitm_bsc_award", name: "BSc Award: 114 cr", fullName: "BSc in Programming and Data Science from IIT Madras", type: "iitm-award", size: 13, credits: 114, program: "IIT Madras BS in Data Science and Applications", description: "BSc award after 114 cumulative credits and BSc Degree-Level requirements." },
+        { id: "iitm_bs_level", name: "BS Level: +28 cr", fullName: "BS Degree Level - 28 Additional Credits", type: "iitm-level", size: 17, credits: 28, program: "IIT Madras BS in Data Science and Applications", description: "Complete remaining mandatory/core Degree-Level courses, approved electives, approved NPTEL credits where used, and approved apprenticeship credits where used." },
+        { id: "iitm_bs_award", name: "BS Award: 142 cr", fullName: "BS in Data Science and Applications Awarded - 142 Credits", type: "iitm-award", size: 18, credits: 142, program: "IIT Madras BS in Data Science and Applications", description: "Foundation, both Diplomas, four Diploma projects, BSc requirements, all five mandatory/core Degree-Level courses, and the full 142-credit BS requirement completed." },
+        { id: "iitm_degree_core", name: "Mandatory Core: 20 cr", fullName: "Mandatory Degree-Level Courses - All Five Must Be Completed", type: "iitm-level", size: 15, credits: 20, program: "IIT Madras BS in Data Science and Applications", description: "Five mandatory/core Degree-Level courses totaling 20 credits." },
+        { id: "iitm_degree_electives", name: "Approved Credits: 36 cr", fullName: "Degree-Level Elective and Approved Credit Requirement", type: "iitm-level", size: 15, credits: 36, program: "IIT Madras BS in Data Science and Applications", description: "36 approved Degree-Level credits beyond the five mandatory/core courses. Ordinary 4-credit electives, approved NPTEL transfer, and approved apprenticeship credit may contribute under programme rules." },
+        { id: "iitm_elective_ai", name: "AI/ML/DS Electives", type: "iitm-level", size: 12, program: "IIT Madras BS in Data Science and Applications", description: "Degree-Level elective pool: AI, machine learning and data science." },
+        { id: "iitm_elective_systems", name: "Software/Systems Electives", type: "iitm-level", size: 12, program: "IIT Madras BS in Data Science and Applications", description: "Degree-Level elective pool: programming, software and computer systems." },
+        { id: "iitm_elective_math", name: "Math/Stats Electives", type: "iitm-level", size: 12, program: "IIT Madras BS in Data Science and Applications", description: "Degree-Level elective pool: mathematics and statistics." },
+        { id: "iitm_elective_bio", name: "Bio Data Electives", type: "iitm-level", size: 12, program: "IIT Madras BS in Data Science and Applications", description: "Degree-Level elective pool: bioinformatics and biological data." },
+        { id: "iitm_elective_design", name: "Design/Speech Electives", type: "iitm-level", size: 12, program: "IIT Madras BS in Data Science and Applications", description: "Degree-Level elective pool: data visualisation, speech and design." },
+        { id: "iitm_elective_business", name: "Business Electives", type: "iitm-level", size: 12, program: "IIT Madras BS in Data Science and Applications", description: "Degree-Level elective pool: business, economics and management." },
+        { id: "iitm_nptel", name: "NPTEL Transfer", type: "iitm-note", size: 11, credits: 8, program: "IIT Madras BS in Data Science and Applications", description: "At the BSc and BS Degree Levels, up to 8 approved credits may be transferred from NPTEL under current programme rules." },
+        { id: "iitm_apprenticeship", name: "Apprenticeship", type: "iitm-note", size: 11, credits: 12, program: "IIT Madras BS in Data Science and Applications", description: "Approved BS-level apprenticeship credit may transfer up to 12 credits under current apprenticeship and evaluation rules." },
+        { id: "iitm_term_structure", name: "Flexible Terms", type: "iitm-note", size: 11, program: "IIT Madras BS in Data Science and Applications", description: "Three terms per year: January, May and September. Each term lasts about four months; up to four courses may be registered in a term subject to Credit Clearing Capability." },
+        { id: "iitm_assessment", name: "Assessment", type: "iitm-note", size: 11, program: "IIT Madras BS in Data Science and Applications", description: "Typical assessment includes weekly online assignments, in-person quizzes, and in-person end-term examination. Some courses may include programming examinations, mini-projects, project evaluations, viva voce, or take-home assignments." },
+        { id: "iitm_credit_ledger", name: "Credit Ledger", type: "iitm-note", size: 11, program: "IIT Madras BS in Data Science and Applications", description: "Foundation 32; Programming Diploma 27; Data Science Diploma 27; both Diplomas 86 cumulative; BSc 114 cumulative; BS 142 cumulative; mandatory Degree-Level core 20; remaining approved Degree-Level credits 36." },
+        ...iitmCourses,
+        ...iitmElectives
+    );
+
+    const tifrCoreNote = "Core summary: Integrated M.Sc.-Ph.D. core 28 credits; Ph.D.-level core included 28 credits; Research Methodology 4 credits; total 60 credits.";
+    const tifrElectiveNote = "Exact elective requirement to be confirmed by the TIFR Physics Subject Board.";
+
+    allGraphData.nodes.push(
+        { id: "tifr_sem1", name: "TIFR Sem I", type: "semester", size: 18, credits: 12, program: "TIFR Physics", description: "First-semester core: Numerical Methods and Algorithms in Chemical Physics, Mathematical Methods for Physicists, Classical Mechanics." },
+        { id: "tifr_sem2", name: "TIFR Sem II", type: "semester", size: 18, credits: 16, program: "TIFR Physics", description: "Second-semester core: Quantum Mechanics I, Classical Electrodynamics I, Experimental Methods." },
+        { id: "tifr_summer", name: "Summer Research", type: "tifr-project", size: 15, program: "TIFR Physics", note: "Research/project window connected to Departmental Project I where applicable; confirm requirement with the Subject Board." },
+        { id: "tifr_sem3", name: "TIFR Sem III", type: "semester", size: 18, credits: 12, program: "TIFR Physics", description: "Third-semester core: Numerical Methods II, Statistical Mechanics I, Research Methodology." },
+        { id: "tifr_winter", name: "Winter Research", type: "tifr-project", size: 15, program: "TIFR Physics", note: "Reading/project window connected to Departmental Project II where applicable; confirm requirement with the Subject Board." },
+        { id: "tifr_sem4", name: "TIFR Sem IV", type: "semester", size: 18, credits: 20, program: "TIFR Physics", description: "Fourth-semester core: Quantum Mechanics II / Advanced Quantum Mechanics, Classical Electrodynamics II, Advanced Experimental Methods." },
+        { id: "tifr_core_summary", name: "Core: 60 credits", type: "tifr-core", size: 17, credits: 60, program: "TIFR Physics", description: tifrCoreNote },
+        { id: "tifr_phy1027", name: "PHY-102.7 Numerical Methods", fullName: "PHY-102.7 Numerical Methods and Algorithms in Chemical Physics", type: "tifr-core", size: 10, credits: 4, semester: "tifr_sem1", program: "TIFR Physics" },
+        { id: "tifr_phy1037", name: "PHY-103.7 Math Methods", fullName: "PHY-103.7 Mathematical Methods for Physicists", type: "tifr-core", size: 10, credits: 4, semester: "tifr_sem1", program: "TIFR Physics" },
+        { id: "tifr_phy1047", name: "PHY-104.7 Classical Mechanics", fullName: "PHY-104.7 Classical Mechanics", type: "tifr-core", size: 10, credits: 4, semester: "tifr_sem1", program: "TIFR Physics" },
+        { id: "tifr_phy1067", name: "PHY-106.7 Quantum I", fullName: "PHY-106.7 Quantum Mechanics I", type: "tifr-core", size: 10, credits: 4, semester: "tifr_sem2", program: "TIFR Physics" },
+        { id: "tifr_phy1077", name: "PHY-107.7 Electrodynamics I", fullName: "PHY-107.7 Classical Electrodynamics I", type: "tifr-core", size: 10, credits: 4, semester: "tifr_sem2", program: "TIFR Physics" },
+        { id: "tifr_phy1087", name: "PHY-108.7 Experimental Methods", fullName: "PHY-108.7 Experimental Methods", type: "tifr-lab", size: 11, credits: 8, semester: "tifr_sem2", program: "TIFR Physics" },
+        { id: "tifr_phy2027", name: "PHY-202.7 Numerical Methods II", fullName: "PHY-202.7 Numerical Methods II", type: "tifr-core", size: 10, credits: 4, semester: "tifr_sem3", program: "TIFR Physics" },
+        { id: "tifr_phy2057", name: "PHY-205.7 Statistical Mechanics I", fullName: "PHY-205.7 Statistical Mechanics I", type: "tifr-core", size: 10, credits: 4, semester: "tifr_sem3", program: "TIFR Physics" },
+        { id: "tifr_phy2007", name: "PHY-200.7 Research Methodology", fullName: "PHY-200.7 Research Methodology", type: "tifr-core", size: 10, credits: 4, semester: "tifr_sem3", program: "TIFR Physics", status: "Compulsory Course" },
+        { id: "tifr_phy2067", name: "PHY-206.7 Quantum II", fullName: "PHY-206.7 Quantum Mechanics II / Advanced Quantum Mechanics", type: "tifr-core", size: 10, credits: 4, semester: "tifr_sem4", program: "TIFR Physics" },
+        { id: "tifr_phy2077", name: "PHY-207.7 Electrodynamics II", fullName: "PHY-207.7 Classical Electrodynamics II", type: "tifr-core", size: 10, credits: 4, semester: "tifr_sem4", program: "TIFR Physics" },
+        { id: "tifr_phy2087", name: "PHY-208.7 Advanced Experiments", fullName: "PHY-208.7 Advanced Experimental Methods", type: "tifr-lab", size: 12, credits: 12, semester: "tifr_sem4", program: "TIFR Physics" },
+        { id: "tifr_dp1", name: "DP-I", fullName: "PHY-300.7 Departmental Project I", type: "tifr-project", size: 11, credits: 8, program: "TIFR Physics", note: "Departmental Project I is listed as 8 credits; whether it is compulsory for the M.Sc. exit path should be confirmed with the TIFR Physics Subject Board." },
+        { id: "tifr_dp2", name: "DP-II", fullName: "PHY-400.7 Departmental Project II", type: "tifr-project", size: 11, credits: 8, program: "TIFR Physics", note: "Departmental Project II is listed as 8 credits; whether it is compulsory for the M.Sc. exit path should be confirmed with the TIFR Physics Subject Board." },
+        { id: "tifr_reading_courses", name: "Reading Courses", fullName: "PHY-399.7 and PHY-499.7 Reading Courses", type: "tifr-project", size: 11, program: "TIFR Physics", note: "Reading courses are optional or requirement-dependent." },
+        { id: "tifr_elective_board", name: "Elective Check", type: "tifr-warning", size: 14, program: "TIFR Physics", note: tifrElectiveNote },
+        { id: "tifr_elec_condensed", name: "Condensed Matter", type: "tifr-elective", size: 10, program: "TIFR Physics", codes: "PHY-302.7, PHY-303.7, PHY-313.7, PHY-417.7, PHY-419.7, PHY-429.7", note: tifrElectiveNote },
+        { id: "tifr_elec_soft_bio", name: "Soft/Bio Physics", type: "tifr-elective", size: 10, program: "TIFR Physics", codes: "PHY-225.7, PHY-325.7, PHY-405.7, PHY-428.7", note: tifrElectiveNote },
+        { id: "tifr_elec_stat", name: "Stat/Noneq", type: "tifr-elective", size: 10, program: "TIFR Physics", codes: "PHY-403.7, PHY-404.7, PHY-418.7, PHY-424.7 (2 credits), PHY-425.7, PHY-426.7", note: tifrElectiveNote },
+        { id: "tifr_elec_optics", name: "Optics/Atomic", type: "tifr-elective", size: 10, program: "TIFR Physics", codes: "PHY-301.7, PHY-304.7, PHY-305.7, PHY-410.7, PHY-427.7", note: tifrElectiveNote },
+        { id: "tifr_elec_mathcomp", name: "Math/Comp/Dyn", type: "tifr-elective", size: 10, program: "TIFR Physics", codes: "PHY-401.7, PHY-402.7, PHY-406.7, PHY-407.7, PHY-409.7, PHY-415.7, PHY-422.7", note: tifrElectiveNote },
+        { id: "tifr_elec_qft", name: "Field Theory", type: "tifr-elective", size: 10, program: "TIFR Physics", codes: "PHY-408.7", note: tifrElectiveNote },
+        { id: "tifr_elec_interdisciplinary", name: "Interdisciplinary", type: "tifr-elective", size: 10, program: "TIFR Physics", codes: "CHM-222.7, BIO-205.7, BIO-203.7, CHM-113.7, CHM-215.7, CHM-200.7, CHM-210.7, CHM-220.7, CHM-213.7/BIO-202.7, CHM-217.7, CHM-212.7/BIO-101.7", note: tifrElectiveNote },
+        { id: "tifr_exit_eligibility", name: "Eligibility Check", type: "tifr-admin", size: 11, program: "TIFR Physics", description: "M.Sc. eligibility checkpoint before declaring the exit option." },
+        { id: "tifr_exit_declare", name: "Declare M.Sc. Exit", type: "tifr-admin", size: 11, program: "TIFR Physics", description: "Declare the M.Sc. exit option through the required academic-administrative process." },
+        { id: "tifr_exit_datanet", name: "Datanet 2", type: "tifr-admin", size: 11, program: "TIFR Physics", description: "Apply for the M.Sc. degree through Datanet 2 after completing the required academic record." },
+        { id: "tifr_exit_project", name: "M.Sc. Research Project", type: "tifr-project", size: 13, program: "TIFR Physics", description: "M.Sc. Research Project for the exit pathway." },
+        { id: "tifr_exit_report", name: "Project Report", type: "tifr-admin", size: 10, program: "TIFR Physics", description: "Project report submission for the M.Sc. Research Project." },
+        { id: "tifr_exit_oral", name: "Oral Evaluation", type: "tifr-admin", size: 10, program: "TIFR Physics", description: "Oral presentation and M.Sc. Committee evaluation." },
+        { id: "tifr_exit_records", name: "Academic Record", type: "tifr-admin", size: 10, program: "TIFR Physics", description: "Complete academic record, final transcript, and supervisor documents." },
+        { id: "tifr_exit_warning", name: "Fellowship Check", type: "tifr-warning", size: 11, program: "TIFR Physics", warning: "Fellowship recovery or repayment implications should be checked with TIFR administration before confirming an exit." },
+        { id: "tifr_exit_approval", name: "Admin Approval", type: "tifr-admin", size: 10, program: "TIFR Physics", description: "Academic and administrative approval for the M.Sc. exit application." },
+        { id: "tifr_exit_provisional", name: "Provisional Certificate", type: "tifr-admin", size: 10, program: "TIFR Physics", description: "Provisional certificate after approval." },
+        { id: "tifr_exit_final", name: "Final Certificate", type: "tifr-admin", size: 10, program: "TIFR Physics", description: "Final certificate issued after completion of the approval process." },
+        { id: "tifr_exit_awarded", name: "M.Sc. Degree Awarded", fullName: "M.Sc. DEGREE AWARDED - Exit from the TIFR Integrated M.Sc.-Ph.D. Physics Programme", type: "tifr-terminal", size: 14, program: "TIFR Physics", description: "Terminal node for the M.Sc. exit path." }
     );
 
     allGraphData.links.push(
-        { source: "tifr_hyd", target: "sutirtha", strength: 0.18, color: "tifr", distance: 720 },
-        { source: "tifr_hyd", target: "iitm_bs", strength: 0.16, color: "tifr", distance: 760 },
-        { source: "tifr_hyd", target: "tifr_core_summary", strength: 0.8, color: "tifr", distance: 150 },
-        { source: "tifr_hyd", target: "tifr_sem1", strength: 0.9, color: "tifr", distance: 130 },
+        { source: "tifr_main", target: "tifr_core_summary", strength: 0.8, color: "tifr", distance: 150 },
+        { source: "tifr_main", target: "tifr_sem1", strength: 0.9, color: "tifr", distance: 130 },
         { source: "tifr_sem1", target: "tifr_sem2", strength: 0.65, semesterLink: true, distance: 120 },
         { source: "tifr_sem2", target: "tifr_summer", strength: 0.55, color: "tifrAdmin", distance: 115 },
         { source: "tifr_summer", target: "tifr_sem3", strength: 0.55, color: "tifrAdmin", distance: 115 },
@@ -979,9 +1074,11 @@
         });
     });
 
-    // Main connection between IISER and IITM with green color and longer distance
+    // Main institute triangle with green links
     allGraphData.links.push(
-        { source: "sutirtha", target: "iitm_bs", strength: 0.3, color: "green", distance: 400 }
+        { source: "sutirtha", target: "iitm_bs", strength: 0.22, color: "green", distance: 560 },
+        { source: "sutirtha", target: "tifr_main", strength: 0.18, color: "green", distance: 720 },
+        { source: "iitm_bs", target: "tifr_main", strength: 0.18, color: "green", distance: 720 }
     );
 
     // IISER connections
@@ -1022,28 +1119,72 @@
         { source: "sem8", target: "sem15", strength: 0.4, semesterLink: true }
     );
 
-    // IITM connections
+    // IITM level-based programme pathway
     allGraphData.links.push(
-        { source: "iitm_bs", target: "iitm_sem1", strength: 1 },
-        { source: "iitm_bs", target: "iitm_sem2", strength: 1 },
-        { source: "iitm_bs", target: "iitm_sem3", strength: 1 },
-        { source: "iitm_bs", target: "iitm_sem4", strength: 1 },
-        { source: "iitm_bs", target: "iitm_sem5", strength: 1 },
-        { source: "iitm_bs", target: "iitm_sem6", strength: 1 },
-        { source: "iitm_bs", target: "iitm_sem7", strength: 1 },
-        { source: "iitm_bs", target: "iitm_sem8", strength: 1 }
+        { source: "iitm_bs", target: "iitm_entry", strength: 0.9, color: "iitm", distance: 120 },
+        { source: "iitm_entry", target: "iitm_qualifier", strength: 0.8, color: "iitm", distance: 110 },
+        { source: "iitm_qualifier", target: "iitm_foundation", strength: 0.9, color: "iitm", distance: 130 },
+        { source: "iitm_foundation", target: "iitm_diploma_level", strength: 0.85, color: "iitm", distance: 145 },
+        { source: "iitm_diploma_level", target: "iitm_programming_diploma", strength: 0.75, color: "iitm", distance: 120 },
+        { source: "iitm_diploma_level", target: "iitm_ds_diploma", strength: 0.75, color: "iitm", distance: 120 },
+        { source: "iitm_ds_diploma", target: "iitm_ds_track_choice", strength: 0.65, color: "iitm", distance: 105 },
+        { source: "iitm_ds_track_choice", target: "iitm_ds_track_business", strength: 0.55, color: "iitm", distance: 95 },
+        { source: "iitm_ds_track_choice", target: "iitm_ds_track_deep", strength: 0.55, color: "iitm", distance: 95 },
+        { source: "iitm_programming_diploma", target: "iitm_both_diplomas", strength: 0.65, color: "iitm", distance: 135 },
+        { source: "iitm_ds_diploma", target: "iitm_both_diplomas", strength: 0.65, color: "iitm", distance: 135 },
+        { source: "iitm_both_diplomas", target: "iitm_bsc_level", strength: 0.75, color: "iitm", distance: 140 },
+        { source: "iitm_bsc_level", target: "iitm_bs_level", strength: 0.75, color: "iitm", distance: 140 },
+        { source: "iitm_bs_level", target: "iitm_bs_award", strength: 0.8, color: "iitm", distance: 130 },
+        { source: "iitm_foundation", target: "iitm_foundation_award", strength: 0.3, color: "iitmOptional", distance: 95 },
+        { source: "iitm_programming_diploma", target: "iitm_programming_award", strength: 0.3, color: "iitmOptional", distance: 95 },
+        { source: "iitm_ds_diploma", target: "iitm_ds_award", strength: 0.3, color: "iitmOptional", distance: 95 },
+        { source: "iitm_both_diplomas", target: "iitm_both_award", strength: 0.3, color: "iitmOptional", distance: 95 },
+        { source: "iitm_bsc_level", target: "iitm_bsc_award", strength: 0.3, color: "iitmOptional", distance: 95 },
+        { source: "iitm_bsc_level", target: "iitm_degree_core", strength: 0.55, color: "iitm", distance: 105 },
+        { source: "iitm_bs_level", target: "iitm_degree_core", strength: 0.55, color: "iitm", distance: 105 },
+        { source: "iitm_bsc_level", target: "iitm_degree_electives", strength: 0.55, color: "iitm", distance: 115 },
+        { source: "iitm_bs_level", target: "iitm_degree_electives", strength: 0.55, color: "iitm", distance: 115 },
+        { source: "iitm_degree_electives", target: "iitm_nptel", strength: 0.35, color: "iitmOptional", distance: 90 },
+        { source: "iitm_bs_level", target: "iitm_apprenticeship", strength: 0.35, color: "iitmOptional", distance: 90 },
+        { source: "iitm_bs", target: "iitm_term_structure", strength: 0.25, color: "iitmOptional", distance: 140 },
+        { source: "iitm_bs", target: "iitm_assessment", strength: 0.25, color: "iitmOptional", distance: 140 },
+        { source: "iitm_bs", target: "iitm_credit_ledger", strength: 0.25, color: "iitmOptional", distance: 140 }
     );
 
-    // Connect IITM semesters in order with green lines
-    allGraphData.links.push(
-        { source: "iitm_sem1", target: "iitm_sem2", strength: 0.6, semesterLink: true },
-        { source: "iitm_sem2", target: "iitm_sem3", strength: 0.6, semesterLink: true },
-        { source: "iitm_sem3", target: "iitm_sem4", strength: 0.6, semesterLink: true },
-        { source: "iitm_sem4", target: "iitm_sem5", strength: 0.6, semesterLink: true },
-        { source: "iitm_sem5", target: "iitm_sem6", strength: 0.6, semesterLink: true },
-        { source: "iitm_sem6", target: "iitm_sem7", strength: 0.6, semesterLink: true },
-        { source: "iitm_sem7", target: "iitm_sem8", strength: 0.6, semesterLink: true }
-    );
+    ["iitm_elective_ai", "iitm_elective_systems", "iitm_elective_math", "iitm_elective_bio", "iitm_elective_design", "iitm_elective_business"].forEach(id => {
+        allGraphData.links.push({ source: "iitm_degree_electives", target: id, strength: 0.35, color: "iitmOptional", distance: 110 });
+    });
+
+    iitmCourses.concat(iitmElectives).forEach(course => {
+        allGraphData.links.push({ source: course.level, target: course.id, strength: 0.75, color: course.type === "iitm-elective" ? "iitmOptional" : "iitm", distance: course.type === "iitm-elective" ? 72 : 82 });
+    });
+
+    [
+        ["iitm_BSMA1001", "iitm_BSMA1003", "iitm"],
+        ["iitm_BSMA1001", "iitm_BSMA1004", "iitm"],
+        ["iitm_BSMA1002", "iitm_BSMA1004", "iitm"],
+        ["iitm_BSMA1003", "iitm_BSMA1004", "iitmCoreq"],
+        ["iitm_BSCS1001", "iitm_BSCS1002", "iitm"],
+        ["iitm_BSHS1001", "iitm_BSHS1002", "iitm"],
+        ["iitm_BSCS2001", "iitm_BSCS2003", "iitmCoreq"],
+        ["iitm_BSCS2003", "iitm_BSCS2003P", "iitmCoreq"],
+        ["iitm_BSCS2003", "iitm_BSCS2006", "iitm"],
+        ["iitm_BSCS2003P", "iitm_BSCS2006P", "iitm"],
+        ["iitm_BSCS2006", "iitm_BSCS2006P", "iitmCoreq"],
+        ["iitm_BSCS2004", "iitm_BSCS2007", "iitmCoreq"],
+        ["iitm_BSCS2004", "iitm_BSCS2008", "iitm"],
+        ["iitm_BSCS2007", "iitm_BSCS2008", "iitm"],
+        ["iitm_BSCS2008", "iitm_BSCS2008P", "iitmCoreq"],
+        ["iitm_BSCS2008", "iitm_BSSE2002", "iitmCoreq"],
+        ["iitm_BSMS2001", "iitm_BSMS2002", "iitm"],
+        ["iitm_BSMS2001", "iitm_BSMS2001P", "iitmCoreq"],
+        ["iitm_BSCS2008", "iitm_BSDA2001", "iitmCoreq"],
+        ["iitm_BSCS2007", "iitm_BSDA2001P", "iitm"],
+        ["iitm_BSCS2008", "iitm_BSDA2001P", "iitmCoreq"],
+        ["iitm_BSDA2001", "iitm_BSDA2001P", "iitmCoreq"]
+    ].forEach(([source, target, color]) => {
+        allGraphData.links.push({ source, target, strength: 0.2, color, distance: 64 });
+    });
 
     // Course connections
     allGraphData.nodes.forEach(node => {
@@ -1059,7 +1200,6 @@
             }
             if (node.semester >= 5) allGraphData.links.push({ source: node.id, target: "physics_major", strength: 0.6 });
             if (astroMinorCourses.has(node.id)) allGraphData.links.push({ source: node.id, target: "astro_minor", strength: 0.7 });
-            if (node.grade) allGraphData.links.push({ source: node.id, target: `grade_${node.grade}`, strength: 0.2 });
         } else if (node.semester && typeof node.semester === 'string') {
             allGraphData.links.push({ source: node.semester, target: node.id, strength: 1 });
             if (node.id.startsWith("tifr_phy")) {
@@ -1115,46 +1255,60 @@
     let link = g.append("g").selectAll("line");
     let node = g.append("g").selectAll("g");
     let linkDistanceScale = 1;
-    const isTifrNode = d => d && typeof d.id === "string" && (d.id === "tifr_hyd" || d.id.startsWith("tifr_"));
+    const isTifrNode = d => d && typeof d.id === "string" && (d.id === "tifr_main" || d.id.startsWith("tifr_"));
+    const isIitmNode = d => d && typeof d.id === "string" && (d.id === "iitm_bs" || d.id.startsWith("iitm_"));
+    const isIiserNode = d => d && typeof d.id === "string" && !isIitmNode(d) && !isTifrNode(d);
 
     const simulation = d3.forceSimulation()
         .force("link", d3.forceLink()
             .id(d => d.id)
             .distance(d => (d.distance || 200) * linkDistanceScale)
             .strength(d => d.strength || 0.1))
-        .force("charge", d3.forceManyBody().strength(-400))
-        .force("collision", d3.forceCollide().radius(d => d.size + 8))
+        .force("charge", d3.forceManyBody().strength(d => (d.type === "central" ? -900 : -560)))
+        .force("collision", d3.forceCollide().radius(d => d.size + (d.type === "central" ? 22 : 13)))
         .force("center", d3.forceCenter(width / 2, height / 2))
         .force("x", d3.forceX(d => {
             const sidebarWidth = 220; // Account for right sidebar
             const availableWidth = Math.max(320, width - sidebarWidth);
             if (isTifrNode(d))
-                return availableWidth * 0.9;
-            if (d.id === 'sutirtha' || (d.id.startsWith('sem') && !d.id.startsWith('iitm')))
-                return availableWidth * 0.3;
-            else if (d.id === 'iitm_bs' || d.id.startsWith('iitm'))
-                return availableWidth * 0.65;
+                return availableWidth * 0.84;
+            if (isIitmNode(d))
+                return availableWidth * 0.52;
+            if (isIiserNode(d))
+                return availableWidth * 0.2;
             return availableWidth * 0.5;
-        }).strength(d => isTifrNode(d) ? 0.18 : 0.1))
+        }).strength(d => (isTifrNode(d) || isIitmNode(d) || isIiserNode(d)) ? 0.2 : 0.1))
         .force("y", d3.forceY(d => {
+            if (isIitmNode(d)) {
+                if (d.id === "iitm_bs" || ["iitm_entry", "iitm_qualifier", "iitm_foundation"].includes(d.id)) return height * 0.22;
+                if (d.id.includes("diploma") || d.id.includes("track") || d.type === "iitm-project") return height * 0.42;
+                if (d.id.includes("bsc") || d.id.includes("bs_level") || d.id === "iitm_degree_core") return height * 0.6;
+                if (d.type === "iitm-elective" || d.id.includes("elective") || d.id === "iitm_degree_electives") return height * 0.75;
+                if (d.type === "iitm-award" || d.type === "iitm-note" || d.id === "iitm_bs_award") return height * 0.86;
+                return height * 0.5;
+            }
+            if (isIiserNode(d)) {
+                if (d.id === "sutirtha" || d.type === "semester") return height * 0.28;
+                if (d.id.endsWith("_dept") || d.id.endsWith("_hub") || d.id.includes("physics_") || d.id === "astro_minor") return height * 0.5;
+                return height * 0.72;
+            }
             if (!isTifrNode(d)) return height / 2;
             if (["tifr-admin", "tifr-terminal", "tifr-warning"].includes(d.type)) return height * 0.72;
             if (d.type === "tifr-elective" || d.id === "tifr_elective_board") return height * 0.48;
             if (d.type === "semester" || d.type === "tifr-core" || d.type === "tifr-lab") return height * 0.24;
             return height * 0.38;
-        }).strength(d => isTifrNode(d) ? 0.1 : 0.05));
+        }).strength(d => (isTifrNode(d) || isIitmNode(d) || isIiserNode(d)) ? 0.12 : 0.05));
 
     function updateGraph() {
         const showSemesters = document.getElementById("toggleSemesters").checked;
         const showCourses = document.getElementById("toggleCourses").checked;
-        const showGrades = document.getElementById("toggleGrades").checked;
         const showLabs = document.getElementById("toggleLabs").checked;
 
         const filteredNodes = allGraphData.nodes.filter(d => {
-            const isTifrPathNode = ["tifr", "tifr-admin", "tifr-project", "tifr-warning", "tifr-terminal"].includes(d.type) || d.id === "tifr_core_summary";
+            const isTifrPathNode = ["tifr-admin", "tifr-project", "tifr-warning", "tifr-terminal"].includes(d.type) || d.id === "tifr_core_summary";
+            const isIitmPathNode = ["iitm-level", "iitm-award", "iitm-note"].includes(d.type);
             if (!showSemesters && d.type === 'semester') return false;
-            if (!showCourses && !d.type.startsWith('grade-') && d.type !== 'semester' && d.type !== 'central' && !isTifrPathNode && !d.id.endsWith('_dept') && !d.id.endsWith('_hub') && !d.id.includes('physics_')) return false;
-            if (!showGrades && d.type.startsWith('grade-')) return false;
+            if (!showCourses && d.type !== 'semester' && d.type !== 'central' && !isTifrPathNode && !isIitmPathNode && !d.id.endsWith('_dept') && !d.id.endsWith('_hub') && !d.id.includes('physics_')) return false;
             if (!showLabs && (d.type === 'lab' || d.type === 'tifr-lab')) return false;
             return true;
         });
@@ -1184,6 +1338,9 @@
             enter => enter.append("line")
                 .attr("class", d => {
                     if (d.color === "green") return "link-green";
+                    if (d.color === "iitm") return "link-iitm";
+                    if (d.color === "iitmOptional") return "link-iitm-optional";
+                    if (d.color === "iitmCoreq") return "link-iitm-coreq";
                     if (d.color === "tifr") return "link-tifr";
                     if (d.color === "tifrAdmin") return "link-tifr-admin";
                     if (d.semesterLink) return "link-semester";
@@ -1191,7 +1348,10 @@
                 })
                 .attr("stroke", d => {
                     if (d.color === "green") return "#48bb78";
-                    if (d.color === "tifr") return "#58a6ff";
+                    if (d.color === "iitm") return "#f59e0b";
+                    if (d.color === "iitmOptional") return "#fbbf24";
+                    if (d.color === "iitmCoreq") return "#fde68a";
+                    if (d.color === "tifr") return "#d946ef";
                     if (d.color === "tifrAdmin") return "#94a3b8";
                     if (d.semesterLink) return "#26a641";
                     return "#484f58";
@@ -1223,15 +1383,21 @@
             infoTitle.textContent = d.fullName || d.name;
             let html = "";
             if (d.program) html += `<p><strong>Program:</strong> ${d.program}</p>`;
-            if (d.cgpa) html += `<p><strong>Final CGPA:</strong> ${d.cgpa}</p>`;
-            if (d.sgpa) html += `<p><strong>SGPA:</strong> ${d.sgpa}</p>`;
+            if (d.code) html += `<p><strong>Code:</strong> ${d.code}</p>`;
+            if (d.level) {
+                const levelNode = allGraphData.nodes.find(n => n.id === d.level);
+                html += `<p><strong>Level:</strong> ${levelNode ? levelNode.name : d.level}</p>`;
+            }
             if (d.credits) html += `<p><strong>Credits:</strong> ${d.credits}</p>`;
-            if (d.grade) html += `<p><strong>Grade:</strong> ${d.grade}</p>`;
             if (typeof d.semester === 'number') html += `<p><strong>Semester:</strong> ${d.semester}</p>`;
             if (typeof d.semester === 'string') {
                 const semesterNode = allGraphData.nodes.find(n => n.id === d.semester);
                 html += `<p><strong>Semester:</strong> ${semesterNode ? semesterNode.name : d.semester}</p>`;
             }
+            if (d.prerequisite) html += `<p><strong>Prerequisite:</strong> ${d.prerequisite}</p>`;
+            if (d.corequisite) html += `<p><strong>Corequisite:</strong> ${d.corequisite}</p>`;
+            if (d.track) html += `<p><strong>Track:</strong> ${d.track}</p>`;
+            if (d.electiveGroup) html += `<p><strong>Elective Group:</strong> ${d.electiveGroup}</p>`;
             if (d.status) html += `<p><strong>Status:</strong> ${d.status}</p>`;
             if (d.codes) html += `<p><strong>Codes:</strong> ${d.codes}</p>`;
             if (d.description) html += `<p>${d.description}</p>`;
@@ -1340,10 +1506,9 @@
 
     document.getElementById("toggleSemesters").addEventListener("change", updateGraph);
     document.getElementById("toggleCourses").addEventListener("change", updateGraph);
-    document.getElementById("toggleGrades").addEventListener("change", updateGraph);
     document.getElementById("toggleLabs").addEventListener("change", updateGraph);
     // A filter change is a new node set -> re-frame the whole thing.
-    ["toggleSemesters","toggleCourses","toggleGrades","toggleLabs"].forEach(id =>
+    ["toggleSemesters","toggleCourses","toggleLabs"].forEach(id =>
         document.getElementById(id).addEventListener("change", () => { autoFit = true; }));
 
     updateGraph();
