@@ -277,6 +277,10 @@ h2 {
     flex-direction: column;
 }
 
+.image-card-main {
+    color: inherit;
+}
+
 .image-container {
     position: absolute;
     top: 0;
@@ -292,6 +296,7 @@ h2 {
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
+    background: #f7f7f4;
 }
 
 .image-container video {
@@ -331,7 +336,8 @@ h2 {
 }
 
 .image-card:hover .image-container img {
-    transform: scale(1.1);
+    object-fit: contain;
+    transform: scale(0.96);
 }
 
 .image-title {
@@ -353,6 +359,57 @@ h2 {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.image-highres {
+    position: absolute;
+    left: auto !important;
+    right: 0.55rem;
+    top: 0.55rem;
+    bottom: auto !important;
+    z-index: 4;
+    width: auto !important;
+    height: auto !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 0.28rem 0.52rem;
+    background: rgba(13, 17, 23, 0.76);
+    border: 1px solid rgba(240, 246, 252, 0.22);
+    color: #f0f6fc;
+    font-size: 0.68em;
+    line-height: 1;
+    text-decoration: none;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease, border-color 0.15s ease;
+}
+
+.image-card:hover .image-highres,
+.image-card:focus-within .image-highres {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.image-highres:hover {
+    border-color: #58a6ff;
+    color: #ffffff;
+}
+
+.gallery-source-note {
+    margin: 1.3rem 0 0;
+    color: #8b949e;
+    font-size: 0.92em;
+    line-height: 1.45;
+}
+
+.gallery-source-note a {
+    color: #58a6ff;
+    text-decoration: none;
+}
+
+.gallery-source-note a:hover {
+    text-decoration: underline;
 }
 
 /* Movie Gallery Original Styles - Adapted for Dark Theme */
@@ -591,7 +648,7 @@ div[style*="clear"] {
     }
 }
 </style>
-<link rel="stylesheet" href="../../nav.css?v=20260714n">
+<link rel="stylesheet" href="../../nav.css?v=20260714o">
 </head>
 
 <body>
@@ -677,6 +734,7 @@ div[style*="clear"] {
     <div id="animationGrid" class="image-grid animation-grid">
         <!-- Animations will be dynamically loaded here -->
     </div>
+    <p class="gallery-source-note">A main source for learning these Processing and p5.js ideas is Daniel Shiffman's <a href="https://thecodingtrain.com/" target="_blank" rel="noopener noreferrer">The Coding Train</a>.</p>
 </div>
 
 <script>
@@ -700,10 +758,33 @@ const staticImages = [
 ];
 
 const animationMedia = [
-    { src: 'Images/1e0657_bullett_anim_sm.mov', title: 'Bullet Cluster Animation' },
-    { src: 'Fractals.mp4', title: 'Fractals' },
-    { src: 'WhatsApp Video 2026-07-14 at 22.26.22.mp4', title: 'Movie 1' },
-    { src: 'WhatsApp Video 2026-07-14 at 22.26.22 (1).mp4', title: 'Movie 2' }
+    { src: 'Images/1e0657_bullett_anim_sm.mov', title: 'Bullet Cluster Animation', thumb: 'thumbs/videos/bullet-cluster-animation.webp' },
+    { src: 'Fractals.mp4', title: 'Fractals', thumb: 'thumbs/videos/fractals.webp' },
+    { src: 'WhatsApp Video 2026-07-14 at 22.26.22.mp4', title: 'Movie 1', thumb: 'thumbs/videos/movie-1.webp' },
+    { src: 'WhatsApp Video 2026-07-14 at 22.26.22 (1).mp4', title: 'Movie 2', thumb: 'thumbs/videos/movie-2.webp' },
+    { src: 'Randomness parameter = 0.00618.mp4', title: 'Zodiacal Light Randomness Simulation', thumb: 'thumbs/videos/zodiacal-light.webp' },
+    { src: 'n body grav - Made with Clipchamp (1).mp4', title: 'N-body Gravity Simulation', thumb: 'thumbs/videos/zodiacal-light.webp' },
+    { src: 'Timesteps_hoffmann/variable.mp4', title: 'Variable Timestep', thumb: 'thumbs/videos/timesteps.webp' },
+    { src: 'Timesteps_hoffmann/fixed.mp4', title: 'Fixed Timestep', thumb: 'thumbs/videos/timesteps.webp' },
+    { src: 'Timesteps_hoffmann/soft.mp4', title: 'Fixed Timestep with Softening', thumb: 'thumbs/videos/timesteps.webp' },
+    { src: 'Softening_valenzuela/animation5.mp4', title: 'Particle Clouds', thumb: 'thumbs/videos/softening.webp' },
+    { src: 'Softening_valenzuela/animation4.mp4', title: 'Macro Particles, No Softening', thumb: 'thumbs/videos/softening.webp' },
+    { src: 'Softening_valenzuela/animation3.mp4', title: 'Macro Particles, High Softening', thumb: 'thumbs/videos/softening.webp' },
+    { src: 'Softening_valenzuela/animation2.mp4', title: 'Macro Particles, Low Softening', thumb: 'thumbs/videos/softening.webp' },
+    { src: 'Softening_valenzuela/animation.mp4', title: 'Macro Particles, Best Softening', thumb: 'thumbs/videos/softening.webp' },
+    { src: 'KH_marin/SPH_295Ngb.mp4', title: 'SPH with Viscosity and Conductivity', thumb: 'thumbs/videos/kh-advanced-sph.webp' },
+    { src: 'KH_marin/SPH_295Ngb_no_visc.mp4', title: 'SPH, No Viscosity', thumb: 'thumbs/videos/kh-advanced-sph.webp' },
+    { src: 'KH_marin/SPH_295Ngb_no_conduct.mp4', title: 'SPH, No Conductivity', thumb: 'thumbs/videos/kh-advanced-sph.webp' },
+    { src: 'KH_marin/MFM_295Ngb.mp4', title: 'MFM Implementation', thumb: 'thumbs/videos/kh-advanced-sph.webp' },
+    { src: 'KH_Dolag_Niemayer/classic_sph.mp4', title: 'Classic SPH', thumb: 'thumbs/videos/kh-classic-arepo.webp' },
+    { src: 'KH_Dolag_Niemayer/Arepo_kh.mp4', title: 'Arepo Kelvin-Helmholtz', thumb: 'thumbs/videos/kh-classic-arepo.webp' },
+    { src: 'collection/velocityfield_magneticum_seidel.mp4', title: 'Magneticum Velocity Field', thumb: 'thumbs/videos/velocity-fields.webp' },
+    { src: 'collection/zoom-in_merger_schlachtberger.avi', title: 'Frog-In Zoom Simulation', thumb: 'thumbs/videos/zoom-in-compass.webp' },
+    { src: 'collection/magneticum_dolag.avi', title: 'Magneticum Cluster Evolution', thumb: 'thumbs/videos/magneticum.webp' },
+    { src: 'collection/simulated_box_remus_web.mp4', title: 'Cosmic Web Simulation', thumb: 'thumbs/videos/cosmic-web.webp' },
+    { src: 'collection/simulated_box_remus_download.mp4', title: 'Cosmic Web High-Quality MP4', thumb: 'thumbs/videos/cosmic-web.webp' },
+    { src: 'https://github.com/SutirthaMukherjee2004/Smukh/releases/download/media/simulated_box_remus.mpg', title: 'Cosmic Web Full Original', thumb: 'thumbs/videos/cosmic-web.webp' },
+    { src: 'collection/kdc_movement_hoffmann.mp4', title: 'Kinematically Distinct Core Movement', thumb: 'thumbs/videos/kdc-rotation.webp' }
 ];
 
 const githubMediaApi =
@@ -771,6 +852,19 @@ function uniqueMedia(files) {
     });
 }
 
+function slugifyName(name) {
+    return name
+        .replace(/\.(jpeg|jpg|png|gif|webp|mp4|webm|mov)$/i, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '');
+}
+
+function staticThumb(src) {
+    const base = src.split('/').pop() || src;
+    return 'thumbs/images/' + slugifyName(base) + '.webp';
+}
+
 function getImageName(filename) {
     let base = filename.split('/').pop() || filename;
     let name = base.replace(/\.(jpeg|jpg|png|gif|webp|mp4|webm|mov)$/i, '');
@@ -789,19 +883,20 @@ function createStaticImageCard(filename) {
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
     link.title = `View ${imageName} on GitHub`;
+    link.className = 'image-card-main';
 
     const imageContainer = document.createElement('div');
     imageContainer.className = 'image-container';
 
     const img = document.createElement('img');
-    img.src = src;
+    img.src = staticThumb(src);
     img.alt = imageName;
     img.loading = 'lazy';
     img.decoding = 'async';
     img.onerror = function() {
         if (!this.dataset.retried) {
             this.dataset.retried = 'true';
-            this.src = './' + src;
+            this.src = src;
         }
     };
     imageContainer.appendChild(img);
@@ -814,6 +909,14 @@ function createStaticImageCard(filename) {
     link.appendChild(imageContainer);
     link.appendChild(title);
     card.appendChild(link);
+    const hi = document.createElement('a');
+    hi.className = 'image-highres';
+    hi.href = src;
+    hi.target = '_blank';
+    hi.rel = 'noopener noreferrer';
+    hi.textContent = 'See higher resolution';
+    hi.setAttribute('aria-label', `See higher resolution for ${imageName}`);
+    card.appendChild(hi);
 
     return card;
 }
@@ -829,13 +932,23 @@ function createAnimationCard(item) {
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
     link.title = `Open ${imageName}`;
+    link.className = 'image-card-main';
 
     const imageContainer = document.createElement('div');
     imageContainer.className = 'image-container';
-    const thumb = document.createElement('div');
-    thumb.className = 'movie-thumb';
-    thumb.innerHTML = '<span class="play-symbol" aria-hidden="true">&#9658;</span>';
-    imageContainer.appendChild(thumb);
+    if (item.thumb) {
+        const img = document.createElement('img');
+        img.src = item.thumb;
+        img.alt = imageName;
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        imageContainer.appendChild(img);
+    } else {
+        const thumb = document.createElement('div');
+        thumb.className = 'movie-thumb';
+        thumb.innerHTML = '<span class="play-symbol" aria-hidden="true">&#9658;</span>';
+        imageContainer.appendChild(thumb);
+    }
 
     const title = document.createElement('div');
     title.className = 'image-title';
@@ -975,10 +1088,10 @@ Where the timesteps are small, the movie appears to progress slowly.)</p>
 </div>
 
 <div class="movie-section">
-<a href="simulated_box_remus.png"><img src="simulated_box_remus.png" class="minipic" alt="Cosmic Web preview" loading="lazy" decoding="async"></a>
+<a href="simulated_box_remus.png"><img src="simulated_box_remus.png" class="minipic" alt="Cosmic Web simulation" loading="lazy" decoding="async"></a>
 <h2>Cosmic Web Simulation</h2>
 <ul>
-<li><a class="col" href="collection/simulated_box_remus_web.mp4">Watch compressed web preview</a></li>
+<li><a class="col" href="collection/simulated_box_remus_web.mp4">Watch compressed MP4</a></li>
 <li><a class="col" href="collection/simulated_box_remus_download.mp4">Download high-quality MP4 version</a></li>
 <li><a class="col" href="https://github.com/SutirthaMukherjee2004/Smukh/releases/download/media/simulated_box_remus.mpg" target="_blank" rel="noopener noreferrer">Download the full original 111&nbsp;MB MPEG &nearr;</a></li>
 </ul>
@@ -1007,7 +1120,7 @@ Last update 08.05.2022 by Sutirtha Mukherjee
 
 </div>
 <a href="../../index.html" class="home-corner" title="Back to Home" aria-label="Back to Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V10"/></svg></a>
-<script src="../../site-nav.js?v=20260714n"></script>
+<script src="../../site-nav.js?v=20260714o"></script>
 <script src="../../tools/smukh-editor.js"></script>
 </body>
 </html>
