@@ -215,7 +215,8 @@
             overflow: hidden;
             cursor: pointer;
             padding-right: 1.2rem;
-            transition: max-height 0.35s ease;
+            color: #8b949e;
+            transition: max-height 0.35s ease, color 0.22s ease;
         }
 
         .content p.bio-collapsible::after {
@@ -225,14 +226,16 @@
             bottom: 0;
             padding-left: 1.9rem;
             background: linear-gradient(90deg, rgba(13, 17, 23, 0), #0d1117 38%);
-            color: #e6edf3;
+            color: #8b949e;
             font-weight: 700;
+            transition: color 0.22s ease, opacity 0.22s ease;
         }
 
         .content p.bio-collapsible:hover,
         .content p.bio-collapsible:focus,
         .content p.bio-collapsible.is-expanded {
             max-height: 18em;
+            color: #e6edf3;
             outline: none;
         }
 
@@ -245,6 +248,16 @@
 
         body.light-mode .content p.bio-collapsible::after {
             background: linear-gradient(90deg, rgba(246, 248, 250, 0), #f6f8fa 38%);
+            color: #57606a;
+        }
+
+        body.light-mode .content p.bio-collapsible {
+            color: #57606a;
+        }
+
+        body.light-mode .content p.bio-collapsible:hover,
+        body.light-mode .content p.bio-collapsible:focus,
+        body.light-mode .content p.bio-collapsible.is-expanded {
             color: #24292f;
         }
 
@@ -1901,6 +1914,28 @@
       {
         authors: '<span class="me">S. Mukherjee</span>',
         year: '2026',
+        title: 'Perturbative String Theory and Its Non-Perturbative Probes',
+        venue: '',
+        cite: '',
+        doi: '',
+        ads: '',
+        pdf: 'docs/CFT_TIFR_Notes_2.pdf',
+        citations: 0
+      },
+      {
+        authors: '<span class="me">S. Mukherjee</span>',
+        year: '2026',
+        title: 'First Global Milky Way Dark Matter Phase-Space Model Including Velocity Anisotropy, Disk Shocking, and Host&ndash;Subhalo Tidal Disruption: Impact on the Local VDF, Direct Detection Exclusions, and Benchmark J-Factors for Indirect Searches',
+        venue: '',
+        cite: 'https://inspirehep.net/api/literature/3112279?format=bibtex',
+        doi: '',
+        ads: 'https://inspirehep.net/literature/3112279',
+        pdf: 'https://inspirehep.net/files/bff032aec0e3078f9896b03cc293792d',
+        citations: 0
+      },
+      {
+        authors: '<span class="me">S. Mukherjee</span>',
+        year: '2026',
         title: "GAIA DR3++: A Model-Independent Construction of the Milky Way's Rotation Curve Using a Homogenized Stellar Catalogue",
         venue: 'National Undergraduate Physics Conference (NUPC) 2025',
         cite: 'https://inspirehep.net/api/literature/3103622?format=bibtex',
@@ -2028,13 +2063,14 @@
       list.innerHTML = '';
       PUBS.forEach(function (p) {
         var d = document.createElement('div'); d.className = 'pub-item';
-        var buttons = '<a class="pub-btn" href="' + p.cite + '">Cite</a>' +
+        var titleHref = p.ads || p.pdf || '#';
+        var buttons = (p.cite ? '<a class="pub-btn" href="' + p.cite + '">Cite</a>' : '') +
           (p.pdf ? '<a class="pub-btn pdf" href="' + p.pdf + '" target="_blank">PDF</a>' : '<span class="pub-btn pdf unavailable">PDF</span>') +
           (p.doi ? '<a class="pub-btn" href="' + p.doi + '" target="_blank">DOI</a>' : '') +
-          '<a class="pub-btn" href="' + p.ads + '" target="_blank">INSPIRE</a>';
+          (p.ads ? '<a class="pub-btn" href="' + p.ads + '" target="_blank">INSPIRE</a>' : '');
         var venue = p.venue ? '<span class="pub-venue">' + p.venue + '.</span> ' : '';
         d.innerHTML =
-          '<a class="pub-title pub-title-line" href="' + p.ads + '" target="_blank">' + p.title + '</a>' +
+          '<a class="pub-title pub-title-line" href="' + titleHref + '" target="_blank">' + p.title + '</a>' +
           '<div class="pub-meta">' + p.authors + ' (' + p.year + '). ' +
           venue +
           '<span class="pub-citations">Citations: ' + p.citations + '</span></div>' +
