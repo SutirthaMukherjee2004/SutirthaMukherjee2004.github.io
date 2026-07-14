@@ -309,22 +309,6 @@
             text-shadow: 0 0 3px #0d1117, 0 0 5px #0d1117;
         }
 
-        .cluster-blob {
-            fill-opacity: 0.075;
-            stroke-opacity: 0.34;
-            stroke-width: 2px;
-            pointer-events: none;
-        }
-
-        .cluster-blob-label {
-            fill: #e6edf3;
-            font-size: 18px;
-            font-weight: 600;
-            text-anchor: middle;
-            pointer-events: none;
-            text-shadow: 0 0 5px #0d1117, 0 0 8px #0d1117;
-        }
-
         .link {
             stroke-opacity: 0.5;
             stroke-width: 1.5px;
@@ -1252,7 +1236,6 @@
         height = document.getElementById("graph").clientHeight;
         svg.attr("width", width).attr("height", height);
         simulation.force("center", d3.forceCenter(width / 2, height / 2));
-        drawClusterBlobs();
         simulation.alpha(0.3).restart();
     });
 
@@ -1269,85 +1252,27 @@
         });
     svg.call(zoom);
 
-    const blobLayer = g.append("g").attr("class", "cluster-blob-layer");
     let link = g.append("g").selectAll("line");
     let node = g.append("g").selectAll("g");
-    let linkDistanceScale = 1;
-    const isTifrNode = d => d && typeof d.id === "string" && (d.id === "tifr_main" || d.id.startsWith("tifr_"));
-    const isIitmNode = d => d && typeof d.id === "string" && (d.id === "iitm_bs" || d.id.startsWith("iitm_"));
-    const isIiserNode = d => d && typeof d.id === "string" && !isIitmNode(d) && !isTifrNode(d);
-    const clusterSpecs = [
-        { key: "iiser", label: "IISER", color: "#4ecdc4" },
-        { key: "iitm", label: "IITM", color: "#f59e0b" },
-        { key: "tifr", label: "TIFR", color: "#d946ef" }
-    ];
-    const clusterKey = d => isTifrNode(d) ? "tifr" : (isIitmNode(d) ? "iitm" : "iiser");
-    const clusterCenterForKey = key => {
-        const sidebarWidth = 220;
-        const availableWidth = Math.max(320, width - sidebarWidth);
-        const centers = {
-            iiser: { x: availableWidth * 0.2, y: height * 0.52 },
-            iitm: { x: availableWidth * 0.52, y: height * 0.52 },
-            tifr: { x: availableWidth * 0.84, y: height * 0.52 }
-        };
-        return centers[key] || centers.iitm;
-    };
-    const clusterCenter = d => clusterCenterForKey(clusterKey(d));
-    const clusterRadius = () => Math.max(150, Math.min(230, Math.min(width, height) * 0.29));
-    function drawClusterBlobs() {
-        const radius = clusterRadius();
-        const blobs = blobLayer.selectAll("g.cluster-blob-group")
-            .data(clusterSpecs, d => d.key)
-            .join(enter => {
-                const group = enter.append("g").attr("class", "cluster-blob-group");
-                group.append("circle").attr("class", "cluster-blob");
-                group.append("text").attr("class", "cluster-blob-label");
-                return group;
-            });
-        blobs.each(function(d) {
-            const center = clusterCenterForKey(d.key);
-            const group = d3.select(this);
-            group.select("circle")
-                .attr("cx", center.x)
-                .attr("cy", center.y)
-                .attr("r", radius)
-                .attr("fill", d.color)
-                .attr("stroke", d.color);
-            group.select("text")
-                .attr("x", center.x)
-                .attr("y", center.y - radius + 30)
-                .text(d.label);
-        });
-    }
-    drawClusterBlobs();
-
-    function keepNodesInsideClusters() {
-        const radius = clusterRadius() * 0.92;
-        simulation.nodes().forEach(d => {
-            if (d.fx != null || d.fy != null) return;
-            const center = clusterCenter(d);
-            const dx = d.x - center.x;
-            const dy = d.y - center.y;
-            const distance = Math.hypot(dx, dy);
-            const maxDistance = radius + (d.type === "central" ? 24 : 0);
-            if (distance > maxDistance) {
-                const pull = ((distance - maxDistance) / distance) * 0.22;
-                d.x -= dx * pull;
-                d.y -= dy * pull;
-            }
-        });
-    }
 
     const simulation = d3.forceSimulation()
         .force("link", d3.forceLink()
             .id(d => d.id)
-            .distance(d => (d.distance || 200) * linkDistanceScale)
+            .distance(d => d.distance || 200)
             .strength(d => d.strength || 0.1))
-        .force("charge", d3.forceManyBody().strength(d => (d.type === "central" ? -760 : -420)))
-        .force("collision", d3.forceCollide().radius(d => d.size + (d.type === "central" ? 18 : 10)))
+        .force("charge", d3.forceManyBody().strength(-400))
+        .force("collision", d3.forceCollide().radius(d => d.size + 8))
         .force("center", d3.forceCenter(width / 2, height / 2))
-        .force("x", d3.forceX(d => clusterCenter(d).x).strength(d => d.type === "central" ? 0.34 : 0.16))
-        .force("y", d3.forceY(d => clusterCenter(d).y).strength(d => d.type === "central" ? 0.34 : 0.16));
+        .force("x", d3.forceX(d => {
+            const sidebarWidth = 220;
+            const availableWidth = width - sidebarWidth;
+            if (d.id === 'sutirtha' || (d.id.startsWith('sem') && !d.id.startsWith('iitm') && !d.id.startsWith('tifr')))
+                return availableWidth * 0.3;
+            else if (d.id === 'iitm_bs' || d.id.startsWith('iitm'))
+                return availableWidth * 0.65;
+            return availableWidth * 0.5;
+        }).strength(0.1))
+        .force("y", d3.forceY(height / 2).strength(0.05));
 
     function updateGraph() {
         const showSemesters = document.getElementById("toggleSemesters").checked;
@@ -1465,7 +1390,6 @@
     }
 
     simulation.on("tick", () => {
-        keepNodesInsideClusters();
         link.attr("x1", d => d.source.x)
             .attr("y1", d => d.source.y)
             .attr("x2", d => d.target.x)
@@ -1545,8 +1469,7 @@
 
     // Control listeners
     document.getElementById("linkDistance").addEventListener("input", e => {
-        linkDistanceScale = +e.target.value / 200;
-        simulation.force("link").distance(d => (d.distance || 200) * linkDistanceScale);
+        simulation.force("link").distance(+e.target.value);
         simulation.alpha(0.3).restart();
     });
 
