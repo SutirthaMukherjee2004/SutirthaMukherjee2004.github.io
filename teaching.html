@@ -494,6 +494,72 @@
         }
     </style>
     <link rel="stylesheet" href="nav.css?v=20260714b">
+    <style>
+    /* ===== Academics graph: fill the viewport + frameless modern controls =====
+       Loaded AFTER nav.css so these rules win over the shared standardization. */
+
+    /* Let the visualization use the full available height (no tiny box + dead space). */
+    div#sublayout{ height:auto !important; min-height:calc(100vh - 150px) !important; }
+    #subpage{ overflow:hidden !important; }
+    #graph{ width:100% !important; height:100% !important; min-height:calc(100vh - 160px) !important; }
+
+    /* Frameless, glassy control panel — no boxy border, soft + modern. */
+    .graph-sidebar{
+      top:16px !important; right:16px !important; width:210px !important;
+      background:rgba(13,17,23,.55) !important;
+      border:0 !important; border-radius:16px !important;
+      padding:14px 16px !important;
+      box-shadow:0 10px 34px rgba(0,0,0,.30) !important;
+      -webkit-backdrop-filter:blur(16px) saturate(1.15); backdrop-filter:blur(16px) saturate(1.15);
+      max-height:calc(100vh - 200px) !important;
+    }
+    .graph-sidebar h3{
+      border:0 !important; padding:0 !important; margin:0 0 10px !important;
+      font-size:11px !important; font-weight:600 !important; letter-spacing:.09em !important;
+      text-transform:uppercase !important; color:#8b98a9 !important;
+    }
+    .graph-sidebar .legend{
+      border-top:1px solid rgba(255,255,255,.07) !important;
+      margin-top:14px !important; padding-top:12px !important;
+    }
+    .graph-sidebar label{
+      display:flex !important; align-items:center !important; gap:9px !important;
+      font-size:13px !important; margin:9px 0 !important; color:#c9d1d9 !important;
+    }
+    .graph-sidebar input[type="checkbox"]{ accent-color:#58a6ff; width:15px; height:15px; margin:0 !important; }
+    .graph-sidebar label:has(input[type="range"]){
+      display:block !important; color:#8b98a9 !important; font-size:11px !important;
+      text-transform:uppercase; letter-spacing:.06em; margin-top:12px !important;
+    }
+    .graph-sidebar input[type="range"]{ accent-color:#58a6ff; width:100%; margin-top:6px; }
+    .legend-item{ font-size:12.5px !important; gap:9px; }
+    .legend-color{ border:0 !important; box-shadow:0 0 0 1px rgba(255,255,255,.18); }
+
+    /* Clean pill button (replaces the old bordered inline-styled one). */
+    .graph-controls-btn{
+      width:100%; padding:8px 10px; margin-bottom:12px;
+      background:rgba(88,166,255,.10); color:#7cc0ff;
+      border:1px solid rgba(88,166,255,.28); border-radius:10px;
+      cursor:pointer; font:500 13px/1 inherit;
+      transition:background .2s ease, border-color .2s ease, transform .1s ease;
+    }
+    .graph-controls-btn:hover{ background:rgba(88,166,255,.18); border-color:rgba(88,166,255,.55); }
+    .graph-controls-btn:active{ transform:scale(.98); }
+
+    /* Light mode */
+    body.light-mode .graph-sidebar{
+      background:rgba(255,255,255,.68) !important;
+      box-shadow:0 10px 34px rgba(31,35,40,.14) !important;
+    }
+    body.light-mode .graph-sidebar label{ color:#24292f !important; }
+    body.light-mode .graph-sidebar h3,
+    body.light-mode .graph-sidebar label:has(input[type="range"]){ color:#57606a !important; }
+
+    /* Stay usable when the window/panel gets narrow. */
+    @media (max-width:820px){
+      .graph-sidebar{ width:172px !important; top:10px !important; right:10px !important; padding:12px !important; }
+    }
+    </style>
 </head>
 <body>
 <div id="layout">
@@ -582,7 +648,7 @@
 
                     <div class="graph-sidebar">
                         <h3> Graph Controls</h3>
-                        <button onclick="showIntro()" style="width: 100%; padding: 8px; margin-bottom: 10px; background: #1c2128; color: #58a6ff; border: 1px solid #30363d; border-radius: 6px; cursor: pointer; font-size: 14px;">ℹ Show Instructions</button>
+                        <button class="graph-controls-btn" onclick="showIntro()">ℹ Show Instructions</button>
                         <label><input type="checkbox" id="toggleSemesters" checked> Semesters</label>
                         <label><input type="checkbox" id="toggleCourses" checked> Courses</label>
                         <label><input type="checkbox" id="toggleGrades" checked> Grades</label>
@@ -1017,7 +1083,7 @@
     });
 
     // --- Zoom-to-fit: keep every node inside the viewport (no cropping) ---
-    function fitToView(duration = 500, padding = 70) {
+    function fitToView(duration = 500, padding = 28) {
         const nodes = simulation.nodes();
         if (!nodes || !nodes.length) return;
         let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
@@ -1033,7 +1099,7 @@
         const el = document.getElementById("graph");
         const w = el.clientWidth, h = el.clientHeight;
         if (!w || !h) return;
-        const rightSidebar = w > 720 ? 240 : 0; // stay clear of the controls panel on wide screens
+        const rightSidebar = w > 720 ? 205 : 0; // stay clear of the controls panel on wide screens
         const availW = Math.max(120, w - rightSidebar - padding * 2);
         const availH = Math.max(120, h - padding * 2);
         const gw = maxX - minX, gh = maxY - minY;
@@ -1091,8 +1157,10 @@
         document.getElementById(id).addEventListener("change", () => setTimeout(() => fitToView(500), 700)));
 
     updateGraph();
-    // Initial fit once the first layout has had time to spread out.
-    setTimeout(() => fitToView(600), 1400);
+    // Fit repeatedly as the force layout settles, so it always fills the space.
+    setTimeout(() => fitToView(600), 1200);
+    setTimeout(() => fitToView(500), 2600);
+    setTimeout(() => fitToView(400), 4200);
 
     // Auto-hide intro text after 10 seconds (reveals + fits the full graph)
     setTimeout(() => {
