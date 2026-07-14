@@ -97,16 +97,16 @@
     { label: 'Home', href: 'index.html' },
     { label: 'Research', href: 'research.html', children: [
       ['Overview', 'research.html'],
-      ['Baryons & Dark Matter', 'research/research_consp.html'],
-      ['Outer Stellar Halos', 'research/research_outer.html'],
-      ['Galaxy Kinematics', 'research/research_kinematics.html'],
-      ['High Redshift', 'research/research_proto.html'],
-      ['Relativistic Jets', 'research/research_jets.html'],
       ['Galactic Rotation Curve as a Dark Matter Probe', 'research/research_rotcurve.html'],
       ['Large-Scale Cosmological Survey', 'research/research_survey.html'],
       ['Magnetised Disc Axion Search Experiment', 'research/research_axion.html'],
       ['Joint Likelihood & Local Dark Matter Density', 'research/research_jointlike.html'],
-      ['Surface Density of the Milky Way', 'research/research_surfdens.html']
+      ['Surface Density of the Milky Way', 'research/research_surfdens.html'],
+      ['Baryons & Dark Matter', 'research/research_consp.html'],
+      ['Outer Stellar Halos', 'research/research_outer.html'],
+      ['Galaxy Kinematics', 'research/research_kinematics.html'],
+      ['High Redshift', 'research/research_proto.html'],
+      ['Relativistic Jets', 'research/research_jets.html']
     ]},
     { label: 'Publication/preprint', href: 'publications.html' },
     { label: 'Galaxy Comics', href: 'comics.html', children: [
