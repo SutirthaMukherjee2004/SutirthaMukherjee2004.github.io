@@ -221,10 +221,18 @@ h2 {
 
 .image-gallery-title {
     color: #58a6ff;
-    margin-bottom: 1.5em;
+    margin-bottom: 0.7em;
     text-align: center;
     font-size: 2em;
     font-weight: 400;
+}
+
+.media-group-title {
+    color: #c9d1d9;
+    font-size: 1.08em;
+    font-weight: 700;
+    margin: 1.2rem 0 0.9rem;
+    text-align: left;
 }
 
 .image-grid {
@@ -232,7 +240,11 @@ h2 {
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     padding: 0;
-    min-height: 200px;
+    min-height: 0;
+}
+
+.animation-grid {
+    margin-bottom: 1.4rem;
 }
 
 .image-card {
@@ -243,6 +255,10 @@ h2 {
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
+}
+
+.image-card.is-animation {
+    background: #0d1117;
 }
 
 .image-card:hover {
@@ -284,6 +300,34 @@ h2 {
     object-fit: cover;
     display: block;
     background: #0d1117;
+}
+
+.movie-thumb {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        linear-gradient(135deg, rgba(88, 166, 255, 0.18), rgba(63, 185, 80, 0.08)),
+        #10161d;
+    border: 1px solid rgba(88, 166, 255, 0.18);
+    box-sizing: border-box;
+}
+
+.play-symbol {
+    width: 48px;
+    height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50% !important;
+    background: rgba(240, 246, 252, 0.92);
+    color: #0d1117;
+    font-size: 1.4rem;
+    line-height: 1;
+    padding-left: 3px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
 }
 
 .image-card:hover .image-container img {
@@ -431,6 +475,35 @@ img {
     padding-top: 1em;
 }
 
+.home-corner {
+    position: fixed;
+    right: 22px;
+    bottom: 28px;
+    z-index: 2600;
+    width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #8fc5ff;
+    background: rgba(13, 17, 23, 0.72);
+    border: 1px solid rgba(88, 166, 255, 0.28);
+    border-radius: 50% !important;
+    text-decoration: none;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.24);
+}
+
+.home-corner svg {
+    width: 22px;
+    height: 22px;
+    display: block;
+}
+
+.home-corner:hover {
+    color: #ffffff;
+    border-color: rgba(88, 166, 255, 0.7);
+}
+
 /* Clear floats */
 div[style*="clear"] {
     clear: both;
@@ -518,7 +591,7 @@ div[style*="clear"] {
     }
 }
 </style>
-<link rel="stylesheet" href="../../nav.css?v=20260714m">
+<link rel="stylesheet" href="../../nav.css?v=20260714n">
 </head>
 
 <body>
@@ -596,22 +669,21 @@ div[style*="clear"] {
 <!-- New Image Gallery Section -->
 <div class="image-gallery-section">
     <h1 class="image-gallery-title">Processing & p5.js Gallery</h1>
+    <h2 class="media-group-title">Static Images</h2>
     <div id="imageGrid" class="image-grid">
         <!-- Images will be dynamically loaded here -->
+    </div>
+    <h2 class="media-group-title">Animations and Movies</h2>
+    <div id="animationGrid" class="image-grid animation-grid">
+        <!-- Animations will be dynamically loaded here -->
     </div>
 </div>
 
 <script>
-// ============================================
-// AUTOMATIC IMAGE DETECTION SYSTEM - FIXED VERSION
-// ============================================
+const processingRepo = 'https://github.com/SutirthaMukherjee2004/Processing-p5.js';
 
-const knownMedia = [
+const staticImages = [
     'Images/Astar.jpeg',
-    'Images/1e0657_bullett_anim_sm.mov',
-    'Fractals.mp4',
-    'WhatsApp Video 2026-07-14 at 22.26.22.mp4',
-    'WhatsApp Video 2026-07-14 at 22.26.22 (1).mp4',
     'Images/Polar Fireworks.jpeg',
     'Images/Heart Fireworks.jpeg',
     'Images/Mesh grid generator.jpeg',
@@ -627,36 +699,21 @@ const knownMedia = [
     'Images/Super Shape Generator.jpeg'
 ];
 
+const animationMedia = [
+    { src: 'Images/1e0657_bullett_anim_sm.mov', title: 'Bullet Cluster Animation' },
+    { src: 'Fractals.mp4', title: 'Fractals' },
+    { src: 'WhatsApp Video 2026-07-14 at 22.26.22.mp4', title: 'Movie 1' },
+    { src: 'WhatsApp Video 2026-07-14 at 22.26.22 (1).mp4', title: 'Movie 2' }
+];
+
 const githubMediaApi =
     'https://api.github.com/repos/SutirthaMukherjee2004/SutirthaMukherjee2004.github.io/contents/teaching/movies/Images';
 
 const mediaExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'mp4', 'webm', 'mov'];
 const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
 const videoExtensions = ['mp4', 'webm', 'mov'];
-const mediaTitles = {
-    'WhatsApp Video 2026-07-14 at 22.26.22.mp4': 'Movie 1',
-    'WhatsApp Video 2026-07-14 at 22.26.22 (1).mp4': 'Movie 2'
-};
 
-// Backward-compatible alias for any old console checks.
-const knownImages = knownMedia.slice();
-
-// Additional patterns to try if you add new images with simple generated names.
-const imagesToTry = [
-    'Images/Astar.jpeg',
-    'Images/Lissajous Figure.jpeg',
-    'Images/Print Maze.jpeg',
-    'Barnsley Fern Fractal.jpeg',
-    'Butterfly.jpeg'
-];
-
-for (let i = 1; i <= 30; i++) {
-    ['png', 'jpg', 'jpeg', 'webp', 'gif', 'mp4', 'webm', 'mov'].forEach(ext => {
-        imagesToTry.push(`Images/image${i}.${ext}`, `Images/img${i}.${ext}`, `Images/picture${i}.${ext}`);
-    });
-}
-
-let mediaFiles = [];
+const knownImages = staticImages.slice();
 
 function mediaPath(filename) {
     return filename.indexOf('/') === -1 && filename.indexOf('Images') !== 0 ? 'Images/' + filename : filename;
@@ -670,17 +727,17 @@ function isVideo(filename) {
     return videoExtensions.includes(mediaExt(filename));
 }
 
+function isImage(filename) {
+    return imageExtensions.includes(mediaExt(filename));
+}
+
 function isSupportedMedia(filename) {
     return mediaExtensions.includes(mediaExt(filename));
 }
 
-function checkMedia(filename) {
+function checkImage(filename) {
     return new Promise((resolve) => {
         const src = mediaPath(filename);
-        if (isVideo(src)) {
-            resolve(src);
-            return;
-        }
         const img = new Image();
         img.onload = () => resolve(src);
         img.onerror = () => resolve(null);
@@ -696,7 +753,7 @@ async function discoverGithubMedia() {
         const entries = await response.json();
         if (!Array.isArray(entries)) return [];
         return entries
-            .filter(entry => entry && entry.type === 'file' && isSupportedMedia(entry.name || ''))
+            .filter(entry => entry && entry.type === 'file' && isImage(entry.name || ''))
             .map(entry => 'Images/' + entry.name);
     } catch (error) {
         return [];
@@ -716,53 +773,38 @@ function uniqueMedia(files) {
 
 function getImageName(filename) {
     let base = filename.split('/').pop() || filename;
-    if (mediaTitles[base]) return mediaTitles[base];
     let name = base.replace(/\.(jpeg|jpg|png|gif|webp|mp4|webm|mov)$/i, '');
     name = name.replace(/[_-]+/g, ' ').replace(/\s+/g, ' ').trim();
     return name;
 }
 
-function createImageCard(filename) {
+function createStaticImageCard(filename) {
     const src = mediaPath(filename);
     const imageName = getImageName(src);
     const card = document.createElement('div');
     card.className = 'image-card';
 
     const link = document.createElement('a');
-    link.href = src;
-    link.title = `Open ${imageName}`;
+    link.href = processingRepo;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.title = `View ${imageName} on GitHub`;
 
     const imageContainer = document.createElement('div');
     imageContainer.className = 'image-container';
 
-    if (isVideo(src)) {
-        const video = document.createElement('video');
-        video.src = src;
-        video.muted = true;
-        video.loop = true;
-        video.playsInline = true;
-        video.preload = 'metadata';
-        video.setAttribute('aria-label', imageName);
-        imageContainer.appendChild(video);
-        card.addEventListener('mouseenter', () => video.play().catch(() => {}));
-        card.addEventListener('mouseleave', () => {
-            video.pause();
-            video.currentTime = 0;
-        });
-    } else {
-        const img = document.createElement('img');
-        img.src = src;
-        img.alt = imageName;
-        img.loading = 'lazy';
-        img.decoding = 'async';
-        img.onerror = function() {
-            if (!this.dataset.retried) {
-                this.dataset.retried = 'true';
-                this.src = './' + src;
-            }
-        };
-        imageContainer.appendChild(img);
-    }
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = imageName;
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.onerror = function() {
+        if (!this.dataset.retried) {
+            this.dataset.retried = 'true';
+            this.src = './' + src;
+        }
+    };
+    imageContainer.appendChild(img);
 
     const title = document.createElement('div');
     title.className = 'image-title';
@@ -776,22 +818,58 @@ function createImageCard(filename) {
     return card;
 }
 
+function createAnimationCard(item) {
+    const src = mediaPath(item.src || item);
+    const imageName = item.title || getImageName(src);
+    const card = document.createElement('div');
+    card.className = 'image-card is-animation';
+
+    const link = document.createElement('a');
+    link.href = src;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.title = `Open ${imageName}`;
+
+    const imageContainer = document.createElement('div');
+    imageContainer.className = 'image-container';
+    const thumb = document.createElement('div');
+    thumb.className = 'movie-thumb';
+    thumb.innerHTML = '<span class="play-symbol" aria-hidden="true">&#9658;</span>';
+    imageContainer.appendChild(thumb);
+
+    const title = document.createElement('div');
+    title.className = 'image-title';
+    title.textContent = imageName;
+    title.title = imageName;
+
+    link.appendChild(imageContainer);
+    link.appendChild(title);
+    card.appendChild(link);
+    return card;
+}
+
 async function autoDetectMedia() {
     const gridContainer = document.getElementById('imageGrid');
-    if (!gridContainer) return;
+    const animationContainer = document.getElementById('animationGrid');
+    if (!gridContainer || !animationContainer) return;
     const githubMedia = await discoverGithubMedia();
-    const candidates = uniqueMedia([...knownMedia, ...githubMedia, ...imagesToTry]);
-    const results = await Promise.all(candidates.map(item => checkMedia(item)));
-    mediaFiles = uniqueMedia(results.filter(Boolean));
+    const candidates = uniqueMedia([...staticImages, ...githubMedia]).filter(isImage);
+    const results = await Promise.all(candidates.map(item => checkImage(item)));
+    const imageFiles = uniqueMedia(results.filter(Boolean));
     gridContainer.innerHTML = '';
+    animationContainer.innerHTML = '';
 
-    if (mediaFiles.length > 0) {
-        mediaFiles.forEach(filename => {
-            gridContainer.appendChild(createImageCard(filename));
+    if (imageFiles.length > 0) {
+        imageFiles.forEach(filename => {
+            gridContainer.appendChild(createStaticImageCard(filename));
         });
     } else {
         gridContainer.innerHTML = '<div class="gallery-message">No Processing or p5.js media found.</div>';
     }
+
+    animationMedia.forEach(item => {
+        animationContainer.appendChild(createAnimationCard(item));
+    });
 }
 
 function refreshGallery() {
@@ -817,14 +895,6 @@ You may use these movies for educational purposes as long as you give credit to 
 <ul>
 <li> <a class="col" href="Randomness parameter = 0.00618.mp4">Randomness parameter =0.00168</a></li>
 <li> <a class="col" href="n body grav - Made with Clipchamp (1).mp4">N -body simulation with different r dependance</a></li>
-</ul>
-<div style="clear: both"></div>
-</div>
-
-<div class="movie-section">
-<h2>Fractals</h2>
-<ul>
-<li><a class="col" href="Fractals.mp4">Fractals</a></li>
 </ul>
 <div style="clear: both"></div>
 </div>
@@ -937,7 +1007,7 @@ Last update 08.05.2022 by Sutirtha Mukherjee
 
 </div>
 <a href="../../index.html" class="home-corner" title="Back to Home" aria-label="Back to Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V10"/></svg></a>
-<script src="../../site-nav.js?v=20260714m"></script>
+<script src="../../site-nav.js?v=20260714n"></script>
 <script src="../../tools/smukh-editor.js"></script>
 </body>
 </html>

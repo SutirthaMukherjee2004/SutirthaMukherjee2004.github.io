@@ -12,7 +12,7 @@
   var LANG_KEY = 'sutirtha-lang';
   var LOVE_KEY = 'sutirtha-loved-site';
   var LAST_UPDATED_TEXT = 'Last updated 23 March 2025';
-  var SITE_INFO_TEXT = "Last updated 23rd March 2025. The doodles are inspired by Prof. Rhea-Silvia Remus's LMU website; some signed doodles are borrowed from that source, and some are my own. The artworks hosted in Arts/Gallery are my own artwork. Please contact me before using them.";
+  var SITE_INFO_TEXT = "This site is currently under construction. The doodles are inspired by Prof. Rhea-Silvia Remus's LMU website; some signed doodles are borrowed from that source, and some are my own. The artworks hosted in Arts/Gallery are my own artwork. Please contact me before using them.";
   var LOVE_COUNTER_URL =
     'https://hits.sh/sutirthamukherjee2004.github.io/love.svg?label=Love&extraCount=23&color=3fb950&labelColor=0d1117&style=flat-square';
   var themeButton = null;
@@ -430,7 +430,9 @@
     var loveButton = el('button', 'site-love-toggle' + (loved ? ' is-loved' : ''));
     loveButton.type = 'button';
     loveButton.setAttribute('aria-label', loved ? 'Website loved' : 'Love this website');
-    loveButton.innerHTML = '<span>Love</span><span class="site-love-count">' + (loved ? '24' : '23') + '</span>';
+    loveButton.setAttribute('title', 'Give it a love if you like it');
+    loveButton.setAttribute('data-tip', 'Give it a love if you like it');
+    loveButton.innerHTML = '<span class="site-love-heart" aria-hidden="true">&#9829;</span><span class="site-love-count">' + (loved ? '24' : '23') + '</span>';
     loveButton.addEventListener('click', function () {
       if (readLoved()) return;
       writeLoved();
