@@ -1076,16 +1076,16 @@
         }
         .kp-media:hover .kp-slideshow,
         .kp-media:focus-within .kp-slideshow {
-            position: absolute;
+            position: fixed;
             opacity: 1;
-            inset: auto;
-            right: calc(100% + 0.28rem);
-            top: 50%;
-            width: min(330px, 34vw);
-            height: min(205px, 28vh);
-            transform: translateY(-50%);
+            inset: auto auto auto auto;
+            left: var(--kp-float-left, 1rem);
+            top: var(--kp-float-top, 1rem);
+            width: var(--kp-float-width, min(330px, 34vw));
+            height: var(--kp-float-height, min(205px, 28vh));
+            transform: none;
             pointer-events: auto;
-            z-index: 60;
+            z-index: 12000;
         }
         .kp-highres {
             position: absolute;
@@ -1386,11 +1386,10 @@
             .kp-thumb.empty { width: 100%; height: 86px; flex-basis: auto; }
             .kp-media:hover .kp-slideshow,
             .kp-media:focus-within .kp-slideshow {
-                right: auto;
-                left: 0;
-                top: calc(100% + 0.35rem);
-                width: min(100%, 360px);
-                height: min(220px, 42vh);
+                left: var(--kp-float-left, 1rem);
+                top: var(--kp-float-top, 1rem);
+                width: var(--kp-float-width, calc(100vw - 2rem));
+                height: var(--kp-float-height, min(220px, 42vh));
                 transform: none;
             }
         }
@@ -2199,6 +2198,36 @@
       media.__slideTimer = null;
     }
 
+    function positionProjectSlideshow(media) {
+      if (!media) return;
+      var rect = media.getBoundingClientRect();
+      var gap = 10;
+      var margin = 14;
+      var viewportW = window.innerWidth || document.documentElement.clientWidth || 1200;
+      var viewportH = window.innerHeight || document.documentElement.clientHeight || 800;
+      var width = Math.min(360, Math.max(250, viewportW * 0.36));
+      var height = Math.min(230, Math.max(170, viewportH * 0.32));
+
+      if (viewportW <= 520) {
+        width = Math.min(360, viewportW - margin * 2);
+        height = Math.min(230, Math.max(170, viewportH * 0.34));
+      }
+
+      var left = rect.left - width - gap;
+      if (left < margin) left = Math.min(rect.right + gap, viewportW - width - margin);
+      if (left < margin) left = margin;
+      if (left + width > viewportW - margin) left = viewportW - width - margin;
+
+      var top = rect.top + (rect.height / 2) - (height / 2);
+      if (top < margin) top = margin;
+      if (top + height > viewportH - margin) top = viewportH - height - margin;
+
+      media.style.setProperty('--kp-float-left', Math.round(left) + 'px');
+      media.style.setProperty('--kp-float-top', Math.round(top) + 'px');
+      media.style.setProperty('--kp-float-width', Math.round(width) + 'px');
+      media.style.setProperty('--kp-float-height', Math.round(height) + 'px');
+    }
+
     function renderProjectMedia(topic) {
       var images = projectImages(topic);
       if (!images.length) {
@@ -2256,10 +2285,12 @@
       });
       slideshow.appendChild(highres);
       media.appendChild(slideshow);
-      media.addEventListener('mouseenter', function () { startProjectSlides(media, images, topic.title); });
+      media.addEventListener('mouseenter', function () { positionProjectSlideshow(media); startProjectSlides(media, images, topic.title); });
       media.addEventListener('mouseleave', function () { stopProjectSlides(media); });
-      media.addEventListener('focusin', function () { startProjectSlides(media, images, topic.title); });
+      media.addEventListener('focusin', function () { positionProjectSlideshow(media); startProjectSlides(media, images, topic.title); });
       media.addEventListener('focusout', function () { stopProjectSlides(media); });
+      window.addEventListener('resize', function () { if (media.matches(':hover, :focus-within')) positionProjectSlideshow(media); });
+      window.addEventListener('scroll', function () { if (media.matches(':hover, :focus-within')) positionProjectSlideshow(media); }, true);
       return media;
     }
 
