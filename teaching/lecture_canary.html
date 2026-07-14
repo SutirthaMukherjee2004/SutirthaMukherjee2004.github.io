@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=1280, user-scalable=yes">
 <title>Sutirtha Mukherjee</title>
-    <meta name="description" content="Generated theoretical physics notes by Sutirtha Mukherjee, including direct PDF notes and manuscripts on axion-photon conversion, perturbative string theory, local dark matter density, and relativistic thermodynamics.">
+    <meta name="description" content="Theoretical physics notes by Sutirtha Mukherjee, including PDF notes and papers on axion-photon conversion, perturbative string theory, local dark matter density, and relativistic thermodynamics.">
     <meta name="keywords" content="Sutirtha Mukherjee, axion-photon conversion, axions, ALPs, astrophysical environments, astrophysics, cosmology, dark matter, galactic dynamics, Milky Way, conformal field theory, theoretical physics">
     <meta name="author" content="Sutirtha Mukherjee">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -17,11 +17,11 @@
     <meta property="og:url" content="https://sutirthamukherjee2004.github.io/teaching/lecture_canary.html">
     <meta property="og:title" content="Sutirtha Mukherjee">
     <meta property="og:site_name" content="Sutirtha Mukherjee">
-    <meta property="og:description" content="Generated theoretical physics notes by Sutirtha Mukherjee, including direct PDF notes and manuscripts on axion-photon conversion, perturbative string theory, local dark matter density, and relativistic thermodynamics.">
+    <meta property="og:description" content="Theoretical physics notes by Sutirtha Mukherjee, including PDF notes and papers on axion-photon conversion, perturbative string theory, local dark matter density, and relativistic thermodynamics.">
     <meta property="og:image" content="https://sutirthamukherjee2004.github.io/images/Profile.jpeg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Sutirtha Mukherjee">
-    <meta name="twitter:description" content="Generated theoretical physics notes by Sutirtha Mukherjee, including direct PDF notes and manuscripts on axion-photon conversion, perturbative string theory, local dark matter density, and relativistic thermodynamics.">
+    <meta name="twitter:description" content="Theoretical physics notes by Sutirtha Mukherjee, including PDF notes and papers on axion-photon conversion, perturbative string theory, local dark matter density, and relativistic thermodynamics.">
     <meta name="twitter:image" content="https://sutirthamukherjee2004.github.io/images/Profile.jpeg">
     <script type="application/ld+json">
     {
@@ -30,7 +30,7 @@
   "name": "Sutirtha Mukherjee",
   "headline": "Sutirtha Mukherjee",
   "url": "https://sutirthamukherjee2004.github.io/teaching/lecture_canary.html",
-  "description": "Generated theoretical physics notes by Sutirtha Mukherjee, including direct PDF notes and manuscripts on axion-photon conversion, perturbative string theory, local dark matter density, and relativistic thermodynamics.",
+  "description": "Theoretical physics notes by Sutirtha Mukherjee, including PDF notes and papers on axion-photon conversion, perturbative string theory, local dark matter density, and relativistic thermodynamics.",
   "isPartOf": {
     "@type": "WebSite",
     "name": "Sutirtha Mukherjee",
@@ -444,6 +444,47 @@ hr {
     overflow: hidden;
 }
 
+.resource-card.pdf-preview-card {
+    height: 300px;
+}
+
+.pdf-preview-shell {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(88px, 0.85fr);
+    gap: 8px;
+    padding: 10px;
+    background: #10151d;
+}
+
+.pdf-cover-preview,
+.pdf-figure-preview {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: top center;
+    background: #f8f8f6;
+    border: 1px solid rgba(139, 148, 158, 0.25);
+}
+
+.pdf-cover-preview {
+    object-fit: contain;
+    background: #f7f7f4;
+}
+
+.pdf-figure-strip {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 8px;
+    min-height: 0;
+}
+
+.resource-card.pdf-preview-card .card-overlay {
+    padding: 18px;
+}
+
 /* Bottom Section */
 #bottom {
     background-color: #0d1117;
@@ -585,11 +626,10 @@ hr {
 <div id="subpage">
     <div class="physics-header">
         <h1>Notes of Theoretical Physics</h1>
-        <p>Generated notes by Sutirtha Mukherjee</p>
+        <p>Notes by Sutirtha Mukherjee</p>
     </div>
 
     <div class="resources-grid">
-        <!-- LOCAL PDF - Direct crawlable PDF link -->
         <a href="../docs/CFT_TIFR_Notes_2.pdf" target="_blank" rel="noopener noreferrer" class="resource-card" type="application/pdf">
             <div class="latex-thumbnail">
                 <div class="latex-content">
@@ -601,22 +641,23 @@ hr {
             <div class="card-overlay">
                 <span class="resource-type type-direct">PDF</span>
                 <div class="overlay-title">Perturbative String Theory and Its Non-Perturbative Probes</div>
-                <div class="overlay-description">Direct hosted PDF notes - opens as a .pdf file</div>
+                <div class="overlay-description">PDF notes</div>
             </div>
         </a>
 
-        <a href="../docs/Axion-Photon-Conversion-in-Astrophysical-Environments.pdf" target="_blank" rel="noopener noreferrer" class="resource-card" type="application/pdf">
-            <div class="latex-thumbnail">
-                <div class="latex-content">
-                    <div class="latex-title compact-title">Axion&ndash;Photon Conversion in Astrophysical Environments</div>
-                    <div class="latex-subtitle">Sutirtha Mukherjee</div>
-                    <div class="latex-formula">g<sub>a&gamma;&gamma;</sub>aE &middot; B</div>
+        <a href="../docs/Axion-Photon-Conversion-in-Astrophysical-Environments.pdf" target="_blank" rel="noopener noreferrer" class="resource-card pdf-preview-card" type="application/pdf">
+            <div class="pdf-preview-shell" aria-hidden="true">
+                <img src="../images/pdf-previews/axion-notes-cover.jpg" alt="" class="pdf-cover-preview" loading="lazy" decoding="async">
+                <div class="pdf-figure-strip">
+                    <img src="../images/pdf-previews/axion-notes-figure-probability.jpg" alt="" class="pdf-figure-preview" loading="lazy" decoding="async">
+                    <img src="../images/pdf-previews/axion-notes-figure-conversion.jpg" alt="" class="pdf-figure-preview" loading="lazy" decoding="async">
+                    <img src="../images/pdf-previews/axion-notes-figure-spectrum.jpg" alt="" class="pdf-figure-preview" loading="lazy" decoding="async">
                 </div>
             </div>
             <div class="card-overlay">
                 <span class="resource-type type-direct">PDF</span>
                 <div class="overlay-title">Axion&ndash;Photon Conversion in Astrophysical Environments</div>
-                <div class="overlay-description">Direct hosted PDF notes - Axion-Photon-Conversion-in-Astrophysical-Environments.pdf</div>
+                <div class="overlay-description">Cover preview and selected figures</div>
             </div>
         </a>
 
@@ -631,7 +672,7 @@ hr {
             <div class="card-overlay">
                 <span class="resource-type type-direct">PDF</span>
                 <div class="overlay-title">Tight Constraint on Local Dark Matter Density from a Joint Analysis of Local Kinematics and Rotation Curves</div>
-                <div class="overlay-description">Direct hosted PDF manuscript - 2402.0326v2.pdf</div>
+                <div class="overlay-description">PDF</div>
             </div>
         </a>
 
@@ -646,7 +687,7 @@ hr {
             <div class="card-overlay">
                 <span class="resource-type type-direct">PDF</span>
                 <div class="overlay-title">A Revisit on Covariant Approach in Relativistic Thermodynamics</div>
-                <div class="overlay-description">Direct hosted PDF manuscript - rel_tdy_1_main_tex__Copy_ (3).pdf</div>
+                <div class="overlay-description">PDF</div>
             </div>
         </a>
 
