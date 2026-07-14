@@ -1083,17 +1083,22 @@
     });
 
     // --- Zoom-to-fit: keep every node inside the viewport (no cropping) ---
-    function fitToView(duration = 500, padding = 28) {
+    function fitToView(duration = 500, padding = 42) {
         const nodes = simulation.nodes();
         if (!nodes || !nodes.length) return;
         let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
         nodes.forEach(d => {
             if (d.x == null || d.y == null) return;
-            const r = (d.size || 10) + 26; // include the label footprint under each node
-            minX = Math.min(minX, d.x - r);
-            maxX = Math.max(maxX, d.x + r);
-            minY = Math.min(minY, d.y - r);
-            maxY = Math.max(maxY, d.y + r);
+            const rad = (d.size || 10);
+            // Labels are centred UNDER each node and are far wider than the dot,
+            // so measure their real footprint or edge nodes get clipped.
+            const nameLen = d.name ? d.name.length : 0;
+            const halfLabel = nameLen * 3.5 + 8;          // ~half the rendered label width
+            const halfW = Math.max(rad + 10, halfLabel);
+            minX = Math.min(minX, d.x - halfW);
+            maxX = Math.max(maxX, d.x + halfW);
+            minY = Math.min(minY, d.y - rad - 14);        // top of the dot
+            maxY = Math.max(maxY, d.y + rad + 26);        // bottom of the label under it
         });
         if (!isFinite(minX)) return;
         const el = document.getElementById("graph");
