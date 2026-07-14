@@ -26,7 +26,7 @@
   var TRANSLATIONS = {
     hi: {
       html: {
-        'home-bio-1': 'मैं भौतिकी का एक उत्साही मास्टर छात्र हूँ, जिसकी रुचि गुरुत्वाकर्षण और ब्रह्माण्ड विज्ञान, सैद्धांतिक खगोलभौतिकी और डार्क मैटर फिनोमेनोलॉजी में है। मेरी व्यापक प्रेरणा ब्रह्माण्ड की प्रकृति और इतिहास को सबसे छोटे से सबसे बड़े पैमानों तक समझना है।',
+        'home-bio-1': 'नमस्ते! मैं भौतिकी का एक उत्साही मास्टर छात्र हूँ, जिसकी रुचि गुरुत्वाकर्षण और ब्रह्माण्ड विज्ञान, सैद्धांतिक खगोलभौतिकी और डार्क मैटर फिनोमेनोलॉजी में है। मेरी व्यापक प्रेरणा ब्रह्माण्ड की प्रकृति और इतिहास को सबसे छोटे से सबसे बड़े पैमानों तक समझना है।',
         'home-bio-2': 'मेरा वर्तमान शोध बैरियोनिक पदार्थ के डेटा-आधारित Bayesian inference से स्थानीय dark matter phase space बनाना, dark matter के प्रत्यक्ष और अप्रत्यक्ष detection, और उनके near-field cosmological implications पर केंद्रित है।',
         'home-bio-3': 'मेरी शैक्षणिक पृष्ठभूमि ने theoretical physics, data science और computational methods की गहरी समझ विकसित करने में मदद की है। मैंने observational cosmology, large-scale structure formation, galaxy evolution, radio astronomy और astrophysical data analysis से जुड़े विषयों पर काम किया है। बड़े datasets के अध्ययन के लिए मैं Bayesian statistical inference, machine learning और numerical methods का उपयोग करता हूँ। मेरी रुचि conformal field theory (CFT), AdS/CFT duality और perturbative string theory के पहलुओं में भी है।',
         'home-bio-4': 'मैं आपसी रुचि वाले प्रोजेक्ट्स पर शोधकर्ताओं और अकादमिक समूहों के साथ सहयोग के लिए खुला हूँ। संभावित problem statements पर चर्चा करने के लिए बेझिझक संपर्क करें।',
@@ -59,7 +59,7 @@
     },
     bn: {
       html: {
-        'home-bio-1': 'আমি পদার্থবিদ্যার একজন উৎসাহী মাস্টার্স ছাত্র; আমার গবেষণার আগ্রহ মাধ্যাকর্ষণ ও মহাবিশ্বতত্ত্ব, তাত্ত্বিক জ্যোতির্বিজ্ঞান এবং dark matter phenomenology। ক্ষুদ্রতম থেকে বৃহত্তম স্কেল পর্যন্ত মহাবিশ্বের প্রকৃতি ও ইতিহাস বোঝাই আমার বৃহত্তর প্রেরণা।',
+        'home-bio-1': 'নমস্কার! আমি পদার্থবিদ্যার একজন উৎসাহী মাস্টার্স ছাত্র; আমার গবেষণার আগ্রহ মাধ্যাকর্ষণ ও মহাবিশ্বতত্ত্ব, তাত্ত্বিক জ্যোতির্বিজ্ঞান এবং dark matter phenomenology। ক্ষুদ্রতম থেকে বৃহত্তম স্কেল পর্যন্ত মহাবিশ্বের প্রকৃতি ও ইতিহাস বোঝাই আমার বৃহত্তর প্রেরণা।',
         'home-bio-2': 'আমার বর্তমান গবেষণা baryonic matter-এর data-driven Bayesian inference থেকে local dark matter phase space নির্মাণ, dark matter-এর direct ও indirect detection, এবং সংশ্লিষ্ট near-field cosmological implications নিয়ে।',
         'home-bio-3': 'আমার একাডেমিক পটভূমি theoretical physics, data science এবং computational methods সম্পর্কে গভীর বোঝাপড়া তৈরি করেছে। observational cosmology, large-scale structure formation, galaxy evolution, radio astronomy এবং astrophysical data analysis-সম্পর্কিত নানা সমস্যায় কাজ করেছি। বড় datasets বিশ্লেষণে আমি Bayesian statistical inference, machine learning এবং numerical methods ব্যবহার করি। conformal field theory (CFT), AdS/CFT duality এবং perturbative string theory-র দিকগুলোতেও আমার আগ্রহ আছে।',
         'home-bio-4': 'পারস্পরিক আগ্রহের প্রকল্পে গবেষক ও একাডেমিক গোষ্ঠীর সঙ্গে সহযোগিতার জন্য আমি উন্মুক্ত। সম্ভাব্য problem statements নিয়ে আলোচনা করতে নির্দ্বিধায় যোগাযোগ করুন।',
@@ -108,7 +108,7 @@
       ['Joint Likelihood & Local Dark Matter Density', 'research/research_jointlike.html'],
       ['Surface Density of the Milky Way', 'research/research_surfdens.html']
     ]},
-    { label: 'Publications', href: 'publications.html' },
+    { label: 'Publication/preprint', href: 'publications.html' },
     { label: 'Galaxy Comics', href: 'comics.html', children: [
       ['Overview', 'comics.html'],
       ['Ram-Pressure Stripping', 'comics/comic_rampressure.html'],
