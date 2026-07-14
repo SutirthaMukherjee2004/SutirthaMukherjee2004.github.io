@@ -69,8 +69,9 @@
   .pub-histogram-legend{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;color:#9da7b3;font-size:.88em}
   .pub-histogram-legend span{display:inline-flex;align-items:center;gap:.35rem}
   .pub-histogram-legend i{display:inline-block;width:.85rem;height:.85rem;background:var(--key);font-style:normal}
-  .pub-list{list-style:none;margin:0;padding:0}
-  .pub-list li{padding:1rem 0;border-bottom:1px solid #30363d}
+  .pub-list{list-style:none;counter-reset:pubitem;margin:0;padding:0}
+  .pub-list li{counter-increment:pubitem;position:relative;padding:1rem 0 1rem 2.2rem;border-bottom:1px solid #30363d}
+  .pub-list li::before{content:counter(pubitem) ".";position:absolute;left:0;top:1rem;color:#58a6ff;font-weight:800}
   .pub-title{color:#58a6ff;font-weight:700;text-decoration:none}
   .pub-title:hover{text-decoration:underline}
   .pub-meta{color:#9da7b3;line-height:1.55;margin:.25rem 0 .55rem}
@@ -167,7 +168,7 @@
   </div>
 </div>
 
-<ul class="pub-list">
+<ol class="pub-list">
   <li>
     <a class="pub-title" href="https://inspirehep.net/literature/3115342" target="_blank" rel="noopener noreferrer">Embedding Space Construction of Conformal Field Theory From First Principles</a>
     <div class="pub-meta"><span class="me">S. Mukherjee</span> (2026). Citations: 1.</div>
@@ -193,7 +194,7 @@
     <div class="pub-meta"><span class="me">S. Mukherjee</span> (2024). Science, Technology and Development Journal, Vol. XIII, Issue 5, pp. 372-387. Citations: 1.</div>
     <div class="pub-links"><a href="https://inspirehep.net/api/literature/2800182?format=bibtex">Cite</a><a href="https://inspirehep.net/files/dd9c74d10ed308d117ff92eda720dd61" target="_blank" rel="noopener noreferrer">PDF</a><a href="https://inspirehep.net/literature/2800182" target="_blank" rel="noopener noreferrer">INSPIRE</a></div>
   </li>
-</ul>
+</ol>
 </div>
 </td></tr>
 <tr><td id="bottom">
