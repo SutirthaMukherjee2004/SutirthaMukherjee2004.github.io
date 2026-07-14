@@ -97,9 +97,9 @@
     { label: 'Home', href: 'index.html' },
     { label: 'Research', href: 'research.html', children: [
       ['Overview', 'research.html'],
-      ['Galactic Rotation Curve as a Dark Matter Probe', 'research/research_rotcurve.html'],
+      ['Galactic Rotation Curve', 'research/research_rotcurve.html'],
       ['Large-Scale Cosmological Survey', 'research/research_survey.html'],
-      ['Magnetised Disc Axion Search Experiment', 'research/research_axion.html'],
+      ['Magnetised Disc Axion Search', 'research/research_axion.html'],
       ['Joint Likelihood & Local Dark Matter Density', 'research/research_jointlike.html'],
       ['Surface Density of the Milky Way', 'research/research_surfdens.html'],
       ['Baryons & Dark Matter', 'research/research_consp.html'],
@@ -111,12 +111,12 @@
     { label: 'Publication/preprint', href: 'publications.html' },
     { label: 'Galaxy Comics', href: 'comics.html', children: [
       ['Overview', 'comics.html'],
-      ['Ram-Pressure Stripping', 'comics/comic_rampressure.html'],
-      ['Compact Groups', 'comics/comic_compact.html'],
-      ['Fossil Groups', 'comics/comic_fossil.html'],
-      ['Dwarf Galaxy Harassment', 'comics/comic_harassment.html'],
-      ['Multiple Minor Merger', 'comics/comic_multi_minor.html'],
-      ['Galaxy Major Merger', 'comics/comic_majormerger.html']
+      ['Ram Pressure Stripping', 'comics/comic_rampressure.html'],
+      ['Major Merger', 'comics/comic_majormerger.html'],
+      ['Galaxy Harassment', 'comics/comic_harassment.html'],
+      ['Compact Group', 'comics/comic_compact.html'],
+      ['Fossil Group', 'comics/comic_fossil.html'],
+      ['Multi Minor Merger', 'comics/comic_multi_minor.html']
     ]},
     { label: 'Academics', href: 'teaching.html', children: [
       ['Overview', 'teaching.html'],
@@ -128,7 +128,7 @@
     ]},
     { label: 'About Me', href: 'vita.html' },
     { label: "What's New", href: 'whatsnew.html' },
-    { label: 'Arts', href: 'arts.html' },
+    { label: 'Arts and gallery', href: 'arts.html' },
     { label: 'Philosophy', href: 'philosophy.html' },
     { label: 'Downloads', href: 'research/research_download.html' }
   ];
@@ -378,120 +378,31 @@
     }
   }
 
-  /* ============================================================
-     Visitor analytics — GoatCounter (privacy-first, no cookies).
-     Real dashboard at https://GC_CODE.goatcounter.com shows visits,
-     unique visitors, countries, referrers, pages and browsers — i.e.
-     you can actually SEE who is visiting, and exclude your own visits.
-
-     ONE-TIME SETUP (≈1 min): sign up free at
-       https://www.goatcounter.com/signup
-     and register the code below as your subdomain. If that code is
-     taken, pick another and change GC_CODE here — nothing else changes.
-
-     EXCLUDE YOURSELF: open any page once with ?skipgc appended
-       (e.g.  https://…github.io/index.html?skipgc )
-     and this browser/device stops being counted. Use ?countgc to undo.
-     ============================================================ */
-  var GC_CODE = 'sutirthamukherjee'; // <-- your goatcounter.com code/subdomain
-
-  function setupAnalytics() {
-    try {
-      var qs = location.search + location.hash;
-      if (/[?#&]skipgc\b/.test(qs)) localStorage.setItem('skipgc', 't');
-      if (/[?#&]countgc\b/.test(qs)) localStorage.removeItem('skipgc');
-    } catch (e) {}
-
-    if (!GC_CODE || document.getElementById('goatcounter-js')) return;
-    var s = document.createElement('script');
-    s.id = 'goatcounter-js';
-    s.async = true;
-    s.src = '//gc.zgo.at/count.js';
-    // count.js natively skips when localStorage['skipgc']==='t' (self-exclusion).
-    s.setAttribute('data-goatcounter', 'https://' + GC_CODE + '.goatcounter.com/count');
-    document.body.appendChild(s);
-  }
+  var VISITOR_COUNTER_URL =
+    'https://hits.sh/sutirthamukherjee2004.github.io.svg?label=Visitors&color=58a6ff&labelColor=0d1117&style=flat-square';
 
   function addVisitorCounter() {
     if (document.querySelector('.visitor-counter')) return;
     var target = document.getElementById('bottom') || document.querySelector('footer') || document.body;
-    if (!target || !GC_CODE) return;
+    if (!target) return;
 
     var wrap = el('div', 'visitor-counter');
     var link = el('a');
-    link.href = 'https://' + GC_CODE + '.goatcounter.com';
+    link.href = 'https://hits.sh/sutirthamukherjee2004.github.io/';
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
-    link.setAttribute('aria-label', 'Visitor statistics');
+    link.setAttribute('aria-label', 'Visitor counter');
 
     var img = document.createElement('img');
-    // Authentic site-wide count, served straight from your GoatCounter data.
-    img.src = 'https://' + GC_CODE + '.goatcounter.com/counter/TOTAL.svg?no_branding=1';
+    img.src = VISITOR_COUNTER_URL;
     img.alt = 'Visitor count';
     img.loading = 'lazy';
     img.decoding = 'async';
-    // Until the code is registered (or if the counter is private) hide quietly.
     img.onerror = function () { wrap.style.display = 'none'; };
 
     link.appendChild(img);
     wrap.appendChild(link);
     target.appendChild(wrap);
-  }
-
-  function setupContentProtection() {
-    if (/(^|#)edit\b/i.test(location.hash || '')) return;
-
-    if (!document.getElementById('content-protection-css')) {
-      var style = document.createElement('style');
-      style.id = 'content-protection-css';
-      style.textContent =
-        'html.content-protected,html.content-protected body,' +
-        'html.content-protected body *:not(input):not(textarea):not(select){' +
-        '-webkit-user-select:none!important;user-select:none!important;}' +
-        'html.content-protected img{-webkit-user-drag:none!important;user-drag:none!important;}' +
-        '@media print{html.content-protected body{display:none!important;}}';
-      document.head.appendChild(style);
-    }
-
-    document.documentElement.classList.add('content-protected');
-
-    function isEditableTarget(target) {
-      if (!target || target === document) return false;
-      return !!(target.closest && target.closest('input,textarea,select,[contenteditable="true"]'));
-    }
-
-    function blockIfNeeded(event) {
-      if (isEditableTarget(event.target)) return;
-      event.preventDefault();
-    }
-
-    ['copy', 'cut', 'contextmenu', 'dragstart', 'selectstart'].forEach(function (name) {
-      document.addEventListener(name, blockIfNeeded, true);
-    });
-
-    document.addEventListener('keydown', function (event) {
-      if (isEditableTarget(event.target)) return;
-      var key = String(event.key || '').toLowerCase();
-      if ((event.ctrlKey || event.metaKey) && /^(a|c|x|p|s|u)$/.test(key)) {
-        event.preventDefault();
-      }
-      if (key === 'printscreen') {
-        event.preventDefault();
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText('').catch(function () {});
-        }
-      }
-    }, true);
-
-    function markImages() {
-      Array.prototype.forEach.call(document.images || [], function (img) {
-        img.setAttribute('draggable', 'false');
-      });
-    }
-    markImages();
-    if ('MutationObserver' in window) {
-      new MutationObserver(markImages).observe(document.body, { childList: true, subtree: true });
-    }
   }
 
   function init() {
@@ -595,9 +506,7 @@
       new MutationObserver(scheduleLanguageApply).observe(document.body, { childList: true, subtree: true });
     }
     initScrollTopControls();
-    setupAnalytics();
     addVisitorCounter();
-    setupContentProtection();
 
     function open() { document.body.classList.add('snav-open'); btn.classList.add('is-open'); btn.setAttribute('aria-label', 'Close navigation'); }
     function shut() { document.body.classList.remove('snav-open'); btn.classList.remove('is-open'); btn.setAttribute('aria-label', 'Open navigation'); }
