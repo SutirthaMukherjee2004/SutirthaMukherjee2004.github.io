@@ -24,7 +24,7 @@
 
   function activatePrivateMode() {
     document.documentElement.classList.add('site-private-mode');
-    document.title = 'Private';
+    document.title = 'Access denied';
 
     var robots = document.querySelector('meta[name="robots"]') || document.createElement('meta');
     robots.setAttribute('name', 'robots');
@@ -38,9 +38,9 @@
 
     var blank = function () {
       if (!document.body) return;
-      document.body.innerHTML = '';
+      document.body.innerHTML = '<main aria-label="Access denied" style="min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding-top:12vh;box-sizing:border-box;"><h1 style="margin:0;color:#8b949e;font:600 1rem/1.4 -apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Helvetica,Arial,sans-serif;letter-spacing:0;">Access denied</h1></main>';
       document.body.className = 'site-private-body';
-      document.body.style.cssText = 'margin:0;min-height:100vh;background:#0d1117;color:#0d1117;overflow:hidden;';
+      document.body.style.cssText = 'margin:0;min-height:100vh;background:#0d1117;color:#8b949e;overflow:hidden;';
     };
 
     if (document.body) blank();
