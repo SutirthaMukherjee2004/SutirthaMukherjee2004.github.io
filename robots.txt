@@ -1,14 +1,26 @@
 User-agent: *
 
 # Public files kept discoverable while the website HTML is private.
-Allow: /docs/CFT_TIFR_Notes_2.pdf
-Allow: /docs/Axion-Photon-Conversion-in-Astrophysical-Environments.pdf
-Allow: /2402.0326v2.pdf
-Allow: /rel_tdy_1_main_tex__Copy_%20%283%29.pdf
+Allow: /docs/Perturbative%20String%20Theory%20and%20Its%20Non-Perturbative%20Probes.pdf
+Allow: /docs/Axion%E2%80%93Photon%20Resonant%20Conversion%20in%20Astrophysical%20Environment.pdf
+Allow: /Tight%20Constraint%20on%20Local%20Dark%20Matter%20Density%20from%20a%20Joint%20Analysis%20of%20Local%20Kinematics%20and%20Rotation%20Curves.pdf
+Allow: /A%20Revisit%20on%20Covariant%20Approach%20in%20Relativistic%20Thermodynamics.pdf
 Allow: /images/Profile.jpeg
 
 # Keep the rest of the media/PDF surface out of normal crawling.
 Disallow: /*.pdf$
+Disallow: /*.jpg$
+Disallow: /*.jpeg$
+Disallow: /*.png$
+Disallow: /*.webp$
+Disallow: /*.gif$
+Disallow: /*.svg$
+Disallow: /*.jfif$
+Disallow: /*.mov$
+Disallow: /*.mp4$
+Disallow: /*.avi$
+Disallow: /*.mpg$
+Disallow: /*.mpeg$
 Disallow: /images/
 Disallow: /Smukh/
 Disallow: /docs/
