@@ -8,6 +8,7 @@
 (function () {
   var me = document.currentScript;
   var BASE = me ? new URL('.', me.src).href : location.href.replace(/[^/]*$/, '');
+  var SITE_PRIVATE = true; // Set to false to make the full website public again.
   var THEME_KEY = 'sutirtha-theme';
   var LANG_KEY = 'sutirtha-lang';
   var LOVE_KEY = 'sutirtha-loved-site';
@@ -20,6 +21,31 @@
   var infoButton = null;
   var applyingLanguage = false;
   var langScanTimer = null;
+
+  function activatePrivateMode() {
+    document.documentElement.classList.add('site-private-mode');
+    document.title = 'Private';
+
+    var robots = document.querySelector('meta[name="robots"]') || document.createElement('meta');
+    robots.setAttribute('name', 'robots');
+    robots.setAttribute('content', 'noindex, nofollow, noarchive, nosnippet, noimageindex');
+    if (!robots.parentNode) document.head.appendChild(robots);
+
+    var googlebot = document.querySelector('meta[name="googlebot"]') || document.createElement('meta');
+    googlebot.setAttribute('name', 'googlebot');
+    googlebot.setAttribute('content', 'noindex, nofollow, noarchive, nosnippet, noimageindex');
+    if (!googlebot.parentNode) document.head.appendChild(googlebot);
+
+    var blank = function () {
+      if (!document.body) return;
+      document.body.innerHTML = '';
+      document.body.className = 'site-private-body';
+      document.body.style.cssText = 'margin:0;min-height:100vh;background:#0d1117;color:#0d1117;overflow:hidden;';
+    };
+
+    if (document.body) blank();
+    else document.addEventListener('DOMContentLoaded', blank, { once: true });
+  }
 
   var LANGS = ['en', 'hi', 'bn'];
   var LANG_LABELS = {
@@ -448,6 +474,11 @@
   }
 
   function init() {
+    if (SITE_PRIVATE) {
+      activatePrivateMode();
+      return;
+    }
+
     normalizeTopNav();
     if (document.querySelector('.snav-toggle')) return; // never double-inject
 
