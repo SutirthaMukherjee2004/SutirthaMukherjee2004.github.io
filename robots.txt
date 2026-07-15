@@ -1,4 +1,21 @@
 User-agent: *
-Allow: /
+
+# Public files kept discoverable while the website HTML is private.
+Allow: /docs/CFT_TIFR_Notes_2.pdf
+Allow: /docs/Axion-Photon-Conversion-in-Astrophysical-Environments.pdf
+Allow: /2402.0326v2.pdf
+Allow: /rel_tdy_1_main_tex__Copy_%20%283%29.pdf
+Allow: /images/Profile.jpeg
+
+# Keep the rest of the media/PDF surface out of normal crawling.
+Disallow: /*.pdf$
+Disallow: /images/
+Disallow: /Smukh/
+Disallow: /docs/
+Disallow: /downloads/
+Disallow: /research/
+Disallow: /comics/
+Disallow: /teaching/movies/
+Disallow: /teaching/lecture_canary/
 
 Sitemap: https://sutirthamukherjee2004.github.io/sitemap.xml
